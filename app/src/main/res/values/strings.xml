@@ -4,4 +4,8 @@
     <string name="unique_id">Unique ID</string>
     <string name="continue_txt">Continue</string>
     <string name="already_register">Already Registered? <font fgcolor='#FF000000'>Login</font></string>
+    <string name="email_id">Email Id</string>
+    <string name="verify_now">Verify Now</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_otp">Enter OTP</string>
 </resources>

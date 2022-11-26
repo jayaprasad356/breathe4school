@@ -5,21 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.greymatter.app.R;
 
 public class RegistrationActivity extends AppCompatActivity {
     EditText edUniqueId;
     Button btnContinue;
+    LinearLayout llInputFeild;
+    RelativeLayout rlUniqueInp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+
         edUniqueId = findViewById(R.id.edUniqueId);
         btnContinue = findViewById(R.id.btnContinue);
+        llInputFeild = findViewById(R.id.llInputFeild);
+        rlUniqueInp = findViewById(R.id.rlUniqueInp);
 
         edUniqueId.addTextChangedListener(new TextWatcher() {
             @Override
@@ -39,6 +48,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
 
+
+
                 }
                 else {
                     btnContinue.setEnabled(false);
@@ -46,6 +57,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llInputFeild.setVisibility(View.VISIBLE);
+                rlUniqueInp.setVisibility(View.GONE);
             }
         });
     }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RegistrationActivity">
+    tools:context=".view.OtpActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,46 +42,33 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/semibold"
-                android:text="@string/registration"
+                android:text="@string/enter_otp"
                 android:textColor="@color/black_text"
                 android:textSize="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_2sdp"/>
+
+
+            <TextView
+                android:id="@+id/tvdescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif"
+                android:text="OTP sent to Johndeo@xploresense.com"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_8sdp"
                 android:layout_marginBottom="@dimen/_10sdp"/>
 
 
+
             <RelativeLayout
-                android:id="@+id/rlUniqueInp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="visible">
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/edUniqueInp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:hint="@string/unique_id">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/edUniqueId"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/llInputFeild"
-                android:visibility="gone"
+                android:id="@+id/rlOTPFeild"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/rlEmailInp"
+                    android:id="@+id/rlOTPInp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/edit_border_box"
@@ -94,7 +82,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_weight="0.6"
-                        android:id="@+id/edEmailInp"
+                        android:id="@+id/edOTPInp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
@@ -102,10 +90,10 @@
                         android:background="@drawable/bg_textinput_layout"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
-                        android:hint="@string/email_id">
+                        android:hint="@string/enter_otp">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edEmailId"
+                            android:id="@+id/edOTPId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -113,69 +101,22 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
+                        android:id="@+id/tvTimer"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1.4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/verify_now"
+                        android:text="00:45"
                         android:gravity="center"
                         android:fontFamily="sans-serif-medium"
-                        android:textColor="@color/primary"
-                        />
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/rlMobilenoInp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edit_border_box"
-                    android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:weightSum="2"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_3sdp"
-
-                    >
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_weight="0.6"
-                        android:id="@+id/edMobilenoInp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        app:boxBackgroundColor="@color/white"
-                        android:background="@drawable/bg_textinput_layout"
-                        android:hint="@string/mobile_number"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        >
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edMobilenoId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number"
-                            >
-
-                        </com.google.android.material.textfield.TextInputEditText>
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1.4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/verify_now"
-                        android:gravity="center"
-                        android:fontFamily="sans-serif-medium"
-                        android:textColor="@color/primary"
+                        android:textColor="@color/black"
                         />
 
 
                 </LinearLayout>
 
 
-            </LinearLayout>
+            </RelativeLayout>
 
 
             <com.google.android.material.button.MaterialButton
