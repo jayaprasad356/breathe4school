@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Breathe4School</string>
+    <string name="registration">Registration</string>
+    <string name="unique_id">Unique ID</string>
+    <string name="continue_txt">Continue</string>
+    <string name="already_register">Already Registered? <font fgcolor='#FF000000'>Login</font></string>
 </resources>
