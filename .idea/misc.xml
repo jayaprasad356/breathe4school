@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/drawable/btn_shape.xml" value="0.1" />
+        <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/drawable/edit_border_box.xml" value="0.15" />
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
-        <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_registration.xml" value="0.3333333333333333" />
+        <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_registration.xml" value="0.4466666666666667" />
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_splash_screen.xml" value="0.17552083333333332" />
       </map>
     </option>
