@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:rotationX="0"
-    tools:context=".RegistrationActivity">
+    tools:context=".view.RegistrationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:rotationX="360"
             android:scaleType="fitXY"
@@ -36,53 +35,48 @@
                 android:src="@drawable/logo" />
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/semibold"
                 android:layout_below="@+id/logo"
                 android:layout_centerInParent="true"
+                android:fontFamily="@font/semibold"
                 android:text="@string/registration"
                 android:textColor="@color/black_text"
-                android:textSize="@dimen/_32sdp" />
+                android:textSize="@dimen/_30sdp" />
 
-            <EditText
-                android:id="@+id/et_unic_id"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_52sdp"
-                android:layout_below="@+id/tv_title"
-                android:layout_centerInParent="true"
-                android:layout_marginHorizontal="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/edit_border_box"
-                android:hint="@string/unique_id"
-                android:paddingVertical="@dimen/_14sdp"
-                android:paddingLeft="@dimen/_16sdp"
-                android:textSize="@dimen/_16sdp" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_continue"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_52sdp"
-                android:layout_below="@+id/et_unic_id"
-                android:layout_centerInParent="true"
-                android:paddingVertical="@dimen/_15sdp"
-                android:layout_marginHorizontal="@dimen/_150sdp"
-                android:layout_marginTop="@dimen/_24sdp"
-                android:background="@drawable/btn_shape"
-                android:backgroundTint="@color/reg_btn_color"
-                android:fontFamily="@font/semibold"
-                android:rotationX="0"
-                android:rotationY="-2"
-                android:text="@string/continue_txt"
-                android:textColor="#CCCCCC"
-                android:textSize="@dimen/_16sdp" />
-            <TextView
-                android:layout_below="@id/btn_continue"
-                android:layout_width="wrap_content"
-                android:text="@string/already_register"
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edUniqueInp"
                 android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"/>
+                android:layout_below="@+id/tvTitle"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:hint="Unique ID"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edUniqueId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinue"
+                android:layout_width="@dimen/_250sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_below="@+id/edUniqueInp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:enabled="false"
+                android:fontFamily="@font/semibold"
+                android:text="@string/continue_txt"
+                android:textAllCaps="false"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_16sdp" />
 
 
         </RelativeLayout>

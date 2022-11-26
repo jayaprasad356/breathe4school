@@ -1,10 +1,12 @@
-package com.greymatter.breathe4school;
+package com.greymatter.app.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.greymatter.app.R;
 
 public class MainActivity extends AppCompatActivity {
     Activity activity;

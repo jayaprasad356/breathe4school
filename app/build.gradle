@@ -6,7 +6,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.greymatter.breathe4school"
+        applicationId "com.app.breathe4school"
         minSdk 26
         targetSdk 32
         versionCode 1

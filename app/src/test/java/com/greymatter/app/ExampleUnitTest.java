@@ -1,4 +1,4 @@
-package com.greymatter.breathe4school;
+package com.greymatter.app;
 
 import org.junit.Test;
 
