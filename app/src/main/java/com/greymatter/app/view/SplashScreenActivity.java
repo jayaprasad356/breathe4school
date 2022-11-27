@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.greymatter.app.R;
+import com.greymatter.app.view.Register.RegistrationActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     final int SPLASH_TIME_OUT = 500;

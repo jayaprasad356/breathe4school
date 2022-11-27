@@ -14,20 +14,17 @@
         android:theme="@style/Theme.Breathe4School"
         tools:targetApi="31">
         <activity
-            android:name=".OtpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RegistrationActivity"
+            android:name=".view.Login.LoginPasswordActivity"
             android:exported="false"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape"/>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".view.Login.LoginMPinActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Login.LoginFaceIDActivity"
             android:exported="true"
             android:screenOrientation="landscape">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,9 +32,47 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.SuccessfullActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Register.SetMPinActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.Register.SetFaceIdActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Register.SetPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Register.OtpActivity"
             android:exported="false"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Register.RegistrationActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.SplashScreenActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.MainActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

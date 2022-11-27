@@ -8,4 +8,34 @@
     <string name="verify_now">Verify Now</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="enter_otp">Enter OTP</string>
+    <string name="time_out">Time out!</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="proceed_txt">Proceed</string>
+    <string name="set_password">Set Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="show_password">Show Password</string>
+    <string name="minimum_8_characters">\u2022 minimum 8 characters</string>
+    <string name="one_uppercase_character">\u2022 one uppercase character</string>
+    <string name="one_special_character">\u2022 one special character</string>
+    <string name="one_lowercase_character">\u2022 one lowercase character</string>
+    <string name="one_number">\u2022 one number</string>
+    <string name="set_face_id">Set Face ID</string>
+    <string name="face_id">Face ID</string>
+    <string name="set_4_digit_m_pin">Set 4 Digit M-PIN</string>
+    <string name="new_pin">New Pin</string>
+    <string name="confrim_pin">Confrim Pin</string>
+    <string name="hello_john_deo">Hello! John deo</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="forgot_m_pin_password">Forgot M-PIN / Password?</string>
+    <string name="login_with_temp_password">Login with temp password</string>
+    <string name="welcome_john_deo">Welcome John deo</string>
+    <string name="otp_sent_to_johndeo_xploresense_com">OTP sent to Johndeo@xploresense.com</string>
+    <string name="unlock_with_m_pin">Unlock with M-PIN</string>
+    <string name="login">Login</string>
+    <string name="forgot_m_pin">Forgot M-PIN?</string>
+    <string name="login_with_password_instead">Login with password instead</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+
 </resources>

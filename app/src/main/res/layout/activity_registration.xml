@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.RegistrationActivity">
+    tools:context=".view.Register.RegistrationActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +55,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    app:boxStrokeErrorColor="@color/red"
                     android:id="@+id/edUniqueInp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -66,8 +67,24 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edUniqueId"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        ></com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_below="@+id/edUniqueInp"
+                    android:id="@+id/tvInvalidID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginHorizontal="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"
+                    />
 
 
             </RelativeLayout>
@@ -113,6 +130,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
+                        android:id="@+id/tvVerifyEmail"
                         android:layout_gravity="center_vertical"
                         android:layout_weight="1.4"
                         android:layout_width="match_parent"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.OtpActivity">
+    tools:context=".view.Register.OtpActivity">
 
 
     <LinearLayout
@@ -55,8 +55,8 @@
                 android:layout_centerInParent="true"
                 android:fontFamily="sans-serif"
                 android:text="OTP sent to Johndeo@xploresense.com"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp"/>
 
 
@@ -95,7 +95,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edOTPId"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="6">
 
                         </com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -119,8 +121,49 @@
             </RelativeLayout>
 
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_100sdp"
+                >
+
+
+                <TextView
+                    android:id="@+id/tvTimeout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/time_out"
+                    android:textColor="@color/red"
+                    android:fontFamily="sans-serif"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/tvInvalidotp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:fontFamily="sans-serif"
+                    android:visibility="gone"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tvResentotp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="right"
+                    android:text="@string/resend_otp"
+                    android:textColor="@color/gray" />
+
+            </RelativeLayout>
+
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnContinue"
+                android:id="@+id/btnProceed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -129,7 +172,7 @@
                 android:enabled="false"
                 android:fontFamily="@font/semibold"
                 android:padding="@dimen/_8sdp"
-                android:text="@string/continue_txt"
+                android:text="@string/proceed_txt"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp" />

@@ -13,5 +13,10 @@
     <color name="black_text">#000A11</color>
     <color name="disable_btn">#F3F3F3</color>
     <color name="gray">#CCCCCC</color>
+    <color name="text_gray">#666666</color>
+    <color name="dark_blue">#003354</color>
+    <color name="text_green">#45BF55</color>
+    <color name="red">#D40D12</color>
+
 
 </resources>

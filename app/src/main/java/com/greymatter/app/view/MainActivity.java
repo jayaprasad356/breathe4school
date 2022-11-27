@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.greymatter.app.R;
+import com.greymatter.app.view.Register.RegistrationActivity;
 
 public class MainActivity extends AppCompatActivity {
     Activity activity;
