@@ -11,9 +11,13 @@
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_registration.xml" value="0.22" />
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_splash_screen.xml" value="0.17552083333333332" />
         <entry key="..\:/breathe4school/app/src/main/res/drawable/bg_textinput_layout.xml" value="0.192" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgot_mpin.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgot_otp.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgotpassword.xml" value="0.19010416666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_face_idactivity.xml" value="0.25" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_mpin.xml" value="0.2" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_password.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_temp_password.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_otp.xml" value="0.22" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_registration.xml" value="0.18" />

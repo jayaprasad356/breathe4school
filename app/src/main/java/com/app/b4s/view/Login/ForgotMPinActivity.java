@@ -1,4 +1,4 @@
-package com.app.b4s.view.Register;
+package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.view.Register.SetMPinActivity;
 
-public class OtpActivity extends AppCompatActivity {
+public class ForgotMPinActivity extends AppCompatActivity {
+
+
 
     TextView tvTimer,tvTimeout,tvResentotp,tvInvalidotp;
     EditText edOTPId;
@@ -29,9 +32,8 @@ public class OtpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp);
-        activity = OtpActivity.this;
-
+        setContentView(R.layout.activity_forgot_mpin);
+        activity = ForgotMPinActivity.this;
 
 
         tvTimer = findViewById(R.id.tvTimer);
@@ -107,7 +109,10 @@ public class OtpActivity extends AppCompatActivity {
 
 
         if (edOTPId.getText().toString().equals("123456")){
-            onBackPressed();
+
+            Intent intent = new Intent(activity, SetMPinActivity.class);
+            startActivity(intent);
+
         }
 
         else{

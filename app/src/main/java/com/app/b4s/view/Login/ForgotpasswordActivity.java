@@ -1,4 +1,4 @@
-package com.app.b4s.view.Register;
+package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,8 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.view.Register.SetMPinActivity;
+import com.app.b4s.view.Register.SetPasswordActivity;
 
-public class OtpActivity extends AppCompatActivity {
+public class ForgotpasswordActivity extends AppCompatActivity {
+
 
     TextView tvTimer,tvTimeout,tvResentotp,tvInvalidotp;
     EditText edOTPId;
@@ -26,12 +29,12 @@ public class OtpActivity extends AppCompatActivity {
     Activity activity;
     LinearLayout rlOTPInp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp);
-        activity = OtpActivity.this;
-
+        setContentView(R.layout.activity_forgotpassword);
+        activity = ForgotpasswordActivity.this;
 
 
         tvTimer = findViewById(R.id.tvTimer);
@@ -107,7 +110,10 @@ public class OtpActivity extends AppCompatActivity {
 
 
         if (edOTPId.getText().toString().equals("123456")){
-            onBackPressed();
+
+            Intent intent = new Intent(activity, SetPasswordActivity.class);
+            startActivity(intent);
+
         }
 
         else{
@@ -146,7 +152,5 @@ public class OtpActivity extends AppCompatActivity {
 
         }.start();
     }
-
-
 
 }

@@ -82,7 +82,7 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:visibility="gone"
+                android:visibility="visible"
                 android:id="@+id/llFaceId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -114,6 +114,8 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llFaceidNotMatch"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -122,6 +124,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/enter_pin"
@@ -170,6 +173,7 @@
 
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/enter_password"
@@ -182,6 +186,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvForgotPin_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/forgot_m_pin_password"
@@ -194,6 +199,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvLoginWTempPassword"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
