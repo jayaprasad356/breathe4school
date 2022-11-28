@@ -23,10 +23,17 @@ import android.widget.Toast;
 
 import com.app.b4s.databinding.ActivityRegistrationBinding;
 import com.app.b4s.model.User;
+import com.app.b4s.utilities.ApiConfig;
+import com.app.b4s.utilities.Constant;
 import com.app.b4s.viewmodels.RegistrationViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 import com.app.b4s.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -46,9 +53,9 @@ public class RegistrationActivity extends AppCompatActivity {
         binding.setViewModel(registrationViewModel);
 
         registrationViewModel.getUser().observe(this, user -> {
+            validateUniqueId();
 
-            binding.llInputFeild.setVisibility(View.VISIBLE);
-            binding.rlUniqueInp.setVisibility(View.GONE);
+
 
 
         });
@@ -99,6 +106,39 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void validateUniqueId()
+    {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.UNIQUE_ID,binding.edUniqueId.getText().toString().trim());
+        ApiConfig.RequestToVolley((result, response) -> {
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        binding.llInputFeild.setVisibility(View.VISIBLE);
+                        binding.rlUniqueInp.setVisibility(View.GONE);
+
+
+                    }
+                    else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, Constant.VALIDATEUNIQUEID_URL, params, true,1);
+
+
+
+
+    }
+
     @BindingAdapter({"toastMessage"})
     public static void runMe(View view, String message) {
         if (message != null)
