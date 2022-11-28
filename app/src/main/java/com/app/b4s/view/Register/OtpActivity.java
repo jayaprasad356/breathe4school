@@ -1,4 +1,4 @@
-package com.greymatter.app.view.Register;
+package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.greymatter.app.R;
+import com.app.b4s.R;
 
 public class OtpActivity extends AppCompatActivity {
 
@@ -120,7 +120,7 @@ public class OtpActivity extends AppCompatActivity {
 
             GradientDrawable drawable = (GradientDrawable)rlOTPInp.getBackground();
 //            drawable.mutate(); // only change this instance of the xml, not all components using this xml
-            drawable.setStroke(4, Color.RED); // set stroke width and stroke color
+            drawable.setStroke(2, Color.RED); // set stroke width and stroke color
             tvInvalidotp.setVisibility(View.VISIBLE);
             tvInvalidotp.setText("Invalid OTP entered");
             tvTimeout.setVisibility(View.GONE);

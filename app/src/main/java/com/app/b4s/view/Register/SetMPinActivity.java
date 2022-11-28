@@ -1,4 +1,4 @@
-package com.greymatter.app.view.Register;
+package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.greymatter.app.R;
+import com.app.b4s.R;
 
 public class SetMPinActivity extends AppCompatActivity {
 

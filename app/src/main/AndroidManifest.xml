@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.greymatter.app">
+    package="com.app.b4s">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,15 +15,46 @@
         android:theme="@style/Theme.Breathe4School"
         tools:targetApi="31">
         <activity
-            android:name=".view.Login.LoginPasswordActivity"
+            android:name="com.app.b4s.view.Login.LoginPasswordActivity"
             android:exported="false"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".view.Login.LoginMPinActivity"
+            android:name="com.app.b4s.view.Login.LoginMPinActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".view.Login.LoginFaceIDActivity"
+            android:name="com.app.b4s.view.Login.LoginFaceIDActivity"
+            android:exported="false"
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="com.app.b4s.view.SuccessfullActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.app.b4s.view.Register.SetMPinActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+
+        </activity>
+        <activity
+            android:name="com.app.b4s.view.Register.SetFaceIdActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.app.b4s.view.Register.SetPasswordActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.app.b4s.view.Register.OtpActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.app.b4s.view.Register.RegistrationActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.app.b4s.view.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -32,45 +64,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.SuccessfullActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.Register.SetMPinActivity"
-            android:exported="true"
-            android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".view.Register.SetFaceIdActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.Register.SetPasswordActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.Register.OtpActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.Register.RegistrationActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.SplashScreenActivity"
-            android:exported="true"
-            android:screenOrientation="landscape">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.MainActivity"
+            android:name="com.app.b4s.view.MainActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
     </application>

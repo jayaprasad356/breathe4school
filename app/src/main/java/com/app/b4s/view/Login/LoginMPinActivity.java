@@ -1,16 +1,16 @@
-package com.greymatter.app.view.Login;
+package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.greymatter.app.R;
+import com.app.b4s.R;
 
-public class LoginFaceIDActivity extends AppCompatActivity {
+public class LoginMPinActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_face_idactivity);
+        setContentView(R.layout.activity_login_mpin);
     }
 }

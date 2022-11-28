@@ -1,4 +1,4 @@
-package com.greymatter.app.view.Register;
+package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
-import com.greymatter.app.R;
+import com.app.b4s.R;
 
 import java.util.regex.Pattern;
 

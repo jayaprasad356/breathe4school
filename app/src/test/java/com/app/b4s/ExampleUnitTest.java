@@ -1,4 +1,4 @@
-package com.greymatter.app;
+package com.app.b4s;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.greymatter.app.view;
+package com.app.b4s.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.greymatter.app.R;
-import com.greymatter.app.view.Register.RegistrationActivity;
+import com.app.b4s.R;
+import com.app.b4s.view.Register.RegistrationActivity;
 
 public class MainActivity extends AppCompatActivity {
     Activity activity;
