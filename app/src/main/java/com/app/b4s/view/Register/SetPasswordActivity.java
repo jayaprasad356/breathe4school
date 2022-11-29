@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,6 +72,14 @@ public class SetPasswordActivity extends AppCompatActivity {
         btnProceed = binding.btnProceed;
 
 
+        edSetPasswordInp.setEndIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llinfo.setVisibility(View.VISIBLE);
+            }
+        });
+
+
         ibBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +99,9 @@ public class SetPasswordActivity extends AppCompatActivity {
         edSetPasswordId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+
+
 
             }
 
@@ -124,6 +137,41 @@ public class SetPasswordActivity extends AppCompatActivity {
 
             }
         });
+
+        binding.tvShowPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (binding.tvShowPass.getText().equals("Show Password")){
+
+
+                    binding.tvShowPass.setText("Hide Password");
+                    edSetPasswordId.setTransformationMethod(null);
+                    edConfirmPasswordId.setTransformationMethod(null);
+
+
+                }
+
+                else  if (binding.tvShowPass.getText().equals("Hide Password")){
+
+
+                    binding.tvShowPass.setText("Show Password");
+                    edSetPasswordId.setTransformationMethod(new PasswordTransformationMethod());
+                    edConfirmPasswordId.setTransformationMethod(new PasswordTransformationMethod());
+
+
+                }
+
+
+
+            }
+        });
+
+
+
+
+
+
 
 
     }
@@ -169,11 +217,11 @@ public class SetPasswordActivity extends AppCompatActivity {
         Pattern uppercase = Pattern.compile("[A-Z]");
         Pattern lowercase = Pattern.compile("[a-z]");
         Pattern digit = Pattern.compile("[0-9]");
-        Pattern special = Pattern.compile("[$&+,:;=?@#|'<>.-^*()%!]");
+        Pattern special = Pattern.compile("(.*[!@#$%^&*()\\-__+.]){1,}");
 
         // if lowercase character is not present
         if (!lowercase.matcher(password).find()) {
-            atoz.setTextColor(Color.RED);
+            atoz.setTextColor(Color.BLACK);
             return false;
         } else {
             // if lowercase character is  present
@@ -182,7 +230,7 @@ public class SetPasswordActivity extends AppCompatActivity {
 
         // if uppercase character is not present
         if (!uppercase.matcher(password).find()) {
-            AtoZ.setTextColor(Color.RED);
+            AtoZ.setTextColor(Color.BLACK);
             return false;
         } else {
             // if uppercase character is  present
@@ -192,7 +240,7 @@ public class SetPasswordActivity extends AppCompatActivity {
 
         // if Special character is not present
         if (!special.matcher(password).find()) {
-            special_char.setTextColor(Color.RED);
+            special_char.setTextColor(Color.BLACK);
             return false;
         } else {
             // if Special character is  present
@@ -202,7 +250,7 @@ public class SetPasswordActivity extends AppCompatActivity {
 
         // if digit is not present
         if (!digit.matcher(password).find()) {
-            num.setTextColor(Color.RED);
+            num.setTextColor(Color.BLACK);
             return false;
         } else {
             // if digit is present
@@ -210,7 +258,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         }
         // if password length is less than 8
         if (password.length() < 8) {
-            charcount.setTextColor(Color.RED);
+            charcount.setTextColor(Color.BLACK);
             return false;
         } else {
             charcount.setTextColor(getResources().getColor(R.color.text_green));

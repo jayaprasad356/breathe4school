@@ -14,6 +14,7 @@
     <string name="set_password">Set Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="show_password">Show Password</string>
+    <string name="hide_password">Hide Password</string>
     <string name="minimum_8_characters">\u2022 minimum 8 characters</string>
     <string name="one_uppercase_character">\u2022 one uppercase character</string>
     <string name="one_special_character">\u2022 one special character</string>

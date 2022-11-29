@@ -149,9 +149,9 @@
                             android:gravity="center"
                             android:id="@+id/iv_mail_Tick"
                             android:visibility="gone"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ic_green_tick"
+                            android:src="@drawable/ic_green_tick"
                             />
 
 
@@ -208,9 +208,10 @@
                             android:gravity="center"
                             android:id="@+id/iv_mobile_Tick"
                             android:visibility="gone"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ic_green_tick"
+                            android:src="@drawable/ic_green_tick"
+
                             />
 
 
