@@ -1,6 +1,7 @@
 package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,34 +12,29 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivitySetMpinBinding;
 
 public class SetMPinActivity extends AppCompatActivity {
 
 
-    EditText edConfirmMPinId,edMPinId;
+    EditText edConfirmMPinId, edMPinId;
     Button btnContinue;
     boolean Pin = false;
     ImageButton ibBackBtn;
+    ActivitySetMpinBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_mpin);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_set_mpin);
 
+        edMPinId = binding.edMPinId;
+        edConfirmMPinId = binding.edConfirmMPinId;
+        btnContinue = binding.btnContinue;
+        ibBackBtn = binding.ibBackBtn;
 
-
-        edMPinId = findViewById(R.id.edMPinId);
-        edConfirmMPinId = findViewById(R.id.edConfirmMPinId);
-        btnContinue = findViewById(R.id.btnContinue);
-        ibBackBtn = findViewById(R.id.ibBackBtn);
-
-
-        ibBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        ibBackBtn.setOnClickListener(v -> onBackPressed());
 
 
         edMPinId.addTextChangedListener(new TextWatcher() {
@@ -54,19 +50,11 @@ public class SetMPinActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().equals("")){
-
+                if (!editable.toString().equals("")) {
                     Pin = true;
-//
 //                    btnContinue.setEnabled(true);
 //                    btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-
-
-
-
-                }
-                else {
-
+                } else {
 
                     Pin = false;
 
@@ -91,26 +79,17 @@ public class SetMPinActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
 
+                if (Pin = true) {
 
-                if (Pin = true){
-
-                    if (!editable.toString().equals("")){
+                    if (!editable.toString().equals("")) {
                         btnContinue.setEnabled(true);
                         btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-                    }
-
-
-                    else {
+                    } else {
                         btnContinue.setEnabled(false);
                         btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
                     }
 
-
-
-                }
-
-
-                else {
+                } else {
                     btnContinue.setEnabled(false);
                     btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 

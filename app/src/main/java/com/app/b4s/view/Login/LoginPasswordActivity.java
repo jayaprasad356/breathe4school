@@ -1,6 +1,7 @@
 package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,25 +14,27 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivityLoginPasswordBinding;
+import com.app.b4s.utilities.Constant;
 
 public class LoginPasswordActivity extends AppCompatActivity {
 
     EditText edSetPasswordId;
     Button btnProceed;
     TextView tvForgotPasword;
-    Activity activity ;
+    Activity activity;
+    ActivityLoginPasswordBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_password);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_password);
         activity = LoginPasswordActivity.this;
 
 
-        edSetPasswordId = findViewById(R.id.edSetPasswordId);
-        btnProceed = findViewById(R.id.btnProceed);
-        tvForgotPasword = findViewById(R.id.tvForgotPasword);
-
+        edSetPasswordId = binding.edSetPasswordId;
+        btnProceed = binding.btnProceed;
+        tvForgotPasword = binding.tvForgotPasword;
 
 
         edSetPasswordId.addTextChangedListener(new TextWatcher() {
@@ -47,11 +50,10 @@ public class LoginPasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().equals("")){
+                if (!editable.toString().equals("")) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-                }
-                else {
+                } else {
                     btnProceed.setEnabled(false);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
@@ -65,7 +67,7 @@ public class LoginPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-                intent.putExtra("Title","Success!");
+                intent.putExtra(Constant.TITLE, Constant.SUCCESS);
 //                intent.putExtra(   "Descripition","You have successfully completed the registration");
                 startActivity(intent);
             }

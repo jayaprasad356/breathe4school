@@ -1,6 +1,7 @@
 package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,36 +12,37 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivityLoginFaceIdactivityBinding;
 
 public class LoginFaceIDActivity extends AppCompatActivity {
 
 
-    Button btnPin,btnPassword;
-    TextView tvForgotPin_password,tvLoginWTempPassword;
+    Button btnPin, btnPassword;
+    TextView tvForgotPin_password, tvLoginWTempPassword;
     Activity activity;
-    LinearLayout llFaceidNotMatch,llFaceId;
+    LinearLayout llFaceidNotMatch, llFaceId;
+    ActivityLoginFaceIdactivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_face_idactivity);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_face_idactivity);
         activity = LoginFaceIDActivity.this;
 
-        btnPin = findViewById(R.id.btnPin);
-        btnPassword = findViewById(R.id.btnPassword);
-        tvForgotPin_password = findViewById(R.id.tvForgotPin_password);
-        tvLoginWTempPassword = findViewById(R.id.tvLoginWTempPassword);
-        llFaceidNotMatch = findViewById(R.id.llFaceidNotMatch);
-        llFaceId = findViewById(R.id.llFaceId);
-
+        btnPin = binding.btnPin;
+        btnPassword = binding.btnPassword;
+        tvForgotPin_password = binding.tvForgotPinPassword;
+        tvLoginWTempPassword = binding.tvLoginWTempPassword;
+        llFaceidNotMatch = binding.llFaceidNotMatch;
+        llFaceId = binding.llFaceId;
 
 
         llFaceId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-               llFaceId.setVisibility(View.GONE);
-               llFaceidNotMatch.setVisibility(View.VISIBLE);
+                llFaceId.setVisibility(View.GONE);
+                llFaceidNotMatch.setVisibility(View.VISIBLE);
 
             }
         });
@@ -48,8 +50,8 @@ public class LoginFaceIDActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               Intent intent = new Intent(activity,LoginTempPasswordActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -57,29 +59,24 @@ public class LoginFaceIDActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               Intent intent = new Intent(activity,LoginTempPasswordActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
+                startActivity(intent);
 
             }
         });
 
 
-
-
-
-
-
         btnPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,LoginMPinActivity.class);
+                Intent intent = new Intent(activity, LoginMPinActivity.class);
                 startActivity(intent);
             }
         });
         btnPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,LoginPasswordActivity.class);
+                Intent intent = new Intent(activity, LoginPasswordActivity.class);
                 startActivity(intent);
             }
         });

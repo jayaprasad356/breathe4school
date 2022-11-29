@@ -1,6 +1,7 @@
 package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivityLoginMpinBinding;
+import com.app.b4s.utilities.Constant;
 
 public class LoginMPinActivity extends AppCompatActivity {
 
@@ -22,19 +25,21 @@ public class LoginMPinActivity extends AppCompatActivity {
     TextView tvForgotPin,tvLogineithpassword;
     EditText edMPinId;
     Button btnProceed;
+    ActivityLoginMpinBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_mpin);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_mpin);
+
         activity = LoginMPinActivity.this;
 
 
-        ibBackBtn = findViewById(R.id.ibBackBtn);
-        tvForgotPin = findViewById(R.id.tvForgotPin);
-        tvLogineithpassword = findViewById(R.id.tvLogineithpassword);
-        edMPinId = findViewById(R.id.edMPinId);
-        btnProceed = findViewById(R.id.btnProceed);
+        ibBackBtn = binding.ibBackBtn;
+        tvForgotPin = binding.tvForgotPin;
+        tvLogineithpassword = binding.tvLogineithpassword;
+        edMPinId = binding.edMPinId;
+        btnProceed = binding.btnProceed;
 
 
 
@@ -72,14 +77,11 @@ public class LoginMPinActivity extends AppCompatActivity {
         });
 
 
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-                intent.putExtra("Title","Success!");
+        btnProceed.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+            intent.putExtra(Constant.TITLE,Constant.SUCCESS);
 //                intent.putExtra(   "Descripition","You have successfully completed the registration");
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
 
 

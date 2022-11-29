@@ -1,6 +1,8 @@
 package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,41 +16,58 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.b4s.databinding.ActivitySetPasswordBinding;
+import com.app.b4s.utilities.ApiConfig;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.viewmodels.PasswordViewModel;
 import com.google.android.material.textfield.TextInputLayout;
 import com.app.b4s.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class SetPasswordActivity extends AppCompatActivity {
 
-    EditText edSetPasswordId,edConfirmPasswordId;
+    EditText edSetPasswordId, edConfirmPasswordId;
     TextInputLayout edSetPasswordInp;
     Activity activity;
-    TextView atoz, AtoZ, num, charcount,special_char;
+    TextView atoz, AtoZ, num, charcount, special_char;
     LinearLayout llinfo;
     ImageButton ibBackBtn;
     Button btnProceed;
+    String uniqueID;
+    ActivitySetPasswordBinding binding;
+    PasswordViewModel passwordViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_password);
+        passwordViewModel = ViewModelProviders.of(this).get(PasswordViewModel.class);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_set_password);
 
         activity = SetPasswordActivity.this;
+        uniqueID = getIntent().getStringExtra(Constant.UNIQUE_ID);
+        passwordViewModel.getUser().observe(this, user -> {
+            checkPassword();
+        });
 
-
-        edSetPasswordId = findViewById(R.id.edSetPasswordId);
-        edConfirmPasswordId = findViewById(R.id.edConfirmPasswordId);
-        atoz = findViewById(R.id.atoz);
-        AtoZ = findViewById(R.id.AtoZ);
-        num = findViewById(R.id.num);
-        charcount = findViewById(R.id.charcount);
-        special_char = findViewById(R.id.special_char);
-        llinfo = findViewById(R.id.llinfo);
-        edSetPasswordInp = findViewById(R.id.edSetPasswordInp);
-        ibBackBtn = findViewById(R.id.ibBackBtn);
-        btnProceed = findViewById(R.id.btnProceed);
+        edSetPasswordId = binding.edSetPasswordId;
+        edConfirmPasswordId = binding.edConfirmPasswordId;
+        atoz = binding.atoz;
+        AtoZ = binding.AtoZ;
+        num = binding.num;
+        charcount = binding.charcount;
+        special_char = binding.specialChar;
+        llinfo = binding.llinfo;
+        edSetPasswordInp = binding.edSetPasswordInp;
+        ibBackBtn = binding.ibBackBtn;
+        btnProceed = binding.btnProceed;
 
 
         ibBackBtn.setOnClickListener(new View.OnClickListener() {
@@ -75,25 +94,21 @@ public class SetPasswordActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                llinfo.setVisibility(View.VISIBLE);
                 // get the password when we start typing
                 String password = edSetPasswordId.getText().toString();
                 validatepass(password);
-
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().equals("")){
+                if (!editable.toString().equals("")) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
 
-
-
-                }
-                else {
-                    btnProceed.setEnabled(false);
+                } else {
+                    // btnProceed.setEnabled(false);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
                 }
@@ -105,20 +120,50 @@ public class SetPasswordActivity extends AppCompatActivity {
         btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity,SetFaceIdActivity.class);
-                startActivity(intent);
+                checkPassword();
+
             }
         });
 
 
+    }
+
+    private void checkPassword() {
+        if (validatepass(binding.edSetPasswordId.getText().toString())) {
+            if (edConfirmPasswordId.getText().toString().equals(edSetPasswordId.getText().toString())) {
+                setPassword(edConfirmPasswordId.getText().toString());
+            } else {
+                Toast.makeText(activity, R.string.password_mismatch, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void setPassword(String password) {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.UNIQUE_ID, uniqueID);
+        params.put(Constant.PASSWORD, password);
+        ApiConfig.RequestToVolley((result, response) -> {
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        Intent intent = new Intent(activity, SetFaceIdActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
 
 
-
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, Constant.RESET_PASSWORD, params, true, 2);
     }
 
 
-    public void validatepass(String password) {
+    public boolean validatepass(String password) {
 
         // check for pattern
         Pattern uppercase = Pattern.compile("[A-Z]");
@@ -129,6 +174,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         // if lowercase character is not present
         if (!lowercase.matcher(password).find()) {
             atoz.setTextColor(Color.RED);
+            return false;
         } else {
             // if lowercase character is  present
             atoz.setTextColor(getResources().getColor(R.color.text_green));
@@ -137,6 +183,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         // if uppercase character is not present
         if (!uppercase.matcher(password).find()) {
             AtoZ.setTextColor(Color.RED);
+            return false;
         } else {
             // if uppercase character is  present
             AtoZ.setTextColor(getResources().getColor(R.color.text_green));
@@ -146,6 +193,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         // if Special character is not present
         if (!special.matcher(password).find()) {
             special_char.setTextColor(Color.RED);
+            return false;
         } else {
             // if Special character is  present
             special_char.setTextColor(getResources().getColor(R.color.text_green));
@@ -155,6 +203,7 @@ public class SetPasswordActivity extends AppCompatActivity {
         // if digit is not present
         if (!digit.matcher(password).find()) {
             num.setTextColor(Color.RED);
+            return false;
         } else {
             // if digit is present
             num.setTextColor(getResources().getColor(R.color.text_green));
@@ -162,8 +211,11 @@ public class SetPasswordActivity extends AppCompatActivity {
         // if password length is less than 8
         if (password.length() < 8) {
             charcount.setTextColor(Color.RED);
+            return false;
         } else {
             charcount.setTextColor(getResources().getColor(R.color.text_green));
         }
+        llinfo.setVisibility(View.GONE);
+        return true;
     }
 }

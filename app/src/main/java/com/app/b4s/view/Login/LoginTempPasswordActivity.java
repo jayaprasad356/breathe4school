@@ -1,6 +1,7 @@
 package com.app.b4s.view.Login;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,47 +16,43 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivityLoginTempPasswordBinding;
+import com.app.b4s.utilities.Constant;
 
 public class LoginTempPasswordActivity extends AppCompatActivity {
 
     TextView tvLoginMPin;
     ImageButton ibBackBtn;
-    Activity activity ;
-    RelativeLayout rlEnterTempCode,rlGenrateTempCode;
+    Activity activity;
+    RelativeLayout rlEnterTempCode, rlGenrateTempCode;
 
     ImageButton ibBackGenratecode;
     TextView tvForgotPin;
     EditText edMPinId;
     Button btnProceed;
+    ActivityLoginTempPasswordBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_temp_password);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login_temp_password);
         activity = LoginTempPasswordActivity.this;
 
 
-        ibBackBtn = findViewById(R.id.ibBackBtn);
-        tvLoginMPin = findViewById(R.id.tvLoginMPin);
-        rlEnterTempCode = findViewById(R.id.rlEnterTempCode);
-        rlGenrateTempCode = findViewById(R.id.rlGenrateTempCode);
-        ibBackGenratecode = findViewById(R.id.ibBackGenratecode);
-        tvForgotPin = findViewById(R.id.tvForgotPin);
-        edMPinId = findViewById(R.id.edMPinId);
-        btnProceed = findViewById(R.id.btnProceed);
+        ibBackBtn = binding.ibBackBtn;
+        tvLoginMPin = binding.tvLoginMPin;
+        rlEnterTempCode = binding.rlEnterTempCode;
+        rlGenrateTempCode = binding.rlGenrateTempCode;
+        ibBackGenratecode = binding.ibBackGenratecode;
+        tvForgotPin = binding.tvForgotPin;
+        edMPinId = binding.edMPinId;
+        btnProceed = binding.btnProceed;
 
 
-
-        ibBackGenratecode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                rlGenrateTempCode.setVisibility(View.VISIBLE);
-                rlEnterTempCode.setVisibility(View.GONE);
-
-            }
+        ibBackGenratecode.setOnClickListener(v -> {
+            rlGenrateTempCode.setVisibility(View.VISIBLE);
+            rlEnterTempCode.setVisibility(View.GONE);
         });
 
         edMPinId.addTextChangedListener(new TextWatcher() {
@@ -71,11 +68,10 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editable.toString().equals("")){
+                if (!editable.toString().equals("")) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-                }
-                else {
+                } else {
                     btnProceed.setEnabled(false);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
@@ -85,44 +81,29 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
         });
 
 
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-                intent.putExtra("Title","Success!");
+        btnProceed.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+            intent.putExtra(Constant.TITLE, Constant.SUCCESS);
 //                intent.putExtra(   "Descripition","You have successfully completed the registration");
-                startActivity(intent);
-            }
+            startActivity(intent);
         });
 
 
-        tvForgotPin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        tvForgotPin.setOnClickListener(v -> {
 
 
-                rlGenrateTempCode.setVisibility(View.VISIBLE);
-                rlEnterTempCode.setVisibility(View.GONE);
-            }
+            rlGenrateTempCode.setVisibility(View.VISIBLE);
+            rlEnterTempCode.setVisibility(View.GONE);
         });
 
-   ;
+        ;
 
 
+        ibBackBtn.setOnClickListener(v -> onBackPressed());
+        tvLoginMPin.setOnClickListener(v -> {
 
-        ibBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        tvLoginMPin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                rlGenrateTempCode.setVisibility(View.GONE);
-                rlEnterTempCode.setVisibility(View.VISIBLE);
-            }
+            rlGenrateTempCode.setVisibility(View.GONE);
+            rlEnterTempCode.setVisibility(View.VISIBLE);
         });
 
     }

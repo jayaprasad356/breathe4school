@@ -1,6 +1,8 @@
 package com.app.b4s.view.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,49 +19,65 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.b4s.R;
+import com.app.b4s.databinding.ActivityOtpBinding;
+import com.app.b4s.utilities.ApiConfig;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.viewmodels.OtpViewModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class OtpActivity extends AppCompatActivity {
 
-    TextView tvTimer,tvTimeout,tvResentotp,tvInvalidotp;
+    TextView tvTimer, tvTimeout, tvResentotp, tvInvalidotp;
     EditText edOTPId;
     Button btnProceed;
     Activity activity;
     LinearLayout rlOTPInp;
     ImageView ivOtpTick;
+    OtpViewModel otpViewModel;
+    private ActivityOtpBinding binding;
+    String otpType;
+    String url;
+
 
     ImageButton ibBackBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp);
         activity = OtpActivity.this;
 
+        otpViewModel = ViewModelProviders.of(this).get(OtpViewModel.class);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_otp);
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(otpViewModel);
+        Intent intent = getIntent();
+
+        otpType = intent.getStringExtra(Constant.TYPE);
 
 
-        tvTimer = findViewById(R.id.tvTimer);
-        tvResentotp = findViewById(R.id.tvResentotp);
-        tvTimeout = findViewById(R.id.tvTimeout);
-        edOTPId = findViewById(R.id.edOTPId);
-        btnProceed = findViewById(R.id.btnProceed);
-        tvInvalidotp = findViewById(R.id.tvInvalidotp);
-        rlOTPInp = findViewById(R.id.rlOTPInp);
-        ibBackBtn = findViewById(R.id.ibBackBtn);
-        ivOtpTick = findViewById(R.id.ivOtpTick);
-
-
-
-
-        ibBackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
+        tvTimer = binding.tvTimer;
+        tvResentotp = binding.tvResentotp;
+        tvTimeout = binding.tvTimeout;
+        edOTPId = binding.edOTPId;
+        btnProceed = binding.btnProceed;
+        tvInvalidotp = binding.tvInvalidotp;
+        rlOTPInp = binding.rlOTPInp;
+        ibBackBtn = binding.ibBackBtn;
+        ivOtpTick = binding.ivOtpTick;
+        otpViewModel.getUser().observe(this, user -> {
+            proceeed(otpType);
         });
 
 
-
+        ibBackBtn.setOnClickListener(v -> onBackPressed());
         timerstart();
 
 
@@ -76,11 +94,10 @@ public class OtpActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 6){
+                if (editable.length() == 4) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-                }
-                else {
+                } else {
                     btnProceed.setEnabled(false);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
@@ -88,11 +105,6 @@ public class OtpActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
-
 
 
         tvResentotp.setOnClickListener(new View.OnClickListener() {
@@ -105,37 +117,56 @@ public class OtpActivity extends AppCompatActivity {
         });
 
 
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                proceeed();
-            }
-        });
-
-
-
-
-
     }
 
-    private void proceeed() {
-
-
-        if (edOTPId.getText().toString().equals("123456")){
-            onBackPressed();
-        }
-
-        else{
-
-            GradientDrawable drawable = (GradientDrawable)rlOTPInp.getBackground();
+    private void proceeed(String otpType) {
+        if (otpType.equals(Constant.EMAIL)) {
+            if (edOTPId.getText().length() == 4) {
+                url = Constant.VALIDATE_EMAIL_OTP;
+                verifyOtp(Constant.EMAIL_OTP, edOTPId.getText().toString().trim(), url);
+            }
+        } else if (otpType.equals(Constant.MOBILE)) {
+            if (edOTPId.getText().length() == 4) {
+                url = Constant.VALIDATE_MOBILE_OTP;
+                verifyOtp(Constant.MOBILE_OTP, edOTPId.getText().toString().trim(), url);
+            }
+        } else {
+            GradientDrawable drawable = (GradientDrawable) rlOTPInp.getBackground();
 //            drawable.mutate(); // only change this instance of the xml, not all components using this xml
             drawable.setStroke(2, Color.RED); // set stroke width and stroke color
             tvInvalidotp.setVisibility(View.VISIBLE);
-            tvInvalidotp.setText("Invalid OTP entered");
+            tvInvalidotp.setText(R.string.invalid_otp);
             tvTimeout.setVisibility(View.GONE);
 
 
         }
+    }
+
+    private void verifyOtp(String type, String otp, String url) {
+        Map<String, String> params = new HashMap<>();
+        params.put(type, otp);
+        ApiConfig.RequestToVolley((result, response) -> {
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, url, params, true, 1);
+
     }
 
     private void timerstart() {
@@ -145,17 +176,15 @@ public class OtpActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 tvResentotp.setEnabled(false);
                 int seconds = (int) (millisUntilFinished / 1000);
-                tvTimer.setText(String.format("%02d:%02d", seconds / 60, seconds % 60));
+                tvTimer.setText(String.format(getString(R.string.resend_time_format), seconds / 60, seconds % 60));
 
             }
 
             public void onFinish() {
-
                 tvResentotp.setEnabled(true);
                 tvTimeout.setVisibility(View.VISIBLE);
                 tvInvalidotp.setVisibility(View.GONE);
                 tvResentotp.setTextColor(getResources().getColorStateList(R.color.black));
-
 
             }
 
@@ -163,5 +192,5 @@ public class OtpActivity extends AppCompatActivity {
     }
 
 
-
 }
+

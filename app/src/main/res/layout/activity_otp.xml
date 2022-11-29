@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".view.Register.OtpActivity">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.app.b4s.viewmodels.OtpViewModel" />
+    </data>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -201,6 +207,7 @@
                 android:enabled="false"
                 android:fontFamily="@font/semibold"
                 android:padding="@dimen/_8sdp"
+                android:onClick="@{()-> viewModel.onClick()}"
                 android:text="@string/proceed_txt"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -217,3 +224,4 @@
 
 
 </RelativeLayout>
+</layout>
