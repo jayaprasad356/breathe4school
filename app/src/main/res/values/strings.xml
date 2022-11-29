@@ -39,6 +39,7 @@
     <string name="your_temp_password_request_no">Your temp password request no</string>
     <string name="enter_temp_m_pin">Enter temp M-PIN</string>
     <string name="unloack_with_temp_m_pin">Unloack with temp M-PIN</string>
+    <string name="skip_and_get_started">Skip and Get started</string>
 
 
 </resources>

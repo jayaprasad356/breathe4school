@@ -3,12 +3,15 @@ package com.app.b4s.view.Register;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +27,8 @@ public class SetPasswordActivity extends AppCompatActivity {
     Activity activity;
     TextView atoz, AtoZ, num, charcount,special_char;
     LinearLayout llinfo;
+    ImageButton ibBackBtn;
+    Button btnProceed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,16 @@ public class SetPasswordActivity extends AppCompatActivity {
         special_char = findViewById(R.id.special_char);
         llinfo = findViewById(R.id.llinfo);
         edSetPasswordInp = findViewById(R.id.edSetPasswordInp);
+        ibBackBtn = findViewById(R.id.ibBackBtn);
+        btnProceed = findViewById(R.id.btnProceed);
+
+
+        ibBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         edSetPasswordInp.setEndIconOnClickListener(new View.OnClickListener() {
@@ -69,22 +84,34 @@ public class SetPasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-//                if (!editable.toString().equals("")){
-//                    btnContinue.setEnabled(true);
-//                    btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-//
-//
-//
-//
-//                }
-//                else {
-//                    btnContinue.setEnabled(false);
-//                    btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
-//
-//                }
+                if (!editable.toString().equals("")){
+                    btnProceed.setEnabled(true);
+                    btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+
+
+
+
+                }
+                else {
+                    btnProceed.setEnabled(false);
+                    btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+
+                }
 
             }
         });
+
+
+        btnProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity,SetFaceIdActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
 
 
 

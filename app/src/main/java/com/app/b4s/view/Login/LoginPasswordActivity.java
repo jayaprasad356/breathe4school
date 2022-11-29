@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.app.b4s.R;
-import com.app.b4s.view.SuccessfullActivity;
 
 public class LoginPasswordActivity extends AppCompatActivity {
 
@@ -65,7 +64,9 @@ public class LoginPasswordActivity extends AppCompatActivity {
         btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, SuccessfullActivity.class);
+                Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+                intent.putExtra("Title","Success!");
+//                intent.putExtra(   "Descripition","You have successfully completed the registration");
                 startActivity(intent);
             }
         });

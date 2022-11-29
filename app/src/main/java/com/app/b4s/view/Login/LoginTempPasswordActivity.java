@@ -11,12 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.app.b4s.R;
-import com.app.b4s.view.SuccessfullActivity;
 
 public class LoginTempPasswordActivity extends AppCompatActivity {
 
@@ -90,7 +88,9 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
         btnProceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, SuccessfullActivity.class);
+                Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+                intent.putExtra("Title","Success!");
+//                intent.putExtra(   "Descripition","You have successfully completed the registration");
                 startActivity(intent);
             }
         });

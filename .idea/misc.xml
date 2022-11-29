@@ -22,10 +22,11 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_otp.xml" value="0.22" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_registration.xml" value="0.18" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_resister_successfull.xml" value="0.20416666666666666" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_face_id.xml" value="0.16" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_face_id.xml" value="0.18" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_mpin.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_password.xml" value="0.1625" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_successfull.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.app.b4s.R;
 
@@ -16,6 +18,7 @@ public class SetMPinActivity extends AppCompatActivity {
     EditText edConfirmMPinId,edMPinId;
     Button btnContinue;
     boolean Pin = false;
+    ImageButton ibBackBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,15 @@ public class SetMPinActivity extends AppCompatActivity {
         edMPinId = findViewById(R.id.edMPinId);
         edConfirmMPinId = findViewById(R.id.edConfirmMPinId);
         btnContinue = findViewById(R.id.btnContinue);
+        ibBackBtn = findViewById(R.id.ibBackBtn);
+
+
+        ibBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
 
         edMPinId.addTextChangedListener(new TextWatcher() {
@@ -56,7 +68,7 @@ public class SetMPinActivity extends AppCompatActivity {
                 else {
 
 
-                    Pin = true;
+                    Pin = false;
 
 //                    btnContinue.setEnabled(false);
 //                    btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));

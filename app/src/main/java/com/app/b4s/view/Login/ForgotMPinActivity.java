@@ -13,6 +13,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
     Button btnProceed;
     Activity activity;
     LinearLayout rlOTPInp;
+    ImageView ivOtpTick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
         btnProceed = findViewById(R.id.btnProceed);
         tvInvalidotp = findViewById(R.id.tvInvalidotp);
         rlOTPInp = findViewById(R.id.rlOTPInp);
+        ivOtpTick = findViewById(R.id.ivOtpTick);
 
 
 

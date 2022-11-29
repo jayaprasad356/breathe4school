@@ -1,38 +1,30 @@
 package com.app.b4s.view.Register;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.b4s.databinding.ActivityRegistrationBinding;
-import com.app.b4s.model.User;
+import com.app.b4s.view.Login.LoginFaceIDActivity;
 import com.app.b4s.viewmodels.RegistrationViewModel;
-import com.google.android.material.textfield.TextInputLayout;
 import com.app.b4s.R;
-
-import java.util.Objects;
 
 public class RegistrationActivity extends AppCompatActivity {
     Activity activity;
     private RegistrationViewModel registrationViewModel;
     private ActivityRegistrationBinding binding;
+    boolean data = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +34,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_registration);
 
+        binding.tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, LoginFaceIDActivity.class);
+                startActivity(intent);
+            }
+        });
+
         binding.setLifecycleOwner(this);
         binding.setViewModel(registrationViewModel);
 
@@ -49,6 +49,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
             binding.llInputFeild.setVisibility(View.VISIBLE);
             binding.rlUniqueInp.setVisibility(View.GONE);
+            binding.btnContinue.setVisibility(View.GONE);
+            binding.llLogintv.setVisibility(View.GONE);
 
 
         });
@@ -79,12 +81,86 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
+        binding.edEmailId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!editable.toString().equals("")){
+
+                    data = true;
+
+//                    binding.btnContinue.setEnabled(true);
+//                    binding.btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+                }
+                else {
+
+                    data = false;
+//                    binding.btnContinue.setEnabled(false);
+//                    binding.btnContinue.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+
+                }
+
+            }
+        });
+        binding.edMobilenoId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                data = false;
+
+
+                if ( data = true){
+
+                    if (!editable.toString().equals("")){
+                        binding.btnContinueFinish.setEnabled(true);
+                        binding.btnContinueFinish.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+                    }
+
+
+                    else {
+                        binding.btnContinueFinish.setEnabled(false);
+                        binding.btnContinueFinish.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+                    }
+
+
+
+                }
+
+
+                else {
+                    binding.btnContinueFinish.setEnabled(false);
+                    binding.btnContinueFinish.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
+
+                }
+
+
+            }
+        });
+
         binding.tvVerifyEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 if (binding.edEmailId.getText().toString().equals("")){
-
                     binding.edEmailId.setError("Enter email Id");
                     binding.edEmailId.requestFocus();
                 }
@@ -98,6 +174,21 @@ public class RegistrationActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
+        binding.btnContinueFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, SetPasswordActivity.class);
+                intent.putExtra("Title","Kudos!");
+                intent.putExtra(   "Descripition","You have successfully completed the registration");
+                startActivity(intent);
+            }
+        });
+
+
     }
     @BindingAdapter({"toastMessage"})
     public static void runMe(View view, String message) {

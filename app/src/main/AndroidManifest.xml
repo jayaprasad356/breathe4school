@@ -18,8 +18,7 @@
         <activity
             android:name=".view.Login.LoginTempPasswordActivity"
             android:exported="false"
-            android:screenOrientation="landscape"
-            />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.Login.ForgotpasswordActivity"
             android:exported="false"
@@ -40,14 +39,10 @@
             android:name=".view.Login.LoginFaceIDActivity"
             android:exported="true"
             android:screenOrientation="landscape">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name="com.app.b4s.view.SuccessfullActivity"
+            android:name="com.app.b4s.view.Register.RegisterSuccessfullActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
@@ -70,10 +65,19 @@
             android:name="com.app.b4s.view.Register.RegistrationActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
+
         <activity
             android:name="com.app.b4s.view.SplashScreenActivity"
             android:exported="true"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
         <activity
             android:name="com.app.b4s.view.MainActivity"
             android:exported="false"

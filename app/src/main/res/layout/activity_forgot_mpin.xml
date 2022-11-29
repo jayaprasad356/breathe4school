@@ -74,26 +74,26 @@
                     android:id="@+id/rlOTPInp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/edit_border_box"
                     android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:weightSum="2"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:background="@drawable/edit_border_box"
                     android:orientation="horizontal"
                     android:padding="@dimen/_3sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:weightSum="2"
 
                     >
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_weight="0.6"
                         android:id="@+id/edOTPInp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        app:boxBackgroundColor="@color/white"
+                        android:layout_weight="0.6"
                         android:background="@drawable/bg_textinput_layout"
+                        android:hint="@string/enter_otp"
+                        app:boxBackgroundColor="@color/white"
                         app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        android:hint="@string/enter_otp">
+                        app:boxStrokeWidthFocused="0dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edOTPId"
@@ -107,14 +107,25 @@
 
                     <TextView
                         android:id="@+id/tvTimer"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1.4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="00:45"
-                        android:gravity="center"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1.4"
                         android:fontFamily="sans-serif-medium"
-                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:text="00:45"
+                        android:textColor="@color/black" />
+
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1.4"
+                        android:gravity="center"
+                        android:id="@+id/ivOtpTick"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_green_tick"
                         />
 
 
