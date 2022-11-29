@@ -25,295 +25,201 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/register_image" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivlogo"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_14sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/registration"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"/>
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/ivlogo"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="@dimen/_14sdp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/logo" />
-
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/semibold"
-                        android:text="@string/registration"
-                        android:textColor="@color/black_text"
-                        android:textSize="@dimen/_18sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"/>
+                <RelativeLayout
+                    android:id="@+id/rlUniqueInp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
 
 
-                    <RelativeLayout
-                        android:id="@+id/rlUniqueInp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="visible">
-
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            app:boxStrokeErrorColor="@color/red"
-                            android:id="@+id/edUniqueInp"
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginHorizontal="@dimen/_100sdp"
-                            android:hint="@string/unique_id">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/edUniqueId"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:maxLength="6"
-                                ></com.google.android.material.textfield.TextInputEditText>
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <TextView
-                            android:layout_below="@+id/edUniqueInp"
-                            android:id="@+id/tvInvalidID"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textColor="@color/red"
-                            android:fontFamily="sans-serif"
-                            android:layout_marginHorizontal="@dimen/_100sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:visibility="gone"
-                            />
-
-
-
-
-                    </RelativeLayout>
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnContinue"
+                    <com.google.android.material.textfield.TextInputLayout
+                        app:boxStrokeErrorColor="@color/red"
+                        android:id="@+id/edUniqueInp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginHorizontal="@dimen/_100sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:enabled="false"
-                        android:fontFamily="@font/semibold"
-                        android:padding="@dimen/_8sdp"
-                        android:text="@string/continue_txt"
-                        android:textAllCaps="false"
-                        android:onClick="@{()-> viewModel.onClick()}"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp" />
+                        android:hint="@string/unique_id">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edUniqueId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:layout_below="@+id/edUniqueInp"
+                        android:id="@+id/tvInvalidID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/red"
+                        android:fontFamily="sans-serif"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:visibility="gone"
+                        />
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInputFeild"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/llInputFeild"
-                        android:visibility="gone"
+                        android:id="@+id/rlEmailInp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:background="@drawable/edit_border_box"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
 
-                        <LinearLayout
-                            android:id="@+id/rlEmailInp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_border_box"
-                            android:layout_marginHorizontal="@dimen/_100sdp"
-                            android:weightSum="2"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/_3sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
+                        >
 
-                            >
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_weight="0.6"
-                                android:id="@+id/edEmailInp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                app:boxBackgroundColor="@color/white"
-                                android:background="@drawable/bg_textinput_layout"
-                                app:boxStrokeWidth="0dp"
-                                app:boxStrokeWidthFocused="0dp"
-                                android:hint="@string/email_id">
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/edEmailId"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content">
-
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <TextView
-                                android:id="@+id/tvVerifyEmail"
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/verify_now"
-                                android:gravity="center"
-                                android:fontFamily="sans-serif-medium"
-                                android:textColor="@color/primary"
-                                />
-
-
-                            <ImageView
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.4"
-                                android:gravity="center"
-                                android:id="@+id/ivTickEmail"
-                                android:visibility="gone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/ic_green_tick"
-                                />
-
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/rlMobilenoInp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edit_border_box"
-                            android:layout_marginHorizontal="@dimen/_100sdp"
-                            android:weightSum="2"
-                            android:orientation="horizontal"
-                            android:padding="@dimen/_3sdp"
-
-                            >
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_weight="0.6"
-                                android:id="@+id/edMobilenoInp"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                app:boxBackgroundColor="@color/white"
-                                android:background="@drawable/bg_textinput_layout"
-                                android:hint="@string/mobile_number"
-                                app:boxStrokeWidth="0dp"
-                                app:boxStrokeWidthFocused="0dp"
-                                >
-
-                                <com.google.android.material.textfield.TextInputEditText
-                                    android:id="@+id/edMobilenoId"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:inputType="number"
-                                    >
-
-                                </com.google.android.material.textfield.TextInputEditText>
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <TextView
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/verify_now"
-                                android:gravity="center"
-                                android:fontFamily="sans-serif-medium"
-                                android:textColor="@color/primary"
-                                />
-
-
-                            <ImageView
-                                android:layout_gravity="center_vertical"
-                                android:layout_weight="1.4"
-                                android:gravity="center"
-                                android:id="@+id/ivTickMobile"
-                                android:visibility="gone"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/ic_green_tick"
-                                />
-
-
-                        </LinearLayout>
-
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnContinueFinish"
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_weight="0.6"
+                            android:id="@+id/edEmailInp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginHorizontal="@dimen/_100sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/semibold"
-                            android:padding="@dimen/_8sdp"
-                            android:text="@string/continue_txt"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_12sdp" />
+                            app:boxBackgroundColor="@color/white"
+                            android:background="@drawable/bg_textinput_layout"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            android:hint="@string/email_id">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edEmailId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:id="@+id/tvVerifyEmail"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/verify_now"
+                            android:gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/primary"
+                            />
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/rlMobilenoInp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edit_border_box"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:weightSum="2"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_3sdp"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_weight="0.6"
+                            android:id="@+id/edMobilenoInp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:boxBackgroundColor="@color/white"
+                            android:background="@drawable/bg_textinput_layout"
+                            android:hint="@string/mobile_number"
+                            app:boxStrokeWidth="0dp"
+                            app:boxStrokeWidthFocused="0dp"
+                            >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/edMobilenoId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                >
+
+                            </com.google.android.material.textfield.TextInputEditText>
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1.4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/verify_now"
+                            android:gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/primary"
+                            />
+
 
                     </LinearLayout>
 
 
-
-
                 </LinearLayout>
 
 
-
-                <LinearLayout
-                    android:id="@+id/llLogintv"
-                    android:layout_width="wrap_content"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnContinue"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp"
-                    >
+                    android:layout_marginHorizontal="@dimen/_100sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:fontFamily="@font/semibold"
+                    android:padding="@dimen/_8sdp"
+                    android:text="@string/continue_txt"
+                    android:textAllCaps="false"
+                    android:onClick="@{()-> viewModel.onClick()}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text="Already registered?"
-                        />
-                    <TextView
-                        android:id="@+id/tvLogin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="sans-serif-medium"
-                        android:text=" Login"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/black"
-                        />
-
-
-                </LinearLayout>
-
-
-
-            </RelativeLayout>
-
-
-
+            </LinearLayout>
 
 
         </LinearLayout>
-
-
-
     </RelativeLayout>
 
 
