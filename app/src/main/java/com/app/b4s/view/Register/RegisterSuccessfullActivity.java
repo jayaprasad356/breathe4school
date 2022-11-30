@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySuccessfullBinding;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.Login.LoginFaceIDActivity;
 
 public class RegisterSuccessfullActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
 
     Handler handler;
     ActivitySuccessfullBinding binding;
+    public String uniqueId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
 
         tvTitle = binding.tvTitle;
         tvdescription = binding.tvdescription;
-
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         tvTitle.setText(getIntent().getStringExtra(Constant.TITLE));
         tvdescription.setText(getIntent().getStringExtra(Constant.DESCRIPTION));
 
@@ -43,7 +45,9 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(RegisterSuccessfullActivity.this, RegistrationActivity.class);
+                Intent intent = new Intent(RegisterSuccessfullActivity.this, LoginFaceIDActivity.class);
+                intent.putExtra(Constant.UNIQUE_ID, uniqueId);
+                intent.putExtra(Constant.SKIP_FACE_ID, 0);
                 startActivity(intent);
                 finish();
 

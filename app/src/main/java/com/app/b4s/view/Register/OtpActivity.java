@@ -43,7 +43,7 @@ public class OtpActivity extends AppCompatActivity {
     ImageView ivOtpTick;
     OtpViewModel otpViewModel;
     private ActivityOtpBinding binding;
-    String otpType;
+    String otpType, description;
     String url;
 
 
@@ -61,6 +61,8 @@ public class OtpActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         otpType = intent.getStringExtra(Constant.TYPE);
+        description = intent.getStringExtra(Constant.DESCRIPTION);
+        binding.tvdescription.setText(getString(R.string.otp_header) + " " + description);
 
 
         tvTimer = binding.tvTimer;
@@ -94,7 +96,7 @@ public class OtpActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 4) {
+                if (editable.length() >= 4) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
                 } else {
@@ -121,7 +123,7 @@ public class OtpActivity extends AppCompatActivity {
 
     private void proceeed(String otpType) {
         if (otpType.equals(Constant.EMAIL)) {
-            if (edOTPId.getText().length() == 4) {
+            if (edOTPId.getText().length() >= 4) {
                 url = Constant.VALIDATE_EMAIL_OTP;
                 verifyOtp(Constant.EMAIL_OTP, edOTPId.getText().toString().trim(), url);
             }

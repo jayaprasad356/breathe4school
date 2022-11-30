@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotMpinBinding;
 import com.app.b4s.databinding.ActivitySetPasswordBinding;
+import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.SetMPinActivity;
 
 public class ForgotMPinActivity extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
     Activity activity;
     LinearLayout rlOTPInp;
     ImageView ivOtpTick;
+    String uniqueId;
     private ActivityForgotMpinBinding binding;
 
 
@@ -47,7 +49,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
         tvInvalidotp = binding.tvInvalidotp;
         rlOTPInp = binding.rlOTPInp;
         ivOtpTick = binding.ivOtpTick;
-
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         timerstart();
 
         edOTPId.addTextChangedListener(new TextWatcher() {
@@ -63,7 +65,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 6) {
+                if (editable.length()>=4) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
@@ -98,6 +100,7 @@ public class ForgotMPinActivity extends AppCompatActivity {
 
         if (edOTPId.getText().toString().equals(getString(R.string.test_num))) {
             Intent intent = new Intent(activity, SetMPinActivity.class);
+            intent.putExtra(Constant.UNIQUE_ID,uniqueId);
             startActivity(intent);
 
         } else {

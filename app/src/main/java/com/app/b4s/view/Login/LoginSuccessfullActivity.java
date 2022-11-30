@@ -20,6 +20,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
     Activity activity;
     ActivitySuccessfullBinding binding;
     Handler handler;
+    String uniqueId;
 
 
     @Override
@@ -27,7 +28,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_successfull);
         activity = LoginSuccessfullActivity.this;
-
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         tvTitle = binding.tvTitle;
         tvdescription = binding.tvdescription;
 
@@ -47,7 +48,8 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(LoginSuccessfullActivity.this, SetFaceIdActivity.class);
-                intent.putExtra("SkipFaceId", true);
+                intent.putExtra(Constant.SKIP_FACE_ID, true);
+                intent.putExtra(Constant.UNIQUE_ID,uniqueId);
                 startActivity(intent);
                 finish();
 

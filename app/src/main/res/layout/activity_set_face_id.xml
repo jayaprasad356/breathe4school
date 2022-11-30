@@ -69,6 +69,7 @@
 
 
                     <ImageView
+                        android:id="@+id/ivFaceLogo"
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:background="@drawable/img_face_id" />

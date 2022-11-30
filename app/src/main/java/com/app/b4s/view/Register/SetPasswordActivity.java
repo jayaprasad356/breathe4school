@@ -43,7 +43,7 @@ public class SetPasswordActivity extends AppCompatActivity {
     LinearLayout llinfo;
     ImageButton ibBackBtn;
     Button btnProceed;
-    String uniqueID;
+    String uniqueID, flow;
     ActivitySetPasswordBinding binding;
     PasswordViewModel passwordViewModel;
 
@@ -55,6 +55,7 @@ public class SetPasswordActivity extends AppCompatActivity {
 
         activity = SetPasswordActivity.this;
         uniqueID = getIntent().getStringExtra(Constant.UNIQUE_ID);
+        flow = getIntent().getStringExtra(Constant.FLOW);
         passwordViewModel.getUser().observe(this, user -> {
             checkPassword();
         });
@@ -101,8 +102,6 @@ public class SetPasswordActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
 
-
-
             }
 
             @Override
@@ -142,7 +141,7 @@ public class SetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (binding.tvShowPass.getText().equals("Show Password")){
+                if (binding.tvShowPass.getText().equals("Show Password")) {
 
 
                     binding.tvShowPass.setText("Hide Password");
@@ -150,9 +149,7 @@ public class SetPasswordActivity extends AppCompatActivity {
                     edConfirmPasswordId.setTransformationMethod(null);
 
 
-                }
-
-                else  if (binding.tvShowPass.getText().equals("Hide Password")){
+                } else if (binding.tvShowPass.getText().equals("Hide Password")) {
 
 
                     binding.tvShowPass.setText("Show Password");
@@ -163,15 +160,8 @@ public class SetPasswordActivity extends AppCompatActivity {
                 }
 
 
-
             }
         });
-
-
-
-
-
-
 
 
     }
@@ -196,8 +186,17 @@ public class SetPasswordActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        Intent intent = new Intent(activity, SetFaceIdActivity.class);
-                        startActivity(intent);
+                        if (flow.equals(Constant.NORMAL)){
+                            Intent intent = new Intent(activity, SetMPinActivity.class);
+                            intent.putExtra(Constant.UNIQUE_ID, uniqueID);
+                            intent.putExtra(Constant.SKIP_FACE_ID, 0);
+                            startActivity(intent);
+                        }else {
+                            Intent intent = new Intent(activity, RegisterSuccessfullActivity.class);
+                            intent.putExtra(Constant.UNIQUE_ID, uniqueID);
+                            intent.putExtra(Constant.SKIP_FACE_ID, 0);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }

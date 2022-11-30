@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotpasswordBinding;
+import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.SetMPinActivity;
 import com.app.b4s.view.Register.SetPasswordActivity;
 
@@ -32,6 +33,7 @@ public class ForgotpasswordActivity extends AppCompatActivity {
     Activity activity;
     LinearLayout rlOTPInp;
     ImageView ivOtpTick;
+    String uniqueId;
     public ActivityForgotpasswordBinding binding;
 
     @Override
@@ -48,6 +50,7 @@ public class ForgotpasswordActivity extends AppCompatActivity {
         tvInvalidotp = binding.tvInvalidotp;
         rlOTPInp = binding.rlOTPInp;
         ivOtpTick = binding.ivOtpTick;
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
 
         timerstart();
 
@@ -64,7 +67,7 @@ public class ForgotpasswordActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (editable.length() == 6) {
+                if (editable.length() >=4) {
                     btnProceed.setEnabled(true);
                     btnProceed.setBackgroundTintList(getResources().getColorStateList(R.color.btncolor));
 
@@ -93,11 +96,11 @@ public class ForgotpasswordActivity extends AppCompatActivity {
     private void proceeed() {
 
 
-        if (edOTPId.getText().toString().equals(R.string.test_num)) {
-
+        if (edOTPId.getText().toString().equals(getString(R.string.test_num))) {
             Intent intent = new Intent(activity, SetPasswordActivity.class);
+            intent.putExtra(Constant.FLOW,Constant.FORGOT);
+            intent.putExtra(Constant.UNIQUE_ID, uniqueId);
             startActivity(intent);
-
         } else {
 
             GradientDrawable drawable = (GradientDrawable) rlOTPInp.getBackground();

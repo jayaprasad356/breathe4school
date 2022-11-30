@@ -15,7 +15,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityRegistrationBinding;
-import com.app.b4s.model.User;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.viewmodels.RegistrationViewModel;
@@ -47,9 +46,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
         registrationViewModel.getUser().observe(this, user -> {
             if (mobileVerify && emailverify) {
-                uniqueID=binding.edUniqueId.getText().toString();
+                uniqueID = binding.edUniqueId.getText().toString();
                 Intent intent = new Intent(activity, SetPasswordActivity.class);
-                intent.putExtra(Constant.UNIQUE_ID,uniqueID);
+                intent.putExtra(Constant.FLOW,Constant.NORMAL);
+                intent.putExtra(Constant.UNIQUE_ID, uniqueID);
                 startActivity(intent);
             } else
                 validateUniqueId();
@@ -90,6 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
 
                     Intent intent = new Intent(activity, OtpActivity.class);
+                    intent.putExtra(Constant.DESCRIPTION, binding.edEmailId.getText().toString());
                     intent.putExtra(Constant.TYPE, Constant.EMAIL);
                     startActivityForResult(intent, 2);
                 }
@@ -105,6 +106,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     binding.edMobilenoId.requestFocus();
                 } else {
                     Intent intent = new Intent(activity, OtpActivity.class);
+                    intent.putExtra(Constant.DESCRIPTION, binding.edMobilenoId.getText().toString());
                     intent.putExtra(Constant.TYPE, Constant.MOBILE);
                     startActivityForResult(intent, 1);
                 }
@@ -121,7 +123,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                       /// Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         binding.llInputFeild.setVisibility(View.VISIBLE);
                         binding.rlUniqueInp.setVisibility(View.GONE);
 

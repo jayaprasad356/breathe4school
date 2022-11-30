@@ -31,6 +31,7 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
     EditText edMPinId;
     Button btnProceed;
     ActivityLoginTempPasswordBinding binding;
+    String uniqueId, tempMpin;
 
 
     @Override
@@ -39,7 +40,8 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_temp_password);
         activity = LoginTempPasswordActivity.this;
 
-
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
+        tempMpin = getIntent().getStringExtra(Constant.MPIN);
         ibBackBtn = binding.ibBackBtn;
         tvLoginMPin = binding.tvLoginMPin;
         rlEnterTempCode = binding.rlEnterTempCode;
@@ -48,6 +50,7 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
         tvForgotPin = binding.tvForgotPin;
         edMPinId = binding.edMPinId;
         btnProceed = binding.btnProceed;
+        binding.tvCode.setText(tempMpin);
 
 
         ibBackGenratecode.setOnClickListener(v -> {
@@ -83,6 +86,7 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
 
         btnProceed.setOnClickListener(v -> {
             Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+            intent.putExtra(Constant.UNIQUE_ID, uniqueId);
             intent.putExtra(Constant.TITLE, Constant.SUCCESS);
 //                intent.putExtra(   "Descripition","You have successfully completed the registration");
             startActivity(intent);

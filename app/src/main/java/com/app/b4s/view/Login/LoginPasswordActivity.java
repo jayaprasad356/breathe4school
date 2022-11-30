@@ -12,10 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityLoginPasswordBinding;
+import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginPasswordActivity extends AppCompatActivity {
 
@@ -24,13 +32,14 @@ public class LoginPasswordActivity extends AppCompatActivity {
     TextView tvForgotPasword;
     Activity activity;
     ActivityLoginPasswordBinding binding;
+    String uniqueId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_password);
         activity = LoginPasswordActivity.this;
-
+        uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
 
         edSetPasswordId = binding.edSetPasswordId;
         btnProceed = binding.btnProceed;
@@ -63,25 +72,40 @@ public class LoginPasswordActivity extends AppCompatActivity {
         });
 
 
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-                intent.putExtra(Constant.TITLE, Constant.SUCCESS);
+        btnProceed.setOnClickListener(v -> loginWithPassword(uniqueId, edSetPasswordId.getText().toString()));
+
+        tvForgotPasword.setOnClickListener(v -> {
+            Intent intent = new Intent(activity, ForgotpasswordActivity.class);
+            intent.putExtra(Constant.UNIQUE_ID,uniqueId);
+            startActivity(intent);
+        });
+
+    }
+
+    private void loginWithPassword(String uniqueId, String password) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.UNIQUE_ID, uniqueId);
+        params.put(Constant.PASSWORD, password);
+        ApiConfig.RequestToVolley((result, response) -> {
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
+                        intent.putExtra(Constant.UNIQUE_ID,uniqueId);
+                        intent.putExtra(Constant.TITLE, Constant.SUCCESS);
 //                intent.putExtra(   "Descripition","You have successfully completed the registration");
-                startActivity(intent);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
-        });
-
-
-        tvForgotPasword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(activity, ForgotpasswordActivity.class);
-                startActivity(intent);
-            }
-        });
+        }, activity, Constant.LOGIN_WITH_PASSWORD, params, true, 1);
 
     }
 }

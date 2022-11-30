@@ -3,287 +3,261 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.Register.SetMPinActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
+    <data>
 
+        <variable
+            name="viewModel"
+            type="com.app.b4s.viewmodels.MpinViewModel" />
+    </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:rotationX="360"
-            android:scaleType="fitXY"
-            android:src="@drawable/register_image" />
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <ImageButton
-                android:id="@+id/ibBackBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_back_arrow"
-                android:layout_margin="@dimen/_10sdp"
-
-                />
-
+        android:layout_height="match_parent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-
-            >
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/ivlogo"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:rotationX="360"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/semibold"
-                android:text="@string/set_4_digit_m_pin"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/_14sdp"
-                android:layout_marginBottom="@dimen/_5sdp"/>
+                android:src="@drawable/register_image" />
 
 
-
-            <TextView
-                android:id="@+id/tvdescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="sans-serif"
-                android:text="My PIN is your personal number that keeps your account safe from others.
-Let’s keep your data a secret!"
-                android:textColor="@color/text_gray"
-                android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginHorizontal="@dimen/_50sdp"
-                />
-
-
-
-
-
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor="@color/red"
-                android:id="@+id/edSetMPinInp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/_100sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
-                android:hint="@string/new_pin"
-                app:passwordToggleEnabled="true"
-                >
+                android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edMPinId"
-                    android:layout_width="match_parent"
+
+                <ImageButton
+                    android:id="@+id/ibBackBtn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberPassword"
-                    android:maxLength="4"
-                    >
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/ic_back_arrow"
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                app:boxStrokeErrorColor="@color/red"
-                android:id="@+id/edConfirmMPinInp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/_100sdp"
-                android:hint="@string/confrim_pin">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edConfirmMPinId"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="numberPassword"
-                    android:maxLength="4"
-                    >
-
-                </com.google.android.material.textfield.TextInputEditText>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-            <LinearLayout
-                android:id="@+id/llinfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                >
-
+                    />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:weightSum="2"
-                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
 
                     >
 
+                    <ImageView
+                        android:id="@+id/ivlogo"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/logo" />
 
                     <TextView
-                        android:id="@+id/charcount"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/minimum_8_characters"
-                        android:textSize="@dimen/_10sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:fontFamily="@font/semibold"
+                        android:text="@string/set_4_digit_m_pin"
+                        android:textColor="@color/black_text"
+                        android:textSize="@dimen/_14sdp" />
+
+
+                    <TextView
+                        android:id="@+id/tvdescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginHorizontal="@dimen/_50sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
                         android:fontFamily="sans-serif"
-                        />
+                        android:text="My PIN is your personal number that keeps your account safe from others.
+Let’s keep your data a secret!"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_10sdp" />
 
-                    <TextView
-                        android:id="@+id/AtoZ"
-                        android:layout_weight="1"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edSetMPinInp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/one_uppercase_character"
-                        android:textSize="@dimen/_10sdp"
-                        />
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:hint="@string/new_pin"
+                        app:boxStrokeErrorColor="@color/red"
+                        app:passwordToggleEnabled="true">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edMPinId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberPassword"
+                            android:maxLength="4">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/edConfirmMPinInp"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:hint="@string/confrim_pin"
+                        app:boxStrokeErrorColor="@color/red">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edConfirmMPinId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberPassword"
+                            android:maxLength="4">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/llinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_100sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+
+                            >
+
+
+                            <TextView
+                                android:id="@+id/charcount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif"
+                                android:text="@string/minimum_8_characters"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/AtoZ"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/one_uppercase_character"
+                                android:textSize="@dimen/_10sdp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_100sdp"
+                            android:layout_marginBottom="@dimen/_4sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+
+                            <TextView
+                                android:id="@+id/special_char"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/one_special_character"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/atoz"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/one_lowercase_character"
+                                android:textSize="@dimen/_10sdp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_100sdp"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+
+                            >
+
+
+                            <TextView
+                                android:id="@+id/num"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/one_number"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="@dimen/_8sdp"
+                                android:visibility="invisible" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnContinue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:enabled="false"
+                        android:fontFamily="@font/semibold"
+                        android:padding="@dimen/_8sdp"
+                        android:text="@string/continue_txt"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12sdp" />
 
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:weightSum="2"
-                    android:layout_marginBottom="@dimen/_4sdp"
-                    >
 
 
-                    <TextView
-                        android:id="@+id/special_char"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/one_special_character"
-                        android:textSize="@dimen/_10sdp"
-                        />
-
-                    <TextView
-                        android:id="@+id/atoz"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/one_lowercase_character"
-                        android:textSize="@dimen/_10sdp"
-                        />
-
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/_100sdp"
-                    android:weightSum="2"
-
-                    >
-
-
-                    <TextView
-                        android:id="@+id/num"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/one_number"
-                        android:textSize="@dimen/_10sdp"
-                        />
-
-                    <TextView
-                        android:visibility="invisible"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_8sdp"
-                        />
-
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-
-
-
-
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnContinue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="@dimen/_100sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:enabled="false"
-                android:fontFamily="@font/semibold"
-                android:padding="@dimen/_8sdp"
-                android:text="@string/continue_txt"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12sdp" />
+            </RelativeLayout>
 
 
         </LinearLayout>
 
 
-        </RelativeLayout>
-
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+    </RelativeLayout>
 </layout>
