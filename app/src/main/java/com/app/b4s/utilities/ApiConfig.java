@@ -3,10 +3,13 @@ package com.app.b4s.utilities;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -23,7 +26,9 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.app.b4s.R;
 import com.app.b4s.preferences.Session;
+import com.app.b4s.view.ToastMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,61 +64,66 @@ public class ApiConfig extends Application {
         }
         return message;
     }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public static void RequestToVolley(final VolleyCallback callback, final Activity activity, final String url, final Map<String, String> params, final boolean isProgress, int method) {
-        session = new Session(activity);
-        if (ProgressDisplay.mProgressBar != null) {
-            ProgressDisplay.mProgressBar.setVisibility(View.GONE);
-        }
-        final ProgressDisplay progressDisplay = new ProgressDisplay(activity);
-        progressDisplay.hideProgress();
 
-        if (isProgress)
-            progressDisplay.showProgress();
-        StringRequest stringRequest = new StringRequest( method, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse( String s ) {
-                if (ApiConfig.isConnected(activity))
-                    callback.onSuccess(true, s);
-                if (isProgress)
-                    progressDisplay.hideProgress();
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static void RequestToVolley(final VolleyCallback callback, final Activity activity, final String url,
+                                       final Map<String, String> params, final boolean isProgress, int method) {
+        if (isConnected(activity)) {
+            session = new Session(activity);
+            if (ProgressDisplay.mProgressBar != null) {
+                ProgressDisplay.mProgressBar.setVisibility(View.GONE);
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse( VolleyError volleyError ) {
-                try {
-                    String responseBody = new String( volleyError.networkResponse.data, "utf-8" );
-                    JSONObject jsonObject = new JSONObject( responseBody );
+            final ProgressDisplay progressDisplay = new ProgressDisplay(activity);
+            progressDisplay.hideProgress();
+
+            if (isProgress)
+                progressDisplay.showProgress();
+            StringRequest stringRequest = new StringRequest(method, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String s) {
                     if (ApiConfig.isConnected(activity))
-                        callback.onSuccess(true, responseBody);
+                        callback.onSuccess(true, s);
                     if (isProgress)
                         progressDisplay.hideProgress();
-                } catch ( JSONException e ) {
-                    //Handle a malformed json response
-                } catch (UnsupportedEncodingException error){
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    try {
+                        String responseBody = new String(volleyError.networkResponse.data, "utf-8");
+                        JSONObject jsonObject = new JSONObject(responseBody);
+                        if (ApiConfig.isConnected(activity))
+                            callback.onSuccess(true, responseBody);
+                        if (isProgress)
+                            progressDisplay.hideProgress();
+                    } catch (JSONException e) {
+                        //Handle a malformed json response
+                    } catch (UnsupportedEncodingException error) {
 
+                    }
                 }
             }
+            ) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params1 = new HashMap<>();
+                    //params1.put(Constant.AUTHORIZATION, "Bearer " +session.getData(Constant.TOKEN));
+                    return params1;
+                }
+
+
+                @Override
+                protected Map<String, String> getParams() {
+
+                    return params;
+                }
+            };
+
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
+            ApiConfig.getInstance().getRequestQueue().getCache().clear();
+            ApiConfig.getInstance().addToRequestQueue(stringRequest);
+
         }
-        ){
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> params1 = new HashMap<>();
-                //params1.put(Constant.AUTHORIZATION, "Bearer " +session.getData(Constant.TOKEN));
-                return params1;
-            }
-
-
-            @Override
-            protected Map<String, String> getParams() {
-
-                return params;
-            }
-        };
-
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(0, 0, 0));
-        ApiConfig.getInstance().getRequestQueue().getCache().clear();
-        ApiConfig.getInstance().addToRequestQueue(stringRequest);
     }
 
 
@@ -130,13 +140,15 @@ public class ApiConfig extends Application {
             if (networkInfo != null && networkInfo.isConnected()) {
                 check = true;
             } else {
-                //Toast.makeText(activity, "No Internet", Toast.LENGTH_SHORT).show();
+                ToastMessage toastMessage = new ToastMessage();
+                toastMessage.show(activity, activity.getString(R.string.no_internet));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return check;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -144,6 +156,7 @@ public class ApiConfig extends Application {
 
 
     }
+
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -151,11 +164,11 @@ public class ApiConfig extends Application {
 
         return mRequestQueue;
     }
+
     public <T> void addToRequestQueue(Request<T> req) {
         req.setTag(TAG);
         getRequestQueue().add(req);
     }
-
 
 
 }
