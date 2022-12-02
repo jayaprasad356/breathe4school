@@ -44,7 +44,8 @@ public class LoginMPinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         loginMPinViewModel = ViewModelProviders.of(this).get(LoginMPinViewModel.class);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_mpin);
-
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(loginMPinViewModel);
         activity = LoginMPinActivity.this;
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         ibBackBtn = binding.ibBackBtn;

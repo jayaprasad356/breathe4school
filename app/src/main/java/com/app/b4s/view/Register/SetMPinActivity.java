@@ -43,6 +43,8 @@ public class SetMPinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_mpin);
         mpinViewModel = ViewModelProviders.of(this).get(MpinViewModel.class);
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(mpinViewModel);
         activity = SetMPinActivity.this;
         edMPinId = binding.edMPinId;
         edConfirmMPinId = binding.edConfirmMPinId;
