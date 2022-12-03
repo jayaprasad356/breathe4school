@@ -83,9 +83,9 @@ public class RegistrationViewModel extends ViewModel {
         }
     }
 
-    private void showOtpActivity(String dataTest, String dataType) {
+    private void showOtpActivity(String dataText, String dataType) {
         Intent intent = new Intent(context, OtpActivity.class);
-        intent.putExtra(Constant.DESCRIPTION, dataTest);
+        intent.putExtra(Constant.DESCRIPTION, dataText);
         intent.putExtra(Constant.TYPE, dataType);
         context.startActivity(intent);
         context.finish();

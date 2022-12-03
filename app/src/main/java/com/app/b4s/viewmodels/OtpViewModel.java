@@ -1,17 +1,20 @@
 package com.app.b4s.viewmodels;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityOtpBinding;
 import com.app.b4s.model.User;
@@ -19,12 +22,10 @@ import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.RegistrationActivity;
+import com.app.b4s.view.ToastMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class OtpViewModel extends ViewModel {
     public MutableLiveData<String> UniqueId = new MutableLiveData<>();
@@ -35,12 +36,14 @@ public class OtpViewModel extends ViewModel {
     Session session;
     Activity activity;
     public String url;
+    public ToastMessage toastMessage = new ToastMessage();
+
 
     public MutableLiveData<User> getUser(ActivityOtpBinding binding, String otpType, Activity activity) {
-        this.activity=activity;
-        this.binding=binding;
-        this.otpType=otpType;
-        session=new Session(activity);
+        this.activity = activity;
+        this.binding = binding;
+        this.otpType = otpType;
+        session = new Session(activity);
 
 
         if (userMutableLiveData == null) {
@@ -53,14 +56,17 @@ public class OtpViewModel extends ViewModel {
     public void onClick() {
         proceeed(otpType);
     }
+
     public void onBack() {
-       activity.onBackPressed();
+        activity.onBackPressed();
     }
-    public void reSendOtp(){
+
+    public void reSendOtp() {
         binding.tvResentotp.setTextColor(activity.getResources().getColorStateList(R.color.gray));
         binding.tvTimeout.setVisibility(View.GONE);
         timerstart();
     }
+
     public void timerstart() {
 
         new CountDownTimer(45000, 1000) {
@@ -87,12 +93,14 @@ public class OtpViewModel extends ViewModel {
         if (otpType.equals(Constant.EMAIL)) {
             if (binding.edOTPId.getText().length() >= 4) {
                 url = Constant.VALIDATE_EMAIL_OTP;
-                verifyOtp(Constant.EMAIL_OTP, binding.edOTPId.getText().toString().trim(), url);
+                verifyOYP(Constant.EMAIL_OTP, url, Integer.parseInt(binding.edOTPId.getText().toString().trim()));
+                //verifyOtp(Constant.EMAIL_OTP, binding.edOTPId.getText().toString().trim(), url);
             }
         } else if (otpType.equals(Constant.MOBILE)) {
             if (binding.edOTPId.getText().length() == 4) {
                 url = Constant.VALIDATE_MOBILE_OTP;
-                verifyOtp(Constant.MOBILE_OTP, binding.edOTPId.getText().toString().trim(), url);
+                verifyOYP(Constant.MOBILE_OTP, url, Integer.parseInt(binding.edOTPId.getText().toString().trim()));
+                // verifyOtp(Constant.MOBILE_OTP, binding.edOTPId.getText().toString().trim(), url);
             }
         } else {
             GradientDrawable drawable = (GradientDrawable) binding.rlOTPInp.getBackground();
@@ -106,39 +114,58 @@ public class OtpViewModel extends ViewModel {
         }
     }
 
-    private void verifyOtp(String type, String otp, String url) {
-        Map<String, String> params = new HashMap<>();
-        params.put(type, otp);
-        ApiConfig.RequestToVolley((result, response) -> {
+    private void verifyOYP(String type, String url, int otpText) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(type, otpText);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            if (result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getBoolean(Constant.STATUS)) {
-                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+        if (ApiConfig.isConnected(activity)) {
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.POST, url, jsonObject, new com.android.volley.Response.Listener<JSONObject>() {
 
-                    } else {
-                        if (otpType.equals(Constant.EMAIL)) {
-                            session.setBoolean(Constant.EMAIL_OTP_VERIFY,true);
-                        } else if ((otpType.equals(Constant.MOBILE))) {
-                            session.setBoolean(Constant.MOBILE_OTP_VERIFY, true);
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("TEST_RES", response.toString());
+
+                            try {
+                                if (response.getBoolean(Constant.STATUS)) {
+                                    Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                                    if (otpType.equals(Constant.EMAIL)) {
+                                        session.setBoolean(Constant.EMAIL_OTP_VERIFY, true);
+                                    } else if ((otpType.equals(Constant.MOBILE))) {
+                                        session.setBoolean(Constant.MOBILE_OTP_VERIFY, true);
+                                    }
+                                    Intent intent = new Intent(activity, RegistrationActivity.class);
+                                    activity.startActivity(intent);
+                                    activity.finish();
+
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            System.out.print(response);
+
                         }
-                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(activity, RegistrationActivity.class);
-                        activity.startActivity(intent);
-                        activity.finish();
+                    }, new com.android.volley.Response.ErrorListener() {
 
-                    }
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO: Handle error
+                            error.printStackTrace();
+                            Toast.makeText(activity, activity.getString(R.string.invalid_otp), Toast.LENGTH_SHORT).show();
+                        }
 
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, activity, url, params, true, 1);
+                    });
+            ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
+        }
 
     }
-    public void onUsernameTextChanged(CharSequence text) {
+
+    public void onUserTextChanged(CharSequence text) {
         // TODO do something with text
         if (text.length() >= 4) {
             binding.btnProceed.setEnabled(true);

@@ -119,7 +119,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edOTPId"
                             android:layout_width="match_parent"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onUsernameTextChanged(text)}"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserTextChanged(text)}"
 
                             android:layout_height="wrap_content"
                             android:inputType="number"
