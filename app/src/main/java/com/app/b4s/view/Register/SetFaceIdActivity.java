@@ -1,19 +1,18 @@
 package com.app.b4s.view.Register;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySetFaceIdBinding;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.view.Login.LoginFaceIDActivity;
+import com.app.b4s.viewmodels.SetFaceIdViewModel;
 
 public class SetFaceIdActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class SetFaceIdActivity extends AppCompatActivity {
     ActivitySetFaceIdBinding binding;
     Activity activity;
     String uniqueId;
-
+    SetFaceIdViewModel setFaceIdViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,30 +32,13 @@ public class SetFaceIdActivity extends AppCompatActivity {
         ibBackBtn = binding.ibBackBtn;
         tvSkipFaceid = binding.tvSkipFaceid;
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
-
-
+        setFaceIdViewModel = ViewModelProviders.of(this).get(SetFaceIdViewModel.class);
+        binding.setLifecycleOwner(this);
+        binding.setViewModel(setFaceIdViewModel);
         Skip_FaceID_tv = getIntent().getExtras().getBoolean(Constant.SKIP_FACE_ID);
-
-        ibBackBtn.setOnClickListener(v -> onBackPressed());
-        binding.ivFaceLogo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, LoginFaceIDActivity.class);
-                intent.putExtra(Constant.UNIQUE_ID,uniqueId);
-                startActivity(intent);
-            }
+        setFaceIdViewModel.getUser(binding, activity, Skip_FaceID_tv).observe(this, user -> {
         });
 
-
-        if (Skip_FaceID_tv == true) {
-
-            tvSkipFaceid.setVisibility(View.VISIBLE);
-
-        } else {
-            tvSkipFaceid.setVisibility(View.GONE);
-
-        }
-
-
+        setFaceIdViewModel.showVisibility();
     }
 }

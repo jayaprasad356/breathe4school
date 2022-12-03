@@ -50,7 +50,6 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
                 intent.putExtra(Constant.SKIP_FACE_ID, 0);
                 startActivity(intent);
                 finish();
-
             }
         }, 2000);
     }

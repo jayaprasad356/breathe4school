@@ -43,24 +43,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(activity, RegistrationActivity.class);
                 startActivity(intent);
                 finish();
-
-
-//
-
-//                Session session = new Session(SplashActivity.this);
-//                if (session.getBoolean("is_logged_in")){
-//                    Intent intent=new Intent(SplashActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//
-//                }else{
-//                    Intent intent=new Intent(SplashActivity.this,LoginActivity.class);
-//                    startActivity(intent);
-//                    finish();
-//
-//                }
-
-
             }
         }, 2000);
     }

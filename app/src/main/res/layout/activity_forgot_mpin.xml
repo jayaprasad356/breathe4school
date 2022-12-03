@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.Login.ForgotMPinActivity">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.app.b4s.viewmodels.ForgotMPinViewModel" />
+    </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -99,6 +104,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edOTPId"
                             android:layout_width="match_parent"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.otpTextChanged(text,start)}"
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:maxLength="6">
@@ -169,6 +175,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
+                    android:onClick="@{()-> viewModel.reSendOtp()}"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="right"
                     android:text="@string/resend_otp"
@@ -185,6 +192,7 @@
                 android:layout_marginHorizontal="@dimen/_100sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:enabled="false"
+                android:onClick="@{()-> viewModel.onClick()}"
                 android:fontFamily="@font/semibold"
                 android:padding="@dimen/_8sdp"
                 android:text="@string/proceed_txt"

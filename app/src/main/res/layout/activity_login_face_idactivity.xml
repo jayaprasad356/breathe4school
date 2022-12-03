@@ -3,233 +3,219 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.Login.LoginFaceIDActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
+    <data>
 
-    <LinearLayout
+        <variable
+            name="viewModel"
+            type="com.app.b4s.viewmodels.LoginFaceidViewModel" />
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:rotationX="360"
-            android:scaleType="fitXY"
-            android:src="@drawable/register_image" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            >
+            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/ivlogo"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
+                android:rotationX="360"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo" />
+                android:src="@drawable/register_image" />
 
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/semibold"
-                android:text="@string/hello_john_deo"
-                android:textColor="@color/black_text"
-                android:textSize="@dimen/_18sdp"
-                android:layout_marginBottom="@dimen/_5sdp"/>
-
-            <TextView
-                android:id="@+id/tvdescription"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="sans-serif"
-                android:text="Unlock with Face ID"
-                android:textColor="@color/text_gray"
-                android:textSize="@dimen/_10sdp"
-                android:textAlignment="center"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_marginHorizontal="@dimen/_50sdp"
-                />
-
-
-
-
-            <RelativeLayout
-                android:visibility="gone"
-                android:id="@+id/rlFaceIdSuccesss"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                >
+                android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:background="@drawable/img_success_greentick"
-                    />
+                    android:id="@+id/ivlogo"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
 
-            </RelativeLayout>
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/semibold"
+                    android:text="@string/hello_john_deo"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/_18sdp" />
 
-            <LinearLayout
-                android:visibility="visible"
-                android:id="@+id/llFaceId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-
-
-            <ImageView
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:background="@drawable/img_face_id"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_100sdp"
-                android:layout_marginVertical="@dimen/_4sdp"
-                android:text="@string/face_id"
-                android:drawablePadding="@dimen/_10sdp"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:textSize="@dimen/_10sdp"
-
-                />
+                <TextView
+                    android:id="@+id/tvdescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginHorizontal="@dimen/_50sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:fontFamily="sans-serif"
+                    android:text="Unlock with Face ID"
+                    android:textAlignment="center"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_10sdp" />
 
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llFaceidNotMatch"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/_100sdp"
-                >
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPin"
+                <RelativeLayout
+                    android:id="@+id/rlFaceIdSuccesss"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/enter_pin"
-                    app:strokeColor="@color/primary"
-                    android:padding="@dimen/_10sdp"
-                    android:textAllCaps="false"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    />
+                    android:gravity="center"
+                    android:visibility="gone">
 
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/img_success_greentick" />
+
+                </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/llFaceId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:gravity="center"
 
-                    >
+                    android:onClick="@{()-> viewModel.onFaceIdClick()}"
+                    android:orientation="vertical"
+                    android:visibility="visible">
 
 
-                    <com.google.android.material.divider.MaterialDivider
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
-                        android:layout_gravity="center"
-                        />
+                    <ImageView
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:background="@drawable/img_face_id" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Or"
-                        android:textAlignment="center"
-                        android:layout_weight="1.4"
-                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="@dimen/_100sdp"
+                        android:layout_marginVertical="@dimen/_4sdp"
+                        android:drawablePadding="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/face_id"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+
                         />
 
-                    <com.google.android.material.divider.MaterialDivider
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llFaceidNotMatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_100sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPin"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.8"
+                        android:onClick="@{()-> viewModel.clickPin()}"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/enter_pin"
+                        android:textAllCaps="false"
+                        app:strokeColor="@color/primary" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+
+                        >
+
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.4"
+                            android:text="Or"
+                            android:textAlignment="center" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="0.8" />
+
+
+                    </LinearLayout>
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPassword"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="@{()-> viewModel.clickPassword()}"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/enter_password"
+                        android:textAllCaps="false"
+                        app:strokeColor="@color/primary" />
+
+
+                    <TextView
+                        android:id="@+id/tvForgotPin_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:onClick="@{()-> viewModel.generateMpin()}"
+                        android:text="@string/forgot_m_pin_password"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_8sdp" />
+
+
+                    <TextView
+                        android:id="@+id/tvLoginWTempPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:fontFamily="sans-serif-medium"
+                        android:onClick="@{()-> viewModel.generateMpin()}"
+                        android:text="@string/login_with_temp_password"
+                        android:textColor="@color/dark_blue"
+
                         />
 
 
                 </LinearLayout>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/enter_password"
-                    app:strokeColor="@color/primary"
-                    android:padding="@dimen/_10sdp"
-                    android:textAllCaps="false"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    />
-
-
-
-                <TextView
-                    android:id="@+id/tvForgotPin_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/forgot_m_pin_password"
-                    android:gravity="right"
-                    android:textSize="@dimen/_8sdp"
-                    android:textColor="@color/text_gray"
-                    />
-
-
-
-
-                <TextView
-                    android:id="@+id/tvLoginWTempPassword"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/login_with_temp_password"
-                    android:layout_marginTop="@dimen/_30sdp"
-                    android:textColor="@color/dark_blue"
-                    android:fontFamily="sans-serif-medium"
-
-                    />
-
-
-
-
             </LinearLayout>
-
 
 
         </LinearLayout>
 
 
-
-
-
-
-
-
-    </LinearLayout>
-
-
-
-</RelativeLayout>
+    </RelativeLayout>
 </layout>

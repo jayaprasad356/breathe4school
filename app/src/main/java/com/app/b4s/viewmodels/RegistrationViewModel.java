@@ -117,15 +117,7 @@ public class RegistrationViewModel extends ViewModel {
                         binding.llInputFeild.setVisibility(View.VISIBLE);
                         binding.rlUniqueInp.setVisibility(View.GONE);
                         binding.btnContinue.setVisibility(View.GONE);
-
-
                     } else {
-                        session.setData(Constant.UNIQUE_ID,binding.edUniqueId.getText().toString());
-                        //this below  lines temporary api result failed
-                        binding.llInputFeild.setVisibility(View.VISIBLE);
-                        binding.rlUniqueInp.setVisibility(View.GONE);
-                        binding.btnContinue.setVisibility(View.GONE);
-
                         Toast.makeText(context, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
 

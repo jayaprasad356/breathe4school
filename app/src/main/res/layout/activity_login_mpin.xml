@@ -35,6 +35,7 @@
                 <ImageButton
                     android:id="@+id/ibBackBtn"
                     android:layout_width="wrap_content"
+                    android:onClick="@{()-> viewModel.onBackPress()}"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/_10sdp"
                     android:background="@drawable/ic_back_arrow" />
@@ -95,6 +96,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edMPinId"
                             android:layout_width="match_parent"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.mPinTextChanged(text,start)}"
                             android:layout_height="wrap_content"
                             android:inputType="numberPassword"
                             android:maxLength="4">
@@ -110,6 +112,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginHorizontal="@dimen/_100sdp"
                         android:enabled="false"
+                        android:onClick="@{()-> viewModel.doLogin()}"
                         android:fontFamily="@font/semibold"
                         android:padding="@dimen/_8sdp"
                         android:text="@string/login"
@@ -124,6 +127,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/_100sdp"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:onClick="@{()-> viewModel.forgotPin()}"
                         android:fontFamily="sans-serif-medium"
                         android:gravity="right"
                         android:text="@string/forgot_m_pin"
@@ -135,6 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:onClick="@{()-> viewModel.loginInsteadOfPassword()}"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="sans-serif-medium"
                         android:text="@string/login_with_password_instead"

@@ -1,39 +1,18 @@
 package com.app.b4s.view.Register;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityOtpBinding;
 import com.app.b4s.preferences.Session;
-import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.viewmodels.OtpViewModel;
-import com.app.b4s.viewmodels.RegistrationViewModel;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class OtpActivity extends AppCompatActivity {
 

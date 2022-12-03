@@ -179,7 +179,6 @@ public class PasswordViewModel extends ViewModel {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

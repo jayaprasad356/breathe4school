@@ -52,7 +52,6 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
                 intent.putExtra(Constant.UNIQUE_ID,uniqueId);
                 startActivity(intent);
                 finish();
-
             }
         }, 2000);
     }
