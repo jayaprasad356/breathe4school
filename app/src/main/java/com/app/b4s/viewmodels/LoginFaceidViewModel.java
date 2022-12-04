@@ -17,7 +17,6 @@ import com.app.b4s.view.Login.LoginMPinActivity;
 import com.app.b4s.view.Login.LoginPasswordActivity;
 import com.app.b4s.view.Login.LoginTempPasswordActivity;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -71,14 +70,16 @@ public class LoginFaceidViewModel extends ViewModel {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         JSONObject dataObject = jsonObject.getJSONObject(Constant.DATA);
-                        String tempPin = dataObject.get(Constant.TICKET_NUMBER).toString();
-                        session.setData(Constant.TEMP_PASS, tempPin);
-                        Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
-                        intent.putExtra(Constant.UNIQUE_ID, uniqueId);
-                        activity.startActivity(intent);
+                        int tempTicket = dataObject.getInt(Constant.TICKET_NUMBER);
+                        String ticketNum = Integer.toString(tempTicket);
+                        session.setData(Constant.TEMP_PASS, ticketNum);
+                    } else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
+                    Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
+                    intent.putExtra(Constant.UNIQUE_ID, uniqueId);
+                    activity.startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

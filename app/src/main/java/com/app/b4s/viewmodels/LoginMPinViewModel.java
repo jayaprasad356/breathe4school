@@ -89,13 +89,10 @@ public class LoginMPinViewModel extends ViewModel {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        JSONObject dataObject1 = jsonObject.getJSONObject("data");
-                        dataObject1.getString("name");
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
                         intent.putExtra(Constant.TITLE, Constant.SUCCESS);
                         intent.putExtra(Constant.UNIQUE_ID,uniqueId);
-//                intent.putExtra(   "Descripition","You have successfully completed the registration");
                        activity.startActivity(intent);
                     } else {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();

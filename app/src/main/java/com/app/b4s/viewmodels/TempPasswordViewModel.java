@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.app.b4s.R;
-import com.app.b4s.databinding.ActivityLoginPasswordBinding;
 import com.app.b4s.databinding.ActivityLoginTempPasswordBinding;
 import com.app.b4s.model.User;
 import com.app.b4s.preferences.Session;
@@ -46,16 +45,7 @@ public class TempPasswordViewModel extends ViewModel {
     }
 
     public void onClick() {
-        loginWithMPin(session.getData(Constant.UNIQUE_ID),binding.edMPinId.getText().toString());
-
-//        if (binding.edMPinId.getText().toString().equals(session.getData(Constant.TEMP_PASS))) {
-//            Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-//            intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
-//            intent.putExtra(Constant.TITLE, Constant.SUCCESS);
-//            activity.startActivity(intent);
-//        } else {
-//            Toast.makeText(activity, activity.getString(R.string.invalid_temp_pin), Toast.LENGTH_SHORT).show();
-//        }
+        loginWithMPin(session.getData(Constant.UNIQUE_ID), binding.edMPinId.getText().toString());
     }
 
     public void forgotPin() {
@@ -85,6 +75,7 @@ public class TempPasswordViewModel extends ViewModel {
     public void showTempPassword() {
         binding.tvCode.setText(session.getData(Constant.TEMP_PASS));
     }
+
     private void loginWithMPin(String uniqueId, String mPin) {
         Map<String, String> params = new HashMap<>();
         params.put(Constant.UNIQUE_ID, uniqueId);
@@ -100,13 +91,6 @@ public class TempPasswordViewModel extends ViewModel {
                         intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
                         intent.putExtra(Constant.TITLE, Constant.SUCCESS);
                         activity.startActivity(intent);
-//                        JSONObject dataObject = jsonObject.getJSONObject("data");
-//                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
-//                        intent.putExtra(Constant.TITLE, Constant.SUCCESS);
-//                        intent.putExtra(Constant.UNIQUE_ID,uniqueId);
-////                intent.putExtra(   "Descripition","You have successfully completed the registration");
-//                        activity.startActivity(intent);
                     } else {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
