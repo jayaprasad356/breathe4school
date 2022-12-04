@@ -7,11 +7,13 @@ public class Constant {
     public static final String VALIDATE_EMAIL_OTP = BaseUrl + "validateEmailOtp";
     public static final String VALIDATE_MOBILE_OTP = BaseUrl + "validateMobileOtp";
     public static final String RESET_PASSWORD = BaseUrl + "reset/password";
+    public static final String REGISTER_USER = BaseUrl + "register";
     public static final String RESET_MPIN = BaseUrl + "reset/mpin";
     public static final String LOGIN_WITH_MPIN = BaseUrl + "loginWithMpin";
     public static final String LOGIN_WITH_PASSWORD = BaseUrl + "loginWithPassword";
     public static final String GENERATE_TEMP_MPIN = BaseUrl + "generateTempMpinTicket";
     public static final String UNIQUE_ID = "unique_id";
+    public static final String IS_REGISTER = "isRegistered";
     public static final String STATUS = "status";
     public static final String MESSAGE = "message";
     public static final String EMAIL_OTP = "email_otp";
@@ -30,6 +32,9 @@ public class Constant {
     public static final String FLOW = "flow";
     public static final String FORGOT = "forgot";
     public static final String NORMAL = "normal";
+    public static final String TEMP_PASS = "tempPass";
+    public static final String TICKET_NUMBER = "ticket_number";
+    public static final String DATA = "data";
 
 
 

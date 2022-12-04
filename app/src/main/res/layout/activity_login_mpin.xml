@@ -99,7 +99,7 @@
                             android:onTextChanged="@{(text, start, before, count) -> viewModel.mPinTextChanged(text,start)}"
                             android:layout_height="wrap_content"
                             android:inputType="numberPassword"
-                            android:maxLength="4">
+                            android:maxLength="10">
 
                         </com.google.android.material.textfield.TextInputEditText>
                     </com.google.android.material.textfield.TextInputLayout>

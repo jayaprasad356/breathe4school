@@ -34,10 +34,13 @@ public class PasswordViewModel extends ViewModel {
     ActivitySetPasswordBinding binding;
     Activity activity;
     Session session;
+    String flow;
+    boolean validPassword = false, length = false, digits = false, atoz = false, AtoZ = false, splChar = false;
 
-    public MutableLiveData<User> getUser(ActivitySetPasswordBinding binding, Activity activity) {
+    public MutableLiveData<User> getUser(ActivitySetPasswordBinding binding, Activity activity, String flow) {
         this.activity = activity;
         this.binding = binding;
+        this.flow = flow;
         session = new Session(activity);
 
         if (userMutableLiveData == null) {
@@ -47,8 +50,8 @@ public class PasswordViewModel extends ViewModel {
 
     }
 
-    public void onUsernameTextChanged(CharSequence text,int start) {
-        if (start>=0){
+    public void onUsernameTextChanged(CharSequence text, int start) {
+        if (start >= 0) {
             binding.llinfo.setVisibility(View.VISIBLE);
             // get the password when we start typing
             String password = text.toString();
@@ -58,15 +61,26 @@ public class PasswordViewModel extends ViewModel {
             binding.btnProceed.setEnabled(true);
             binding.btnProceed.setBackgroundTintList(activity.getResources().getColorStateList(R.color.btncolor));
         } else {
-            // btnProceed.setEnabled(false);
+            binding.btnProceed.setEnabled(false);
             binding.btnProceed.setBackgroundTintList(activity.getResources().getColorStateList(R.color.btncolor));
         }
 
     }
+
     public void onClick() {
         checkPassword();
     }
-    public void showPassword(){
+
+    private void registerPassword(String password) {
+        session.setData(Constant.PASSWORD, password);
+        Intent intent = new Intent(activity, SetMPinActivity.class);
+        intent.putExtra(Constant.FLOW, Constant.NORMAL);
+        intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
+        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+        activity.startActivity(intent);
+    }
+
+    public void showPassword() {
         if (binding.tvShowPass.getText().equals(activity.getString(R.string.show_password))) {
             binding.tvShowPass.setText(R.string.hide_password);
             binding.edSetPasswordId.setTransformationMethod(null);
@@ -83,20 +97,25 @@ public class PasswordViewModel extends ViewModel {
     public void setPasswordInfo() {
         binding.llinfo.setVisibility(View.VISIBLE);
     }
+
     public void back() {
         activity.onBackPressed();
     }
+
     private void checkPassword() {
-        if (validatepass(binding.edSetPasswordId.getText().toString())) {
+        if (validPassword) {
             if (binding.edConfirmPasswordId.getText().toString().equals(binding.edSetPasswordId.getText().toString())) {
-                setPassword(binding.edConfirmPasswordId.getText().toString());
+                if (flow.equals(Constant.NORMAL))
+                    registerPassword(binding.edConfirmPasswordId.getText().toString());
+                else
+                    setPassword(binding.edConfirmPasswordId.getText().toString());
             } else {
                 Toast.makeText(activity, R.string.password_mismatch, Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public boolean validatepass(String password) {
+    public void validatepass(String password) {
 
         // check for pattern
         Pattern uppercase = Pattern.compile("[A-Z]");
@@ -107,49 +126,56 @@ public class PasswordViewModel extends ViewModel {
         // if lowercase character is not present
         if (!lowercase.matcher(password).find()) {
             binding.atoz.setTextColor(Color.BLACK);
-            return false;
+            atoz = false;
         } else {
             // if lowercase character is  present
             binding.atoz.setTextColor(activity.getResources().getColor(R.color.text_green));
+            atoz = true;
         }
 
         // if uppercase character is not present
         if (!uppercase.matcher(password).find()) {
+            AtoZ = false;
             binding.AtoZ.setTextColor(Color.BLACK);
-            return false;
         } else {
             // if uppercase character is  present
             binding.AtoZ.setTextColor(activity.getResources().getColor(R.color.text_green));
+            AtoZ = true;
         }
 
 
         // if Special character is not present
         if (!special.matcher(password).find()) {
+            splChar = false;
             binding.specialChar.setTextColor(Color.BLACK);
-            return false;
         } else {
             // if Special character is  present
             binding.specialChar.setTextColor(activity.getResources().getColor(R.color.text_green));
+            splChar = true;
         }
 
 
         // if digit is not present
         if (!digit.matcher(password).find()) {
+            digits = false;
             binding.num.setTextColor(Color.BLACK);
-            return false;
         } else {
             // if digit is present
             binding.num.setTextColor(activity.getResources().getColor(R.color.text_green));
+            digits = true;
         }
         // if password length is less than 8
         if (password.length() < 8) {
             binding.charcount.setTextColor(Color.BLACK);
-            return false;
+            length = false;
         } else {
             binding.charcount.setTextColor(activity.getResources().getColor(R.color.text_green));
+            length = true;
         }
-        binding.llinfo.setVisibility(View.GONE);
-        return true;
+        if (length && digits && splChar && AtoZ && atoz) {
+            validPassword = true;
+            binding.llinfo.setVisibility(View.GONE);
+        }
     }
 
     private void setPassword(String password) {
@@ -164,17 +190,10 @@ public class PasswordViewModel extends ViewModel {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        if (flow.equals(Constant.NORMAL)) {
-                            Intent intent = new Intent(activity, SetMPinActivity.class);
-                            intent.putExtra(Constant.UNIQUE_ID, uniqueID);
-                            intent.putExtra(Constant.SKIP_FACE_ID, 0);
-                            activity.startActivity(intent);
-                        } else {
-                            Intent intent = new Intent(activity, RegisterSuccessfullActivity.class);
-                            intent.putExtra(Constant.UNIQUE_ID, uniqueID);
-                            intent.putExtra(Constant.SKIP_FACE_ID, 0);
-                            activity.startActivity(intent);
-                        }
+                        Intent intent = new Intent(activity, RegisterSuccessfullActivity.class);
+                        intent.putExtra(Constant.UNIQUE_ID, uniqueID);
+                        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+                        activity.startActivity(intent);
                     } else {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }

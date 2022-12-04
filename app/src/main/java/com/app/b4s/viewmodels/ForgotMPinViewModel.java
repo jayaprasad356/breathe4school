@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotMpinBinding;
-import com.app.b4s.databinding.ActivitySetFaceIdBinding;
 import com.app.b4s.model.User;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
@@ -25,10 +24,13 @@ public class ForgotMPinViewModel extends ViewModel {
     ActivityForgotMpinBinding binding;
     Session session;
     Activity activity;
+    String flow;
 
-    public MutableLiveData<User> getUser(ActivityForgotMpinBinding binding, Activity activity) {
+    public MutableLiveData<User> getUser(ActivityForgotMpinBinding binding, Activity activity, String flow) {
         this.binding = binding;
         this.activity = activity;
+        this.flow=flow;
+
         session = new Session(activity);
 
         if (userMutableLiveData == null) {
@@ -51,6 +53,7 @@ public class ForgotMPinViewModel extends ViewModel {
 
         if (binding.edOTPId.getText().toString().equals(activity.getString(R.string.test_num))) {
             Intent intent = new Intent(activity, SetMPinActivity.class);
+            intent.putExtra(Constant.FLOW,Constant.FORGOT);
             intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
             activity.startActivity(intent);
 

@@ -17,6 +17,7 @@ import com.app.b4s.view.Login.LoginMPinActivity;
 import com.app.b4s.view.Login.LoginPasswordActivity;
 import com.app.b4s.view.Login.LoginTempPasswordActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,23 +41,28 @@ public class LoginFaceidViewModel extends ViewModel {
         return userMutableLiveData;
 
     }
-    public void onFaceIdClick(){
+
+    public void onFaceIdClick() {
         binding.llFaceId.setVisibility(View.GONE);
         binding.llFaceidNotMatch.setVisibility(View.VISIBLE);
     }
-    public void generateMpin(){
+
+    public void generateMpin() {
         generateTempMPin(session.getData(Constant.UNIQUE_ID));
     }
-    public void clickPin(){
+
+    public void clickPin() {
         Intent intent = new Intent(activity, LoginMPinActivity.class);
-        intent.putExtra(Constant.UNIQUE_ID,session.getData(Constant.UNIQUE_ID));
+        intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
         activity.startActivity(intent);
     }
-    public void clickPassword(){
+
+    public void clickPassword() {
         Intent intent = new Intent(activity, LoginPasswordActivity.class);
-        intent.putExtra(Constant.UNIQUE_ID,session.getData(Constant.UNIQUE_ID));
+        intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
         activity.startActivity(intent);
     }
+
     private void generateTempMPin(String uniqueId) {
         Map<String, String> params = new HashMap<>();
         params.put(Constant.UNIQUE_ID, uniqueId);
@@ -66,14 +72,11 @@ public class LoginFaceidViewModel extends ViewModel {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        JSONObject dataObject = jsonObject.getJSONObject(Constant.DATA);
+                        String tempPin = dataObject.get(Constant.TICKET_NUMBER).toString();
+                        session.setData(Constant.TEMP_PASS, tempPin);
                         Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
-                        intent.putExtra(Constant.UNIQUE_ID,uniqueId);
-                        activity.startActivity(intent);
-                    } else {
-                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
-                        intent.putExtra(Constant.UNIQUE_ID,uniqueId);
-                        intent.putExtra(Constant.MPIN,"15445");
+                        intent.putExtra(Constant.UNIQUE_ID, uniqueId);
                         activity.startActivity(intent);
                     }
                 } catch (JSONException e) {

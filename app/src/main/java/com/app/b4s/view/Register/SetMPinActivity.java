@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySetMpinBinding;
+import com.app.b4s.utilities.Constant;
 import com.app.b4s.viewmodels.MpinViewModel;
 
 public class SetMPinActivity extends AppCompatActivity {
@@ -24,7 +25,8 @@ public class SetMPinActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
         binding.setViewModel(mpinViewModel);
         activity = SetMPinActivity.this;
-        mpinViewModel.getUser(binding, activity).observe(this, user -> {
+        String  flow = getIntent().getStringExtra(Constant.FLOW);
+        mpinViewModel.getUser(binding, activity,flow).observe(this, user -> {
         });
     }
 

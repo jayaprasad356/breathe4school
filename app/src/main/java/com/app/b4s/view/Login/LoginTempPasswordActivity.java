@@ -28,5 +28,6 @@ public class LoginTempPasswordActivity extends AppCompatActivity {
         binding.setViewModel(tempPasswordViewModel);
         tempPasswordViewModel.getUser(binding, activity).observe(this, user -> {
         });
+        tempPasswordViewModel.showTempPassword();
     }
 }

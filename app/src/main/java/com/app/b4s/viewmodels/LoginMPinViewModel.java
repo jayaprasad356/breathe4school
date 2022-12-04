@@ -87,7 +87,8 @@ public class LoginMPinViewModel extends ViewModel {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        JSONObject dataObject = jsonObject.getJSONObject("data");
+                        JSONObject dataObject1 = jsonObject.getJSONObject("data");
+                        dataObject1.getString("name");
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
                         intent.putExtra(Constant.TITLE, Constant.SUCCESS);

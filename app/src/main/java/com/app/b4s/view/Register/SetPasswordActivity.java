@@ -2,6 +2,8 @@ package com.app.b4s.view.Register;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
@@ -27,8 +29,9 @@ public class SetPasswordActivity extends AppCompatActivity {
         activity = SetPasswordActivity.this;
         uniqueID = getIntent().getStringExtra(Constant.UNIQUE_ID);
         flow = getIntent().getStringExtra(Constant.FLOW);
-        passwordViewModel.getUser(binding, activity).observe(this, user -> {
+        passwordViewModel.getUser(binding, activity, flow).observe(this, user -> {
         });
+        binding.edSetPasswordInp.setEndIconOnClickListener(view -> passwordViewModel.setPasswordInfo());
     }
 
 }

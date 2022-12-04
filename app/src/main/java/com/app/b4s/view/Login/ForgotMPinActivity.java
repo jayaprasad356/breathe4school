@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotMpinBinding;
+import com.app.b4s.utilities.Constant;
 import com.app.b4s.viewmodels.ForgotMPinViewModel;
 
 public class ForgotMPinActivity extends AppCompatActivity {
@@ -25,7 +26,8 @@ public class ForgotMPinActivity extends AppCompatActivity {
         forgotMPinViewModel = ViewModelProviders.of(this).get(ForgotMPinViewModel.class);
         binding.setLifecycleOwner(this);
         binding.setViewModel(forgotMPinViewModel);
-        forgotMPinViewModel.getUser(binding, activity).observe(this, user -> {
+        String  flow = getIntent().getStringExtra(Constant.FLOW);
+        forgotMPinViewModel.getUser(binding, activity,flow).observe(this, user -> {
         });
         forgotMPinViewModel.timerstart();
     }

@@ -17,6 +17,7 @@ import com.app.b4s.model.User;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.SetMPinActivity;
+import com.app.b4s.view.Register.SetPasswordActivity;
 
 public class ForgotPasswordViewModel extends ViewModel {
     private MutableLiveData<User> userMutableLiveData;
@@ -46,7 +47,8 @@ public class ForgotPasswordViewModel extends ViewModel {
     private void proceeed() {
 
         if (binding.edOTPId.getText().toString().equals(activity.getString(R.string.test_num))) {
-            Intent intent = new Intent(activity, SetMPinActivity.class);
+            Intent intent = new Intent(activity, SetPasswordActivity.class);
+            intent.putExtra(Constant.FLOW,Constant.FORGOT);
             intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
             activity.startActivity(intent);
 

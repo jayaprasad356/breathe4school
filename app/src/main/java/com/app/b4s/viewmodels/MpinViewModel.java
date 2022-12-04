@@ -14,7 +14,6 @@ import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.RegisterSuccessfullActivity;
-import com.app.b4s.view.Register.SetMPinActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +30,12 @@ public class MpinViewModel extends ViewModel {
     Activity activity;
     Session session;
     boolean Pin = false;
+    String flow;
 
-    public MutableLiveData<User> getUser(ActivitySetMpinBinding binding, Activity activity) {
+    public MutableLiveData<User> getUser(ActivitySetMpinBinding binding, Activity activity, String flow) {
         this.activity = activity;
         this.binding = binding;
+        this.flow = flow;
         session = new Session(activity);
 
         if (userMutableLiveData == null) {
@@ -45,10 +46,41 @@ public class MpinViewModel extends ViewModel {
     }
 
     public void onClick() {
-        if (binding.edConfirmMPinId.getText().toString().equals(binding.edMPinId.getText().toString()))
-            setMPin(session.getData(Constant.UNIQUE_ID), binding.edConfirmMPinId.getText().toString());
-        else
+        if (binding.edConfirmMPinId.getText().toString().equals(binding.edMPinId.getText().toString())) {
+            if (flow.equals(Constant.FORGOT))
+                setMPin(session.getData(Constant.UNIQUE_ID), binding.edConfirmMPinId.getText().toString());
+            else
+                registerUser(binding.edConfirmMPinId.getText().toString());
+        } else
             Toast.makeText(activity, activity.getString(R.string.miss_match_mpin), Toast.LENGTH_SHORT).show();
+    }
+
+    private void registerUser(String mpin) {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
+        params.put(Constant.MPIN, mpin);
+        params.put(Constant.PASSWORD, session.getData(Constant.PASSWORD));
+        ApiConfig.RequestToVolley((result, response) -> {
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        session.setBoolean(Constant.IS_REGISTER, true);
+                        Intent intent = new Intent(activity, RegisterSuccessfullActivity.class);
+                        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+                        activity.startActivity(intent);
+                    } else {
+                        session.setBoolean(Constant.IS_REGISTER, true);
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, Constant.REGISTER_USER, params, true, 1);
     }
 
     private void setMPin(String uniqueID, String mpin) {

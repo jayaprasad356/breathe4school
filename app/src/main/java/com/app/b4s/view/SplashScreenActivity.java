@@ -10,6 +10,8 @@ import android.os.Handler;
 import com.app.b4s.R;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.Login.LoginFaceIDActivity;
+import com.app.b4s.view.Register.RegisterSuccessfullActivity;
 import com.app.b4s.view.Register.RegistrationActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -29,17 +31,31 @@ public class SplashScreenActivity extends AppCompatActivity {
         session.setBoolean(Constant.EMAIL_OTP_VERIFY, false);
         session.setData(Constant.EMAIL, "");
 
-
         handler = new Handler();
-        GotoActivity();
+        if (session.getBoolean(Constant.IS_REGISTER))
+            goToLoginActivity();
+        else
+            goToRegisterActivity();
     }
 
-
-    private void GotoActivity() {
+    private void goToLoginActivity() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+        Intent intent = new Intent(SplashScreenActivity.this, LoginFaceIDActivity.class);
+        intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
+        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+        startActivity(intent);
+        finish();
+            }
+        }, 2000);
+    }
 
+
+    private void goToRegisterActivity() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
                 Intent intent = new Intent(activity, RegistrationActivity.class);
                 startActivity(intent);
                 finish();
