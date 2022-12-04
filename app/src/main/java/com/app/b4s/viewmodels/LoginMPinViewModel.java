@@ -76,6 +76,7 @@ public class LoginMPinViewModel extends ViewModel {
         intent.putExtra(Constant.UNIQUE_ID,session.getData(Constant.UNIQUE_ID));
         activity.startActivity(intent);
     }
+
     private void loginWithMPin(String uniqueId, String mPin) {
         Map<String, String> params = new HashMap<>();
         params.put(Constant.UNIQUE_ID, uniqueId);
