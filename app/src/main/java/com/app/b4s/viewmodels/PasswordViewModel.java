@@ -112,6 +112,8 @@ public class PasswordViewModel extends ViewModel {
             } else {
                 Toast.makeText(activity, R.string.password_mismatch, Toast.LENGTH_SHORT).show();
             }
+        }else {
+            Toast.makeText(activity, R.string.invalid_password, Toast.LENGTH_SHORT).show();
         }
     }
 
