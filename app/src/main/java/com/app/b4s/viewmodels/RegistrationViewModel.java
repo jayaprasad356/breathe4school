@@ -14,7 +14,9 @@ import com.app.b4s.model.User;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.Login.LoginFaceIDActivity;
 import com.app.b4s.view.Register.OtpActivity;
+import com.app.b4s.view.Register.RegisterSuccessfullActivity;
 import com.app.b4s.view.Register.SetPasswordActivity;
 
 import org.json.JSONException;
@@ -49,7 +51,7 @@ public class RegistrationViewModel extends ViewModel {
     }
 
     public void onClick() {
-        validateUniqueId();
+        validateUniqueId(context.getString(R.string.regist));
     }
 
     public void showPasswordActivity() {
@@ -92,18 +94,24 @@ public class RegistrationViewModel extends ViewModel {
 
     }
 
+    public void alreadyRegister() {
+        validateUniqueId(context.getString(R.string.login_flow));
+    }
+
     public void onUsernameTextChanged(CharSequence text) {
         // TODO do something with text
         if (!text.toString().equals("")) {
             binding.btnContinue.setEnabled(true);
+            binding.tvAlreadyRegister.setVisibility(View.VISIBLE);
             binding.btnContinue.setBackgroundTintList(context.getResources().getColorStateList(R.color.btncolor));
         } else {
             binding.btnContinue.setEnabled(false);
+            binding.tvAlreadyRegister.setVisibility(View.GONE);
             binding.btnContinue.setBackgroundTintList(context.getResources().getColorStateList(R.color.btncolor));
         }
     }
 
-    private void validateUniqueId() {
+    private void validateUniqueId(String flow) {
         Map<String, String> params = new HashMap<>();
         params.put(Constant.UNIQUE_ID, binding.edUniqueId.getText().toString().trim());
         ApiConfig.RequestToVolley((result, response) -> {
@@ -112,11 +120,19 @@ public class RegistrationViewModel extends ViewModel {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        session.setData(Constant.UNIQUE_ID,binding.edUniqueId.getText().toString());
+                        session.setData(Constant.UNIQUE_ID, binding.edUniqueId.getText().toString());
                         /// Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                        binding.llInputFeild.setVisibility(View.VISIBLE);
-                        binding.rlUniqueInp.setVisibility(View.GONE);
-                        binding.btnContinue.setVisibility(View.GONE);
+                        if (flow.equals(context.getString(R.string.login_flow))) {
+                            session.setBoolean(Constant.IS_REGISTER, true);
+                            Intent intent = new Intent(context, LoginFaceIDActivity.class);
+                            intent.putExtra(Constant.SKIP_FACE_ID, 0);
+                            context.startActivity(intent);
+                        } else {
+                            binding.tvAlreadyRegister.setVisibility(View.GONE);
+                            binding.llInputFeild.setVisibility(View.VISIBLE);
+                            binding.rlUniqueInp.setVisibility(View.GONE);
+                            binding.btnContinue.setVisibility(View.GONE);
+                        }
                     } else {
                         Toast.makeText(context, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }

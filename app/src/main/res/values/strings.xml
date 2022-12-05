@@ -3,7 +3,7 @@
     <string name="registration">Registration</string>
     <string name="unique_id">Unique ID</string>
     <string name="continue_txt">Continue</string>
-    <string name="already_register">Already Registered? <font fgcolor='#FF000000'>Login</font></string>
+    <string name="already_register"><font fgcolor='##000A11'>Already Registered?</font><b> <font fgcolor='##000A11'>Login</font></b></string>
     <string name="email_id">Email Id</string>
     <string name="verify_now">Verify Now</string>
     <string name="mobile_number">Mobile Number</string>
@@ -56,6 +56,8 @@
     <string name="otp_header">OTP send to</string>
     <string name="miss_match_mpin">MPin MisMatch</string>
     <string name="no_internet">Please Check Internet Connection</string>
+    <string name="login_flow">login</string>
+    <string name="regist">register</string>
 
 
 </resources>

@@ -71,7 +71,6 @@ public class MpinViewModel extends ViewModel {
                         intent.putExtra(Constant.SKIP_FACE_ID, 0);
                         activity.startActivity(intent);
                     } else {
-                        session.setBoolean(Constant.IS_REGISTER, true);
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
 

@@ -240,6 +240,17 @@
                     android:onClick="@{()-> viewModel.onClick()}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
+                <TextView
+                    android:id="@+id/tvAlready_register"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:fontFamily="sans-serif"
+                    android:visibility="gone"
+                    android:onClick="@{()-> viewModel.alreadyRegister()}"
+                    android:text="@string/already_register"
+                    android:layout_height="wrap_content">
+                </TextView>
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnContinue_pass"
                     android:layout_width="match_parent"
