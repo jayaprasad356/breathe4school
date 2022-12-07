@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MyFeedFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_5sdp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/my_feed"
+                android:textColor="@color/black"
+                />
+
+
+            <RelativeLayout
+                android:padding="@dimen/_5sdp"
+                android:id="@+id/rlTitleCard"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/home_card_title"
+                android:layout_alignParentBottom="true"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/tvTitleName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Hi Ravi, Good morning!"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/tvdescription"
+                    android:layout_width="@dimen/_300sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTitleName"
+                    android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8sdp" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+
+                <ImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:background="@drawable/img_title_card" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:id="@+id/imageTips"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/img_tips" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/imageTips"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Today in history India 23 February – Events that took place on this day in history 23 February:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_6sdp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="- 1954- First council meeting of Southeast Asia Treaty Organization (SEATO)."
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_6sdp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-World Peace and Understanding Day, is celebrated to maintain peace and harmony. "
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_6sdp" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/upcoming_classes"
+            android:textSize="@dimen/_8sdp"
+            android:textStyle="bold"
+            android:textColor="@color/text_dark_blue" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_10sdp">
+
+                <ImageView
+                    android:id="@+id/imageClass"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/img_class" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imageClass"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Science"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00am - 11:00 am"
+                        android:textColor="@color/gray" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:text="@string/mr_john_doe"
+                    android:textColor="@color/gray"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:gravity="right"
+                    android:text="@string/join_now"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvClasses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/layout_classes"
+            />
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
