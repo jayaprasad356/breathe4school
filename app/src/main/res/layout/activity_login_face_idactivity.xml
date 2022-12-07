@@ -89,8 +89,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-
-                    android:onClick="@{()-> viewModel.onFaceIdClick()}"
                     android:orientation="vertical"
                     android:visibility="visible">
 
@@ -130,7 +128,6 @@
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()-> viewModel.clickPin()}"
                         android:padding="@dimen/_10sdp"
                         android:text="@string/enter_pin"
                         android:textAllCaps="false"
@@ -176,7 +173,6 @@
                         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="@{()-> viewModel.clickPassword()}"
                         android:padding="@dimen/_10sdp"
                         android:text="@string/enter_password"
                         android:textAllCaps="false"
@@ -188,7 +184,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
-                        android:onClick="@{()-> viewModel.generateMpin()}"
                         android:text="@string/forgot_m_pin_password"
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/_8sdp" />
@@ -201,7 +196,6 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_30sdp"
                         android:fontFamily="sans-serif-medium"
-                        android:onClick="@{()-> viewModel.generateMpin()}"
                         android:text="@string/login_with_temp_password"
                         android:textColor="@color/dark_blue"
 

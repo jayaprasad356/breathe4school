@@ -107,7 +107,6 @@ Let’s keep your data a secret!"
                             android:id="@+id/edMPinId"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.newMpinTextChanged(text,start)}"
                             android:inputType="numberPassword"
                             android:maxLength="4">
 
@@ -130,9 +129,7 @@ Let’s keep your data a secret!"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberPassword"
-                            android:maxLength="4"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.confirmTextChanged(text,start)}">
-
+                            android:maxLength="4">
                         </com.google.android.material.textfield.TextInputEditText>
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -245,7 +242,6 @@ Let’s keep your data a secret!"
                         android:layout_marginHorizontal="@dimen/_100sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:enabled="false"
-                        android:onClick="@{()-> viewModel.onClick()}"
                         android:fontFamily="@font/semibold"
                         android:padding="@dimen/_8sdp"
                         android:text="@string/continue_txt"

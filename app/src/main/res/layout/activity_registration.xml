@@ -72,7 +72,6 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edUniqueId"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onUsernameTextChanged(text)}"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </com.google.android.material.textfield.TextInputLayout>
@@ -139,7 +138,6 @@
                             android:layout_weight="1.4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:onClick="@{()-> viewModel.verifyEmail()}"
                             android:text="@string/verify_now"
                             android:gravity="center"
                             android:fontFamily="sans-serif-medium"
@@ -201,8 +199,6 @@
                             android:layout_height="wrap_content"
                             android:text="@string/verify_now"
                             android:gravity="center"
-                            android:onClick="@{()-> viewModel.verifyMobile()}"
-
                             android:fontFamily="sans-serif-medium"
                             android:textColor="@color/primary"
                             />
@@ -237,7 +233,6 @@
                     android:padding="@dimen/_8sdp"
                     android:text="@string/continue_txt"
                     android:textAllCaps="false"
-                    android:onClick="@{()-> viewModel.onClick()}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
                 <TextView
@@ -247,7 +242,6 @@
                     android:layout_marginTop="@dimen/_50sdp"
                     android:fontFamily="sans-serif"
                     android:visibility="gone"
-                    android:onClick="@{()-> viewModel.alreadyRegister()}"
                     android:text="@string/already_register"
                     android:layout_height="wrap_content">
                 </TextView>
@@ -264,7 +258,6 @@
                     android:text="@string/continue_txt"
                     android:textAllCaps="false"
                     android:visibility="gone"
-                    android:onClick="@{()-> viewModel.showPasswordActivity()}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12sdp" />
 

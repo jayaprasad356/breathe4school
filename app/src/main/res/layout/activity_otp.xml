@@ -35,7 +35,6 @@
                 android:id="@+id/ibBackBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{()-> viewModel.onBack()}"
                 android:background="@drawable/ic_back_arrow"
                 android:layout_margin="@dimen/_10sdp"
 
@@ -119,8 +118,6 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edOTPId"
                             android:layout_width="match_parent"
-                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onUserTextChanged(text)}"
-
                             android:layout_height="wrap_content"
                             android:inputType="number"
                             android:maxLength="6">
@@ -192,7 +189,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:enabled="false"
-                    android:onClick="@{()-> viewModel.reSendOtp()}"
                     android:fontFamily="sans-serif-medium"
                     android:gravity="right"
                     android:text="@string/resend_otp"
@@ -211,7 +207,6 @@
                 android:enabled="false"
                 android:fontFamily="@font/semibold"
                 android:padding="@dimen/_8sdp"
-                android:onClick="@{()-> viewModel.onClick()}"
                 android:text="@string/proceed_txt"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

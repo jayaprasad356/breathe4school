@@ -42,15 +42,12 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
 
 
     private void GotoActivity() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(RegisterSuccessfullActivity.this, LoginFaceIDActivity.class);
-                intent.putExtra(Constant.UNIQUE_ID, uniqueId);
-                intent.putExtra(Constant.SKIP_FACE_ID, 0);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(RegisterSuccessfullActivity.this, LoginFaceIDActivity.class);
+            intent.putExtra(Constant.UNIQUE_ID, uniqueId);
+            intent.putExtra(Constant.SKIP_FACE_ID, 0);
+            startActivity(intent);
+            finish();
         }, 2000);
     }
 }
