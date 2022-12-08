@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,10 +34,11 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:textSize="@dimen/_8sdp"
+                    android:textSize="@dimen/_7sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Science"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -41,6 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10:00am - 11:00 am"
+                    android:fontFamily="@font/open_sans"
                     android:textColor="@color/gray" />
 
 
@@ -51,21 +57,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/open_sans_bold"
                 android:gravity="center"
                 android:text="@string/mr_john_doe"
                 android:textColor="@color/gray"
-                android:textSize="@dimen/_8sdp"
+                android:textSize="@dimen/_7sdp"
                 android:textStyle="bold" />
 
 
             <TextView
-                android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:fontFamily="@font/open_sans_bold"
                 android:gravity="right"
                 android:text="@string/join_now"
                 android:textColor="@color/primary"
+                android:textSize="@dimen/_8sdp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
