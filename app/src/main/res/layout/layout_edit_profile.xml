@@ -96,6 +96,7 @@
 
 
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/gender"
@@ -103,6 +104,7 @@
 
 
             <TextView
+                android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Male"
@@ -124,6 +126,7 @@
 
 
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/school_email_id"
@@ -131,6 +134,7 @@
 
 
             <TextView
+                android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="charlie@kend_vidyala-student.com"
@@ -154,11 +158,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/father_name"
+            android:text="Father Name"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Parents"
@@ -179,14 +185,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/contact_number"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="98121 11921"
@@ -207,14 +217,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/mdm_id_imei"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="990002703176428"
@@ -234,14 +248,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/division"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Section A"
@@ -274,14 +292,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dob"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="14-02-2003"
@@ -302,14 +324,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/parents_email_id"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="carter@gmail.com"
@@ -330,14 +356,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/mother_name"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phillip Korsgaard"
@@ -358,14 +388,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/alternative_number"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="83842 83412"
@@ -386,14 +420,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Class"
+            android:text="@string/Class"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Class 12"
@@ -413,14 +451,18 @@
 
 
 
+
         <TextView
+            android:textSize="@dimen/_8sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/class_teacher"
             />
 
 
-            <TextView
+
+        <TextView
+            android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gretchen Donin"

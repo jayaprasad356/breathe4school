@@ -25,16 +25,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:layout_toRightOf="@+id/imageClass"
                 android:orientation="vertical">
 
                 <TextView
+                    android:textSize="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Science"
                     android:textColor="@color/black" />
 
                 <TextView
+                    android:textSize="@dimen/_6sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10:00am - 11:00 am"
@@ -51,10 +54,12 @@
                 android:gravity="center"
                 android:text="@string/mr_john_doe"
                 android:textColor="@color/gray"
+                android:textSize="@dimen/_8sdp"
                 android:textStyle="bold" />
 
 
             <TextView
+                android:textSize="@dimen/_8sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

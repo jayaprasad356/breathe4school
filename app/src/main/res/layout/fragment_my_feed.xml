@@ -34,7 +34,6 @@
         android:background="@color/light_gray"
         android:paddingHorizontal="@dimen/_5sdp"
         android:paddingVertical="@dimen/_10sdp"
-
         >
 
 
@@ -52,11 +51,15 @@
                 android:layout_height="match_parent"
                 android:text="@string/my_feed"
                 android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/_12sdp"
                 />
 
 
+
+
+
             <RelativeLayout
-                android:padding="@dimen/_5sdp"
                 android:id="@+id/rlTitleCard"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_60sdp"
@@ -65,23 +68,34 @@
                 >
 
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_mask_group"
+                    android:padding="@dimen/_5sdp">
 
-                <TextView
-                    android:id="@+id/tvTitleName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Hi Ravi, Good morning!"
-                    android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/tvdescription"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tvTitleName"
-                    android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_8sdp" />
+                    <TextView
+                        android:id="@+id/tvTitleName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:drawableStart="@drawable/ic_waving_hand"
+                        android:text="Hi Ravi, Good morning!"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/tvdescription"
+                        android:layout_width="@dimen/_300sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTitleName"
+                        android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+
+                </RelativeLayout>
 
 
             </RelativeLayout>
@@ -176,7 +190,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            >
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -192,6 +208,7 @@
                     android:background="@drawable/img_class" />
 
                 <LinearLayout
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -199,12 +216,14 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:textSize="@dimen/_8sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Science"
                         android:textColor="@color/black" />
 
                     <TextView
+                        android:textSize="@dimen/_6sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="10:00am - 11:00 am"
@@ -215,6 +234,7 @@
 
 
                 <TextView
+                    android:textSize="@dimen/_8sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -231,6 +251,7 @@
                     android:gravity="right"
                     android:text="@string/join_now"
                     android:textColor="@color/primary"
+                    android:textSize="@dimen/_8sdp"
                     android:textStyle="bold" />
 
             </RelativeLayout>
@@ -269,30 +290,32 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:background="@drawable/ic_notification" />
 
                 <ImageView
                     android:id="@+id/ivProfile"
-                    android:layout_width="@dimen/_18sdp"
-                    android:layout_height="@dimen/_18sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:background="@drawable/img_profile" />
 
             </LinearLayout>
 
 
             <RelativeLayout
+                android:layout_marginTop="@dimen/_5sdp"
                 android:id="@+id/calendar"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_160sdp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/llProfileItem">
 
 
                 <CalendarView
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
 
 
             </RelativeLayout>
@@ -313,7 +336,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/_10sdp"
+                    >
 
 
                     <TextView
@@ -321,14 +346,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/notice_board"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8sdp"
+                        />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvNoticeBoard"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        >
 
                         <TextView
                             android:layout_width="match_parent"
