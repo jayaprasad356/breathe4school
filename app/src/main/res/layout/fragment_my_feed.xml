@@ -6,10 +6,36 @@
     tools:context=".view.MyFeedFragment">
 
 
+
+    <include
+        android:id="@+id/includedEditProfile"
+        android:visibility="gone"
+        layout="@layout/layout_edit_profile"
+
+        />
+
+
     <LinearLayout
+        android:id="@+id/llmyfeed"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:weightSum="2"
+        >
+
+
+
+
+
+    <LinearLayout
+        android:layout_weight="0.6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/light_gray"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingVertical="@dimen/_10sdp"
+
+        >
 
 
 
@@ -220,6 +246,115 @@
             android:layout_height="wrap_content"
             tools:listitem="@layout/layout_classes"
             />
+
+
+
+    </LinearLayout>
+
+
+        <RelativeLayout
+            android:backgroundTint="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4">
+
+
+            <LinearLayout
+                android:id="@+id/llProfileItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/ic_notification" />
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_18sdp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:background="@drawable/img_profile" />
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/calendar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_160sdp"
+                android:layout_below="@+id/llProfileItem">
+
+
+                <CalendarView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/calendar"
+                android:orientation="vertical">
+
+
+                <com.google.android.material.divider.MaterialDivider
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_10sdp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/tvNoticeBoard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notice_board"
+                        android:textColor="@color/black" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvNoticeBoard"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
+                            android:textColor="@color/text_gray"
+                            android:textSize="@dimen/_6sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
+                            android:textColor="@color/text_gray"
+                            android:textSize="@dimen/_6sdp" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
 
 

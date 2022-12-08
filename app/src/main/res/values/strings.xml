@@ -66,6 +66,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="notice_board">Notice Board</string>
+    <string name="week">Weekly</string>
+    <string name="daily">Daily</string>
+    <string name="gender">Gender</string>
+    <string name="school_email_id">School email id</string>
+    <string name="father_name">Father name</string>
+    <string name="contact_number">Contact number</string>
+    <string name="mdm_id_imei">MDM ID / IMEI</string>
+    <string name="division">Division</string>
+    <string name="dob">DOB</string>
+    <string name="parents_email_id">Parents email id</string>
+    <string name="mother_name">Mother name</string>
+    <string name="alternative_number">Alternative number</string>
+    <string name="Class">Class</string>
+    <string name="class_teacher">Class teacher</string>
 
 
 </resources>
