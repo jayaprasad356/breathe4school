@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -15,7 +20,9 @@ import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySetFaceIdBinding;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Login.LoginFaceIDActivity;
-import com.app.b4s.viewmodels.SetFaceIdViewModel;
+
+import java.util.concurrent.Executor;
+
 
 public class SetFaceIdActivity extends AppCompatActivity {
 
@@ -25,6 +32,9 @@ public class SetFaceIdActivity extends AppCompatActivity {
     ActivitySetFaceIdBinding binding;
     Activity activity;
     String flow;
+    private Executor executor;
+    private BiometricPrompt biometricPrompt;
+    private BiometricPrompt.PromptInfo promptInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +46,42 @@ public class SetFaceIdActivity extends AppCompatActivity {
         flow = getIntent().getStringExtra(Constant.FLOW);
         Skip_FaceID_tv = getIntent().getExtras().getBoolean(Constant.SKIP_FACE_ID);
         showVisibility();
+
+        executor = ContextCompat.getMainExecutor(this);
+        biometricPrompt = new BiometricPrompt(SetFaceIdActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(activity, errString, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+            }
+        });
+        promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("bio auth")
+                .setSubtitle("face or finger")
+                .setNegativeButtonText("cancel")
+                .build();
         if (flow.equals(Constant.FORGOT)) {
             binding.ivFaceLogo.setOnClickListener(view -> {
-                Intent intent = new Intent(activity, SetMPinActivity.class);
-                intent.putExtra(Constant.FLOW, Constant.NORMAL);
-                activity.startActivity(intent);
+
+                biometricPrompt.authenticate(promptInfo);
+
+//                Intent intent = new Intent(activity, SetMPinActivity.class);
+//                intent.putExtra(Constant.FLOW, Constant.NORMAL);
+//                activity.startActivity(intent);
             });
-        }else {
+        } else {
             Intent intent = new Intent(activity, LoginFaceIDActivity.class);
             intent.putExtra(Constant.SKIP_FACE_ID, 0);
             activity.startActivity(intent);

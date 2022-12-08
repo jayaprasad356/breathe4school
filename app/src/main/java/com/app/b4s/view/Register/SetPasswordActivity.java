@@ -12,17 +12,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.app.b4s.R;
 import com.app.b4s.commons.ResponseListener;
-import com.app.b4s.controller.IOtpVerifyController;
 import com.app.b4s.controller.IPasswordController;
 import com.app.b4s.controller.PasswordController;
 import com.app.b4s.databinding.ActivitySetPasswordBinding;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.viewmodels.PasswordViewModel;
 
 import java.util.regex.Pattern;
 

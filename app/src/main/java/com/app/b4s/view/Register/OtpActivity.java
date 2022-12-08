@@ -20,12 +20,10 @@ import com.app.b4s.controller.OtpVerifyController;
 import com.app.b4s.databinding.ActivityOtpBinding;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.viewmodels.OtpViewModel;
 
 public class OtpActivity extends AppCompatActivity implements ResponseListener {
 
     Activity activity;
-    OtpViewModel otpViewModel;
     private ActivityOtpBinding binding;
     String otpType, description;
     Session session;
@@ -39,8 +37,6 @@ public class OtpActivity extends AppCompatActivity implements ResponseListener {
         session = new Session(activity);
         verifyController = new OtpVerifyController(this);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_otp);
-        binding.setLifecycleOwner(this);
-        binding.setViewModel(otpViewModel);
         Intent intent = getIntent();
         timerstart();
         otpType = intent.getStringExtra(Constant.TYPE);

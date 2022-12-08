@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.Register.RegistrationActivity">
-    <data>
-        <variable
-            name="viewModel"
-            type="com.app.b4s.viewmodels.RegistrationViewModel" />
-    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"

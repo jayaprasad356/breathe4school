@@ -4,12 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.Login.LoginFaceIDActivity">
 
-    <data>
 
-        <variable
-            name="viewModel"
-            type="com.app.b4s.viewmodels.LoginFaceidViewModel" />
-    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"

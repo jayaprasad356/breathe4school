@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="7.05">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_weight="0.05"
+            android:background="@color/text_gray" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sh"
+            android:gravity="center"
+            android:textColor="@color/text_title_color"
+            android:text="Study Planer"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sh"
+            android:gravity="center"
+            android:textColor="@color/text_title_color"
+            android:text="Maths"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/text_title_color"
+            android:background="@drawable/sh"
+            android:text="Complete Chapter 1and2"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_15sdp"
+            android:text="60mins"
+            android:textColor="@color/text_title_color"
+            android:textSize="@dimen/_12sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/sh"
+            android:text="" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/text_title_color"
+            android:background="@drawable/sh"
+            android:text="Completed"
+            android:textSize="@dimen/_12sdp" />
+    </LinearLayout>
+
+</LinearLayout>
