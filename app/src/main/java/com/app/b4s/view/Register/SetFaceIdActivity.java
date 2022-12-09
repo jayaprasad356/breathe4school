@@ -59,6 +59,9 @@ public class SetFaceIdActivity extends AppCompatActivity {
             public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(activity, "success", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(activity, SetMPinActivity.class);
+                intent.putExtra(Constant.FLOW, Constant.NORMAL);
+                activity.startActivity(intent);
             }
 
             @Override
@@ -71,6 +74,7 @@ public class SetFaceIdActivity extends AppCompatActivity {
                 .setTitle("bio auth")
                 .setSubtitle("face or finger")
                 .setNegativeButtonText("cancel")
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
                 .build();
         if (flow.equals(Constant.FORGOT)) {
             binding.ivFaceLogo.setOnClickListener(view -> {
