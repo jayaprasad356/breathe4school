@@ -78,6 +78,11 @@
     <string name="class_teacher">Class teacher</string>
     <string name="Class">Class</string>
     <string name="live_session">Live Session</string>
+    <string name="hindi">hindi</string>
+    <string name="my_text"><u>Reminder ON</u></string>
+    <string name="edit_plan"><u>Edit Planer</u></string>
+    <string name="sanskrit">Sanskrit</string>
+    <string name="set_reminder">Set Reminder</string>
 
 
 </resources>
