@@ -3,16 +3,20 @@ package com.app.b4s.view;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+
 import com.app.b4s.R;
+
 
 
 public class MyFeedFragment extends Fragment {
@@ -22,10 +26,6 @@ public class MyFeedFragment extends Fragment {
     ImageView ivProfile;
     LinearLayout llmyfeed;
     ImageButton ibBackBtn;
-
-
-
-
 
     public MyFeedFragment() {
         // Required empty public constructor
@@ -43,9 +43,6 @@ public class MyFeedFragment extends Fragment {
         ivProfile = root.findViewById(R.id.ivProfile);
         llmyfeed = root.findViewById(R.id.llmyfeed);
         ibBackBtn = root.findViewById(R.id.ibBackBtn);
-
-
-
         ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +51,7 @@ public class MyFeedFragment extends Fragment {
 
             }
         });
+
         ibBackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

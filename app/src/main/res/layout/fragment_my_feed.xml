@@ -365,8 +365,8 @@
                         android:id="@+id/tvNoticeBoard"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/notice_board"
                         android:fontFamily="@font/open_sans_bold"
+                        android:text="@string/notice_board"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_8sdp" />
 
@@ -379,6 +379,12 @@
                         android:layout_marginTop="@dimen/_4sdp"
                         >
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/NoticeBoardRecycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                            <!--
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -407,6 +413,7 @@
                             android:textSize="@dimen/_6sdp" />
 
 
+-->
                     </LinearLayout>
 
 

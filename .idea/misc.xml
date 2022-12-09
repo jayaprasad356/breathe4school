@@ -10,6 +10,7 @@
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_otp.xml" value="0.17552083333333332" />
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_registration.xml" value="0.22" />
         <entry key="..\:/Studio Projects/flutter/Breathe4School/app/src/main/res/layout/activity_splash_screen.xml" value="0.17552083333333332" />
+        <entry key="..\:/breathe4school/app/src/main/res/drawable/bg.xml" value="0.3175" />
         <entry key="..\:/breathe4school/app/src/main/res/drawable/bg_textinput_layout.xml" value="0.192" />
         <entry key="..\:/breathe4school/app/src/main/res/drawable/btn_bg.xml" value="0.1855" />
         <entry key="..\:/breathe4school/app/src/main/res/drawable/home_card_title.xml" value="0.128" />
@@ -32,12 +33,15 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_password.xml" value="0.1625" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_successfull.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_test.xml" value="0.2359375" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_my_feed.xml" value="0.2330097173675877" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_my_feed.xml" value="0.30757282692521576" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/home_menu_header.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/layout_classes.xml" value="0.30757282692521576" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/layout_edit_profile.xml" value="0.2" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_layout.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/notice_board_lyt.xml" value="0.30757282692521576" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_layout.xml" value="0.30757282692521576" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_lyt.xml" value="0.4660194347351754" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_subjects.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/home_menu.xml" value="0.20416666666666666" />
       </map>

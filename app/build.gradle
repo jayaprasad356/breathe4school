@@ -18,6 +18,12 @@ android {
         enabled = true
     }
 
+    buildFeatures {
+
+        viewBinding true
+
+    }
+
 
     buildTypes {
         release {
