@@ -25,13 +25,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
-
         navigationrail = findViewById(R.id.navigationRailView);
 
         if (fragment == null ){
-
             fragmentManager = getSupportFragmentManager();
             fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.rlContainer,new MyFeedFragment());
@@ -41,8 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         navigationrail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-
                 switch (item.getItemId()){
 
                     case R.id.nav_myfeed:
@@ -53,8 +47,6 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new CalendarFragment();
                         break;
                 }
-
-
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.rlContainer,fragment);
@@ -63,10 +55,5 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
-
-
-
     }
 }
