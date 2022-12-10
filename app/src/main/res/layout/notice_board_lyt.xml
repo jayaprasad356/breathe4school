@@ -21,7 +21,7 @@
             android:background="@color/black"/>
 
         <TextView
-            android:id="@+id/Updates"
+            android:id="@+id/updates"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."

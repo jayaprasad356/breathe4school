@@ -9,6 +9,6 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.time_table_lyt);
+        setContentView(R.layout.time_table_layout);
     }
 }

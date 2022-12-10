@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySuccessfullBinding;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.HomeActivity;
 import com.app.b4s.view.Register.SetFaceIdActivity;
 
 public class LoginSuccessfullActivity extends AppCompatActivity {
@@ -45,7 +46,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
 
     private void GotoActivity() {
         handler.postDelayed(() -> {
-            Intent intent = new Intent(LoginSuccessfullActivity.this, SetFaceIdActivity.class);
+            Intent intent = new Intent(LoginSuccessfullActivity.this, HomeActivity.class);
             intent.putExtra(Constant.SKIP_FACE_ID, true);
             intent.putExtra(Constant.FLOW, Constant.NORMAL);
             intent.putExtra(Constant.UNIQUE_ID, uniqueId);

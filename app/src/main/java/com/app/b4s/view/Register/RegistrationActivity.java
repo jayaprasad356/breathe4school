@@ -39,7 +39,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
         binding.btnContinue.setOnClickListener(view -> registerController.onRegister(binding.edUniqueId.getText().toString(), activity));
         binding.tvVerifyEmail.setOnClickListener(View -> verifyEmail());
         binding.tvVerifyMobile.setOnClickListener(View -> verifyMobile());
-        binding.tvAlreadyRegister.setOnClickListener(View -> registerController.onLogin(binding.edUniqueId.getText().toString(), activity));
+        binding.tvAlreadyRegister.setOnClickListener(View -> loginSuccess());
         showActivity();
         binding.edUniqueId.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,6 +95,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
 
     private void loginSuccess() {
         session.setBoolean(Constant.IS_REGISTER, true);
+        session.setData(Constant.UNIQUE_ID,binding.edUniqueId.getText().toString());
         Intent intent = new Intent(activity, LoginFaceIDActivity.class);
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);

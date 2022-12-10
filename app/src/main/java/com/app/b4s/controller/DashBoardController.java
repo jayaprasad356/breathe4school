@@ -3,14 +3,18 @@ package com.app.b4s.controller;
 import android.app.Activity;
 
 import com.app.b4s.commons.ResponseListener;
+import com.app.b4s.model.StudentNotice;
+import com.app.b4s.model.Thoughts;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +35,19 @@ public class DashBoardController implements IDashBoardController {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                        Gson g = new Gson();
+                        ArrayList<Thoughts> thoughts = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            if (jsonObject1 != null) {
+                                Thoughts group = g.fromJson(jsonObject1.toString(), Thoughts.class);
+                                thoughts.add(group);
+                            } else {
+                                break;
+                            }
+                        }
+                        //    JSONArray jsonArray = jsonObject.getJSONArray("data");
                         session.setData(Constant.ON_THIS_DAY, jsonArray.getJSONObject(0).getString("text"));
                         responseListener.onSuccess(Constant.SUCCESS);
                     }
