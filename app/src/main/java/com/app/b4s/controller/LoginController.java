@@ -51,7 +51,7 @@ public class LoginController implements ILoginController {
     private void setStudentData(JSONObject data) {
         try {
             session.setData(Constant.NAME, data.getString(Constant.NAME));
-            session.setData(Constant.STUDENT_ID, data.getString(Constant.STUDENT_ID));
+            session.setData(Constant.STUDENT_ID, data.getString(Constant.ID));
             session.setData(Constant.GENDER, data.getString(Constant.GENDER));
             session.setData(Constant.PARENT_EMAIL,data.getString(Constant.PARENT_EMAIL));
             session.setData(Constant.FATHER_NAME,data.getString(Constant.FATHER_NAME));

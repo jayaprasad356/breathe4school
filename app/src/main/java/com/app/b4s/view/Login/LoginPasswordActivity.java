@@ -15,8 +15,11 @@ import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.ILoginController;
 import com.app.b4s.controller.LoginController;
 import com.app.b4s.databinding.ActivityLoginPasswordBinding;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
+
+import java.util.ArrayList;
 
 public class LoginPasswordActivity extends AppCompatActivity implements ResponseListener {
     Activity activity;
@@ -78,6 +81,11 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
 
     @Override
     public void setPasswordSuccess() {
+
+    }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> arrayList) {
 
     }
 }

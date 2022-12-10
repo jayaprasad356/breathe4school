@@ -44,12 +44,15 @@ public class Constant {
     public static final String QUOTE = "quote";
     public static final String NAME = "name";
     public static final String GENDER = "gender";
-    public static final String STUDENT_ID = "id";
+    public static final String ID = "id";
     public static final String MALE = "M";
 
     public static final String DOB = "date_of_birth";
     public static final String FATHER_NAME = "emergency_contact_name";
     public static final String  PARENT_EMAIL= "email";
+    public static final String  STUDENT_ID= "student_id";
+    public static final String  MESSAGE_SHOWEN_TIME= "message_showed_time";
+    public static final String  MESSAGE_COUNT= "message_count";
 
 
 }

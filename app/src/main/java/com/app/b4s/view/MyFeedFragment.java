@@ -1,8 +1,11 @@
 package com.app.b4s.view;
 
+import static com.app.b4s.utilities.Constant.STATUS;
 import static com.app.b4s.utilities.Constant.SUCCESS;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,10 +28,12 @@ import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.DashBoardController;
 import com.app.b4s.controller.IDashBoardController;
 import com.app.b4s.databinding.FragmentMyFeedBinding;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.StudentNotice;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -44,12 +49,11 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
 
     RecyclerView rvClasses;
     LinearLayout llmyfeed;
-    ImageButton ibBackBtn;
     FragmentMyFeedBinding binding;
     IDashBoardController dashBoardController;
     Activity context;
     Session session;
-    String studentName, greeting;
+    String studentName, greeting, link,tipUrl;
 
     public MyFeedFragment() {
         // Required empty public constructor
@@ -67,7 +71,7 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
         dashBoardController = new DashBoardController(this);
         dashBoardController.getThisDay(context);
         dashBoardController.getThought(context);
-        rvClasses=binding.NoticeBoardRecycler;
+        rvClasses = binding.NoticeBoardRecycler;
         setGreatingText();
         setStudentInfo();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -82,17 +86,25 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
             llmyfeed.setVisibility(View.VISIBLE);
         });
 
-
+        binding.onThisDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse(link));
+                startActivity(browserIntent);
+            }
+        });
         return binding.getRoot();
     }
 
     private void loadStudentNotice() {
         Map<String, String> params = new HashMap<>();
+        params.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getBoolean(SUCCESS)) {
+                    if (jsonObject.getBoolean(STATUS)) {
                         JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
                         Gson g = new Gson();
                         ArrayList<StudentNotice> studentNotices = new ArrayList<>();
@@ -114,14 +126,14 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
                     e.printStackTrace();
                 }
             }
-        }, getActivity(), Constant.GET_NOTICE_BY_STUDENT_ID, params, true,0);
+        }, getActivity(), Constant.GET_NOTICE_BY_STUDENT_ID, params, true, 1);
     }
 
     private void setStudentInfo() {
-        if (session.getData(Constant.GENDER).equals(Constant.MALE)){
+        if (session.getData(Constant.GENDER).equals(Constant.MALE)) {
             binding.ivGenderImage.setImageResource(R.drawable.img_title_card);
             binding.gender.setText("MALE");
-        }else {
+        } else {
             binding.ivGenderImage.setImageResource(R.drawable.female_logo);
             binding.gender.setText("FEMALE");
         }
@@ -166,7 +178,6 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
 
     @Override
     public void onSuccess(String type) {
-        binding.onThisDay.setText("-" + session.getData(Constant.ON_THIS_DAY));
         binding.tvdescription.setText(session.getData(Constant.QUOTE));
     }
 
@@ -177,6 +188,17 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
 
     @Override
     public void setPasswordSuccess() {
+
+    }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> arrayList) {
+        binding.onThisDay.setText("-" + arrayList.get(0).getText());
+        tipUrl=arrayList.get(0).getOrignal_image();
+        link = arrayList.get(0).getDetails_url();
+        Glide.with(context)
+                .load(tipUrl)
+                .into(binding.imageTips);
 
     }
 }

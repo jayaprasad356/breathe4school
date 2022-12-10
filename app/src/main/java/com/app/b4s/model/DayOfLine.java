@@ -1,6 +1,6 @@
 package com.app.b4s.model;
 
-public class Thoughts {
+public class DayOfLine {
     String text,orignal_image,details_url;
 
     public String getText() {

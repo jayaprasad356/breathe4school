@@ -16,7 +16,10 @@ import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.ILoginController;
 import com.app.b4s.controller.LoginController;
 import com.app.b4s.databinding.ActivityLoginMpinBinding;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.utilities.Constant;
+
+import java.util.ArrayList;
 
 public class LoginMPinActivity extends AppCompatActivity implements ResponseListener {
     Activity activity;
@@ -84,6 +87,12 @@ public class LoginMPinActivity extends AppCompatActivity implements ResponseList
     public void setPasswordSuccess() {
 
     }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> ArrayList) {
+
+    }
+
     public void loginInsteadOfPassword(){
         Intent intent = new Intent(activity, LoginPasswordActivity.class);
         activity.startActivity(intent);

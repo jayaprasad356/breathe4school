@@ -576,8 +576,7 @@
                     android:id="@+id/imageTips"
                     android:layout_width="@dimen/_50sdp"
                     android:layout_height="@dimen/_60sdp"
-                    android:layout_marginStart="20dp"
-                    android:background="@drawable/idea" />
+                    android:layout_marginStart="20dp" />
 
 
                 <LinearLayout
@@ -607,13 +606,7 @@
                         android:textSize="@dimen/_6sdp" />
 
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans"
-                        android:text="-World Peace and Understanding Day, is celebrated to maintain peace and harmony. "
-                        android:textColor="@color/text_gray"
-                        android:textSize="@dimen/_6sdp" />
+
 
 
                 </LinearLayout>

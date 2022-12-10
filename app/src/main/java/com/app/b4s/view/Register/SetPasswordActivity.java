@@ -18,9 +18,11 @@ import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.IPasswordController;
 import com.app.b4s.controller.PasswordController;
 import com.app.b4s.databinding.ActivitySetPasswordBinding;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class SetPasswordActivity extends AppCompatActivity implements ResponseListener {
@@ -199,5 +201,10 @@ public class SetPasswordActivity extends AppCompatActivity implements ResponseLi
         intent.putExtra(Constant.UNIQUE_ID, uniqueID);
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);
+    }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> arrayList) {
+
     }
 }

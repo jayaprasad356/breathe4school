@@ -18,8 +18,11 @@ import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.IOtpVerifyController;
 import com.app.b4s.controller.OtpVerifyController;
 import com.app.b4s.databinding.ActivityOtpBinding;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
+
+import java.util.ArrayList;
 
 public class OtpActivity extends AppCompatActivity implements ResponseListener {
 
@@ -115,6 +118,11 @@ public class OtpActivity extends AppCompatActivity implements ResponseListener {
 
     @Override
     public void setPasswordSuccess() {
+
+    }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> arrayList) {
 
     }
 
