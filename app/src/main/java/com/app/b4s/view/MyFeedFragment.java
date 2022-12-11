@@ -1,7 +1,6 @@
 package com.app.b4s.view;
 
 import static com.app.b4s.utilities.Constant.STATUS;
-import static com.app.b4s.utilities.Constant.SUCCESS;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,18 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.app.b4s.R;
 import com.app.b4s.adapter.NoticeAdapter;
+import com.app.b4s.adapter.UpcommingAdapter;
 import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.DashBoardController;
 import com.app.b4s.controller.IDashBoardController;
 import com.app.b4s.databinding.FragmentMyFeedBinding;
 import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.StudentNotice;
+import com.app.b4s.model.UpCommingData;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
@@ -47,13 +47,13 @@ import java.util.Map;
 
 public class MyFeedFragment extends Fragment implements ResponseListener {
 
-    RecyclerView rvClasses;
+    RecyclerView rcNotices, reClasses;
     LinearLayout llmyfeed;
     FragmentMyFeedBinding binding;
     IDashBoardController dashBoardController;
     Activity context;
     Session session;
-    String studentName, greeting, link,tipUrl;
+    String studentName, greeting, link, tipUrl;
 
     public MyFeedFragment() {
         // Required empty public constructor
@@ -71,15 +71,18 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
         dashBoardController = new DashBoardController(this);
         dashBoardController.getThisDay(context);
         dashBoardController.getThought(context);
-        rvClasses = binding.NoticeBoardRecycler;
+        rcNotices = binding.NoticeBoardRecycler;
+        reClasses = binding.rvClasses;
         setGreatingText();
         setStudentInfo();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        rvClasses.setLayoutManager(linearLayoutManager);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rcNotices.setLayoutManager(linearLayoutManager);
+        reClasses.setLayoutManager(layoutManager);
         loadStudentNotice();
+        loadUpcommingClasses();
         studentName = session.getData(Constant.NAME);
         binding.tvTitleName.setText("Hi " + studentName + ", " + greeting);
-        //ibBackBtn =binding.ivProfile;
         binding.ivProfile.setOnClickListener(v -> editprofile());
         binding.ibBackBtn.setOnClickListener(v -> {
             binding.editProfile.setVisibility(View.GONE);
@@ -95,6 +98,40 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
             }
         });
         return binding.getRoot();
+    }
+
+    private void loadUpcommingClasses() {
+        String url = "http://143.244.132.170:3001/api/v1/timetable/getUpcomingClasses/academicYearId/638c7782068611a103ff3987/schoolId/638d745f9e7aa8249cdd42c3/standardId/63429dc80015eb1fd9c86f3c/sectionId/63429de00015eb1fd9c86f3d/timetableSessionId/638d74f59e7aa8249cdd42c7";
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
+        ApiConfig.RequestToVolley((result, response) -> {
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(STATUS)) {
+                        JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                        Gson g = new Gson();
+                        ArrayList<UpCommingData> upCommingData = new ArrayList<>();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            if (jsonObject1 != null) {
+                                UpCommingData group = g.fromJson(jsonObject1.toString(), UpCommingData.class);
+                                upCommingData.add(group);
+                            } else {
+                                break;
+                            }
+                        }
+                        UpcommingAdapter adapter = new UpcommingAdapter(upCommingData, getActivity());
+                        reClasses.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, getActivity(), url, params, true, 0);
+
     }
 
     private void loadStudentNotice() {
@@ -118,7 +155,7 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
                             }
                         }
                         NoticeAdapter adapter = new NoticeAdapter(studentNotices, getActivity());
-                        rvClasses.setAdapter(adapter);
+                        rcNotices.setAdapter(adapter);
                     } else {
                         Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
@@ -194,8 +231,10 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
     @Override
     public void OnSuccess(ArrayList<DayOfLine> arrayList) {
         binding.onThisDay.setText("-" + arrayList.get(0).getText());
-        tipUrl=arrayList.get(0).getOrignal_image();
+        binding.tvDayTitle.setText(arrayList.get(0).getTitle());
+        tipUrl = arrayList.get(0).getOrignal_image();
         link = arrayList.get(0).getDetails_url();
+
         Glide.with(context)
                 .load(tipUrl)
                 .into(binding.imageTips);

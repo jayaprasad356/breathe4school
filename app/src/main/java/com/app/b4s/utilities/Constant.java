@@ -41,6 +41,7 @@ public class Constant {
     public static final String TICKET_NUMBER = "ticket_number";
     public static final String DATA = "data";
     public static final String ON_THIS_DAY = "get_on_this_day";
+    public static final String ON_THIS_DAY_TITLE = "on_this_day_title";
     public static final String QUOTE = "quote";
     public static final String NAME = "name";
     public static final String GENDER = "gender";

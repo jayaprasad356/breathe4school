@@ -1,7 +1,15 @@
 package com.app.b4s.model;
 
 public class DayOfLine {
-    String text,orignal_image,details_url;
+    String text,orignal_image,details_url,title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public String getText() {
         return text;

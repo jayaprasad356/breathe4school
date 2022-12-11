@@ -3,814 +3,791 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.MyFeedFragment">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/editProfile"
-        android:visibility="gone"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/light_gray">
+        android:layout_height="match_parent">
 
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/editProfile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:padding="@dimen/_5sdp">
-
-                <ImageButton
-                    android:id="@+id/ibBackBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/ic_back_arrow" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
-                    android:layout_toRightOf="@+id/ibBackBtn"
-                    android:text="Edit Profile"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp"
-                    android:textStyle="bold" />
-
-
-                <LinearLayout
-                    android:id="@+id/lllProfileItem"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:background="@drawable/ic_notification" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="@dimen/_18sdp"
-                        android:background="@drawable/img_profile" />
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
+            android:background="@color/light_gray"
+            android:visibility="gone">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp">
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="6">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/gender"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/gender"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Male"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/school_email_id"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/sclEmailId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="charlie@kend_vidyala-student.com"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Father Name" />
-
-
-                        <TextView
-                            android:id="@+id/fatherName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Parents"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/contact_number"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/contactNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="98121 11921"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/mdm_id_imei"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/imei"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="990002703176428"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/division"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/division"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Section A"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="6">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/dob"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/dateOfBirth"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="14-02-2003"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/parents_email_id"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/parentEmailId"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="carter@gmail.com"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/mother_name"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/motherName"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Phillip Korsgaard"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/alternative_number"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/alterNumber"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="83842 83412"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp"
-
-                        >
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Class"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/clas"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Class 12"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="@dimen/_10sdp">
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/class_teacher"
-                            android:textSize="@dimen/_8sdp" />
-
-
-                        <TextView
-                            android:id="@+id/classTeacher"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Gretchen Donin"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </RelativeLayout>
-
-
-    <LinearLayout
-        android:visibility="visible"
-        android:id="@+id/llmyfeed"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:weightSum="2"
-        >
-
-
-
-
-
-    <LinearLayout
-        android:layout_weight="0.6"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/light_gray"
-        android:paddingHorizontal="@dimen/_5sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        >
-
-
-
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            android:layout_marginTop="@dimen/_5sdp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="@string/my_feed"
-                android:layout_marginStart="10dp"
-                android:textColor="@color/black"
-                android:textSize="26sp" />
-
-
-
-
-
-            <RelativeLayout
-                android:id="@+id/rlTitleCard"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_60sdp"
-                android:background="@drawable/home_card_title"
-                android:layout_alignParentBottom="true"
-                >
+                android:orientation="vertical">
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/ic_mask_group"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:padding="@dimen/_5sdp">
 
-
-                    <TextView
-                        android:id="@+id/tvTitleName"
+                    <ImageButton
+                        android:id="@+id/ibBackBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_8sdp"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:drawableStart="@drawable/ic_waving_hand"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:text="Hi Ravi, Good morning!"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_10sdp" />
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/ic_back_arrow" />
+
 
                     <TextView
-                        android:id="@+id/tvdescription"
-                        android:layout_width="@dimen/_300sdp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvTitleName"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:fontFamily="@font/open_sans"
-                        android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
-                        android:textColor="@color/white"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:textSize="@dimen/_7sdp" />
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_toRightOf="@+id/ibBackBtn"
+                        android:text="Edit Profile"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+
+                    <LinearLayout
+                        android:id="@+id/lllProfileItem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:gravity="right"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:background="@drawable/ic_notification" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:background="@drawable/img_profile" />
+
+                    </LinearLayout>
 
 
                 </RelativeLayout>
 
 
-            </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp">
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="6">
 
 
-                <ImageView
-                    android:id="@+id/ivGenderImage"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_100sdp"
-                    android:layout_marginRight="@dimen/_20sdp"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp">
 
 
-            </RelativeLayout>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/gender"
+                                android:textSize="@dimen/_8sdp" />
 
+
+                            <TextView
+                                android:id="@+id/gender"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Male"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/school_email_id"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/sclEmailId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="charlie@kend_vidyala-student.com"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Father Name" />
+
+
+                            <TextView
+                                android:id="@+id/fatherName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Parents"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/contact_number"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/contactNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="98121 11921"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/mdm_id_imei"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/imei"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="990002703176428"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/division"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/division"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Section A"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:weightSum="6">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/dob"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/dateOfBirth"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="14-02-2003"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/parents_email_id"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/parentEmailId"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="carter@gmail.com"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/mother_name"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/motherName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Phillip Korsgaard"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/alternative_number"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/alterNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="83842 83412"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp"
+
+                            >
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/Class"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/clas"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Class 12"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:paddingHorizontal="@dimen/_10sdp">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/class_teacher"
+                                android:textSize="@dimen/_8sdp" />
+
+
+                            <TextView
+                                android:id="@+id/classTeacher"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Gretchen Donin"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_8sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
         </RelativeLayout>
 
 
-
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <ImageView
-                    android:id="@+id/imageTips"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:layout_marginStart="20dp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imageTips"
-                    android:layout_centerInParent="true"
-                    android:orientation="vertical"
-                    android:padding="@dimen/_10sdp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Today in history India 23 February – Events that took place on this day in history 23 February:"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:textSize="@dimen/_6sdp" />
-
-                    <TextView
-                        android:id="@+id/onThisDay"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans"
-                        android:layout_marginTop="@dimen/_2sdp"
-                        android:text="- 1954- First council meeting of Southeast Asia Treaty Organization (SEATO)."
-                        android:textColor="@color/text_gray"
-                        android:textSize="@dimen/_6sdp" />
-
-
-
-
-
-                </LinearLayout>
-
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:fontFamily="@font/open_sans_bold"
-            android:text="@string/upcoming_classes"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/text_dark_blue"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
-            android:layout_marginBottom="15dp"
-            app:cardElevation="0dp"
-            android:layout_marginTop="@dimen/_4sdp"
-            >
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/_20sdp"
-                android:paddingVertical="@dimen/_10sdp">
-
-                <ImageView
-                    android:id="@+id/imageClass"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/img_class" />
-
-                <LinearLayout
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/imageClass"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:textSize="@dimen/_7sdp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Science"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:textColor="@color/black" />
-
-                    <TextView
-                        android:textSize="@dimen/_6sdp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="10:00am - 11:00 am"
-                        android:fontFamily="@font/open_sans"
-                        android:textColor="@color/gray" />
-
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:gravity="center"
-                    android:text="@string/mr_john_doe"
-                    android:textColor="@color/gray"
-                    android:textSize="@dimen/_7sdp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:gravity="right"
-                    android:text="@string/join_now"
-                    android:textColor="@color/primary"
-                    android:textSize="@dimen/_8sdp"
-                    android:textStyle="bold" />
-
-            </RelativeLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvClasses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/layout_classes"
-            />
-
-
-
-    </LinearLayout>
-
-
-        <RelativeLayout
-            android:backgroundTint="@color/white"
+        <LinearLayout
+            android:id="@+id/llmyfeed"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1.4">
-
-
-            <LinearLayout
-                android:id="@+id/llProfileItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:gravity="right"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:background="@drawable/ic_notification" />
-
-                <ImageView
-                    android:id="@+id/ivProfile"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:background="@drawable/img_profile" />
-
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_marginTop="@dimen/_5sdp"
-                android:id="@+id/calendar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/llProfileItem">
-
-
-                <CalendarView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content" />
-
-
-            </RelativeLayout>
+            android:visibility="visible"
+            android:weightSum="2">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/calendar"
-                android:orientation="vertical">
+                android:layout_weight="0.6"
+                android:background="@color/light_gray"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:paddingVertical="@dimen/_10sdp">
 
-
-                <com.google.android.material.divider.MaterialDivider
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/_10sdp" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    >
-
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_marginTop="@dimen/_5sdp">
 
                     <TextView
-                        android:id="@+id/tvNoticeBoard"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
                         android:fontFamily="@font/open_sans_bold"
-                        android:text="@string/notice_board"
+                        android:text="@string/my_feed"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_8sdp" />
+                        android:textSize="26sp" />
 
 
-                    <LinearLayout
+                    <RelativeLayout
+                        android:id="@+id/rlTitleCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_60sdp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/home_card_title">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/ic_mask_group"
+                            android:padding="@dimen/_5sdp">
+
+
+                            <TextView
+                                android:id="@+id/tvTitleName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_8sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:drawableStart="@drawable/ic_waving_hand"
+                                android:fontFamily="@font/open_sans_semibold"
+                                android:text="Hi Ravi, Good morning!"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tvdescription"
+                                android:layout_width="@dimen/_300sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvTitleName"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:fontFamily="@font/open_sans"
+                                android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_7sdp" />
+
+
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/tvNoticeBoard"
-                        android:orientation="vertical"
-                        android:layout_marginTop="@dimen/_4sdp"
-                        >
+                        android:gravity="right">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/NoticeBoardRecycler"
+
+                        <ImageView
+                            android:id="@+id/ivGenderImage"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
+                            android:layout_marginRight="@dimen/_20sdp" />
+
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/imageTips"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginStart="20dp" />
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_toRightOf="@+id/imageTips"
+                            android:orientation="vertical"
+                            android:padding="@dimen/_10sdp">
+
+                            <TextView
+                                android:id="@+id/tvDayTitle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_semibold"
+                                android:text="Today in history India 23 February – Events that took place on this day in history 23 February:"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_6sdp" />
+
+                            <TextView
+                                android:id="@+id/onThisDay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:fontFamily="@font/open_sans"
+                                android:text="- 1954- First council meeting of Southeast Asia Treaty Organization (SEATO)."
+                                android:textColor="@color/text_gray"
+                                android:textSize="@dimen/_6sdp" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="@string/upcoming_classes"
+                    android:textColor="@color/text_dark_blue"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="15dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_20sdp"
+                        android:paddingVertical="@dimen/_10sdp">
+
+                        <ImageView
+                            android:id="@+id/imageClass"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/img_class" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:layout_toRightOf="@+id/imageClass"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_semibold"
+                                android:text="Science"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_7sdp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans"
+                                android:text="10:00am - 11:00 am"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_6sdp" />
+
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:gravity="center"
+                            android:text="@string/mr_john_doe"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/_7sdp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:gravity="right"
+                            android:text="@string/join_now"
+                            android:textColor="@color/primary"
+                            android:textSize="@dimen/_8sdp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvClasses"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/layout_classes" />
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4"
+                android:backgroundTint="@color/white">
+
+
+                <LinearLayout
+                    android:id="@+id/llProfileItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:gravity="right"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:background="@drawable/ic_notification" />
+
+                    <ImageView
+                        android:id="@+id/ivProfile"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@drawable/img_profile" />
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llProfileItem"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+
+                    <CalendarView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/calendar"
+                    android:orientation="vertical">
+
+
+                    <com.google.android.material.divider.MaterialDivider
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10sdp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/_10sdp">
+
+
+                        <TextView
+                            android:id="@+id/tvNoticeBoard"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:text="@string/notice_board"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_8sdp" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvNoticeBoard"
+                            android:layout_marginTop="@dimen/_4sdp"
+                            android:orientation="vertical">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/NoticeBoardRecycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
 
                             <!--
                         <TextView
@@ -842,20 +819,19 @@
 
 
 -->
-                    </LinearLayout>
+                        </LinearLayout>
 
 
-                </RelativeLayout>
+                    </RelativeLayout>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </RelativeLayout>
-
-
-
-    </LinearLayout>
+            </RelativeLayout>
 
 
-</FrameLayout>
+        </LinearLayout>
+
+
+    </FrameLayout>
 </layout>

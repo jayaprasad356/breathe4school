@@ -72,7 +72,7 @@ public class LoginController implements ILoginController {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
-                        JSONObject data = jsonObject.getJSONObject("data");
+                        JSONObject data = jsonObject.getJSONObject(Constant.DATA);
                         setStudentData(data);
                         responseListener.onSuccess(jsonObject.getString(Constant.MESSAGE));
                     } else {

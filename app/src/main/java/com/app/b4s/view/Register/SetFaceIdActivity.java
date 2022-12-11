@@ -52,7 +52,12 @@ public class SetFaceIdActivity extends AppCompatActivity {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
-                Toast.makeText(activity, errString, Toast.LENGTH_SHORT).show();
+                if (errorCode == 11) {
+                    Toast.makeText(activity, errString, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(activity, SetMPinActivity.class);
+                    intent.putExtra(Constant.FLOW, Constant.NORMAL);
+                    activity.startActivity(intent);
+                }
             }
 
             @Override
