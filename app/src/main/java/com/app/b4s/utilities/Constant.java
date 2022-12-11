@@ -50,10 +50,20 @@ public class Constant {
 
     public static final String DOB = "date_of_birth";
     public static final String FATHER_NAME = "emergency_contact_name";
-    public static final String  PARENT_EMAIL= "email";
-    public static final String  STUDENT_ID= "student_id";
-    public static final String  MESSAGE_SHOWEN_TIME= "message_showed_time";
-    public static final String  MESSAGE_COUNT= "message_count";
+    public static final String PARENT_EMAIL = "email";
+    public static final String STUDENT_ID = "student_id";
+    public static final String MESSAGE_SHOWEN_TIME = "message_showed_time";
+    public static final String MESSAGE_COUNT = "message_count";
 
+    public static final String ACADEMIC_YEAR_ID = "academicYearId";
+    public static final String SCHOOL_ID = "schoolId";
+    public static final String STANDARD_ID = "standardId";
+    public static final String SECTION_ID = "sectionId";
+    public static final String TIME_TABLE_SESSION_ID = "timetableSessionId";
 
+    public static final String ACADEMIC_YEAR = "academic_year";
+    public static final String SCHOOL = "school";
+    public static final String STANDARD = "standard";
+    public static final String SECTION = "section";
+    public static final String SESSION = "session";
 }

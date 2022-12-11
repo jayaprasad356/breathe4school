@@ -101,9 +101,17 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
     }
 
     private void loadUpcommingClasses() {
-        String url = "http://143.244.132.170:3001/api/v1/timetable/getUpcomingClasses/academicYearId/638c7782068611a103ff3987/schoolId/638d745f9e7aa8249cdd42c3/standardId/63429dc80015eb1fd9c86f3c/sectionId/63429de00015eb1fd9c86f3d/timetableSessionId/638d74f59e7aa8249cdd42c7";
+        String url = "http://143.244.132.170:3001/api/v1/timetable/getUpcomingClasses/academicYearId/" +
+                session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
+                "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
+                session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
+                session.getData(Constant.TIME_TABLE_SESSION_ID);
         Map<String, String> params = new HashMap<>();
-        params.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
+        // params.put(Constant.ACADEMIC_YEAR_ID, session.getData(Constant.ACADEMIC_YEAR_ID));
+        //params.put(Constant.SCHOOL_ID, session.getData(Constant.SCHOOL_ID));
+        //params.put(Constant.STANDARD_ID, session.getData(Constant.STANDARD_ID));
+        //params.put(Constant.SECTION_ID, session.getData(Constant.SECTION_ID));
+        //params.put(Constant.TIME_TABLE_SESSION_ID, session.getData(Constant.TIME_TABLE_SESSION_ID));
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {
                 try {
