@@ -36,9 +36,10 @@ public class UpcommingAdapter extends RecyclerView.Adapter<UpcommingAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull UpcommingAdapter.ViewHolder holder, int position) {
-        holder.teacherName.setText(upCommingData.get(position).name);
+        holder.teacherName.setText(upCommingData.get(position).teacher.getName());
         String duriation = String.valueOf(upCommingData.get(position).start_time) + "-" + String.valueOf(upCommingData.get(position).end_time);
         holder.duriation.setText(duriation);
+        holder.subject.setText(upCommingData.get(position).getName());
     }
 
 

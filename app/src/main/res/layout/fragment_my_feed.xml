@@ -474,7 +474,7 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:fontFamily="@font/open_sans_bold"
                         android:text="@string/my_feed"
@@ -511,7 +511,7 @@
 
                             <TextView
                                 android:id="@+id/tvdescription"
-                                android:layout_width="@dimen/_300sdp"
+                                android:layout_width="@dimen/_145sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/tvTitleName"
                                 android:layout_marginStart="@dimen/_10sdp"
@@ -519,7 +519,7 @@
                                 android:fontFamily="@font/open_sans"
                                 android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_7sdp" />
+                                android:textSize="@dimen/_6sdp" />
 
 
                         </RelativeLayout>
@@ -611,90 +611,11 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_marginBottom="15dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingHorizontal="@dimen/_20sdp"
-                        android:paddingVertical="@dimen/_10sdp">
-
-                        <ImageView
-                            android:id="@+id/imageClass"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/img_class" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:layout_toRightOf="@+id/imageClass"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/open_sans_semibold"
-                                android:text="Science"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_7sdp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/open_sans"
-                                android:text="10:00am - 11:00 am"
-                                android:textColor="@color/gray"
-                                android:textSize="@dimen/_6sdp" />
-
-
-                        </LinearLayout>
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:gravity="center"
-                            android:text="@string/mr_john_doe"
-                            android:textColor="@color/gray"
-                            android:textSize="@dimen/_7sdp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:gravity="right"
-                            android:text="@string/join_now"
-                            android:textColor="@color/primary"
-                            android:textSize="@dimen/_8sdp"
-                            android:textStyle="bold" />
-
-                    </RelativeLayout>
-
-
-                </com.google.android.material.card.MaterialCardView>
-
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvClasses"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/layout_classes" />
+                    />
 
 
             </LinearLayout>
@@ -789,36 +710,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <!--
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
-                            android:textColor="@color/text_gray"
-                            android:fontFamily="@font/open_sans_semibold"
-                            android:textSize="@dimen/_6sdp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/open_sans_semibold"
-                            android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
-                            android:textColor="@color/text_gray"
-                            android:textSize="@dimen/_6sdp" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_4sdp"
-                            android:fontFamily="@font/open_sans_semibold"
-                            android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
-                            android:textColor="@color/text_gray"
-                            android:textSize="@dimen/_6sdp" />
-
-
--->
                         </LinearLayout>
 
 

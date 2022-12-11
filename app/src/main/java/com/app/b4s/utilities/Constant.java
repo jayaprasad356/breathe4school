@@ -63,7 +63,9 @@ public class Constant {
 
     public static final String ACADEMIC_YEAR = "academic_year";
     public static final String SCHOOL = "school";
+    public static final String SCHEDULES = "schedules";
+    public static final String LECTURES = "lectures";
     public static final String STANDARD = "standard";
     public static final String SECTION = "section";
-    public static final String SESSION = "session";
+    public static final String TIMETABLESESSION = "timetableSession";
 }

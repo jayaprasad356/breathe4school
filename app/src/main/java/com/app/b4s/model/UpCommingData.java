@@ -11,7 +11,7 @@ public class UpCommingData {
         public int start_time;
         public int end_time;
         public Object subject;
-        public Object teacher;
+        public Teacher teacher;
 
         public String getId() {
                 return id;
@@ -53,23 +53,13 @@ public class UpCommingData {
                 this.subject = subject;
         }
 
-        public Object getTeacher() {
+        public Teacher getTeacher() {
                 return teacher;
         }
 
-        public void setTeacher(Object teacher) {
+        public void setTeacher(Teacher teacher) {
                 this.teacher = teacher;
         }
-
-        public String getDay() {
-                return day;
-        }
-
-        public void setDay(String day) {
-                this.day = day;
-        }
-
-        public String day;
 }
 
 

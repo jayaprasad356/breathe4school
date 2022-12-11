@@ -11,12 +11,12 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/black"
-            app:cardBackgroundColor="@color/black"
+            app:cardBackgroundColor="@color/gray"
             app:cardCornerRadius="100dp"
             app:cardElevation="0dp" />
 
@@ -25,10 +25,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/_3sdp"
             android:fontFamily="@font/open_sans"
             android:text="All the students / members are hereby informed our school club has decided to celebrrate cultural fest on 25th Feb 2022 @ School Hall from 6 pm onwards."
-            android:textColor="@color/black"
-            android:textSize="17sp" />
+            android:textSize="@dimen/_6sdp" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

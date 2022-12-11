@@ -54,13 +54,14 @@ public class LoginController implements ILoginController {
             JSONObject schoolData = data.getJSONObject(Constant.SCHOOL);
             JSONObject sectionData = data.getJSONObject(Constant.SECTION);
             JSONObject standardData = data.getJSONObject(Constant.STANDARD);
+            JSONObject timeTableData = data.getJSONObject(Constant.TIMETABLESESSION);
 
             session.setData(Constant.NAME, data.getString(Constant.NAME));
             session.setData(Constant.ACADEMIC_YEAR_ID,academicData.getString(Constant.ID));
             session.setData(Constant.SCHOOL_ID,schoolData.getString(Constant.ID));
             session.setData(Constant.SECTION_ID,sectionData.getString(Constant.ID));
             session.setData(Constant.STANDARD_ID,standardData.getString(Constant.ID));
-            session.setData(Constant.TIME_TABLE_SESSION_ID,data.getString(Constant.SESSION));
+            session.setData(Constant.TIME_TABLE_SESSION_ID,timeTableData.getString(Constant.ID));
 
             session.setData(Constant.NAME, data.getString(Constant.NAME));
             session.setData(Constant.STUDENT_ID, data.getString(Constant.ID));
