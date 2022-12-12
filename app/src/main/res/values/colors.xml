@@ -31,5 +31,6 @@
     <color name="sanscrit_bg_col">#28CD9C</color>
     <color name="social_bg_col">#FF848E</color>
     <color name="time_txt_col">#99ADBB</color>
+    <color name="background_grey">#8D91A7</color>
 
 </resources>
