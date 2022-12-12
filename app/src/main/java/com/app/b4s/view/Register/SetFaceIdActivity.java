@@ -95,6 +95,11 @@ public class SetFaceIdActivity extends AppCompatActivity {
             intent.putExtra(Constant.SKIP_FACE_ID, 0);
             activity.startActivity(intent);
         }
+        binding.tvSkipFaceid.setOnClickListener(view ->{
+            Intent intent = new Intent(activity, SetMPinActivity.class);
+            intent.putExtra(Constant.FLOW, Constant.NORMAL);
+            activity.startActivity(intent);
+        });
     }
 
     public void showVisibility() {

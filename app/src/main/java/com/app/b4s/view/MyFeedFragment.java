@@ -77,9 +77,9 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
         setGreatingText();
         setStudentInfo();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        LinearLayoutManager upCommingClassesManager = new LinearLayoutManager(getActivity());
         rcNotices.setLayoutManager(linearLayoutManager);
-        reClasses.setLayoutManager(layoutManager);
+        reClasses.setLayoutManager(upCommingClassesManager);
         loadStudentNotice();
         loadUpcommingClasses();
         studentName = session.getData(Constant.NAME);

@@ -1,14 +1,11 @@
 package com.app.b4s.controller;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.widget.Toast;
 
 import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.view.Login.LoginSuccessfullActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

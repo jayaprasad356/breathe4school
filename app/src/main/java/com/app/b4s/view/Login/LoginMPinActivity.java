@@ -58,7 +58,7 @@ public class LoginMPinActivity extends AppCompatActivity implements ResponseList
                 }
             }
         });
-        binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
+        binding.ibBackBtn.setOnClickListener(view -> backToLogin());
         binding.tvForgotPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,9 +69,18 @@ public class LoginMPinActivity extends AppCompatActivity implements ResponseList
 
     }
 
+    private void backToLogin() {
+        activity.finish();
+        Intent intent = new Intent(activity, LoginFaceIDActivity.class);
+        intent.putExtra(Constant.BACK_FLOW,"1");
+        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+        activity.startActivity(intent);
+    }
+
     @Override
     public void onSuccess(String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
+        activity.finish();
         Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
         intent.putExtra(Constant.TITLE, Constant.SUCCESS);
         intent.putExtra(Constant.UNIQUE_ID, uniqueId);

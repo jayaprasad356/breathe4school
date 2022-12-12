@@ -50,7 +50,7 @@ public class LoginTempPasswordActivity extends AppCompatActivity implements Resp
             binding.rlGenrateTempCode.setVisibility(View.VISIBLE);
             binding.rlEnterTempCode.setVisibility(View.GONE);
         });
-        binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
+        binding.ibBackBtn.setOnClickListener(view -> backToLogin());
         binding.edMPinId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -83,9 +83,16 @@ public class LoginTempPasswordActivity extends AppCompatActivity implements Resp
         });
 
     }
-
+    private void backToLogin() {
+        activity.finish();
+        Intent intent = new Intent(activity, LoginFaceIDActivity.class);
+        intent.putExtra(Constant.BACK_FLOW,"1");
+        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+        activity.startActivity(intent);
+    }
     @Override
     public void onSuccess(String type) {
+        activity.finish();
         Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
         intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
         intent.putExtra(Constant.TITLE, Constant.SUCCESS);

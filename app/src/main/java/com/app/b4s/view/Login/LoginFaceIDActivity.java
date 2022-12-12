@@ -21,7 +21,7 @@ public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterV
 
     Activity activity;
     ActivityLoginFaceIdactivityBinding binding;
-    String uniqueId;
+    String uniqueId, backFlow;
     IRegisterController registerController;
 
     @Override
@@ -31,16 +31,27 @@ public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterV
         activity = LoginFaceIDActivity.this;
         registerController = new RegisterController(this);
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
+        backFlow = getIntent().getStringExtra(Constant.BACK_FLOW);
+        if (backFlow!=null&&backFlow.equals("1")) {
+            binding.llFaceId.setVisibility(View.GONE);
+            binding.llFaceidNotMatch.setVisibility(View.VISIBLE);
+        }
         binding.llFaceId.setOnClickListener(view -> {
+            binding.llFaceId.setVisibility(View.GONE);
+            binding.llFaceidNotMatch.setVisibility(View.VISIBLE);
+        });
+        binding.tvSkipFaceid.setOnClickListener(view -> {
             binding.llFaceId.setVisibility(View.GONE);
             binding.llFaceidNotMatch.setVisibility(View.VISIBLE);
         });
         binding.tvLoginWTempPassword.setOnClickListener(view -> registerController.generateTempMpin(activity));
         binding.btnPassword.setOnClickListener(view -> {
+            activity.finish();
             Intent intent = new Intent(activity, LoginPasswordActivity.class);
             activity.startActivity(intent);
         });
         binding.btnPin.setOnClickListener(view -> {
+            activity.finish();
             Intent intent = new Intent(activity, LoginMPinActivity.class);
             activity.startActivity(intent);
         });
@@ -49,6 +60,7 @@ public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterV
     //Temp Mpin generated success
     @Override
     public void onRegisterSuccess(String message) {
+        activity.finish();
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(activity, LoginTempPasswordActivity.class);
         intent.putExtra(Constant.UNIQUE_ID, uniqueId);

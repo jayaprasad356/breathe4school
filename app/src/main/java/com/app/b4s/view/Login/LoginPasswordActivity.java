@@ -35,6 +35,7 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
         session=new Session(activity);
         loginController = new LoginController(this);
         binding.btnProceed.setOnClickListener(view -> loginController.loginWithPassword(binding.edSetPasswordId.getText().toString(), activity));
+        binding.ibBackBtn.setOnClickListener(view -> backToLogin());
         binding.edSetPasswordId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -64,8 +65,16 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
             activity.startActivity(intent);
         });
     }
+    private void backToLogin() {
+        activity.finish();
+        Intent intent = new Intent(activity, LoginFaceIDActivity.class);
+        intent.putExtra(Constant.BACK_FLOW,"1");
+        intent.putExtra(Constant.SKIP_FACE_ID, 0);
+        activity.startActivity(intent);
+    }
     @Override
     public void onSuccess(String message) {
+        activity.finish();
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(activity, LoginSuccessfullActivity.class);
         intent.putExtra(Constant.TITLE, Constant.SUCCESS);
