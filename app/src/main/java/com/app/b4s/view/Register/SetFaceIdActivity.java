@@ -45,7 +45,6 @@ public class SetFaceIdActivity extends AppCompatActivity {
         tvSkipFaceid = binding.tvSkipFaceid;
         flow = getIntent().getStringExtra(Constant.FLOW);
         Skip_FaceID_tv = getIntent().getExtras().getBoolean(Constant.SKIP_FACE_ID);
-        showVisibility();
 
         executor = ContextCompat.getMainExecutor(this);
         biometricPrompt = new BiometricPrompt(SetFaceIdActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
