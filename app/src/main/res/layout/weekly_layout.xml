@@ -112,6 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="8 AM"
+            android:fontFamily="@font/open_sans"
             android:layout_weight="0.35"/>
         <RelativeLayout
             android:layout_width="0dp"
@@ -120,7 +121,7 @@
             android:layout_weight="1">
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
@@ -137,7 +138,7 @@
                 android:layout_below="@+id/tvSubject">
                 <ImageView
                     android:id="@+id/ivFIcon"
-                    android:src="@drawable/laptop"
+                    android:src="@drawable/tv"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
@@ -145,7 +146,7 @@
 
                 <ImageView
                     android:id="@+id/ivSIcon"
-                    android:src="@drawable/laptop"
+                    android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
@@ -153,11 +154,213 @@
 
                 <ImageView
                     android:id="@+id/ivTIcon"
-                    android:src="@drawable/laptop"
+                    android:src="@drawable/pincel"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_toLeftOf="@+id/ivSIcon"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitle1"
+                android:layout_width="match_parent"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubject1"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitle1"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubject1">
+                <ImageView
+                    android:id="@+id/ivFIcon1"
+                    android:src="@drawable/tv"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/ivSIcon1"
+                    android:src="@drawable/book"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivFIcon1" />
+
+                <ImageView
+                    android:id="@+id/ivTIcon1"
+                    android:src="@drawable/pincel"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivSIcon1"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitle2"
+                android:layout_width="match_parent"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubject2"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitle2"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubject2">
+                <ImageView
+                    android:id="@+id/ivFIcon2"
+                    android:src="@drawable/tv"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/ivSIcon2"
+                    android:src="@drawable/book"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivFIcon2" />
+
+                <ImageView
+                    android:id="@+id/ivTIcon2"
+                    android:src="@drawable/pincel"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivSIcon2"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitle3"
+                android:layout_width="match_parent"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubject3"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitle3"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubject3">
+                <ImageView
+                    android:id="@+id/ivFIcon3"
+                    android:src="@drawable/tv"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/ivSIcon3"
+                    android:src="@drawable/book"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivFIcon3" />
+
+                <ImageView
+                    android:id="@+id/ivTIcon3"
+                    android:src="@drawable/pincel"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivSIcon3"/>
+            </RelativeLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitle4"
+                android:layout_width="match_parent"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubject4"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitle4"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubject4">
+                <ImageView
+                    android:id="@+id/ivFIcon4"
+                    android:src="@drawable/tv"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_20sdp"/>
+
+                <ImageView
+                    android:id="@+id/ivSIcon4"
+                    android:src="@drawable/book"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivFIcon4" />
+
+                <ImageView
+                    android:id="@+id/ivTIcon4"
+                    android:src="@drawable/pincel"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_toLeftOf="@+id/ivSIcon4"/>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
