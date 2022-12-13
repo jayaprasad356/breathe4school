@@ -101,7 +101,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
+        android:layout_height="1dp"
         android:background="@color/gray" />
     <LinearLayout
         android:layout_width="match_parent"
@@ -142,14 +142,14 @@
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_20sdp"/>
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <ImageView
                     android:id="@+id/ivSIcon"
                     android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivFIcon" />
 
                 <ImageView
@@ -157,7 +157,7 @@
                     android:src="@drawable/pincel"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivSIcon"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -196,23 +196,23 @@
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_20sdp"/>
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <ImageView
                     android:id="@+id/ivSIcon1"
                     android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivFIcon1" />
 
                 <ImageView
                     android:id="@+id/ivTIcon1"
-                    android:src="@drawable/pincel"
-                    android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon1"/>
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_toLeftOf="@+id/ivSIcon1"
+                    android:padding="@dimen/_4sdp"
+                    android:src="@drawable/pincel" />
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -250,14 +250,14 @@
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_20sdp"/>
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <ImageView
                     android:id="@+id/ivSIcon2"
                     android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivFIcon2" />
 
                 <ImageView
@@ -265,7 +265,7 @@
                     android:src="@drawable/pincel"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivSIcon2"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -297,14 +297,14 @@
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_20sdp"/>
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <ImageView
                     android:id="@+id/ivSIcon3"
                     android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivFIcon3" />
 
                 <ImageView
@@ -312,7 +312,7 @@
                     android:src="@drawable/pincel"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivSIcon3"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -344,14 +344,14 @@
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_20sdp"/>
+                    android:layout_height="@dimen/_15sdp"/>
 
                 <ImageView
                     android:id="@+id/ivSIcon4"
                     android:src="@drawable/book"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivFIcon4" />
 
                 <ImageView
@@ -359,11 +359,15 @@
                     android:src="@drawable/pincel"
                     android:padding="@dimen/_4sdp"
                     android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_toLeftOf="@+id/ivSIcon4"/>
             </RelativeLayout>
         </RelativeLayout>
-    </LinearLayout>
 
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
 
 </LinearLayout>

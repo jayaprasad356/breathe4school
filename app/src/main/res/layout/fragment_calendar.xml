@@ -3,1091 +3,1139 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.CalendarFragment">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:layout_marginTop="@dimen/_25sdp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="Calender"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_18sdp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:text="Calender"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18sdp" />
 
 
-            <ImageView
-                android:id="@+id/imgProfile"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerInParent="true"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_40sdp"
-                android:src="@drawable/img_profile" />
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_40sdp"
+                    android:src="@drawable/img_profile" />
 
-            <ImageView
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_22sdp"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:layout_toStartOf="@id/imgProfile"
-                android:src="@drawable/ic_notification" />
+                <ImageView
+                    android:layout_width="@dimen/_22sdp"
+                    android:layout_height="@dimen/_22sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_toStartOf="@id/imgProfile"
+                    android:src="@drawable/ic_notification" />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_30sdp"
-                android:fontFamily="@font/open_sans_bold"
-                android:text="18 February 2022, Friday"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_15sdp" />
+            </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/lytTabs"
-                android:layout_width="@dimen/_18sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_toEndOf="@id/tvDate"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="10">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="@dimen/_90sdp"
-                    android:layout_height="match_parent"
-                    app:cardBackgroundColor="#E5EBEE"
-                    app:cardCornerRadius="@dimen/_7sdp"
-                    app:cardElevation="0dp">
+                <TextView
+                    android:id="@+id/tvDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:singleLine="true"
+                    android:text="18 February 2022, Friday"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <LinearLayout
+                    android:id="@+id/lytTabs"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        app:cardBackgroundColor="#E5EBEE"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="0dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/open_sans_bold"
+                            android:text="Daily"
+                            android:textColor="#1298DC"
+                            android:textSize="@dimen/_12sdp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="179dp"
+                            android:layout_height="19dp"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/open_sans_semibold"
+                            android:text="Weekly"
+                            android:textColor="#1298DC"
+                            android:textSize="@dimen/_13sdp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyt_study_planner"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_weight="1.35"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/btn_plus" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/open_sans_bold"
-                        android:text="Daily"
+                        android:text="Add Study Planner"
                         android:textColor="#1298DC"
                         android:textSize="@dimen/_13sdp" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/drop_Down"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.35"
+                    android:background="@drawable/bg"
+                    app:boxStrokeWidth="0dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:inputType="none"
+                        android:text="All"
+                        android:textColor="#1298DC"
+                        android:textSize="@dimen/_12sdp"
+                        tools:ignore="SmallSp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
+                    android:id="@+id/Loh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.3"
+                    android:background="@drawable/bg"
                     android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:singleLine="true"
+                        android:text="List of holidays"
+                        android:textColor="#1298DC"
+                        android:textSize="@dimen/_12sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/Loh"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="1dp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        android:gravity="center"
+                        android:text="February ,2022"
+                        android:textColor="#1298DC"
+                        android:textSize="10sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/left_arrow" />
+
+                        <LinearLayout
+                            android:layout_width="70dp"
+                            android:layout_height="35dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/bg"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/open_sans_semibold"
+                                android:gravity="center"
+                                android:text="Week 3"
+                                android:textColor="#1298DC"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="13dp"
+                            android:layout_height="13dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/arrow_right" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/dailyCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="00dp"
+                    android:layout_weight="9.5"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="7.2">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="0.4" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Type"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Subject"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.8"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Description"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/open_sans"
+                            android:text="Duration"
+                            android:textSize="@dimen/_8sdp" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_2sdp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#CCD6DD"
+                        android:visibility="invisible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:id="@+id/tvstartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="7 AM" />
+
+                            <TextView
+                                android:id="@+id/tvEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="8 AM" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_toEndOf="@id/tvview1"
+                                android:background="#CCD6DD" />
+
+                            <View
+                                android:id="@+id/tvview1"
+                                android:layout_width="5dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="7dp"
+                                android:layout_toEndOf="@id/tvstartTime"
+                                android:background="#7891C3" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/tvview1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="10dp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Study Planner 01"
+                                    android:textColor="#1298DC"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="30dp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Maths"
+                                    android:textColor="#1298DC"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="70dp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Complete Chapter 1 &amp; 2"
+                                    android:textColor="#1298DC"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="72dp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="#1298DC"
+                                    android:textSize="12sp" />
+
+                                <ImageView
+                                    android:layout_width="15dp"
+                                    android:layout_height="15dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="60dp"
+                                    android:src="@drawable/bin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="50dp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="#1298DC"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/tvview1"
+                                android:background="#CCD6DD" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginTop="5sp">
+
+                            <TextView
+                                android:id="@+id/tvMathsStartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="9 AM"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/tvMathsEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="9 AM" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/emptyViewMaths"
+                                android:background="#CCD6DD"
+                                android:visibility="invisible" />
+
+                            <View
+                                android:id="@+id/emptyViewMaths"
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_toEndOf="@id/tvMathsStartTime"
+                                android:background="#7891C3"
+                                android:visibility="invisible" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/emptyViewMaths"
+                                android:orientation="horizontal"
+                                android:weightSum="7">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="47dp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Study Planner 01"
+                                    android:textColor="#1298DC"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Maths"
+                                    android:textColor="#1298DC"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="2"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Complete Chapter 1 &amp; 2"
+                                    android:textColor="#1298DC"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="44dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="#1298DC"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="invisible" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/bin"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="#1298DC"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="invisible" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/emptyViewMaths"
+                                android:background="#CCD6DD"
+                                android:visibility="invisible" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginTop="@dimen/_5sdp">
+
+                            <TextView
+                                android:id="@+id/tvSciencestartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="7 AM"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/tvScienceEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="10 AM"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/scienceEmptyView"
+                                android:background="#CCD6DD" />
+
+                            <View
+                                android:id="@+id/scienceEmptyView"
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_toEndOf="@id/tvSciencestartTime"
+                                android:background="#7891C3"
+                                android:visibility="visible" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/scienceEmptyView"
+                                android:background="#7891C3"
+                                android:orientation="horizontal"
+                                android:weightSum="7">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Live Session"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13sdp" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Science"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="2"
+                                    android:orientation="horizontal"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:weightSum="3">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/pincel" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/book" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1"
+                                        android:src="@drawable/tv" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="45dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:src="@drawable/bin"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/scienceEmptyView"
+                                android:background="#CCD6DD" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginTop="@dimen/_1sdp">
+
+                            <TextView
+                                android:id="@+id/tvMstartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="7 AM"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/tvMEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="11 AM"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/MemptyView"
+                                android:background="#CCD6DD" />
+
+                            <View
+                                android:id="@+id/MemptyView"
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/tvMstartTime"
+                                android:background="#84D0E8"
+                                android:visibility="visible" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/MemptyView"
+                                android:background="#84D0E8"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Live Session"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Maths"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <LinearLayout
+                                    android:layout_width="@dimen/_140sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_75sdp"
+                                    android:orientation="horizontal"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:weightSum="3">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="3"
+                                        android:src="@drawable/laptop" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_72sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:src="@drawable/bin"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_50sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/MemptyView"
+                                android:background="#CCD6DD" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginTop="@dimen/_1sdp">
+
+                            <TextView
+                                android:id="@+id/vHindistartTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="7 AM"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/tvHindiEndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="12 PM"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/EmptyHinidiview"
+                                android:background="#CCD6DD" />
+
+                            <View
+                                android:id="@+id/EmptyHinidiview"
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_toEndOf="@id/vHindistartTime"
+                                android:background="#90E09D"
+                                android:visibility="visible" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/EmptyHinidiview"
+                                android:background="#90E09D"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Live Session"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Hindi"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <LinearLayout
+                                    android:layout_width="@dimen/_140sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="80dp"
+                                    android:orientation="horizontal"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:weightSum="3">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1.5"
+                                        android:src="@drawable/tv" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1.5"
+                                        android:src="@drawable/book" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_72sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:src="@drawable/bin"
+                                    android:visibility="invisible" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_50sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/EmptyHinidiview"
+                                android:background="#CCD6DD" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_marginTop="@dimen/_1sdp">
+
+                            <TextView
+                                android:id="@+id/startTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="7 AM"
+                                android:visibility="invisible" />
+
+                            <TextView
+                                android:id="@+id/EndTime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentBottom="true"
+                                android:fontFamily="@font/open_sans_bold"
+                                android:text="1 PM"
+                                android:textSize="@dimen/_13sdp" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_toEndOf="@id/view1"
+                                android:background="#CCD6DD" />
+
+                            <View
+                                android:id="@+id/view1"
+                                android:layout_width="@dimen/_5sdp"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="@dimen/_7sdp"
+                                android:layout_toEndOf="@id/startTime"
+                                android:background="#F3F3F3"
+                                android:visibility="visible" />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_toEndOf="@id/view1"
+                                android:background="#F3F3F3"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="visible">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:gravity="center"
+                                    android:letterSpacing="1"
+                                    android:text="LUNCH"
+                                    android:textColor="#FDD3A6"
+                                    android:textSize="@dimen/_17sdp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Live Session"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_13sdp"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Hindi"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="gone" />
+
+                                <LinearLayout
+                                    android:layout_width="@dimen/_140sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_80sdp"
+                                    android:orientation="horizontal"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="gone"
+                                    android:weightSum="3">
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1.5"
+                                        android:src="@drawable/tv"
+                                        android:visibility="invisible" />
+
+                                    <ImageView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_16sdp"
+                                        android:layout_weight="1.5"
+                                        android:src="@drawable/book" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_72sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="60 mins"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="gone" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_60sdp"
+                                    android:src="@drawable/bin"
+                                    android:visibility="gone" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="@dimen/_50sdp"
+                                    android:fontFamily="@font/open_sans_bold"
+                                    android:text="Edit Planner"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="gone" />
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_2sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_toEndOf="@id/view1"
+                                android:background="#CCD6DD"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_300sdp"
+                    android:layout_gravity="start"
+                    android:layout_weight="0.5"
+                    android:gravity="start"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/open_sans_semibold"
-                        android:text="Weekly"
-                        android:textColor="#1298DC"
-                        android:textSize="@dimen/_13sdp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/lyt_study_planner"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_centerInParent="true"
-                android:layout_toEndOf="@id/lytTabs"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/btn_plus" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="Add Study Planner"
-                    android:textColor="#1298DC"
-                    android:textSize="@dimen/_13sdp" />
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/drop_Down"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="@dimen/_130sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_toEndOf="@id/lyt_study_planner"
-                android:background="@drawable/bg"
-                app:boxStrokeWidth="0dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:inputType="none"
-                    android:text="All"
-                    android:textColor="#1298DC"
-                    android:textSize="@dimen/_16sdp"
-                    tools:ignore="SmallSp" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <LinearLayout
-                android:id="@+id/Loh"
-                android:layout_width="@dimen/_120sdp"
-                android:layout_height="@dimen/_35sdp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_18sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:layout_toEndOf="@id/drop_Down"
-                android:background="@drawable/bg"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:gravity="center"
-                    android:text="List of holidays"
-                    android:textColor="#1298DC"
-                    android:textSize="@dimen/_12sdp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_toEndOf="@id/Loh">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="February ,2022"
-                    android:textSize="@dimen/_10sdp"
-                    android:layout_marginBottom="@dimen/_1sdp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="#1298DC"
-                    android:fontFamily="@font/open_sans_semibold"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_13sdp"
-                        android:layout_height="@dimen/_13sdp"
-                        android:src="@drawable/left_arrow"
-                        android:layout_gravity="center"/>
-
-                    <LinearLayout
-                        android:layout_width="@dimen/_70sdp"
-                        android:layout_height="@dimen/_35sdp"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:gravity="center"
-                        android:background="@drawable/bg">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Week 3"
-                            android:fontFamily="@font/open_sans_semibold"
-                            android:textSize="@dimen/_11sdp"
-                            android:textColor="#1298DC"
-                            android:gravity="center"
-                            android:layout_gravity="center"/>
-                    </LinearLayout>
-                    <ImageView
-                        android:layout_width="@dimen/_13sdp"
-                        android:layout_height="@dimen/_13sdp"
-                        android:src="@drawable/arrow_right"
-                        android:layout_gravity="center"/>
-                </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/dailyCalendar"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="00dp">
-
-                <LinearLayout
-                    android:id="@+id/lyt_titles"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_90sdp"
-                    android:orientation="horizontal">
+                        android:text="14"
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Type"
-                        android:fontFamily="@font/open_sans_semibold"/>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="15"
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Subject"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:fontFamily="@font/open_sans_semibold"/>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="16"
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description"
-                        android:layout_marginStart="@dimen/_90sdp"
-                        android:fontFamily="@font/open_sans_semibold"/>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="16"
+                        android:textSize="@dimen/_14sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Duration"
-                        android:layout_marginStart="@dimen/_100sdp"
-                        android:fontFamily="@font/open_sans_semibold"/>
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="17"
+                        android:textSize="@dimen/_14sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="18"
+                        android:textSize="@dimen/_14sdp" />
 
                 </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/_30sdp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_marginTop="5dp">
-
-                        <TextView
-                            android:id="@+id/tvstartTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="7 AM"/>
-                        <TextView
-                            android:id="@+id/tvEndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_alignParentStart="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="8 AM"/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_toEndOf="@id/tvview1"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/tvview1"
-                            android:layout_width="5dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="7dp"
-                            android:layout_toEndOf="@id/tvstartTime"
-                            android:background="#7891C3" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/tvview1"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="10dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Study Planner 01"
-                                android:textColor="#1298DC"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="30dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Maths"
-                                android:textColor="#1298DC"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="70dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Complete Chapter 1 &amp; 2"
-                                android:textColor="#1298DC"
-                                android:textSize="12sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="72dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="#1298DC"
-                                android:textSize="12sp" />
-
-                            <ImageView
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="60dp"
-                                android:src="@drawable/bin" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="50dp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="#1298DC"
-                                android:textSize="12sp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_toEndOf="@id/tvview1"
-                            android:layout_alignParentBottom="true"
-                            android:background="#CCD6DD"/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginTop="5sp">
-
-                        <TextView
-                            android:id="@+id/tvMathsStartTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:visibility="invisible"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="9 AM" />
-
-                        <TextView
-                            android:id="@+id/tvMathsEndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="9 AM" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:visibility="invisible"
-                            android:layout_toEndOf="@id/emptyViewMaths"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/emptyViewMaths"
-                            android:layout_width="@dimen/_5sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_7sdp"
-                            android:layout_toEndOf="@id/tvMathsStartTime"
-                            android:background="#7891C3"
-                            android:visibility="invisible" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/emptyViewMaths"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Study Planner 01"
-                                android:textColor="#1298DC"
-                                android:textSize="@dimen/_13sdp"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_30sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Maths"
-                                android:textColor="#1298DC"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_70sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Complete Chapter 1 &amp; 2"
-                                android:textColor="#1298DC"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="#1298DC"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="invisible" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="#1298DC"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="invisible" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:visibility="invisible"
-                            android:layout_alignParentBottom="true"
-                            android:layout_toEndOf="@id/emptyViewMaths"
-                            android:background="#CCD6DD" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginTop="@dimen/_5sdp">
-
-                        <TextView
-                            android:id="@+id/tvSciencestartTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:visibility="invisible"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="7 AM" />
-
-                        <TextView
-                            android:id="@+id/tvScienceEndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:textSize="@dimen/_13sdp"
-                            android:text="10 AM" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/scienceEmptyView"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/scienceEmptyView"
-                            android:layout_width="@dimen/_5sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_7sdp"
-                            android:visibility="visible"
-                            android:layout_toEndOf="@id/tvSciencestartTime"
-                            android:background="#7891C3" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/scienceEmptyView"
-                            android:background="#7891C3"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Live Session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_13sdp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Science"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_140sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_70sdp"
-                                android:textSize="@dimen/_12sdp"
-                                android:weightSum="3"
-                                android:orientation="horizontal">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:src="@drawable/pincel"
-                                    android:layout_weight="1"/>
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:src="@drawable/book"
-                                    android:layout_weight="1"/>
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:src="@drawable/tv"
-                                    android:layout_weight="1"/>
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="center"
-                                android:visibility="invisible"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/scienceEmptyView"
-                            android:layout_alignParentBottom="true"
-                            android:background="#CCD6DD"/>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginTop="@dimen/_1sdp">
-
-                        <TextView
-                            android:id="@+id/tvMstartTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:visibility="invisible"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="7 AM" />
-
-                        <TextView
-                            android:id="@+id/tvMEndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:textSize="@dimen/_13sdp"
-                            android:text="11 AM" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/MemptyView"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/MemptyView"
-                            android:layout_width="@dimen/_5sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_2sdp"
-                            android:visibility="visible"
-                            android:layout_toEndOf="@id/tvMstartTime"
-                            android:background="#84D0E8" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/MemptyView"
-                            android:background="#84D0E8"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Live Session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_13sdp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Maths"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_140sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_75sdp"
-                                android:orientation="horizontal"
-                                android:textSize="@dimen/_12sdp"
-                                android:weightSum="3">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/laptop" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/MemptyView"
-                            android:layout_alignParentBottom="true"
-                            android:background="#CCD6DD"/>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginTop="@dimen/_1sdp">
-
-                        <TextView
-                            android:id="@+id/vHindistartTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:visibility="invisible"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="7 AM" />
-
-                        <TextView
-                            android:id="@+id/tvHindiEndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="12 PM"
-                            android:textSize="@dimen/_13sdp" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/EmptyHinidiview"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/EmptyHinidiview"
-                            android:layout_width="@dimen/_5sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_7sdp"
-                            android:layout_toEndOf="@id/vHindistartTime"
-                            android:background="#90E09D"
-                            android:visibility="visible" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/EmptyHinidiview"
-                            android:background="#90E09D"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Live Session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_13sdp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Hindi"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_140sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="80dp"
-                                android:orientation="horizontal"
-                                android:textSize="@dimen/_12sdp"
-                                android:weightSum="3">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/tv" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/book" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/EmptyHinidiview"
-                            android:layout_alignParentBottom="true"
-                            android:background="#CCD6DD"/>
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_60sdp"
-                        android:layout_marginTop="@dimen/_1sdp">
-
-                        <TextView
-                            android:id="@+id/startTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:visibility="invisible"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="7 AM" />
-
-                        <TextView
-                            android:id="@+id/EndTime"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentBottom="true"
-                            android:fontFamily="@font/open_sans_bold"
-                            android:text="1 PM"
-                            android:textSize="@dimen/_13sdp" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_toEndOf="@id/view1"
-                            android:background="#CCD6DD"/>
-
-                        <View
-                            android:id="@+id/view1"
-                            android:layout_width="@dimen/_5sdp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="@dimen/_7sdp"
-                            android:layout_toEndOf="@id/startTime"
-                            android:background="#F3F3F3"
-                            android:visibility="visible" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/view1"
-                            android:background="#F3F3F3"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:visibility="visible">
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="LUNCH"
-                                android:letterSpacing="1"
-                                android:textSize="@dimen/_17sdp"
-                                android:gravity="center"
-                                android:textColor="#FDD3A6"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:layout_gravity="center"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Live Session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_13sdp"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Hindi"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_140sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_80sdp"
-                                android:orientation="horizontal"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone"
-                                android:weightSum="3">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/tv"
-                                    android:visibility="invisible" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/book" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_15sdp"
-                                android:layout_height="@dimen/_15sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-                        </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_2sdp"
-                            android:layout_alignParentBottom="true"
-                            android:layout_toEndOf="@id/view1"
-                            android:visibility="gone"
-                            android:background="#CCD6DD" />
-                    </RelativeLayout>
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_300sdp"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:text="14"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:text="15"
-                    android:layout_marginTop="@dimen/_5sdp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="16"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="16"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="17"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_14sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:text="18"/>
-
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
 
-</FrameLayout>
+    </FrameLayout>
 </layout>
