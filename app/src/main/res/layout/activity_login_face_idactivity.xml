@@ -190,6 +190,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
+                        android:visibility="gone"
                         android:text="@string/forgot_m_pin_password"
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/_8sdp" />

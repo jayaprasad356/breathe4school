@@ -83,13 +83,15 @@ public class LoginTempPasswordActivity extends AppCompatActivity implements Resp
         });
 
     }
+
     private void backToLogin() {
         activity.finish();
         Intent intent = new Intent(activity, LoginFaceIDActivity.class);
-        intent.putExtra(Constant.BACK_FLOW,"1");
+        intent.putExtra(Constant.BACK_FLOW, "1");
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);
     }
+
     @Override
     public void onSuccess(String type) {
         activity.finish();

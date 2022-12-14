@@ -32,8 +32,8 @@ public class RegisterSuccessfullActivity extends AppCompatActivity {
         tvTitle = binding.tvTitle;
         tvdescription = binding.tvdescription;
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
-        tvTitle.setText(getIntent().getStringExtra(Constant.TITLE));
-        tvdescription.setText(getIntent().getStringExtra(Constant.DESCRIPTION));
+//        tvTitle.setText(getIntent().getStringExtra(Constant.TITLE));
+//        tvdescription.setText(getIntent().getStringExtra(Constant.DESCRIPTION));
 
         handler = new Handler();
         GotoActivity();

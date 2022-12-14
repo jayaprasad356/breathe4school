@@ -45,6 +45,7 @@ public class SetPasswordActivity extends AppCompatActivity implements ResponseLi
         flow = getIntent().getStringExtra(Constant.FLOW);
         binding.edSetPasswordInp.setEndIconOnClickListener(view -> setPasswordInfo());
         binding.btnProceed.setOnClickListener(view -> checkPassword());
+        binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
         binding.tvShowPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

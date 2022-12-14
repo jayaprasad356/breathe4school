@@ -47,6 +47,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
     private void GotoActivity() {
         handler.postDelayed(() -> {
             Intent intent = new Intent(LoginSuccessfullActivity.this, HomeActivity.class);
+            finishAffinity();
             intent.putExtra(Constant.SKIP_FACE_ID, true);
             intent.putExtra(Constant.FLOW, Constant.NORMAL);
             intent.putExtra(Constant.UNIQUE_ID, uniqueId);

@@ -32,10 +32,11 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_password);
         activity = LoginPasswordActivity.this;
-        session=new Session(activity);
+        session = new Session(activity);
         loginController = new LoginController(this);
         binding.btnProceed.setOnClickListener(view -> loginController.loginWithPassword(binding.edSetPasswordId.getText().toString(), activity));
         binding.ibBackBtn.setOnClickListener(view -> backToLogin());
+        binding.tvLogineithMpin.setOnClickListener(view -> loginInsteadOfMPin());
         binding.edSetPasswordId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,17 +62,24 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
         });
         binding.tvForgotPasword.setOnClickListener(view -> {
             Intent intent = new Intent(activity, ForgotpasswordActivity.class);
-            intent.putExtra(Constant.UNIQUE_ID,session.getData(Constant.UNIQUE_ID));
+            intent.putExtra(Constant.UNIQUE_ID, session.getData(Constant.UNIQUE_ID));
             activity.startActivity(intent);
         });
     }
+
     private void backToLogin() {
         activity.finish();
         Intent intent = new Intent(activity, LoginFaceIDActivity.class);
-        intent.putExtra(Constant.BACK_FLOW,"1");
+        intent.putExtra(Constant.BACK_FLOW, "1");
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);
     }
+
+    public void loginInsteadOfMPin() {
+        Intent intent = new Intent(activity, LoginMPinActivity.class);
+        activity.startActivity(intent);
+    }
+
     @Override
     public void onSuccess(String message) {
         activity.finish();
