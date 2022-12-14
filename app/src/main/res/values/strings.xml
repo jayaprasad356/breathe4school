@@ -36,10 +36,11 @@
     <string name="login">Login</string>
     <string name="forgot_m_pin">Forgot M-PIN?</string>
     <string name="login_with_password_instead">Login with password instead</string>
+    <string name="login_with_mpin_instead">Login with M-Pin instead</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="your_temp_password_request_no">Your temp password request no</string>
     <string name="enter_temp_m_pin">Enter temp M-PIN</string>
-    <string name="unloack_with_temp_m_pin">Unloack with temp M-PIN</string>
+    <string name="unloack_with_temp_m_pin">Unlock with temp M-PIN</string>
     <string name="skip_and_get_started">Skip and Get started</string>
     <string name="invalid_otp">Invalid OTP entered</string>
     <string name="enter_mail_id">Enter email Id</string>

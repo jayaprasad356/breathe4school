@@ -106,6 +106,7 @@ public class OtpActivity extends AppCompatActivity implements ResponseListener {
             session.setBoolean(Constant.EMAIL_OTP_VERIFY, true);
         else
             session.setBoolean(Constant.MOBILE_OTP_VERIFY, true);
+        activity.finish();
         Intent intent = new Intent(activity, RegistrationActivity.class);
         activity.startActivity(intent);
         activity.finish();

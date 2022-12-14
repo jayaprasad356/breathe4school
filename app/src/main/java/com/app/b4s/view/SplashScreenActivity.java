@@ -27,9 +27,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         activity = SplashScreenActivity.this;
         session = new Session(activity);
         session.setBoolean(Constant.MOBILE_OTP_VERIFY, false);
-        session.setData(Constant.MOBILE, "");
+        //session.setData(Constant.MOBILE, "");
         session.setBoolean(Constant.EMAIL_OTP_VERIFY, false);
-        session.setData(Constant.EMAIL, "");
+       // session.setData(Constant.EMAIL, "");
 
         handler = new Handler();
         if (session.getBoolean(Constant.IS_REGISTER))

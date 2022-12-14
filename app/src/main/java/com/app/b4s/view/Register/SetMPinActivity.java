@@ -43,6 +43,7 @@ public class SetMPinActivity extends AppCompatActivity implements IRegisterView 
             } else
                 Toast.makeText(activity, activity.getString(R.string.miss_match_mpin), Toast.LENGTH_SHORT).show();
         });
+        binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
         binding.edMPinId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -97,6 +98,7 @@ public class SetMPinActivity extends AppCompatActivity implements IRegisterView 
     public void onRegisterSuccess(String message) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
         session.setBoolean(Constant.IS_REGISTER, true);
+        activity.finish();
         Intent intent = new Intent(activity, RegisterSuccessfullActivity.class);
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);

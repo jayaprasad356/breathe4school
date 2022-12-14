@@ -39,6 +39,8 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
         binding.btnContinue.setOnClickListener(view -> registerController.onRegister(binding.edUniqueId.getText().toString(), activity));
         binding.tvVerifyEmail.setOnClickListener(View -> verifyEmail());
         binding.tvVerifyMobile.setOnClickListener(View -> verifyMobile());
+        binding.edEmailId.setText(session.getData(Constant.EMAIL));
+        binding.edMobilenoId.setText(session.getData(Constant.MOBILE));
         binding.tvAlreadyRegister.setOnClickListener(View -> loginSuccess());
         showActivity();
         binding.edUniqueId.addTextChangedListener(new TextWatcher() {
@@ -95,7 +97,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
 
     private void loginSuccess() {
         session.setBoolean(Constant.IS_REGISTER, true);
-        session.setData(Constant.UNIQUE_ID,binding.edUniqueId.getText().toString());
+        session.setData(Constant.UNIQUE_ID, binding.edUniqueId.getText().toString());
         Intent intent = new Intent(activity, LoginFaceIDActivity.class);
         intent.putExtra(Constant.SKIP_FACE_ID, 0);
         activity.startActivity(intent);
@@ -112,6 +114,8 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
     }
 
     private void showVerification() {
+        binding.edEmailId.setText(session.getData(Constant.EMAIL));
+        binding.edMobilenoId.setText(session.getData(Constant.MOBILE));
         binding.tvAlreadyRegister.setVisibility(View.GONE);
         binding.llInputFeild.setVisibility(View.VISIBLE);
         binding.rlUniqueInp.setVisibility(View.GONE);
@@ -144,7 +148,6 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
         intent.putExtra(Constant.DESCRIPTION, dataText);
         intent.putExtra(Constant.TYPE, dataType);
         activity.startActivity(intent);
-        activity.finish();
     }
 
     public void showActivity() {
@@ -173,6 +176,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
         binding.rlUniqueInp.setVisibility(View.GONE);
         binding.btnContinue.setVisibility(View.GONE);
     }
+
     public void showPasswordActivity() {
         if (mobileVerify) {
             String uniqueID = binding.edUniqueId.getText().toString();

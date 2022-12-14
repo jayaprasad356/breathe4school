@@ -27,6 +27,7 @@ public class Constant {
     public static final String MOBILE_OTP = "mobile_otp";
     public static final String TYPE = "type";
     public static final String MOBILE = "mobile";
+    public static final String MOBILE_NUMBER = "mobileNumber";
     public static final String EMAIL = "email";
     public static final String PASSWORD = "password";
     public static final String TITLE = "Title";
