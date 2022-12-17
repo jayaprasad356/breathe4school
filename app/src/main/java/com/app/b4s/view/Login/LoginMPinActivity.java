@@ -17,6 +17,7 @@ import com.app.b4s.controller.ILoginController;
 import com.app.b4s.controller.LoginController;
 import com.app.b4s.databinding.ActivityLoginMpinBinding;
 import com.app.b4s.model.DayOfLine;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 
 import java.util.ArrayList;
@@ -26,13 +27,16 @@ public class LoginMPinActivity extends AppCompatActivity implements ResponseList
     ActivityLoginMpinBinding binding;
     String uniqueId;
     ILoginController loginController;
+    Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_mpin);
         activity = LoginMPinActivity.this;
+        session = new Session(activity);
         loginController = new LoginController(this);
+        binding.tvTitle.setText("Welcome "+session.getData(Constant.NAME));
         binding.btnProceed.setOnClickListener(view -> loginController.onMPinLogin(binding.edMPinId.getText().toString(), activity));
         binding.tvLogineithpassword.setOnClickListener(view -> loginInsteadOfPassword());
         binding.edMPinId.addTextChangedListener(new TextWatcher() {

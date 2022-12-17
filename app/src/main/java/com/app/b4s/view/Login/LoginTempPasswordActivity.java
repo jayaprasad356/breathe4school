@@ -38,6 +38,7 @@ public class LoginTempPasswordActivity extends AppCompatActivity implements Resp
         session = new Session(activity);
         loginController = new LoginController(this);
         binding.tvCode.setText(session.getData(Constant.TEMP_PASS));
+        binding.tvTitle.setText("Welcome "+session.getData(Constant.NAME));
         binding.tvLoginMPin.setOnClickListener(view -> {
             binding.rlGenrateTempCode.setVisibility(View.GONE);
             binding.rlEnterTempCode.setVisibility(View.VISIBLE);

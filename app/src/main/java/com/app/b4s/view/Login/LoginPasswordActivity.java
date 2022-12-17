@@ -34,6 +34,7 @@ public class LoginPasswordActivity extends AppCompatActivity implements Response
         activity = LoginPasswordActivity.this;
         session = new Session(activity);
         loginController = new LoginController(this);
+        binding.tvTitle.setText("Welcome "+session.getData(Constant.NAME));
         binding.btnProceed.setOnClickListener(view -> loginController.loginWithPassword(binding.edSetPasswordId.getText().toString(), activity));
         binding.ibBackBtn.setOnClickListener(view -> backToLogin());
         binding.tvLogineithMpin.setOnClickListener(view -> loginInsteadOfMPin());
