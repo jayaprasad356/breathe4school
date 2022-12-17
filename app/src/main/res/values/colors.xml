@@ -32,5 +32,8 @@
     <color name="social_bg_col">#FF848E</color>
     <color name="time_txt_col">#99ADBB</color>
     <color name="background_grey">#8D91A7</color>
+    <color name="card_bg">#E5EBEE</color>
+
+
 
 </resources>

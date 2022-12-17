@@ -55,14 +55,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:weightSum="10">
 
                 <TextView
                     android:id="@+id/tvDate"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"
+                    android:layout_weight="2.5"
                     android:fontFamily="@font/open_sans_bold"
                     android:singleLine="true"
                     android:text="18 February 2022, Friday"
@@ -74,10 +74,11 @@
                     android:id="@+id/lytTabs"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="3"
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/dailyCard"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         app:cardBackgroundColor="#E5EBEE"
@@ -85,6 +86,7 @@
                         app:cardElevation="0dp">
 
                         <TextView
+                            android:id="@+id/tvDaily"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -94,21 +96,25 @@
                             android:textSize="@dimen/_12sdp" />
                     </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/weeklyCard"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
+
+                        app:cardElevation="0dp"
                         android:gravity="center">
 
                         <TextView
-                            android:layout_width="179dp"
-                            android:layout_height="19dp"
+                            android:id="@+id/tvWeekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/open_sans_semibold"
+                            android:fontFamily="@font/open_sans_bold"
                             android:text="Weekly"
                             android:textColor="#1298DC"
-                            android:textSize="@dimen/_13sdp" />
-                    </LinearLayout>
+                            android:textSize="@dimen/_12sdp" />
+                    </androidx.cardview.widget.CardView>
                 </LinearLayout>
 
                 <LinearLayout
@@ -242,8 +248,340 @@
                 android:layout_weight="10"
                 android:orientation="horizontal"
                 android:visibility="visible">
-
                 <LinearLayout
+                    android:id="@+id/weeklyLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="00dp"
+                    android:layout_weight="9.5"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/primary"
+                        android:orientation="horizontal"
+                        android:weightSum="7.35">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_weight="0.35" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="Monday"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/tuesday"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/wednesday"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:backgroundTint="@color/white"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/thursday"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/friday"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/saturday"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_2sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_corner"
+                            android:gravity="center"
+                            android:padding="@dimen/_4sdp"
+                            android:text="@string/sunday"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_8sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:weightSum="7.35"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="8 AM"
+                            android:fontFamily="@font/open_sans"
+                            android:layout_weight="0.35"/>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/tvTitle"
+                                android:layout_width="wrap_content"
+                                android:text="LIVE SESSION"
+                                android:fontFamily="@font/semibold"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/tvSubjectn"
+                                android:fontFamily="@font/open_sans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Maths"
+                                android:layout_below="@+id/tvTitle"/>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_below="@+id/tvSubjectn">
+                                <ImageView
+                                    android:id="@+id/ivFIcon"
+                                    android:src="@drawable/tv"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_height="@dimen/_10sdp"/>
+
+                                <ImageView
+                                    android:id="@+id/ivSIcon"
+                                    android:src="@drawable/book"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivFIcon" />
+
+                                <ImageView
+                                    android:id="@+id/ivTIcon"
+                                    android:src="@drawable/pincel"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivSIcon"/>
+                            </RelativeLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/tvTitle1"
+                                android:layout_width="match_parent"
+                                android:text="LIVE SESSION"
+                                android:fontFamily="@font/semibold"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/tvSubject1"
+                                android:fontFamily="@font/open_sans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Maths"
+                                android:layout_below="@+id/tvTitle1"/>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_below="@+id/tvSubject1">
+                                <ImageView
+                                    android:id="@+id/ivFIcon1"
+                                    android:src="@drawable/tv"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_height="@dimen/_10sdp"/>
+
+                                <ImageView
+                                    android:id="@+id/ivSIcon1"
+                                    android:src="@drawable/book"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivFIcon1" />
+
+                                <ImageView
+                                    android:id="@+id/ivTIcon1"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivSIcon1"
+                                    android:src="@drawable/pincel" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/tvTitle2"
+                                android:layout_width="match_parent"
+                                android:text="LIVE SESSION"
+                                android:fontFamily="@font/semibold"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/tvSubject2"
+                                android:fontFamily="@font/open_sans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Maths"
+                                android:layout_below="@+id/tvTitle2"/>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvSubject2">
+                                <ImageView
+                                    android:id="@+id/ivFIcon2"
+                                    android:src="@drawable/tv"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_height="@dimen/_10sdp"/>
+
+                                <ImageView
+                                    android:id="@+id/ivSIcon2"
+                                    android:src="@drawable/book"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivFIcon2" />
+
+                                <ImageView
+                                    android:id="@+id/ivTIcon2"
+                                    android:src="@drawable/pincel"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivSIcon2"/>
+                            </RelativeLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:background="@color/background_grey"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+                            <TextView
+                                android:id="@+id/tvTitle4"
+                                android:layout_width="match_parent"
+                                android:text="LIVE SESSION"
+                                android:fontFamily="@font/semibold"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:id="@+id/tvSubject4"
+                                android:fontFamily="@font/open_sans"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Maths"
+                                android:layout_below="@+id/tvTitle4"/>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvSubject4">
+                                <ImageView
+                                    android:id="@+id/ivFIcon4"
+                                    android:src="@drawable/tv"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_height="@dimen/_10sdp"/>
+
+                                <ImageView
+                                    android:id="@+id/ivSIcon4"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:src="@drawable/book"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivFIcon4" />
+
+                                <ImageView
+                                    android:id="@+id/ivTIcon4"
+                                    android:src="@drawable/pincel"
+                                    android:paddingHorizontal="@dimen/_1sdp"
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_toLeftOf="@+id/ivSIcon4"/>
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/dailyLayout"
+                    android:visibility="visible"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="00dp"
@@ -375,6 +713,7 @@
                                     android:textSize="@dimen/_4sdp" />
 
                                 <TextView
+                                    android:id="@+id/tvSubject"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -395,6 +734,7 @@
                                     android:textSize="@dimen/_4sdp" />
 
                                 <TextView
+                                    android:id="@+id/tvDuriation"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
@@ -1343,6 +1683,7 @@
 
                     </LinearLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"

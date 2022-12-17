@@ -1,16 +1,13 @@
 package com.app.b4s.view;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.os.Bundle;
-import android.view.MenuItem;
-
 import com.app.b4s.R;
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigationrail.NavigationRailView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -33,26 +30,23 @@ public class HomeActivity extends AppCompatActivity {
             fragmentTransaction.commit();
         }
 
-        navigationrail.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+        navigationrail.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
 
-                    case R.id.nav_myfeed:
-                        fragment = new MyFeedFragment();
-                        break;
+                case R.id.nav_myfeed:
+                    fragment = new MyFeedFragment();
+                    break;
 
-                    case R.id.nav_calendar:
-                        fragment = new CalendarFragment();
-                        break;
-                }
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.rlContainer,fragment);
-                fragmentTransaction.commit();
-
-                return true;
+                case R.id.nav_calendar:
+                    fragment = new CalendarFragment();
+                    break;
             }
+            fragmentManager = getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.rlContainer,fragment);
+            fragmentTransaction.commit();
+
+            return true;
         });
     }
 }

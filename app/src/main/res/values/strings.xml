@@ -88,6 +88,12 @@
     <string name="good_afternoon">Good Afternoon</string>
     <string name="good_evening">Good Evening</string>
     <string name="good_night">Good Night</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
 
 
 </resources>

@@ -15,6 +15,7 @@ public class Constant {
     public static final String LOGIN_WITH_PASSWORD = BaseUrl + "loginWithPassword";
     public static final String GENERATE_TEMP_MPIN = BaseUrl + "generateTempMpinTicket";
     public static final String GET_ON_THIS_DAT = MainBaseUrl + MessageBoard + "getOnThisDay";
+    public static final String GET_ALL_TIME_TABLE = MainBaseUrl + "timetable/get";
     public static final String GET_THOUGHT_OF_THE_DAY = MainBaseUrl + MessageBoard + "getThoughtOfTheDay";
     public static final String GET_NOTICE_BY_STUDENT_ID = MainBaseUrl + NoticeBoard + "getByStudent";
     public static final String UNIQUE_ID = "unique_id";
@@ -71,5 +72,8 @@ public class Constant {
     public static final String TIMETABLESESSION = "timetableSession";
 
     public static final String BACK_FLOW = "back";
+
+    public static final String START_TIME = "start_time";
+    public static final String END_TIME = "end_time";
 
 }
