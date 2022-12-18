@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:layout_marginHorizontal="@dimen/_2sdp"
+    android:layout_marginVertical="@dimen/_2sdp"
+    >
+
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:paddingVertical="@dimen/_15sdp"
+       android:paddingHorizontal="@dimen/_15sdp"
+       android:orientation="vertical"
+       >
+
+
+       <TextView
+           android:id="@+id/tvSubName"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Kannada"
+           android:textColor="@color/black"
+           android:layout_marginBottom="@dimen/_5sdp"
+           />
+
+
+       <TextView
+           android:id="@+id/tvTopic"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Navellaru Onde Poem"
+           android:textSize="@dimen/_10sdp"
+           android:textStyle="bold"
+           />
+
+
+
+
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           >
+
+
+
+           <TextView
+               android:layout_marginTop="@dimen/_5sdp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Submit Date"
+               android:textSize="@dimen/_10sdp"
+               />
+           <TextView
+               android:layout_marginTop="@dimen/_5sdp"
+               android:id="@+id/tvDate"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="20-92"
+               android:layout_marginStart="@dimen/_5sdp"
+               android:textSize="@dimen/_10sdp"
+               android:textStyle="bold"
+               android:textColor="@color/black"
+               />
+
+       </LinearLayout>
+
+
+
+
+
+
+
+
+
+   </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
