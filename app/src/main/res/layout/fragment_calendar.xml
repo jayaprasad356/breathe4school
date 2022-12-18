@@ -356,227 +356,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/gray" />
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:weightSum="7.35"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="8 AM"
-                            android:fontFamily="@font/open_sans"
-                            android:layout_weight="0.35"/>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tvTitle"
-                                android:layout_width="wrap_content"
-                                android:text="LIVE SESSION"
-                                android:fontFamily="@font/semibold"
-                                android:layout_height="wrap_content"/>
-                            <TextView
-                                android:id="@+id/tvSubjectn"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Maths"
-                                android:layout_below="@+id/tvTitle"/>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_10sdp"
-                                android:layout_below="@+id/tvSubjectn">
-                                <ImageView
-                                    android:id="@+id/ivFIcon"
-                                    android:src="@drawable/tv"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_height="@dimen/_10sdp"/>
-
-                                <ImageView
-                                    android:id="@+id/ivSIcon"
-                                    android:src="@drawable/book"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivFIcon" />
-
-                                <ImageView
-                                    android:id="@+id/ivTIcon"
-                                    android:src="@drawable/pincel"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivSIcon"/>
-                            </RelativeLayout>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tvTitle1"
-                                android:layout_width="match_parent"
-                                android:text="LIVE SESSION"
-                                android:fontFamily="@font/semibold"
-                                android:layout_height="wrap_content"/>
-                            <TextView
-                                android:id="@+id/tvSubject1"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Maths"
-                                android:layout_below="@+id/tvTitle1"/>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_10sdp"
-                                android:layout_below="@+id/tvSubject1">
-                                <ImageView
-                                    android:id="@+id/ivFIcon1"
-                                    android:src="@drawable/tv"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_height="@dimen/_10sdp"/>
-
-                                <ImageView
-                                    android:id="@+id/ivSIcon1"
-                                    android:src="@drawable/book"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivFIcon1" />
-
-                                <ImageView
-                                    android:id="@+id/ivTIcon1"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivSIcon1"
-                                    android:src="@drawable/pincel" />
-                            </RelativeLayout>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tvTitle2"
-                                android:layout_width="match_parent"
-                                android:text="LIVE SESSION"
-                                android:fontFamily="@font/semibold"
-                                android:layout_height="wrap_content"/>
-                            <TextView
-                                android:id="@+id/tvSubject2"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Maths"
-                                android:layout_below="@+id/tvTitle2"/>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tvSubject2">
-                                <ImageView
-                                    android:id="@+id/ivFIcon2"
-                                    android:src="@drawable/tv"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_height="@dimen/_10sdp"/>
-
-                                <ImageView
-                                    android:id="@+id/ivSIcon2"
-                                    android:src="@drawable/book"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivFIcon2" />
-
-                                <ImageView
-                                    android:id="@+id/ivTIcon2"
-                                    android:src="@drawable/pincel"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivSIcon2"/>
-                            </RelativeLayout>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:background="@color/background_grey"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1">
-                            <TextView
-                                android:id="@+id/tvTitle4"
-                                android:layout_width="match_parent"
-                                android:text="LIVE SESSION"
-                                android:fontFamily="@font/semibold"
-                                android:layout_height="wrap_content"/>
-                            <TextView
-                                android:id="@+id/tvSubject4"
-                                android:fontFamily="@font/open_sans"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Maths"
-                                android:layout_below="@+id/tvTitle4"/>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/tvSubject4">
-                                <ImageView
-                                    android:id="@+id/ivFIcon4"
-                                    android:src="@drawable/tv"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_height="@dimen/_10sdp"/>
-
-                                <ImageView
-                                    android:id="@+id/ivSIcon4"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:src="@drawable/book"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivFIcon4" />
-
-                                <ImageView
-                                    android:id="@+id/ivTIcon4"
-                                    android:src="@drawable/pincel"
-                                    android:paddingHorizontal="@dimen/_1sdp"
-                                    android:layout_width="@dimen/_10sdp"
-                                    android:layout_height="@dimen/_10sdp"
-                                    android:layout_toLeftOf="@+id/ivSIcon4"/>
-                            </RelativeLayout>
-                        </RelativeLayout>
-
-                    </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcWeekly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -598,7 +381,7 @@
                         <View
                             android:layout_width="0dp"
                             android:layout_height="1dp"
-                            android:layout_weight="0.4" />
+                            android:layout_weight="0.2" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -623,6 +406,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1.8"
+                            android:paddingStart="@dimen/_20sdp"
                             android:fontFamily="@font/open_sans"
                             android:text="Description"
                             android:textSize="@dimen/_6sdp" />
@@ -632,6 +416,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="1"
+                            android:gravity="center"
                             android:fontFamily="@font/open_sans"
                             android:text="Duration"
                             android:textSize="@dimen/_6sdp" />
@@ -640,7 +425,7 @@
                             android:layout_width="0dp"
                             android:layout_height="@dimen/_12sdp"
                             android:layout_gravity="center"
-                            android:layout_weight="1" />
+                            android:layout_weight="1.2" />
 
 
                     </LinearLayout>
@@ -656,1029 +441,1033 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
-
-                        <RelativeLayout
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/dailyRecycler"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_2sdp">
-
-                            <TextView
-                                android:id="@+id/tvstartTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="7 AM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="8 AM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_toEndOf="@id/tvview1"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview1"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime"
-                                android:background="#7891C3" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview1"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Study Planner 01"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:id="@+id/tvSubject"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Maths"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="70dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Complete Chapter 1 &amp; 2"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:id="@+id/tvDuriation"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_75sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <ImageView
-                                    android:layout_width="@dimen/_6sdp"
-                                    android:layout_height="@dimen/_6sdp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="60dp"
-                                    android:src="@drawable/bin" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="50dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Edit Planner"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview1"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_5sdp">
-
-                            <TextView
-                                android:id="@+id/tvstartTime1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="9 AM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="10 AM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview2"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime1"
-                                android:background="#c7c7c7" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview2"
-                                android:background="#c7c7c7"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Maths"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/pincel" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/book" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:layout_marginStart="@dimen/_10sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/tv" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_45sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="View summary"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview2"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_12sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/tvstartTime3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="9 AM"
-                                android:textSize="@dimen/_3sdp"
-                                android:visibility="invisible" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:visibility="invisible"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="10 AM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview3"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime3"
-                                android:background="#84D0E8" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview3"
-                                android:background="#84D0E8"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Science"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/laptop" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_88sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Join Now"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview3"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_12sdp"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/tvstartTime4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="11 AM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime4"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="10 AM"
-                                android:textSize="@dimen/_3sdp"
-                                android:visibility="invisible" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview4"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime4"
-                                android:background="#90E09D" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview4"
-                                android:background="#90E09D"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Hindi"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/laptop" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_88sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Reminder ON"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview4"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_toEndOf="@id/view1"
-                            android:background="#F3F3F3"
-                            android:gravity="center"
-                            android:orientation="horizontal"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:visibility="visible">
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:gravity="center"
-                                android:letterSpacing="1"
-                                android:text="LUNCH"
-                                android:textColor="#FDD3A6"
-                                android:textSize="@dimen/_13sdp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_10sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Live Session"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_13sdp"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Hindi"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-
-                            <LinearLayout
-                                android:layout_width="@dimen/_140sdp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_80sdp"
-                                android:orientation="horizontal"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone"
-                                android:weightSum="3">
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/tv"
-                                    android:visibility="invisible" />
-
-                                <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="@dimen/_16sdp"
-                                    android:layout_weight="1.5"
-                                    android:src="@drawable/book" />
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_72sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="60 mins"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-
-                            <ImageView
-                                android:layout_width="@dimen/_12sdp"
-                                android:layout_height="@dimen/_12sdp"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_60sdp"
-                                android:src="@drawable/bin"
-                                android:visibility="gone" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="@dimen/_50sdp"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:text="Edit Planner"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_12sdp"
-                                android:visibility="gone" />
-                        </LinearLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/tvstartTime5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="1 PM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime5"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="2 PM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_toEndOf="@id/tvview5"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview5"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime5"
-                                android:background="#7891C3" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview5"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Study Planner 01"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp"  />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Maths"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="70dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Complete Chapter 1 &amp; 2"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_75sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <ImageView
-                                    android:layout_width="15dp"
-                                    android:layout_height="15dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="60dp"
-                                    android:src="@drawable/bin" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="50dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Edit Planner"
-                                    android:textColor="#1298DC"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview5"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_12sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/tvstartTime6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="11 AM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="10 AM"
-                                android:visibility="invisible" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvEndTime6"
-                                android:background="#ffbd77"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="English"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/laptop" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_88sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Reminder ON"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvEndTime6"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_10sdp">
-
-                            <TextView
-                                android:id="@+id/tvstartTime7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="3 PM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime7"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="4 PM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview7"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime7"
-                                android:background="#c7c7c7" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview7"
-                                android:background="#28cd9c"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Maths"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/pincel" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/book" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:layout_marginStart="@dimen/_10sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/tv" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_45sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="View summary"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview7"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_20sdp"
-                            >
-
-                            <TextView
-                                android:id="@+id/tvstartTime8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:visibility="invisible"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="3 PM" />
-
-                            <TextView
-                                android:id="@+id/tvEndTime8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_alignParentBottom="true"
-                                android:fontFamily="@font/open_sans_bold"
-                                android:visibility="invisible"
-                                android:textSize="@dimen/_3sdp"
-                                android:text="4 PM" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:background="#CCD6DD" />
-
-                            <View
-                                android:id="@+id/tvview8"
-                                android:layout_width="@dimen/_2sdp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="7dp"
-                                android:layout_toEndOf="@id/tvstartTime8"
-                                android:background="#c7c7c7" />
-
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_toEndOf="@id/tvview8"
-                                android:background="#ff848e"
-                                android:orientation="horizontal">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="10dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Live Session"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="30dp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="Maths"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-                                <LinearLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:orientation="horizontal"
-                                    android:textSize="@dimen/_12sdp">
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/pincel" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_12sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/book" />
-
-                                    <ImageView
-                                        android:layout_width="@dimen/_20sdp"
-                                        android:layout_height="@dimen/_12sdp"
-                                        android:layout_marginStart="@dimen/_10sdp"
-                                        android:padding="@dimen/_3sdp"
-                                        android:src="@drawable/tv" />
-
-                                </LinearLayout>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_45sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="60 mins"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginStart="@dimen/_60sdp"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="View summary"
-                                    android:textColor="@color/white"
-                                    android:textSize="@dimen/_4sdp" />
-                            </LinearLayout>
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_1sdp"
-                                android:layout_alignParentBottom="true"
-                                android:layout_toEndOf="@id/tvview8"
-                                android:background="#CCD6DD" />
-                        </RelativeLayout>
+                            android:layout_height="wrap_content"/>
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_20sdp"-->
+<!--                            android:layout_marginTop="@dimen/_2sdp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="7 AM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="8 AM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_toEndOf="@id/tvview1"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview1"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime"-->
+<!--                                android:background="#7891C3" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview1"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Study Planner 01"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/tvSubject"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Maths"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="70dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Complete Chapter 1 &amp; 2"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:id="@+id/tvDuriation"-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_75sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:layout_width="@dimen/_6sdp"-->
+<!--                                    android:layout_height="@dimen/_6sdp"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="60dp"-->
+<!--                                    android:src="@drawable/bin" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="50dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Edit Planner"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview1"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_20sdp"-->
+<!--                            android:layout_marginTop="@dimen/_5sdp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime1"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="9 AM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime1"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="10 AM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview2"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime1"-->
+<!--                                android:background="#c7c7c7" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview2"-->
+<!--                                android:background="#c7c7c7"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Maths"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/pincel" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/book" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_20sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/tv" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_45sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="View summary"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview2"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_12sdp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime3"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="9 AM"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:visibility="invisible" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime3"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:visibility="invisible"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="10 AM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview3"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime3"-->
+<!--                                android:background="#84D0E8" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview3"-->
+<!--                                android:background="#84D0E8"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Science"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/laptop" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_88sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Join Now"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview3"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_12sdp"-->
+<!--                            android:layout_marginTop="@dimen/_15sdp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime4"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="11 AM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime4"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="10 AM"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:visibility="invisible" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview4"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime4"-->
+<!--                                android:background="#90E09D" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview4"-->
+<!--                                android:background="#90E09D"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Hindi"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/laptop" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_88sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Reminder ON"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview4"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_toEndOf="@id/view1"-->
+<!--                            android:background="#F3F3F3"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="horizontal"-->
+<!--                            android:layout_marginStart="@dimen/_10sdp"-->
+<!--                            android:visibility="visible">-->
+
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:gravity="center"-->
+<!--                                android:letterSpacing="1"-->
+<!--                                android:text="LUNCH"-->
+<!--                                android:textColor="#FDD3A6"-->
+<!--                                android:textSize="@dimen/_13sdp" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_10sdp"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="Live Session"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_13sdp"-->
+<!--                                android:visibility="gone" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="Hindi"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_12sdp"-->
+<!--                                android:visibility="gone" />-->
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="@dimen/_140sdp"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_80sdp"-->
+<!--                                android:orientation="horizontal"-->
+<!--                                android:textSize="@dimen/_12sdp"-->
+<!--                                android:visibility="gone"-->
+<!--                                android:weightSum="3">-->
+
+<!--                                <ImageView-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:layout_height="@dimen/_16sdp"-->
+<!--                                    android:layout_weight="1.5"-->
+<!--                                    android:src="@drawable/tv"-->
+<!--                                    android:visibility="invisible" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:layout_width="0dp"-->
+<!--                                    android:layout_height="@dimen/_16sdp"-->
+<!--                                    android:layout_weight="1.5"-->
+<!--                                    android:src="@drawable/book" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_72sdp"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="60 mins"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_12sdp"-->
+<!--                                android:visibility="gone" />-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_12sdp"-->
+<!--                                android:layout_height="@dimen/_12sdp"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                android:src="@drawable/bin"-->
+<!--                                android:visibility="gone" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:layout_marginStart="@dimen/_50sdp"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:text="Edit Planner"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_12sdp"-->
+<!--                                android:visibility="gone" />-->
+<!--                        </LinearLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_20sdp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime5"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="1 PM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime5"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="2 PM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_toEndOf="@id/tvview5"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview5"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime5"-->
+<!--                                android:background="#7891C3" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview5"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Study Planner 01"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp"  />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Maths"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="70dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Complete Chapter 1 &amp; 2"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_75sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <ImageView-->
+<!--                                    android:layout_width="15dp"-->
+<!--                                    android:layout_height="15dp"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="60dp"-->
+<!--                                    android:src="@drawable/bin" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="50dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Edit Planner"-->
+<!--                                    android:textColor="#1298DC"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview5"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_12sdp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime6"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="11 AM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime6"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="10 AM"-->
+<!--                                android:visibility="invisible" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvEndTime6"-->
+<!--                                android:background="#ffbd77"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="English"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/laptop" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_88sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Reminder ON"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvEndTime6"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_20sdp"-->
+<!--                            android:layout_marginTop="@dimen/_10sdp">-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime7"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="3 PM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime7"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="4 PM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview7"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime7"-->
+<!--                                android:background="#c7c7c7" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview7"-->
+<!--                                android:background="#28cd9c"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Maths"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/pincel" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/book" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_20sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/tv" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_45sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="View summary"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview7"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_20sdp"-->
+<!--                            >-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvstartTime8"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:visibility="invisible"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="3 PM" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/tvEndTime8"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_alignParentStart="true"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:fontFamily="@font/open_sans_bold"-->
+<!--                                android:visibility="invisible"-->
+<!--                                android:textSize="@dimen/_3sdp"-->
+<!--                                android:text="4 PM" />-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:background="#CCD6DD" />-->
+
+<!--                            <View-->
+<!--                                android:id="@+id/tvview8"-->
+<!--                                android:layout_width="@dimen/_2sdp"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_marginStart="7dp"-->
+<!--                                android:layout_toEndOf="@id/tvstartTime8"-->
+<!--                                android:background="#c7c7c7" />-->
+
+
+<!--                            <LinearLayout-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_toEndOf="@id/tvview8"-->
+<!--                                android:background="#ff848e"-->
+<!--                                android:orientation="horizontal">-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="10dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Live Session"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="30dp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="Maths"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+<!--                                <LinearLayout-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:orientation="horizontal"-->
+<!--                                    android:textSize="@dimen/_12sdp">-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/pincel" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_12sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/book" />-->
+
+<!--                                    <ImageView-->
+<!--                                        android:layout_width="@dimen/_20sdp"-->
+<!--                                        android:layout_height="@dimen/_12sdp"-->
+<!--                                        android:layout_marginStart="@dimen/_10sdp"-->
+<!--                                        android:padding="@dimen/_3sdp"-->
+<!--                                        android:src="@drawable/tv" />-->
+
+<!--                                </LinearLayout>-->
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_45sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="60 mins"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+
+
+<!--                                <TextView-->
+<!--                                    android:layout_width="wrap_content"-->
+<!--                                    android:layout_height="wrap_content"-->
+<!--                                    android:layout_gravity="center"-->
+<!--                                    android:layout_marginStart="@dimen/_60sdp"-->
+<!--                                    android:fontFamily="@font/open_sans_bold"-->
+<!--                                    android:text="View summary"-->
+<!--                                    android:textColor="@color/white"-->
+<!--                                    android:textSize="@dimen/_4sdp" />-->
+<!--                            </LinearLayout>-->
+
+<!--                            <View-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="@dimen/_1sdp"-->
+<!--                                android:layout_alignParentBottom="true"-->
+<!--                                android:layout_toEndOf="@id/tvview8"-->
+<!--                                android:background="#CCD6DD" />-->
+<!--                        </RelativeLayout>-->
 
 
                     </LinearLayout>

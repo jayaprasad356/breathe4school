@@ -3,102 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"
-        android:orientation="horizontal"
-        android:weightSum="7.35">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_weight="0.35" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:backgroundTint="@color/white"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Moy"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/btn_corner"
-            android:gravity="center"
-            android:padding="@dimen/_4sdp"
-            android:text="Monday"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_8sdp" />
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -120,45 +24,47 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/tvTitle"
+                android:id="@+id/tvTitlem"
                 android:layout_width="wrap_content"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tvSubject"
+                android:id="@+id/tvSubjectnm"
                 android:fontFamily="@font/open_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maths"
-                android:layout_below="@+id/tvTitle"/>
+                android:layout_below="@+id/tvTitlem"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubject">
+                android:layout_height="@dimen/_10sdp"
+                android:layout_below="@+id/tvSubjectnm">
                 <ImageView
-                    android:id="@+id/ivFIcon"
+                    android:id="@+id/ivFIconm"
                     android:src="@drawable/tv"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_15sdp"/>
+                    android:layout_height="@dimen/_10sdp"/>
 
                 <ImageView
-                    android:id="@+id/ivSIcon"
+                    android:id="@+id/ivSIconm"
                     android:src="@drawable/book"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivFIcon" />
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIconm" />
 
                 <ImageView
-                    android:id="@+id/ivTIcon"
+                    android:id="@+id/ivTIconm"
                     android:src="@drawable/pincel"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon"/>
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIconm"/>
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -166,7 +72,49 @@
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
             android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitlet"
+                android:layout_width="wrap_content"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubjectnt"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitlet"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_below="@+id/tvSubjectnt">
+                <ImageView
+                    android:id="@+id/ivFIcont"
+                    android:src="@drawable/tv"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_10sdp"/>
 
+                <ImageView
+                    android:id="@+id/ivSIcont"
+                    android:src="@drawable/book"
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIcont" />
+
+                <ImageView
+                    android:id="@+id/ivTIcont"
+                    android:src="@drawable/pincel"
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIcont"/>
+            </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="0dp"
@@ -174,44 +122,44 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/tvTitle1"
+                android:id="@+id/tvTitlew"
                 android:layout_width="match_parent"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tvSubject1"
+                android:id="@+id/tvSubjectw"
                 android:fontFamily="@font/open_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maths"
-                android:layout_below="@+id/tvTitle1"/>
+                android:layout_below="@+id/tvTitlew"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubject1">
+                android:layout_height="@dimen/_10sdp"
+                android:layout_below="@+id/tvSubjectw">
                 <ImageView
-                    android:id="@+id/ivFIcon1"
+                    android:id="@+id/ivFIconw"
                     android:src="@drawable/tv"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_15sdp"/>
+                    android:layout_height="@dimen/_10sdp"/>
 
                 <ImageView
-                    android:id="@+id/ivSIcon1"
+                    android:id="@+id/ivSIconw"
                     android:src="@drawable/book"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivFIcon1" />
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIconw" />
 
                 <ImageView
-                    android:id="@+id/ivTIcon1"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon1"
-                    android:padding="@dimen/_4sdp"
+                    android:id="@+id/ivTIconw"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIconw"
                     android:src="@drawable/pincel" />
             </RelativeLayout>
         </RelativeLayout>
@@ -220,53 +168,48 @@
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
             android:layout_weight="1">
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:background="@color/background_grey"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
             <TextView
-                android:id="@+id/tvTitle2"
-                android:layout_width="match_parent"
+                android:id="@+id/tvTitleth"
+                android:layout_width="wrap_content"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tvSubject2"
+                android:id="@+id/tvSubjectnth"
                 android:fontFamily="@font/open_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maths"
-                android:layout_below="@+id/tvTitle2"/>
+                android:layout_below="@+id/tvTitleth"/>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubject2">
+                android:layout_height="@dimen/_10sdp"
+                android:layout_below="@+id/tvSubjectnth">
                 <ImageView
-                    android:id="@+id/ivFIcon2"
+                    android:id="@+id/ivFIconth"
                     android:src="@drawable/tv"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_15sdp"/>
+                    android:layout_height="@dimen/_10sdp"/>
 
                 <ImageView
-                    android:id="@+id/ivSIcon2"
+                    android:id="@+id/ivSIconth"
                     android:src="@drawable/book"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivFIcon2" />
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIconth" />
 
                 <ImageView
-                    android:id="@+id/ivTIcon2"
+                    android:id="@+id/ivTIconth"
                     android:src="@drawable/pincel"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon2"/>
+                    android:paddingHorizontal="@dimen/_1sdp"
+
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIconth"/>
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -275,45 +218,45 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/tvTitle3"
+                android:id="@+id/tvTitlef"
                 android:layout_width="match_parent"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tvSubject3"
+                android:id="@+id/tvSubjectf"
                 android:fontFamily="@font/open_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maths"
-                android:layout_below="@+id/tvTitle3"/>
+                android:layout_below="@+id/tvTitlef"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubject3">
+                android:layout_below="@+id/tvSubjectf">
                 <ImageView
-                    android:id="@+id/ivFIcon3"
+                    android:id="@+id/ivFIconf"
                     android:src="@drawable/tv"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_15sdp"/>
+                    android:layout_height="@dimen/_10sdp"/>
 
                 <ImageView
-                    android:id="@+id/ivSIcon3"
+                    android:id="@+id/ivSIconf"
                     android:src="@drawable/book"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivFIcon3" />
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIconf" />
 
                 <ImageView
-                    android:id="@+id/ivTIcon3"
+                    android:id="@+id/ivTIconf"
                     android:src="@drawable/pincel"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon3"/>
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIconf"/>
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
@@ -322,48 +265,94 @@
             android:layout_height="wrap_content"
             android:layout_weight="1">
             <TextView
-                android:id="@+id/tvTitle4"
+                android:id="@+id/tvTitles"
                 android:layout_width="match_parent"
                 android:text="LIVE SESSION"
                 android:fontFamily="@font/semibold"
                 android:layout_height="wrap_content"/>
             <TextView
-                android:id="@+id/tvSubject4"
+                android:id="@+id/tvSubjects"
                 android:fontFamily="@font/open_sans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Maths"
-                android:layout_below="@+id/tvTitle4"/>
+                android:layout_below="@+id/tvTitles"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvSubject4">
+                android:layout_below="@+id/tvSubjects">
                 <ImageView
-                    android:id="@+id/ivFIcon4"
+                    android:id="@+id/ivFIcons"
                     android:src="@drawable/tv"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
                     android:layout_alignParentRight="true"
-                    android:layout_height="@dimen/_15sdp"/>
+                    android:layout_height="@dimen/_10sdp"/>
 
                 <ImageView
-                    android:id="@+id/ivSIcon4"
+                    android:id="@+id/ivSIcons"
+                    android:paddingHorizontal="@dimen/_1sdp"
                     android:src="@drawable/book"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivFIcon4" />
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIcons" />
 
                 <ImageView
-                    android:id="@+id/ivTIcon4"
+                    android:id="@+id/ivTIcons"
                     android:src="@drawable/pincel"
-                    android:padding="@dimen/_4sdp"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_15sdp"
-                    android:layout_toLeftOf="@+id/ivSIcon4"/>
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIcons"/>
             </RelativeLayout>
         </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:background="@color/background_grey"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tvTitlesu"
+                android:layout_width="match_parent"
+                android:text="LIVE SESSION"
+                android:fontFamily="@font/semibold"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvSubjectsu"
+                android:fontFamily="@font/open_sans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Maths"
+                android:layout_below="@+id/tvTitlesu"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvSubjectsu">
+                <ImageView
+                    android:id="@+id/ivFIconsu"
+                    android:src="@drawable/tv"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_height="@dimen/_10sdp"/>
 
+                <ImageView
+                    android:id="@+id/ivSIconsu"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:src="@drawable/book"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivFIconsu" />
+
+                <ImageView
+                    android:id="@+id/ivTIconsu"
+                    android:src="@drawable/pincel"
+                    android:paddingHorizontal="@dimen/_1sdp"
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_toLeftOf="@+id/ivSIconsu"/>
+            </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
