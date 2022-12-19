@@ -121,7 +121,7 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
                         JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
                         JSONObject jsonObject3 = schedules.getJSONObject(0);
                         JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
-                        Log.d("UPCOMING_CLASS",schedules.toString());
+                        Log.d("UPCOMING_CLASS", schedules.toString());
                         Gson g = new Gson();
                         ArrayList<UpCommingData> upCommingData = new ArrayList<>();
                         for (int i = 0; i < lectures.length(); i++) {
@@ -228,6 +228,7 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
     @Override
     public void onSuccess(String type) {
         binding.tvdescription.setText(session.getData(Constant.QUOTE));
+        binding.tvAuther.setText("-" + session.getData(Constant.AUTHOR));
     }
 
     @Override

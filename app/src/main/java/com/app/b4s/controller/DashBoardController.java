@@ -69,6 +69,7 @@ public class DashBoardController implements IDashBoardController {
                     if (jsonObject.getBoolean(Constant.STATUS)) {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
                         session.setData(Constant.QUOTE, jsonArray.getJSONObject(0).getString(Constant.QUOTE));
+                        session.setData(Constant.AUTHOR,jsonArray.getJSONObject(0).getString(Constant.AUTHOR));
                         responseListener.onSuccess(Constant.SUCCESS);
                     }
                 } catch (JSONException e) {

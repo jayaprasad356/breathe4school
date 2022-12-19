@@ -14,6 +14,7 @@ import com.app.b4s.controller.IRegisterController;
 import com.app.b4s.controller.IRegisterView;
 import com.app.b4s.controller.RegisterController;
 import com.app.b4s.databinding.ActivityLoginFaceIdactivityBinding;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 
 public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterView {
@@ -22,6 +23,7 @@ public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterV
     Activity activity;
     ActivityLoginFaceIdactivityBinding binding;
     String uniqueId, backFlow;
+    private Session session;
     IRegisterController registerController;
 
     @Override
@@ -29,7 +31,9 @@ public class LoginFaceIDActivity extends AppCompatActivity implements IRegisterV
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login_face_idactivity);
         activity = LoginFaceIDActivity.this;
+        session=new Session(activity);
         registerController = new RegisterController(this);
+        binding.tvTitle.setText("Hello! "+session.getData(Constant.NAME));
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         backFlow = getIntent().getStringExtra(Constant.BACK_FLOW);
         if (backFlow!=null&&backFlow.equals("1")) {

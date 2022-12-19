@@ -15,11 +15,15 @@ import androidx.databinding.DataBindingUtil;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotMpinBinding;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.SetMPinActivity;
 
+import java.net.ServerSocket;
+
 public class ForgotMPinActivity extends AppCompatActivity {
     Activity activity;
+    private Session session;
     ActivityForgotMpinBinding binding;
 
 
@@ -27,9 +31,11 @@ public class ForgotMPinActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = ForgotMPinActivity.this;
+        session=new Session(activity);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_mpin);
         binding.btnProceed.setOnClickListener(view -> proceeed());
         binding.tvResentotp.setOnClickListener(view -> reSendOtp());
+        binding.tvdescription.setText(session.getData(Constant.EMAIL));
         binding.edOTPId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

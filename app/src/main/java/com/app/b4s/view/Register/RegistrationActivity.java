@@ -165,7 +165,7 @@ public class RegistrationActivity extends AppCompatActivity implements IRegister
             binding.tvVerifyEmail.setVisibility(View.GONE);
             binding.ivMailTick.setVisibility(View.VISIBLE);
         }
-        if (emailverify || mobileVerify) {
+        if (emailverify && mobileVerify) {
             binding.btnContinuePass.setEnabled(true);
             binding.btnContinuePass.setVisibility(View.VISIBLE);
         }

@@ -37,6 +37,7 @@ public class RegisterController implements IRegisterController {
                         JSONObject data = jsonObject.getJSONObject(Constant.DATA);
                         session.setData(Constant.EMAIL, data.getString(Constant.EMAIL));
                         session.setData(Constant.MOBILE, data.getString(Constant.MOBILE_NUMBER));
+                        session.setData(Constant.NAME,data.getString(Constant.NAME));
                         registerView.onRegisterSuccess(jsonObject.getString(Constant.MESSAGE));
                     } else {
                         registerView.onRegisterError(jsonObject.getString(Constant.MESSAGE));

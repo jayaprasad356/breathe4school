@@ -42,6 +42,7 @@ public class OtpActivity extends AppCompatActivity implements ResponseListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_otp);
         Intent intent = getIntent();
         timerstart();
+        binding.tvdescription.setText(session.getData(Constant.EMAIL));
         otpType = intent.getStringExtra(Constant.TYPE);
         description = intent.getStringExtra(Constant.DESCRIPTION);
         binding.tvdescription.setText(getString(R.string.otp_header) + " " + description);

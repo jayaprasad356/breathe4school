@@ -15,12 +15,14 @@ import androidx.databinding.DataBindingUtil;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivityForgotpasswordBinding;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Register.SetPasswordActivity;
 
 public class ForgotpasswordActivity extends AppCompatActivity {
 
     Activity activity;
+    private Session session;
     public ActivityForgotpasswordBinding binding;
 
     @Override
@@ -28,8 +30,9 @@ public class ForgotpasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgotpassword);
         activity = ForgotpasswordActivity.this;
-
+session=new Session(activity);
         timerstart();
+        binding.tvdescription.setText(session.getData(Constant.EMAIL));
         binding.tvResentotp.setOnClickListener(view -> reSendOtp());
         binding.edOTPId.addTextChangedListener(new TextWatcher() {
             @Override

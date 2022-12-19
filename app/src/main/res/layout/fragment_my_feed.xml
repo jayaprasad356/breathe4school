@@ -494,7 +494,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/ic_mask_group"
-                            android:padding="@dimen/_5sdp">
+                            android:padding="@dimen/_1sdp">
 
 
                             <TextView
@@ -511,15 +511,27 @@
 
                             <TextView
                                 android:id="@+id/tvdescription"
-                                android:layout_width="@dimen/_145sdp"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_20sdp"
                                 android:layout_below="@+id/tvTitleName"
                                 android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:fontFamily="@font/open_sans"
-                                android:text="I understand the walls outside of this classroom and\nthink about them as context for everything we do here."
+                                android:text=" I understand"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_6sdp" />
+                            <TextView
+                                android:id="@+id/tvAuther"
+                                android:layout_below="@id/tvdescription"
+                                android:layout_width="wrap_content"
+                                android:text="dsfaa"
+                                android:layout_alignRight="@id/tvdescription"
+                                android:textSize="@dimen/_6sdp"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/open_sans"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_height="@dimen/_10sdp"/>
 
 
                         </RelativeLayout>

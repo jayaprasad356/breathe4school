@@ -45,6 +45,7 @@ public class Constant {
     public static final String ON_THIS_DAY = "get_on_this_day";
     public static final String ON_THIS_DAY_TITLE = "on_this_day_title";
     public static final String QUOTE = "quote";
+    public static final String AUTHOR = "author";
     public static final String NAME = "name";
     public static final String GENDER = "gender";
     public static final String ID = "id";
@@ -69,7 +70,7 @@ public class Constant {
     public static final String LECTURES = "lectures";
     public static final String STANDARD = "standard";
     public static final String SECTION = "section";
-    public static final String TIMETABLESESSION = "timetableSession";
+    public static final String TIMETABLESESSION = "timetable_session";
 
     public static final String BACK_FLOW = "back";
 
