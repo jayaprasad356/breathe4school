@@ -107,5 +107,8 @@
     <string name="choose_file">Choose file</string>
     <string name="you_have_successfully_submitted_the_homework">You Have successfully submitted the homework</string>
 
+    <string-array name="workinghour">
+        <item>All</item>
 
+    </string-array>
 </resources>

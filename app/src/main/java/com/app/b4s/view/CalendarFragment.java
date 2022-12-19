@@ -2,11 +2,13 @@ package com.app.b4s.view;
 
 import static com.app.b4s.utilities.Constant.STATUS;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,7 +45,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
     private FragmentCalendarBinding binding;
     CommonMethods commonMethods;
     Session session;
-    RecyclerView rcDailyTables;
+    RecyclerView rcDailyTables, rcWeeklyTables;
+    private Spinner spinner;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -60,30 +63,47 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
         ICalendarController calendarController = new CalendarController(this);
         calendarController.loadTimeTable(getActivity());
         LinearLayoutManager dailyTimeTable = new LinearLayoutManager(getActivity());
+        LinearLayoutManager weeklyTimeTable=new LinearLayoutManager(getActivity());
         rcDailyTables=binding.dailyRecycler;
+        rcWeeklyTables=binding.rcWeekly;
+        rcWeeklyTables.setLayoutManager(weeklyTimeTable);
         rcDailyTables.setLayoutManager(dailyTimeTable);
         loadDailyTimeTables();
-        binding.tvWeekly.setOnClickListener(view -> {
-            loadWeeklyTimeTables();
 
-            binding.weeklyCard.setRadius(6);
-            binding.dailyCard.setRadius(0);
-            binding.weeklyCard.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
-            binding.dailyCard.setCardBackgroundColor(0);
-            binding.dailyLayout.setVisibility(View.GONE);
-            binding.weeklyLayout.setVisibility(View.VISIBLE);
+        binding.tvWeekly.setOnClickListener(view -> {
+            handleWeekly();
         });
         binding.tvDaily.setOnClickListener(view -> {
-            binding.weeklyCard.setRadius(0);
-            binding.dailyCard.setRadius(6);
-            binding.weeklyCard.setCardBackgroundColor(0);
-            binding.dailyCard.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
-            binding.weeklyLayout.setVisibility(View.GONE);
-            binding.dailyLayout.setVisibility(View.VISIBLE);
+            handleDaily();
         });
 
 
         return binding.getRoot();
+    }
+
+    private void handleDaily() {
+        loadDailyTimeTables();
+        binding.tvWeekly.setBackgroundResource(R.drawable.underline_drawable);
+        binding.tvDaily.setBackgroundResource(0);
+        binding.weeklyCard.setRadius(0);
+        binding.dailyCard.setRadius(6);
+        binding.weeklyCard.setCardBackgroundColor(0);
+        binding.dailyCard.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
+        binding.weeklyLayout.setVisibility(View.GONE);
+        binding.dailyLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void handleWeekly() {
+        binding.weeklyCard.setRadius(6);
+        binding.dailyCard.setRadius(0);
+        binding.tvDaily.setBackgroundResource(R.drawable.underline_drawable);
+        binding.tvWeekly.setBackgroundResource(0);
+
+        binding.weeklyCard.setCardBackgroundColor(getResources().getColor(R.color.card_bg));
+        binding.dailyCard.setCardBackgroundColor(0);
+        binding.dailyLayout.setVisibility(View.GONE);
+        binding.weeklyLayout.setVisibility(View.VISIBLE);
+        loadWeeklyTimeTables();
     }
 
     @Override
@@ -180,7 +200,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
                             }
                         }
                         WeeklyTimeTableAdapter adapter = new WeeklyTimeTableAdapter(weeklyTimeTables, getActivity());
-                        rcDailyTables.setAdapter(adapter);
+                        rcWeeklyTables.setAdapter(adapter);
                     } else {
                         Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                     }
