@@ -99,6 +99,13 @@
     <string name="activity">Activity</string>
     <string name="home_work_management">Home Work Management</string>
     <string name="subject_wise_home_work">Subject Wise Home Work</string>
+    <string name="this_question">This Question</string>
+    <string name="total_marks">Total Marks</string>
+    <string name="questions">Questions</string>
+    <string name="upload_your_files_here">Upload your files here</string>
+    <string name="open_camera">Open Camera</string>
+    <string name="choose_file">Choose file</string>
+    <string name="you_have_successfully_submitted_the_homework">You Have successfully submitted the homework</string>
 
 
 </resources>

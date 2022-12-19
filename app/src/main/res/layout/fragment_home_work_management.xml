@@ -111,34 +111,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:orientation="horizontal"
-                    >
+                    android:orientation="horizontal">
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Filter"
-                        android:textSize="@dimen/_12sdp"
+                        android:background="@drawable/corner_stroke"
                         android:drawableStart="@drawable/ic_filter"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:textColor="#668598"
-                        android:background="@drawable/corner_stroke"
-                        android:paddingVertical="@dimen/_5sdp"
                         android:paddingHorizontal="@dimen/_10sdp"
-                        />
-
+                        android:paddingVertical="@dimen/_5sdp"
+                        android:text="Filter"
+                        android:textColor="#668598"
+                        android:textSize="@dimen/_12sdp" />
 
 
                     <TextView
-                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:id="@+id/tvSortby"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:drawableEnd="@drawable/ic_arrow_down"
+                        android:drawablePadding="@dimen/_5sdp"
                         android:text="Sort by"
                         android:textColor="@color/dark_blue"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableEnd="@drawable/ic_arrow_down"
-                        android:drawablePadding="@dimen/_5sdp"
 
                         />
 
