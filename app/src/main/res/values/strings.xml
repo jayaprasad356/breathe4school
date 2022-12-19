@@ -106,9 +106,35 @@
     <string name="open_camera">Open Camera</string>
     <string name="choose_file">Choose file</string>
     <string name="you_have_successfully_submitted_the_homework">You Have successfully submitted the homework</string>
+    <string name="maths">Maths</string>
+    <string name="create_study_plan">Create Study Planer</string>
+    <string name="study_planner_name">Study planner name</string>
+    <string name="complete_chapter"><![CDATA[Complete Chapter 1 & 2]]></string>
+    <string name="create">Create</string>
+    <string name="subject">Subject</string>
+    <string name="description">Description</string>
 
     <string-array name="workinghour">
         <item>All</item>
 
+    </string-array>
+    <string-array name="types">
+        <item>Select Type</item>
+        <item>Once</item>
+        <item>Everyday</item>
+    </string-array>
+    <string-array name="Timings">
+        <item>Start time</item>
+        <item>07:00 AM</item>
+        <item>08:00 AM</item>
+        <item>09:00 AM</item>
+        <item>10:00 AM</item>
+        <item>11:00 AM</item>
+        <item>12:00 PM</item>
+        <item>01:00 PM</item>
+        <item>02:00 PM</item>
+        <item>03:00 PM</item>
+        <item>04:00 PM</item>
+        <item>05:00 PM</item>
     </string-array>
 </resources>

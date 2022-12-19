@@ -134,6 +134,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/ivAddStudyPlaner"
                         android:layout_width="@dimen/_16sdp"
                         android:layout_height="@dimen/_10sdp"
                         android:layout_gravity="center"

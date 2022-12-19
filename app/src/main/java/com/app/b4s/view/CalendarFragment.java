@@ -1,13 +1,20 @@
 package com.app.b4s.view;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.app.b4s.utilities.Constant.STATUS;
 
+import android.app.ActionBar;
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -47,6 +54,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
     Session session;
     RecyclerView rcDailyTables, rcWeeklyTables;
     private Spinner spinner;
+    private PopupWindow popupWindow;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -59,17 +67,17 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false);
         commonMethods = new CommonMethods();
-        session=new Session(getActivity());
+        session = new Session(getActivity());
         ICalendarController calendarController = new CalendarController(this);
         calendarController.loadTimeTable(getActivity());
         LinearLayoutManager dailyTimeTable = new LinearLayoutManager(getActivity());
-        LinearLayoutManager weeklyTimeTable=new LinearLayoutManager(getActivity());
-        rcDailyTables=binding.dailyRecycler;
-        rcWeeklyTables=binding.rcWeekly;
+        LinearLayoutManager weeklyTimeTable = new LinearLayoutManager(getActivity());
+        rcDailyTables = binding.dailyRecycler;
+        rcWeeklyTables = binding.rcWeekly;
         rcWeeklyTables.setLayoutManager(weeklyTimeTable);
         rcDailyTables.setLayoutManager(dailyTimeTable);
         loadDailyTimeTables();
-
+        binding.ivAddStudyPlaner.setOnClickListener(view -> showPopup());
         binding.tvWeekly.setOnClickListener(view -> {
             handleWeekly();
         });
@@ -79,6 +87,19 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
 
 
         return binding.getRoot();
+    }
+
+    private void showPopup() {
+        Dialog dialog=new Dialog(getContext());
+        dialog.setContentView(R.layout.add_study_planer);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = 1200;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
     }
 
     private void handleDaily() {
@@ -125,6 +146,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
     public void onFailure(String msg) {
 
     }
+
     private void loadDailyTimeTables() {
         String url = "http://143.244.132.170:3001/api/v1/timetable/getDailyTimetable/academicYearId/" +
                 session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
@@ -144,7 +166,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
                         JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
                         JSONObject jsonObject3 = schedules.getJSONObject(0);
                         JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
-                        Log.d("DAILY TIME TABLES",schedules.toString());
+                        Log.d("DAILY TIME TABLES", schedules.toString());
                         Gson g = new Gson();
                         ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
                         for (int i = 0; i < lectures.length(); i++) {
@@ -168,6 +190,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
         }, getActivity(), url, params, true, 0);
 
     }
+
     private void loadWeeklyTimeTables() {
         String url = "http://143.244.132.170:3001/api/v1/timetable/get/academicYearId/" +
                 session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
@@ -187,7 +210,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
                         JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
                         JSONObject jsonObject3 = schedules.getJSONObject(0);
                         JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
-                        Log.d("DAILY TIME TABLES",schedules.toString());
+                        Log.d("DAILY TIME TABLES", schedules.toString());
                         Gson g = new Gson();
                         ArrayList<WeeklyTimeTable> weeklyTimeTables = new ArrayList<>();
                         for (int i = 0; i < lectures.length(); i++) {
