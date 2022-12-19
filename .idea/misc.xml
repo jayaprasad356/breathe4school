@@ -44,8 +44,10 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_mpin.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_set_password.xml" value="0.1625" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_submission_homework_formbased.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_successfull.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_test.xml" value="0.2359375" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/custom_layout.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_completed.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_home_work_management.xml" value="0.1" />
@@ -64,6 +66,7 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_subjects.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/home_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/homework_menu.xml" value="0.10208333333333333" />
+        <entry key="..\:/breathe4school/app/src/main/res/menu/popup_menu.xml" value="0.10208333333333333" />
       </map>
     </option>
   </component>

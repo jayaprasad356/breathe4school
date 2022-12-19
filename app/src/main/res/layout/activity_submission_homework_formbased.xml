@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.SubmissionHomeworkFormbasedActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp">
+
+
+            <ImageButton
+                android:id="@+id/ibBackBtn"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/ic_back_arrow" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toRightOf="@+id/ibBackBtn"
+                android:text="Navellaru Onde Poem"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold"/>
+
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            >
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                >
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kannada | "
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Submit on"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 28/02/2022"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10sdp"
+                    />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                >
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:text="@string/total_marks"
+                        android:textSize="@dimen/_10sdp" />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="25"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/this_question"
+                        android:textSize="@dimen/_10sdp"
+                        />
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="01"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/questions"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="1/40"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:orientation="vertical"
+            >
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/tvQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Q1. Lorem Ipsum is simply dummy text of the printing and typesetting industry.?"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/black"
+            />
+
+
+            <TextView
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:id="@+id/tvmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5 mark"
+                android:textStyle="bold"
+                android:textSize="@dimen/_10sdp"
+                android:layout_toRightOf="@+id/tvQuestion"
+                />
+
+
+            </RelativeLayout>
+
+
+
+
+
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rectangle_bg" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+
+                            android:orientation="vertical"
+                            >
+
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/upload_cam"
+                            android:layout_gravity="center"
+                            />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/upload_your_files_here"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_gravity="center"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/open_camera"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"
+
+                                />
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_120sdp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rectangle_bg" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+
+                            android:orientation="vertical"
+                            >
+
+
+
+                        <ImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/upload_doc"
+                            android:layout_gravity="center"
+                            />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/upload_your_files_here"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_gravity="center"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/choose_file"
+                                android:textSize="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:textColor="@color/primary"
+                                android:textStyle="bold"
+
+                                />
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:visibility="visible"
+                android:layout_below="@+id/tvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_10sdp"
+                >
+
+
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."/>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:text="Next"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/primary" />
+
+</RelativeLayout>
