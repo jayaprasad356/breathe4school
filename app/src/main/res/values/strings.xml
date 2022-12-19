@@ -100,5 +100,8 @@
     <string name="home_work_management">Home Work Management</string>
     <string name="subject_wise_home_work">Subject Wise Home Work</string>
 
+    <string-array name="workinghour">
+        <item>All</item>
 
+    </string-array>
 </resources>
