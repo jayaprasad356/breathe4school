@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/_300sdp"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_9sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="@font/open_sans_bold"
         android:padding="@dimen/_2sdp"
         android:text="@string/create_study_plan"
@@ -24,9 +24,9 @@
         android:background="@drawable/study_bg"
         android:fontFamily="@font/open_sans"
         android:gravity="start"
+        android:hint="@string/subject"
         android:padding="@dimen/_6sdp"
         android:singleLine="true"
-        android:hint="@string/subject"
         android:textColor="@color/time_txt_col"
         android:textSize="12sp" />
 
@@ -98,29 +98,98 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="@dimen/_5sdp"
-            android:layout_weight="1"
-            android:background="@drawable/study_bg">
+            android:layout_weight="1">
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="4"
-                android:background="@android:color/transparent"
-                android:entries="@array/types"
-                android:gravity="center"
-                android:padding="@dimen/_6sdp"
-                android:spinnerMode="dropdown" />
-
-            <ImageView
-                android:layout_width="@dimen/_10sdp"
-                android:layout_height="@dimen/_10sdp"
-                android:layout_gravity="center"
+            <CheckBox
+                android:id="@+id/cbMonday"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:padding="@dimen/_3sdp"
-                android:src="@drawable/down_arrow" />
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="M"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbTuesday"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:fontFamily="@font/open_sans"
+                android:text="T"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbWednes"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="W"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbThurs"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="Th"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbFriday"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="F"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbSatur"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="S"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/cbSun"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="@dimen/_2sdp"
+                android:background="@drawable/check_bg"
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:text="Su"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -134,9 +203,9 @@
         android:background="@drawable/study_bg"
         android:fontFamily="@font/open_sans"
         android:gravity="start"
+        android:hint="@string/study_planner_name"
         android:padding="@dimen/_6sdp"
         android:singleLine="true"
-        android:hint="@string/study_planner_name"
         android:textColor="@color/time_txt_col"
         android:textSize="12sp" />
 
@@ -149,9 +218,9 @@
         android:background="@drawable/study_bg"
         android:fontFamily="@font/open_sans"
         android:gravity="start"
+        android:hint="@string/description"
         android:padding="@dimen/_6sdp"
         android:singleLine="true"
-        android:hint="@string/description"
         android:textColor="@color/time_txt_col"
         android:textSize="12sp" />
 
@@ -161,16 +230,16 @@
         android:layout_gravity="right">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnContinue"
+            android:id="@+id/btnCreateStudy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/btn_corner"
             android:enabled="true"
-            android:layout_marginBottom="@dimen/_10sdp"
             android:fontFamily="@font/semibold"
             android:padding="@dimen/_2sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
             android:text="@string/create"
             android:textAllCaps="false"
             android:textColor="@color/white"

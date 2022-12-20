@@ -1,7 +1,9 @@
 package com.app.b4s.commons;
 
+import java.util.Calendar;
+
 public class CommonMethods {
-    public  String militaryToOrdinaryTime(int milTime) {
+    public String militaryToOrdinaryTime(int milTime) {
         int hour = milTime / 100;
         int min = milTime % 100;
         String period;
@@ -27,6 +29,20 @@ public class CommonMethods {
         }
         String ordTime = hour + ":" + min + " " + period;
         return ordTime;
+    }
+
+    public String getCurrentMilitaryTime() {
+        Calendar c = Calendar.getInstance();
+        int minute = c.get(Calendar.MINUTE);
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        if (minute < 10 && minute > 0) {
+            String minut = "0" + minute;
+            String time = String.valueOf(hour) + String.valueOf(minut);
+            return time;
+        }
+
+        String time = String.valueOf(hour) + String.valueOf(minute);
+        return time;
     }
 
 }

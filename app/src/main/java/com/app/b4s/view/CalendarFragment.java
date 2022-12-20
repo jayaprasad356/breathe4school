@@ -1,12 +1,8 @@
 package com.app.b4s.view;
 
-import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.app.b4s.utilities.Constant.STATUS;
 
-import android.app.ActionBar;
 import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.CheckBox;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,15 +25,20 @@ import com.app.b4s.R;
 import com.app.b4s.adapter.DailyTimeTableAdapter;
 import com.app.b4s.adapter.WeeklyTimeTableAdapter;
 import com.app.b4s.commons.CommonMethods;
+import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.CalendarController;
 import com.app.b4s.controller.CalendarResponse;
 import com.app.b4s.controller.ICalendarController;
+import com.app.b4s.controller.IStudyPlanerController;
+import com.app.b4s.controller.StudyPlanerController;
 import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -47,10 +49,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class CalendarFragment extends Fragment implements CalendarResponse {
+public class CalendarFragment extends Fragment implements CalendarResponse, ResponseListener {
 
     private FragmentCalendarBinding binding;
     CommonMethods commonMethods;
+    IStudyPlanerController studyPlanerController;
     Session session;
     RecyclerView rcDailyTables, rcWeeklyTables;
     private Spinner spinner;
@@ -68,6 +71,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false);
         commonMethods = new CommonMethods();
         session = new Session(getActivity());
+        studyPlanerController=new StudyPlanerController(this);
         ICalendarController calendarController = new CalendarController(this);
         calendarController.loadTimeTable(getActivity());
         LinearLayoutManager dailyTimeTable = new LinearLayoutManager(getActivity());
@@ -90,17 +94,76 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
     }
 
     private void showPopup() {
-        Dialog dialog=new Dialog(getContext());
+        Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.add_study_planer);
+        dialog.findViewById(R.id.cbMonday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbMonday)));
+        dialog.findViewById(R.id.cbTuesday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbTuesday)));
+        dialog.findViewById(R.id.cbWednes).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbWednes)));
+        dialog.findViewById(R.id.cbThurs).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbThurs)));
+        dialog.findViewById(R.id.cbFriday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbFriday)));
+        dialog.findViewById(R.id.cbSatur).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSatur)));
+        dialog.findViewById(R.id.cbSun).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSun)));
+        dialog.findViewById(R.id.btnCreateStudy).setOnClickListener(view -> apiCall(dialog));
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = 1200;
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setAttributes(lp);
         dialog.show();
     }
+
+    private void apiCall(Dialog dialog) {
+        ArrayList<String> checkedBox = new ArrayList<>();
+        selectedDays(dialog,checkedBox);
+        Toast.makeText(getContext(), checkedBox.toString(), Toast.LENGTH_SHORT).show();
+        studyPlanerController.createStudyPlaner(getActivity(),checkedBox);
+
+
+    }
+
+    private void selectedDays(Dialog dialog, ArrayList<String> checkedBox) {
+
+        CheckBox monday, tuesDay, wednesday, thursday, friday, saturday, sunday;
+        monday = dialog.findViewById(R.id.cbMonday);
+        tuesDay = dialog.findViewById(R.id.cbTuesday);
+        wednesday = dialog.findViewById(R.id.cbWednes);
+        thursday = dialog.findViewById(R.id.cbThurs);
+        friday = dialog.findViewById(R.id.cbFriday);
+        saturday = dialog.findViewById(R.id.cbSatur);
+        sunday = dialog.findViewById(R.id.cbSun);
+        if (monday.isChecked()) {
+            checkedBox.add("Monday");
+        }
+        if (tuesDay.isChecked()) {
+            checkedBox.add("Tuesday");
+        }
+        if (wednesday.isChecked()) {
+            checkedBox.add("Wednesday");
+        }
+        if (thursday.isChecked()) {
+            checkedBox.add("Thursday");
+        }
+        if (friday.isChecked()) {
+            checkedBox.add("Friday");
+        }
+        if (saturday.isChecked()) {
+            checkedBox.add("Saturday");
+        }
+        if (sunday.isChecked()) {
+            checkedBox.add("Sunday");
+        }
+    }
+
+    private <T extends View> void checkStatus(View view, T viewById) {
+        Boolean isChecked = ((MaterialCheckBox) view).isChecked();
+        if (isChecked) {
+            viewById.setBackgroundResource(R.drawable.check_box_bg);
+        } else
+            viewById.setBackgroundResource(R.drawable.check_bg);
+    }
+
 
     private void handleDaily() {
         loadDailyTimeTables();
@@ -143,7 +206,22 @@ public class CalendarFragment extends Fragment implements CalendarResponse {
     }
 
     @Override
+    public void onSuccess(String type) {
+
+    }
+
+    @Override
     public void onFailure(String msg) {
+
+    }
+
+    @Override
+    public void setPasswordSuccess() {
+
+    }
+
+    @Override
+    public void OnSuccess(ArrayList<DayOfLine> arrayList) {
 
     }
 

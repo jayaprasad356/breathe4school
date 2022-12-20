@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
 import com.app.b4s.model.DailyTimeTables;
-import com.app.b4s.utilities.Constant;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder> {
@@ -55,6 +53,33 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         int duriation = endTime - startTime;
         holder.duriation.setText(duriation + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
+        iconVisibility(holder, position);
+        statusVisibility(holder, position,startTime,endTime);
+
+    }
+
+    private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
+        int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
+        if (currentTime>startTime && currentTime<endTime)
+            holder.joinNow.setVisibility(View.VISIBLE);
+        if (currentTime>startTime && currentTime>endTime)
+            holder.viewSummbery.setVisibility(View.VISIBLE);
+        if (!(currentTime>startTime && currentTime>endTime))
+            holder.setReminer.setVisibility(View.VISIBLE);
+
+
+
+    }
+
+    private void iconVisibility(@NonNull ViewHolder holder, int position) {
+        if (dailyTimeTables.get(position).getActivity_id() == null)
+            holder.activityView.setVisibility(View.INVISIBLE);
+        if (dailyTimeTables.get(position).getAssessment_id() == null)
+            holder.assessmentView.setVisibility(View.INVISIBLE);
+        if (dailyTimeTables.get(position).getPre_read_id() == null)
+            holder.preReadView.setVisibility(View.INVISIBLE);
+        if (dailyTimeTables.get(position).getBbb_lecture_id() != null)
+            holder.presentationView.setVisibility(View.INVISIBLE);
     }
 
 
@@ -64,8 +89,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView startTime, duriation, subject, endTime;
+        public TextView startTime, duriation, subject, endTime,setReminer,joinNow,onReminder,viewSummbery;
         public LinearLayout layout;
+        public ImageView assessmentView, preReadView, activityView, presentationView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,6 +100,14 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             this.duriation = itemView.findViewById(R.id.tvDuriation);
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.layout = itemView.findViewById(R.id.timeTableLayout);
+            this.activityView = itemView.findViewById(R.id.ivActivity);
+            this.assessmentView = itemView.findViewById(R.id.ivAssessment);
+            this.preReadView = itemView.findViewById(R.id.ivPreRead);
+            this.presentationView = itemView.findViewById(R.id.ivPresentation);
+            this.setReminer = itemView.findViewById(R.id.tvSetReminderView);
+            this.joinNow = itemView.findViewById(R.id.tvJoinNowView);
+            this.onReminder = itemView.findViewById(R.id.tvOnReminderView);
+            this.viewSummbery = itemView.findViewById(R.id.tvViewSummeryView);
         }
     }
 }

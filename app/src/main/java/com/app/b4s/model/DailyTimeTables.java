@@ -46,5 +46,42 @@ public class DailyTimeTables {
     public String  start_time;
     public  String end_time;
     public Object subject;
+    public String activity_id;
+
+    public String getActivity_id() {
+        return activity_id;
+    }
+
+    public void setActivity_id(String activity_id) {
+        this.activity_id = activity_id;
+    }
+
+    public String getAssessment_id() {
+        return assessment_id;
+    }
+
+    public void setAssessment_id(String assessment_id) {
+        this.assessment_id = assessment_id;
+    }
+
+    public String getBbb_lecture_id() {
+        return bbb_lecture_id;
+    }
+
+    public void setBbb_lecture_id(String bbb_lecture_id) {
+        this.bbb_lecture_id = bbb_lecture_id;
+    }
+
+    public String getPre_read_id() {
+        return pre_read_id;
+    }
+
+    public void setPre_read_id(String pre_read_id) {
+        this.pre_read_id = pre_read_id;
+    }
+
+    public String assessment_id;
+    public String bbb_lecture_id;
+    public String pre_read_id;
     public Teacher teacher;
 }

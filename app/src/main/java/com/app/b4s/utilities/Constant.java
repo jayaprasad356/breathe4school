@@ -33,6 +33,7 @@ public class Constant {
     public static final String PASSWORD = "password";
     public static final String TITLE = "Title";
     public static final String DESCRIPTION = "Descripition!";
+    public static final String DESCRIPTIO = "description";
     public static final String MPIN = "mpin";
     public static final String SUCCESS = "Success!";
     public static final String SKIP_FACE_ID = "SkipFaceId!";
@@ -58,11 +59,11 @@ public class Constant {
     public static final String MESSAGE_SHOWEN_TIME = "message_showed_time";
     public static final String MESSAGE_COUNT = "message_count";
 
-    public static final String ACADEMIC_YEAR_ID = "academicYearId";
-    public static final String SCHOOL_ID = "schoolId";
-    public static final String STANDARD_ID = "standardId";
-    public static final String SECTION_ID = "sectionId";
-    public static final String TIME_TABLE_SESSION_ID = "timetableSessionId";
+    public static final String ACADEMIC_YEAR_ID = "academic_year_id";
+    public static final String SCHOOL_ID = "school_id";
+    public static final String STANDARD_ID = "standard_id";
+    public static final String SECTION_ID = "section_id";
+    public static final String TIME_TABLE_SESSION_ID = "timetable_session_id";
 
     public static final String ACADEMIC_YEAR = "academic_year";
     public static final String SCHOOL = "school";
@@ -76,5 +77,7 @@ public class Constant {
 
     public static final String START_TIME = "start_time";
     public static final String END_TIME = "end_time";
+    public static final String SUBJECT_ID = "subject_id";
+
 
 }
