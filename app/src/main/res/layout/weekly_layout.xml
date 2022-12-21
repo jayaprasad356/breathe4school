@@ -19,6 +19,7 @@
             android:fontFamily="@font/open_sans"
             android:layout_weight="0.35"/>
         <RelativeLayout
+            android:id="@+id/mondayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -68,6 +69,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/tuesdayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -117,6 +119,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/wednesdayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -164,6 +167,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/thursDayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -213,6 +217,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/fridayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -260,6 +265,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/saturView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"
@@ -307,6 +313,7 @@
             </RelativeLayout>
         </RelativeLayout>
         <RelativeLayout
+            android:id="@+id/sundayView"
             android:layout_width="0dp"
             android:background="@color/background_grey"
             android:layout_height="wrap_content"

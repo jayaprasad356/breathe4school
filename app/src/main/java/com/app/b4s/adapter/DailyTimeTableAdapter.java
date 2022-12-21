@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
 import com.app.b4s.model.DailyTimeTables;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.CalendarFragment;
 
 import java.util.ArrayList;
 
@@ -23,10 +25,12 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     Activity activity;
     CommonMethods commonMethods = new CommonMethods();
     ArrayList<DailyTimeTables> dailyTimeTables;
+    private String type;
 
-    public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity) {
+    public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type) {
         this.dailyTimeTables = dailyTimeTables;
         this.activity = activity;
+        this.type = type;
     }
 
 
@@ -53,20 +57,20 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         int duriation = endTime - startTime;
         holder.duriation.setText(duriation + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
-        iconVisibility(holder, position);
-        statusVisibility(holder, position,startTime,endTime);
+            iconVisibility(holder, position);
+
+        statusVisibility(holder, position, startTime, endTime);
 
     }
 
     private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
         int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
-        if (currentTime>startTime && currentTime<endTime)
+        if (currentTime > startTime && currentTime < endTime)
             holder.joinNow.setVisibility(View.VISIBLE);
-        if (currentTime>startTime && currentTime>endTime)
+        if (currentTime > startTime && currentTime > endTime)
             holder.viewSummbery.setVisibility(View.VISIBLE);
-        if (!(currentTime>startTime && currentTime>endTime))
+        if (!(currentTime > startTime && currentTime > endTime))
             holder.setReminer.setVisibility(View.VISIBLE);
-
 
 
     }
@@ -89,7 +93,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView startTime, duriation, subject, endTime,setReminer,joinNow,onReminder,viewSummbery;
+        public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery;
         public LinearLayout layout;
         public ImageView assessmentView, preReadView, activityView, presentationView;
 

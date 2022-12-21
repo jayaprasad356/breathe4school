@@ -116,6 +116,8 @@
 
     <string-array name="workinghour">
         <item>All</item>
+        <item>Live Sessions</item>
+        <item>Study Planner</item>
 
     </string-array>
     <string-array name="types">

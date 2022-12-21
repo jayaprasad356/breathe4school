@@ -78,6 +78,16 @@ public class Constant {
     public static final String START_TIME = "start_time";
     public static final String END_TIME = "end_time";
     public static final String SUBJECT_ID = "subject_id";
+    public static final String STUDY_PLANER = "study_planer";
+    public static final String LIVE_SESSION = "live_session";
 
+    public static final String DAY = "day";
+    public static final String MONDAY = "Monday";
+    public static final String TUESDAY = "Tuesday";
+    public static final String WEDNESDAY = "Wednesday";
+    public static final String THURSDAY = "Thursday";
+    public static final String FRIDAY = "Friday";
+    public static final String SATURDAY = "Saturday";
+    public static final String SUNDAY = "Sunday";
 
 }
