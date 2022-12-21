@@ -35,6 +35,7 @@ import com.app.b4s.controller.StudyPlanerController;
 import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.DayOfLine;
+import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.days.Friday;
 import com.app.b4s.model.days.Monday;
 import com.app.b4s.model.WeeklyTimeTable;
@@ -328,24 +329,45 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         ArrayList<Friday> fridays = new ArrayList<>();
                         ArrayList<Saturday> saturdays = new ArrayList<>();
                         ArrayList<Sunday> sundays = new ArrayList<>();
+                        String mon_name = "",tue_name = "",wed_name = "",thurs_name = "",fri_name = "",satur_name = "",sun_name = "";
 
                         for (int i = 0; i < lectures.length(); i++) {
                             JSONObject jsonObject1 = lectures.getJSONObject(i);
                             if (jsonObject1 != null) {
                                 int startTime = jsonObject1.getInt(Constant.START_TIME);
                                 int endTime = jsonObject1.getInt(Constant.END_TIME);
-                                mondayDatas(g, mondays, jsonObject1, startTime, endTime);
-                                tuesDayDatas(g, tuesdays, jsonObject1, startTime, endTime);
-                                wednesDayDatas(g, wednesdays, jsonObject1, startTime, endTime);
-                                thursDayDatas(g, thursdays, jsonObject1, startTime, endTime);
-                                fridayDatas(g, fridays, jsonObject1, startTime, endTime);
-                                saturdayDatas(g, saturdays, jsonObject1, startTime, endTime);
-                                sundayDatas(g, sundays, jsonObject1, startTime, endTime);
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
+                                    mon_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+                                    tue_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+                                    wed_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+                                    thurs_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+                                    fri_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+                                    satur_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
+                                    sun_name = jsonObject1.get(Constant.NAME).toString();
+                                }
+
                             } else {
                                 break;
                             }
                         }
-                        WeeklyTimeTableAdapter adapter = new WeeklyTimeTableAdapter(mondays, tuesdays, wednesdays, thursdays, fridays, saturdays, sundays, getActivity());
+                        ArrayList<WeeklyTimeTable> wt = new ArrayList<>();
+                        //WeeklyTimeTable w1 = new WeeklyTimeTable("Maths","Science","Hindi","Social","Maths","English","Computer");
+                        WeeklyTimeTable w1 = new WeeklyTimeTable(mon_name,tue_name,wed_name,thurs_name,fri_name,satur_name,sun_name);
+
+                        wt.add(w1);
+                        WeeklyTimeTableAdapter adapter = new WeeklyTimeTableAdapter(wt, getActivity());
                         rcWeeklyTables.setAdapter(adapter);
                     } else {
                         Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();

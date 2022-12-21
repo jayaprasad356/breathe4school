@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
+import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Friday;
 import com.app.b4s.model.days.Monday;
 import com.app.b4s.model.days.Saturday;
@@ -27,24 +28,12 @@ import java.util.ArrayList;
 public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adapter.WeeklyTimeTableAdapter.ViewHolder> {
     Activity activity;
     CommonMethods commonMethods = new CommonMethods();
-    ArrayList<Monday> mondays;
-    ArrayList<Tuesday> tuesdays;
-    ArrayList<Wednesday> wednesdays;
-    ArrayList<Thursday> thursdays;
-    ArrayList<Friday> fridays;
-    ArrayList<Saturday> saturdays;
-    ArrayList<Sunday> sundays;
+    ArrayList<WeeklyTimeTable> weeklyTimeTables;
 
 
-    public WeeklyTimeTableAdapter(ArrayList<Monday> mondays, ArrayList<Tuesday> tuesdays, ArrayList<Wednesday> wednesdays, ArrayList<Thursday> thursdays, ArrayList<Friday> fridays, ArrayList<Saturday> saturdays, ArrayList<Sunday> sundays, Activity activity) {
-        this.mondays = mondays;
+    public WeeklyTimeTableAdapter(ArrayList<WeeklyTimeTable> weeklyTimeTables,Activity activity) {
+        this.weeklyTimeTables = weeklyTimeTables;
         this.activity = activity;
-        this.tuesdays = tuesdays;
-        this.wednesdays = wednesdays;
-        this.thursdays = thursdays;
-        this.fridays = fridays;
-        this.saturdays = saturdays;
-        this.sundays = sundays;
     }
 
 
@@ -58,97 +47,20 @@ public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.ada
 
     @Override
     public void onBindViewHolder(@NonNull com.app.b4s.adapter.WeeklyTimeTableAdapter.ViewHolder holder, int position) {
-        if (position == 0) {
-            if (mondays.get(position).getStart_time() >= 700 && mondays.get(position).getEnd_time() <= 740)
-                holder.subjectM.setText(mondays.get(position).getName());
-            if (tuesdays.get(position).getStart_time() >= 700 && tuesdays.get(position).getEnd_time() <= 740)
-                holder.subjectT.setText(tuesdays.get(position).getName());
-            if (wednesdays.get(position).getStart_time() >= 700 && wednesdays.get(position).getEnd_time() <= 740)
-                holder.subjectTh.setText(wednesdays.get(position).getName());
-            if (thursdays.get(position).getStart_time() >= 700 && thursdays.get(position).getEnd_time() <= 740)
-                holder.subjectW.setText(thursdays.get(position).getName());
-            if (fridays.get(position).getStart_time() >= 700 && fridays.get(position).getEnd_time() <= 740)
-                holder.subjectF.setText(fridays.get(position).getName());
-            if (saturdays.get(position).getStart_time() >= 700 && saturdays.get(position).getEnd_time() <= 740)
-                holder.subjectS.setText(saturdays.get(position).getName());
-            if (sundays.get(position).getStart_time() >= 700 && sundays.get(position).getEnd_time() <= 740)
-                holder.subjectSu.setText(sundays.get(position).getName());
-            else
-                holder.sunday.setVisibility(View.INVISIBLE);
-        }
-        if (position == 1) {
-            if (mondays.get(position).getStart_time() >= 740 && mondays.get(position).getEnd_time() <= 820)
-                holder.subjectM.setText(mondays.get(position).getName());
-            if (tuesdays.get(position).getStart_time() >= 740 && tuesdays.get(position).getEnd_time() <= 820)
-                holder.subjectT.setText(tuesdays.get(position).getName());
-            if (wednesdays.get(position).getStart_time() >= 740 && wednesdays.get(position).getEnd_time() <= 820)
-                holder.subjectTh.setText(wednesdays.get(position).getName());
-            if (thursdays.get(position).getStart_time() >= 740 && thursdays.get(position).getEnd_time() <= 820)
-                holder.subjectW.setText(thursdays.get(position).getName());
-            if (fridays.get(position).getStart_time() >= 740 && fridays.get(position).getEnd_time() <= 820)
-                holder.subjectF.setText(fridays.get(position).getName());
-            if (saturdays.get(position).getStart_time() >= 740 && saturdays.get(position).getEnd_time() <= 820)
-                holder.subjectS.setText(saturdays.get(position).getName());
-            if (sundays.get(position).getStart_time() >= 740 && sundays.get(position).getEnd_time() <= 820)
-                holder.subjectSu.setText(sundays.get(position).getName());
-            else
-                holder.sunday.setVisibility(View.INVISIBLE);
-        }
-        if (position == 2) {
-            if (mondays.size() > position && mondays.get(position).getStart_time() >= 820 && mondays.get(position).getEnd_time() <= 900)
-                holder.subjectM.setText(mondays.get(position).getName());
-            if (tuesdays.size() > position && tuesdays.get(position).getStart_time() >= 820 && tuesdays.get(position).getEnd_time() <= 900)
-                holder.subjectT.setText(tuesdays.get(position).getName());
-            if (wednesdays.size() > position && wednesdays.get(position).getStart_time() >= 820 && wednesdays.get(position).getEnd_time() <= 900)
-                holder.subjectTh.setText(wednesdays.get(position).getName());
-            if (thursdays.size() > position && thursdays.get(position).getStart_time() >= 820 && thursdays.get(position).getEnd_time() <= 900)
-                holder.subjectW.setText(thursdays.get(position).getName());
-            if (fridays.size() > position && fridays.get(position).getStart_time() >= 820 && fridays.get(position).getEnd_time() <= 900)
-                holder.subjectF.setText(fridays.get(position).getName());
-            if (saturdays.size() > position && saturdays.get(position).getStart_time() >= 820 && saturdays.get(position).getEnd_time() <= 900)
-                holder.subjectS.setText(saturdays.get(position).getName());
-            if (sundays.size() > position && sundays.get(position).getStart_time() >= 820 && sundays.get(position).getEnd_time() <= 900)
-                holder.subjectSu.setText(sundays.get(position).getName());
-            else
-                holder.sunday.setVisibility(View.INVISIBLE);
-        }
-        if (position == 3) {
-            if (mondays.size() > position && mondays.get(position).getStart_time() >= 1130 && mondays.get(position).getEnd_time() <= 1230)
-                holder.subjectM.setText(mondays.get(position).getName());
-            else
-                holder.monday.setVisibility(View.INVISIBLE);
-            if (tuesdays.size() > position && tuesdays.get(position).getStart_time() >= 1130 && tuesdays.get(position).getEnd_time() <= 1230)
-                holder.subjectT.setText(tuesdays.get(position).getName());
-            else
-                holder.tuesday.setVisibility(View.INVISIBLE);
-            if (wednesdays.size() > position && wednesdays.get(position).getStart_time() >= 1130 && wednesdays.get(position).getEnd_time() <= 1230)
-                holder.subjectTh.setText(wednesdays.get(position).getName());
-            else
-                holder.wednesday.setVisibility(View.INVISIBLE);
-            if (thursdays.size() > position && thursdays.get(position).getStart_time() >= 1130 && thursdays.get(position).getEnd_time() <= 1230)
-                holder.subjectW.setText(thursdays.get(position).getName());
-            else
-                holder.thursday.setVisibility(View.INVISIBLE);
-            if (fridays.size() > position && fridays.get(position).getStart_time() >= 1130 && fridays.get(position).getEnd_time() <= 1230)
-                holder.subjectF.setText(fridays.get(position).getName());
-            else
-                holder.friday.setVisibility(View.INVISIBLE);
-            if (saturdays.size() > position && saturdays.get(position).getStart_time() >= 1130 && saturdays.get(position).getEnd_time() <= 1230)
-                holder.subjectS.setText(saturdays.get(position).getName());
-            else
-                holder.saturday.setVisibility(View.INVISIBLE);
-            if (sundays.size() > position && sundays.get(position).getStart_time() >= 1130 && sundays.get(position).getEnd_time() <= 1230)
-                holder.subjectSu.setText(sundays.get(position).getName());
-            else
-                holder.sunday.setVisibility(View.INVISIBLE);
-        }
 
+        holder.subjectM.setText(weeklyTimeTables.get(position).getMon_name());
+        holder.subjectT.setText(weeklyTimeTables.get(position).getTue_name());
+        holder.subjectW.setText(weeklyTimeTables.get(position).getWed_name());
+        holder.subjectTh.setText(weeklyTimeTables.get(position).getThurs_name());
+        holder.subjectF.setText(weeklyTimeTables.get(position).getFri_name());
+        holder.subjectS.setText(weeklyTimeTables.get(position).getSatur_name());
+        holder.subjectSu.setText(weeklyTimeTables.get(position).getSun_name());
     }
 
 
     @Override
     public int getItemCount() {
-        return 5;
+        return weeklyTimeTables.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
