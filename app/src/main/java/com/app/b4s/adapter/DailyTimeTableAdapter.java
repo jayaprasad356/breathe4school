@@ -44,6 +44,16 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
 
     @Override
     public void onBindViewHolder(@NonNull com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder holder, int position) {
+
+        if (type.equals(Constant.STUDY_PLANER)) {
+            holder.studyView.setVisibility(View.VISIBLE);
+            holder.iconView.setVisibility(View.GONE);
+
+        } else if (type.equals(Constant.LIVE_SESSION)) {
+            holder.iconView.setVisibility(View.VISIBLE);
+            holder.studyView.setVisibility(View.GONE);
+        }
+
         int startTime = Integer.parseInt(dailyTimeTables.get(position).start_time);
         int endTime = Integer.parseInt(dailyTimeTables.get(position).end_time);
         if (position % 2 == 0) {
@@ -57,22 +67,26 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         int duriation = endTime - startTime;
         holder.duriation.setText(duriation + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
-            iconVisibility(holder, position);
+        iconVisibility(holder, position);
 
         statusVisibility(holder, position, startTime, endTime);
 
     }
 
     private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
-        int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
-        if (currentTime > startTime && currentTime < endTime)
-            holder.joinNow.setVisibility(View.VISIBLE);
-        if (currentTime > startTime && currentTime > endTime)
-            holder.viewSummbery.setVisibility(View.VISIBLE);
-        if (!(currentTime > startTime && currentTime > endTime))
-            holder.setReminer.setVisibility(View.VISIBLE);
+        if (type.equals(Constant.STUDY_PLANER)) {
 
-
+            holder.title.setText("Study Planer 01");
+            holder.editPlan.setVisibility(View.VISIBLE);
+        } else {
+            int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
+            if (currentTime > startTime && currentTime < endTime)
+                holder.joinNow.setVisibility(View.VISIBLE);
+            if (currentTime > startTime && currentTime > endTime)
+                holder.viewSummbery.setVisibility(View.VISIBLE);
+            if (!(currentTime > startTime && currentTime > endTime))
+                holder.setReminer.setVisibility(View.VISIBLE);
+        }
     }
 
     private void iconVisibility(@NonNull ViewHolder holder, int position) {
@@ -93,8 +107,8 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery;
-        public LinearLayout layout;
+        public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery, studyView, editPlan, title;
+        public LinearLayout layout, iconView;
         public ImageView assessmentView, preReadView, activityView, presentationView;
 
         public ViewHolder(View itemView) {
@@ -112,6 +126,10 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             this.joinNow = itemView.findViewById(R.id.tvJoinNowView);
             this.onReminder = itemView.findViewById(R.id.tvOnReminderView);
             this.viewSummbery = itemView.findViewById(R.id.tvViewSummeryView);
+            this.iconView = itemView.findViewById(R.id.iconView);
+            this.studyView = itemView.findViewById(R.id.studyView);
+            this.editPlan = itemView.findViewById(R.id.tvEditPlaner);
+            this.title=itemView.findViewById(R.id.tvTitle);
         }
     }
 }
