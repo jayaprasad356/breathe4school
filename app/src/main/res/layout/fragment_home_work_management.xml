@@ -85,6 +85,7 @@
 
 
         <LinearLayout
+            android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
@@ -115,6 +116,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvFilter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/corner_stroke"
@@ -125,6 +127,9 @@
                         android:text="Filter"
                         android:textColor="#668598"
                         android:textSize="@dimen/_12sdp" />
+
+
+
 
 
                     <TextView
