@@ -1,5 +1,7 @@
 package com.app.b4s.view;
 
+import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,11 +9,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +37,10 @@ public class HomeWorkManagementFragment extends Fragment {
     TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
-    TextView tvSortby;
+    TextView tvSortby,tvFilter;
+    PopupWindow popupWindow;
+    LinearLayout linearLayout1;
+    Button closePopupBtn;
 
 
     public HomeWorkManagementFragment() {
@@ -45,6 +55,11 @@ public class HomeWorkManagementFragment extends Fragment {
 
         rvSubject = root.findViewById(R.id.rvSubject);
         tvSortby = root.findViewById(R.id.tvSortby);
+        tvFilter = root.findViewById(R.id.tvFilter);
+        linearLayout1 = root.findViewById(R.id.linearLayout1);
+
+
+
 
 
         tvSortby.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +81,76 @@ public class HomeWorkManagementFragment extends Fragment {
                 // Showing the popup menu
                 popupMenu.show();
             }
+        });
+
+
+        tvFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvFilter.setVisibility(View.INVISIBLE);
+
+
+
+                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View customView = layoutInflater.inflate(R.layout.filter_popup,null);
+
+
+
+               TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
+
+                //instantiate popup window
+                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setTouchInterceptor(new View.OnTouchListener()
+                {
+
+                    public boolean onTouch(View v, MotionEvent event)
+                    {
+                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE)
+                        {
+                            popupWindow.dismiss();
+                            tvFilter.setVisibility(View.VISIBLE);
+
+                            return true;
+                        }
+
+
+                        return false;
+                    }
+                });
+
+
+
+
+
+                //display the popup window
+               popupWindow.showAsDropDown(tvFilter, -650, -100);
+
+
+
+
+                //close the popup window on button click
+
+
+                tvFilterclose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                popupWindow.dismiss();
+                                tvFilter.setVisibility(View.VISIBLE);
+                            }
+                        });
+
+
+
+
+
+
+
+
+
+         }
+
         });
 
 
@@ -103,4 +188,9 @@ public class HomeWorkManagementFragment extends Fragment {
         homeWorkSubjectAdapter = new HomeWorkSubjectAdapter(homeWorkSubjects, getActivity());
         rvSubject.setAdapter(homeWorkSubjectAdapter);
     }
+
+
+
+
+
 }

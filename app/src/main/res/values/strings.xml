@@ -113,6 +113,18 @@
     <string name="create">Create</string>
     <string name="subject">Subject</string>
     <string name="description">Description</string>
+    <string name="result">Result</string>
+    <string name="english">English</string>
+    <string name="science">Science</string>
+    <string name="social_science">Social Science</string>
+    <string name="time">TIME</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="this_week">This Week</string>
+    <string name="last_week">Last Week</string>
+    <string name="last_month">Last Month</string>
+    <string name="this_month">This Month</string>
+    <string name="pick_a_date">PICK A DATE</string>
 
     <string-array name="workinghour">
         <item>All</item>
