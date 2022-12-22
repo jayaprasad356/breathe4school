@@ -3,6 +3,26 @@ package com.app.b4s.model;
 public class DailyTimeTables {
     public String name;
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String day;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String description;
+
     public String getName() {
         return name;
     }

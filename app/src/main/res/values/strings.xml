@@ -50,6 +50,8 @@
     <string name="invalid_password">Invalid Password</string>
     <string name="invalid_otp_enter">Invalid OTP entered</string>
     <string name="invalid_temp_pin">Invalid Temp Pin</string>
+    <string name="edit_study_planer">Edit Study Planer</string>
+
 
     <string name="test_num">1234</string>
 
@@ -133,7 +135,8 @@
     <string name="Mark">Mark</string>
     <string name="completed">Completed</string>
     <string name="mark_completed">Mark Completed</string>
-
+    <string name="save_changes">Save Changes</string>
+    <string name="discard_chagnges">Discard Chagnges</string>
     <string-array name="workinghour">
         <item>All</item>
         <item>Live Sessions</item>

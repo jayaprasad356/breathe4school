@@ -72,6 +72,7 @@ public class Constant {
     public static final String STANDARD = "standard";
     public static final String SECTION = "section";
     public static final String TIMETABLESESSION = "timetable_session";
+    public static final String TEACHER_INFORMATION = "teacher_information";
 
     public static final String BACK_FLOW = "back";
 
@@ -89,5 +90,15 @@ public class Constant {
     public static final String FRIDAY = "Friday";
     public static final String SATURDAY = "Saturday";
     public static final String SUNDAY = "Sunday";
+
+    public static final String SUBJECTS = "subjects";
+
+    public static final String SH_PRF_KEY = "shared_pref_key";
+    public static final String SUBJECTS_KEY = "subjects_key";
+    public static final String SUBJECTS_ID_KEY = "subjects_id_key";
+
+    public static final String SELECTED_SUBJECT = "selected_subject";
+    public static final String SELECTED_SUBJECT_ID = "selected_subject_id";
+
 
 }

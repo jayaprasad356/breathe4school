@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
@@ -35,10 +36,9 @@ import com.app.b4s.controller.StudyPlanerController;
 import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.DayOfLine;
-import com.app.b4s.model.HomeWorkSubject;
+import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Friday;
 import com.app.b4s.model.days.Monday;
-import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Saturday;
 import com.app.b4s.model.days.Sunday;
 import com.app.b4s.model.days.Thursday;
@@ -56,6 +56,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -118,8 +119,29 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     }
 
     private void showPopup() {
+
+        List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
+        List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.add_study_planer);
+        Spinner spinner = dialog.findViewById(R.id.spinnerSubjects);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, subjects);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedSubject = parent.getItemAtPosition(position).toString();
+                String selectedSubjectId = subjectIds.get(position);
+                session.setData(Constant.SELECTED_SUBJECT, selectedSubject);
+                session.setData(Constant.SELECTED_SUBJECT_ID, selectedSubjectId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         dialog.findViewById(R.id.cbMonday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbMonday)));
         dialog.findViewById(R.id.cbTuesday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbTuesday)));
         dialog.findViewById(R.id.cbWednes).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbWednes)));
@@ -329,44 +351,34 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         ArrayList<Friday> fridays = new ArrayList<>();
                         ArrayList<Saturday> saturdays = new ArrayList<>();
                         ArrayList<Sunday> sundays = new ArrayList<>();
-                        String mon_name = "",tue_name = "",wed_name = "",thurs_name = "",fri_name = "",satur_name = "",sun_name = "";
-
+                        String mon_name = "", tue_name = "", wed_name = "", thurs_name = "", fri_name = "", satur_name = "", sun_name = "";
+                        ArrayList<WeeklyTimeTable> wt = null;
                         for (int i = 0; i < lectures.length(); i++) {
                             JSONObject jsonObject1 = lectures.getJSONObject(i);
                             if (jsonObject1 != null) {
                                 int startTime = jsonObject1.getInt(Constant.START_TIME);
                                 int endTime = jsonObject1.getInt(Constant.END_TIME);
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-                                    mon_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-                                    tue_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
-                                    wed_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
-                                    thurs_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
-                                    fri_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
-                                    satur_name = jsonObject1.get(Constant.NAME).toString();
-                                }
-                                if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
-                                    sun_name = jsonObject1.get(Constant.NAME).toString();
-                                }
+                                mon_name = mondaySubjects(startTime, endTime, jsonObject1, Constant.MONDAY, mon_name);
+                                tue_name = tuesdaySubjects(startTime, endTime, jsonObject1, Constant.TUESDAY, tue_name);
+                                wed_name = wednesdaySunjects(startTime, endTime, jsonObject1, Constant.WEDNESDAY, wed_name);
+                                thurs_name = thursdaySubjects(startTime, endTime, jsonObject1, Constant.THURSDAY, thurs_name);
+                                fri_name = fridaySubjects(startTime, endTime, jsonObject1, Constant.FRIDAY, fri_name);
+                                satur_name = saturdaySubjects(startTime, endTime, jsonObject1, Constant.SATURDAY, satur_name);
+                                sun_name = sundaySubjects(startTime, endTime, jsonObject1, Constant.SUNDAY, sun_name);
+                                wt = new ArrayList<>();
+                                //WeeklyTimeTable w1 = new WeeklyTimeTable("Maths","Science","Hindi","Social","Maths","English","Computer");
+                                WeeklyTimeTable w1 = new WeeklyTimeTable(mon_name, tue_name, wed_name, thurs_name, fri_name, satur_name, sun_name);
 
+                                wt.add(w1);
                             } else {
                                 break;
                             }
                         }
-                        ArrayList<WeeklyTimeTable> wt = new ArrayList<>();
-                        //WeeklyTimeTable w1 = new WeeklyTimeTable("Maths","Science","Hindi","Social","Maths","English","Computer");
-                        WeeklyTimeTable w1 = new WeeklyTimeTable(mon_name,tue_name,wed_name,thurs_name,fri_name,satur_name,sun_name);
-
-                        wt.add(w1);
+//                        ArrayList<WeeklyTimeTable> wt = new ArrayList<>();
+//                        //WeeklyTimeTable w1 = new WeeklyTimeTable("Maths","Science","Hindi","Social","Maths","English","Computer");
+//                        WeeklyTimeTable w1 = new WeeklyTimeTable(mon_name, tue_name, wed_name, thurs_name, fri_name, satur_name, sun_name);
+//
+//                        wt.add(w1);
                         WeeklyTimeTableAdapter adapter = new WeeklyTimeTableAdapter(wt, getActivity());
                         rcWeeklyTables.setAdapter(adapter);
                     } else {
@@ -380,51 +392,153 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
     }
 
-    private void mondayDatas(Gson g, ArrayList<Monday> mondays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
-        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-            Monday group = g.fromJson(jsonObject1.toString(), Monday.class);
-            mondays.add(group);
+    private String sundaySubjects(int startTime, int endTime, JSONObject jsonObject1, String sunday, String sun_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+            sun_name = jsonObject1.getString(Constant.NAME);
         }
-        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-            Monday group = g.fromJson(jsonObject1.toString(), Monday.class);
-            mondays.add(group);
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
+            sun_name = jsonObject1.getString(Constant.NAME);
         }
-        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-            Monday group = g.fromJson(jsonObject1.toString(), Monday.class);
-            mondays.add(group);
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
+            sun_name = jsonObject1.getString(Constant.NAME);
+
         }
-        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-            Monday group = g.fromJson(jsonObject1.toString(), Monday.class);
-            mondays.add(group);
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
+            sun_name = jsonObject1.getString(Constant.NAME);
+
         }
-        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
-            Monday group = g.fromJson(jsonObject1.toString(), Monday.class);
-            mondays.add(group);
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.SUNDAY)) {
+            sun_name = jsonObject1.getString(Constant.NAME);
+
         }
+
+
+        return sun_name;
     }
 
-    private void tuesDayDatas(Gson g, ArrayList<Tuesday> tuesdays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
-        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-            Tuesday group = g.fromJson(jsonObject1.toString(), Tuesday.class);
-            tuesdays.add(group);
+    private String saturdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String saturday, String satur_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+            satur_name = jsonObject1.getString(Constant.NAME);
         }
-        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-            Tuesday group = g.fromJson(jsonObject1.toString(), Tuesday.class);
-            tuesdays.add(group);
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+            satur_name = jsonObject1.getString(Constant.NAME);
+
         }
-        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-            Tuesday group = g.fromJson(jsonObject1.toString(), Tuesday.class);
-            tuesdays.add(group);
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+            satur_name = jsonObject1.getString(Constant.NAME);
+
         }
-        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-            Tuesday group = g.fromJson(jsonObject1.toString(), Tuesday.class);
-            tuesdays.add(group);
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+            satur_name = jsonObject1.getString(Constant.NAME);
+
+        }
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
+            satur_name = jsonObject1.getString(Constant.NAME);
+
+        }
+        return satur_name;
+    }
+
+    private String fridaySubjects(int startTime, int endTime, JSONObject jsonObject1, String friday, String fri_name) throws JSONException {
+
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+            fri_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+            fri_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+            fri_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+            fri_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
+            fri_name = jsonObject1.getString(Constant.NAME);
+        }
+        return fri_name;
+    }
+
+    private String thursdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String thursday, String thurs_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+            thurs_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+            thurs_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+            thurs_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
+            thurs_name = jsonObject1.getString(Constant.NAME);
         }
         if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
-            Tuesday group = g.fromJson(jsonObject1.toString(), Tuesday.class);
-            tuesdays.add(group);
+            thurs_name = jsonObject1.getString(Constant.NAME);
         }
+        return thurs_name;
     }
+
+    private String wednesdaySunjects(int startTime, int endTime, JSONObject jsonObject1, String wednesday, String wed_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+            wed_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+            wed_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+            wed_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+            wed_name = jsonObject1.getString(Constant.NAME);
+        }
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
+            wed_name = jsonObject1.getString(Constant.NAME);
+        }
+        return wed_name;
+    }
+
+    private String tuesdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String tuesday, String tue_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+            tue_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+            tue_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+            tue_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+            tue_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
+            tue_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        return tue_name;
+    }
+
+    private String mondaySubjects(int startTime, int endTime, JSONObject jsonObject1, String monday, String mon_name) throws JSONException {
+        if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(monday)) {
+            mon_name = jsonObject1.get(Constant.NAME).toString();
+        }
+        if (startTime >= 740 && endTime <= 820 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
+            mon_name = jsonObject1.get(Constant.NAME).toString();
+
+        }
+        if (startTime >= 820 && endTime <= 900 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
+            mon_name = jsonObject1.get(Constant.NAME).toString();
+
+        }
+        if (startTime >= 1130 && endTime <= 1230 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
+            mon_name = jsonObject1.get(Constant.NAME).toString();
+
+        }
+        if (startTime >= 1400 && endTime <= 1500 && jsonObject1.get(Constant.DAY).equals(Constant.MONDAY)) {
+            mon_name = jsonObject1.get(Constant.NAME).toString();
+
+        }
+        return mon_name;
+    }
+
 
     private void wednesDayDatas(Gson g, ArrayList<Wednesday> wednesdays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
@@ -476,6 +590,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             thursdays.add(group);
         }
     }
+
     private void fridayDatas(Gson g, ArrayList<Friday> fridays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
             Friday group = g.fromJson(jsonObject1.toString(), Friday.class);

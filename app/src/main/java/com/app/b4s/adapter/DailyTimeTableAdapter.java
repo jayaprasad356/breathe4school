@@ -1,12 +1,21 @@
 package com.app.b4s.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
 import com.app.b4s.model.DailyTimeTables;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.view.CalendarFragment;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder> {
@@ -26,6 +37,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     CommonMethods commonMethods = new CommonMethods();
     ArrayList<DailyTimeTables> dailyTimeTables;
     private String type;
+    private Session session;
 
     public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type) {
         this.dailyTimeTables = dailyTimeTables;
@@ -43,8 +55,8 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        session = new Session(activity);
         if (type.equals(Constant.STUDY_PLANER)) {
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
@@ -68,9 +80,178 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         holder.duriation.setText(duriation + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
         iconVisibility(holder, position);
-
         statusVisibility(holder, position, startTime, endTime);
+        holder.editPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showPopup(position);
+            }
+        });
 
+    }
+
+    private void showPopup(int position) {
+        EditText planerName, description;
+        Spinner statTime, endTime;
+        CheckBox monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+        TextView title;
+
+        List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
+        List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.add_study_planer);
+        Spinner spinner = dialog.findViewById(R.id.spinnerSubjects);
+        String sub = String.valueOf(((LinkedTreeMap) dailyTimeTables.get(position).getSubject()).get("name"));
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, subjects);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedSubject = parent.getItemAtPosition(position).toString();
+                String selectedSubjectId = subjectIds.get(position);
+                session.setData(Constant.SELECTED_SUBJECT, selectedSubject);
+                session.setData(Constant.SELECTED_SUBJECT_ID, selectedSubjectId);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        for (int i = 0; i < subjects.size(); i++) {
+            if (sub.equals(subjects.get(i)))
+                spinner.setSelection(i);
+        }
+
+
+        dialog.findViewById(R.id.btnCreateStudy).setVisibility(View.GONE);
+        dialog.findViewById(R.id.btnDescardChanges).setVisibility(View.VISIBLE);
+        dialog.findViewById(R.id.btnSaveChanges).setVisibility(View.VISIBLE);
+        planerName = dialog.findViewById(R.id.tvPlanerName);
+        description = dialog.findViewById(R.id.etDescription);
+        statTime = dialog.findViewById(R.id.spinnerST);
+        endTime = dialog.findViewById(R.id.spinnerET);
+        title = dialog.findViewById(R.id.title);
+
+        title.setText(activity.getString(R.string.edit_study_planer));
+        int start = Integer.parseInt(dailyTimeTables.get(position).getStart_time());
+        int end = Integer.parseInt(dailyTimeTables.get(position).getEnd_time());
+
+
+        description.setText(dailyTimeTables.get(position).getDescription());
+        planerName.setText(dailyTimeTables.get(position).getName());
+
+
+        monday = dialog.findViewById(R.id.cbMonday);
+        tuesday = dialog.findViewById(R.id.cbTuesday);
+        wednesday = dialog.findViewById(R.id.cbWednes);
+        thursday = dialog.findViewById(R.id.cbThurs);
+        friday = dialog.findViewById(R.id.cbFriday);
+        saturday = dialog.findViewById(R.id.cbSatur);
+        sunday = dialog.findViewById(R.id.cbSun);
+
+        switch (dailyTimeTables.get(position).getDay()) {
+            case Constant.MONDAY:
+                monday.setChecked(true);
+                monday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.TUESDAY:
+                tuesday.setChecked(true);
+                tuesday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.WEDNESDAY:
+                wednesday.setChecked(true);
+                wednesday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.THURSDAY:
+                thursday.setChecked(true);
+                thursday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.FRIDAY:
+                friday.setChecked(true);
+                friday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.SATURDAY:
+                saturday.setChecked(true);
+                saturday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+            case Constant.SUNDAY:
+                sunday.setChecked(true);
+                sunday.setBackgroundResource(R.drawable.check_box_bg);
+                break;
+        }
+
+
+        if (start <= 700 && start < 800)
+            statTime.setSelection(1);
+        else if (start <= 800 && start < 900)
+            statTime.setSelection(2);
+        else if (start <= 900 && start < 1000)
+            statTime.setSelection(3);
+        else if (start <= 1000 && start < 1100)
+            statTime.setSelection(4);
+        else if (start <= 1100 && start < 1200)
+            statTime.setSelection(5);
+        else if (start <= 1200 && start < 1300)
+            statTime.setSelection(6);
+        else if (start <= 1300 && start < 1400)
+            statTime.setSelection(7);
+        else if (start <= 1400 && start < 1500)
+            statTime.setSelection(8);
+        else if (start <= 1500 && start < 1600)
+            statTime.setSelection(9);
+        else if (start <= 1600 && start < 1700)
+            statTime.setSelection(10);
+        else if (start <= 1700 && start < 1800)
+            statTime.setSelection(11);
+        else if (start <= 1800 && start < 1900)
+            statTime.setSelection(11);
+
+        if (end <= 700 && end < 800)
+            endTime.setSelection(1);
+        else if (end <= 800 && end < 900)
+            endTime.setSelection(2);
+        else if (end <= 900 && end < 1000)
+            endTime.setSelection(3);
+        else if (end <= 1000 && end < 1100)
+            endTime.setSelection(4);
+        else if (end <= 1100 && end < 1200)
+            endTime.setSelection(5);
+        else if (end <= 1200 && end < 1300)
+            endTime.setSelection(6);
+        else if (end <= 1300 && end < 1400)
+            endTime.setSelection(7);
+        else if (end <= 1400 && end < 1500)
+            endTime.setSelection(8);
+        else if (end <= 1500 && end < 1600)
+            endTime.setSelection(9);
+        else if (end <= 1600 && end < 1700)
+            endTime.setSelection(10);
+        else if (end <= 1700 && end < 1800)
+            endTime.setSelection(11);
+        else if (end <= 1800 && end < 1900)
+            endTime.setSelection(11);
+        else if (end <= 1900 && end < 2000)
+            endTime.setSelection(11);
+
+
+//        monday=dialog.findViewById(R.id.cbMonday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbMonday)));
+//        dialog.findViewById(R.id.cbTuesday)         .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbTuesday)));
+//        dialog.findViewById(R.id.cbWednes)      .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbWednes)));
+//        dialog.findViewById(R.id.cbThurs)           .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbThurs)));
+//        dialog.findViewById(R.id.cbFriday)          .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbFriday)));
+//        dialog.findViewById(R.id.cbSatur)           .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSatur)));
+//        dialog.findViewById(R.id.cbSun)                 .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSun)));
+//        dialog.findViewById(R.id.btnCreateStudy)            .setOnClickListener(view -> apiCall(dialog));
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
     }
 
     private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
@@ -129,7 +310,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             this.iconView = itemView.findViewById(R.id.iconView);
             this.studyView = itemView.findViewById(R.id.studyView);
             this.editPlan = itemView.findViewById(R.id.tvEditPlaner);
-            this.title=itemView.findViewById(R.id.tvTitle);
+            this.title = itemView.findViewById(R.id.tvTitle);
         }
     }
 }
