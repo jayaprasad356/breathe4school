@@ -125,6 +125,14 @@
     <string name="last_month">Last Month</string>
     <string name="this_month">This Month</string>
     <string name="pick_a_date">PICK A DATE</string>
+    <string name="instructions">Instructions</string>
+    <string name="example">Example</string>
+    <string name="on_review">On Review</string>
+    <string name="my_answer">My answer</string>
+    <string name="remark">Remark</string>
+    <string name="Mark">Mark</string>
+    <string name="completed">Completed</string>
+    <string name="mark_completed">Mark Completed</string>
 
     <string-array name="workinghour">
         <item>All</item>

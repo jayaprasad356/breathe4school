@@ -40,7 +40,7 @@ public class HomeWorkManagementFragment extends Fragment {
     TextView tvSortby,tvFilter;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
-    Button closePopupBtn;
+
 
 
     public HomeWorkManagementFragment() {
@@ -53,14 +53,21 @@ public class HomeWorkManagementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home_work_management, container, false);
 
+
+        viewPager = root.findViewById(R.id.view_pager);
+        tabLayout = root.findViewById(R.id.tabs);
+
+        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
+
+        // It is used to join TabLayout with ViewPager.
+        tabLayout.setupWithViewPager(viewPager);
+
+
         rvSubject = root.findViewById(R.id.rvSubject);
         tvSortby = root.findViewById(R.id.tvSortby);
         tvFilter = root.findViewById(R.id.tvFilter);
         linearLayout1 = root.findViewById(R.id.linearLayout1);
-
-
-
-
 
         tvSortby.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,8 +89,6 @@ public class HomeWorkManagementFragment extends Fragment {
                 popupMenu.show();
             }
         });
-
-
         tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,21 +158,12 @@ public class HomeWorkManagementFragment extends Fragment {
 
         });
 
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false);
 
         rvSubject.setLayoutManager(linearLayoutManager);
         homework();
 
 
-        viewPager = root.findViewById(R.id.view_pager);
-        tabLayout = root.findViewById(R.id.tabs);
-
-        viewPagerAdapter = new ViewPagerAdapter(getParentFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
-
-
-        tabLayout.setupWithViewPager(viewPager);
 
 
         return root;

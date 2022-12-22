@@ -8,11 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.app.b4s.view.CompletedFragment;
 import com.app.b4s.view.OnReviewFragment;
 import com.app.b4s.view.PendingFragment;
+import com.app.b4s.view.PrereadCompletedFragment;
+import com.app.b4s.view.PrereadPendingFragment;
 
-public class ViewPagerAdapter
+public class ViewPagerPreReadAdapter
         extends FragmentPagerAdapter {
 
-    public ViewPagerAdapter(
+    public ViewPagerPreReadAdapter(
             @NonNull FragmentManager fm)
     {
         super(fm);
@@ -23,15 +25,11 @@ public class ViewPagerAdapter
     public Fragment getItem(int position)
     {
         Fragment fragment = null;
+
         if (position == 0)
-            fragment = new PendingFragment();
-
+            fragment = new PrereadPendingFragment();
         else if (position == 1)
-            fragment = new OnReviewFragment();
-
-
-        else if (position == 2)
-            fragment = new CompletedFragment();
+            fragment = new PrereadCompletedFragment();
 
         return fragment;
     }
@@ -39,7 +37,7 @@ public class ViewPagerAdapter
     @Override
     public int getCount()
     {
-        return 3;
+        return 2;
     }
 
     @Override
@@ -49,8 +47,6 @@ public class ViewPagerAdapter
         if (position == 0)
             title = "Pending";
         else if (position == 1)
-            title = "On Review";
-        else if (position == 2)
             title = "Compleded";
         return title;
     }

@@ -36,17 +36,33 @@
 
 
         <activity
-            android:name=".view.OnReviewActivity"
+            android:name=".view.ActivityCompletedActivity"
             android:exported="false"
-            android:screenOrientation="landscape" />
-
+            android:screenOrientation="landscape"
+            />
         <activity
-            android:name=".view.CompletedHomeworkActivity"
+            android:name=".view.ActivityOnReviewActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            />
+        <activity
+            android:name=".view.ActivityPendingActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             />
 
-
+        <activity
+            android:name=".view.OnReviewActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.SubmissionHomeworkFormbasedActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.CompletedHomeworkActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.HomeActivity"
             android:exported="true"

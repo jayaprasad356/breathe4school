@@ -5,14 +5,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.app.b4s.view.CompletedFragment;
-import com.app.b4s.view.OnReviewFragment;
-import com.app.b4s.view.PendingFragment;
+import com.app.b4s.view.ActivityCompletedFragment;
+import com.app.b4s.view.ActivityOnreviewFragment;
+import com.app.b4s.view.ActivityPendingFragment;
+import com.app.b4s.view.PrereadCompletedFragment;
+import com.app.b4s.view.PrereadPendingFragment;
 
-public class ViewPagerAdapter
+public class ViewPagerActivityAdapter
         extends FragmentPagerAdapter {
 
-    public ViewPagerAdapter(
+    public ViewPagerActivityAdapter(
             @NonNull FragmentManager fm)
     {
         super(fm);
@@ -23,15 +25,15 @@ public class ViewPagerAdapter
     public Fragment getItem(int position)
     {
         Fragment fragment = null;
-        if (position == 0)
-            fragment = new PendingFragment();
 
+        if (position == 0)
+            fragment = new ActivityPendingFragment();
         else if (position == 1)
-            fragment = new OnReviewFragment();
+            fragment = new ActivityOnreviewFragment();
 
 
         else if (position == 2)
-            fragment = new CompletedFragment();
+            fragment = new ActivityCompletedFragment();
 
         return fragment;
     }
@@ -50,6 +52,7 @@ public class ViewPagerAdapter
             title = "Pending";
         else if (position == 1)
             title = "On Review";
+
         else if (position == 2)
             title = "Compleded";
         return title;

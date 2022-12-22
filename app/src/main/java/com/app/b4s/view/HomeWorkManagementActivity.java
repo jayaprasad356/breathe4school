@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.app.b4s.R;
@@ -14,45 +16,43 @@ public class HomeWorkManagementActivity extends AppCompatActivity {
 
     NavigationRailView navigationrail;
     FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
-    Fragment fragment = null;
+    Activity activity;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_work_management);
+        activity = HomeWorkManagementActivity.this;
 
 
         navigationrail = findViewById(R.id.navigationRailView);
 
-        if (fragment == null ){
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.rlContainer,new HomeWorkManagementFragment());
-            fragmentTransaction.commit();
-        }
+
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.rlContainer, new PrereadFragment()).commit();
+
+
+
+
 
         navigationrail.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
+            switch (item.getItemId()) {
 
                 case R.id.nav_homework:
-                    fragment = new HomeWorkManagementFragment();
+                    fragmentManager.beginTransaction().replace(R.id.rlContainer, new HomeWorkManagementFragment()).commit();
                     break;
 
                 case R.id.nav_pre_read:
-                    fragment = new PrereadFragment();
+                    fragmentManager.beginTransaction().replace(R.id.rlContainer, new PrereadFragment()).commit();
                     break;
-
 
 
                 case R.id.nav_activity:
-                    fragment = new ActivityFragment();
+                    fragmentManager.beginTransaction().replace(R.id.rlContainer, new ActivityFragment()).commit();
                     break;
             }
-            fragmentManager = getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.rlContainer,fragment);
-            fragmentTransaction.commit();
 
             return true;
         });
