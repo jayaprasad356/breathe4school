@@ -1,11 +1,11 @@
 package com.app.b4s.adapter;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,13 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
-import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.WeeklyTimeTable;
+import com.app.b4s.model.days.Friday;
+import com.app.b4s.model.days.Monday;
+import com.app.b4s.model.days.Saturday;
+import com.app.b4s.model.days.Sunday;
+import com.app.b4s.model.days.Thursday;
+import com.app.b4s.model.days.Tuesday;
+import com.app.b4s.model.days.Wednesday;
 
 import java.util.ArrayList;
-
-
-
 
 
 public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adapter.WeeklyTimeTableAdapter.ViewHolder> {
@@ -27,7 +30,8 @@ public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.ada
     CommonMethods commonMethods = new CommonMethods();
     ArrayList<WeeklyTimeTable> weeklyTimeTables;
 
-    public WeeklyTimeTableAdapter(ArrayList<WeeklyTimeTable> weeklyTimeTables, Activity activity) {
+
+    public WeeklyTimeTableAdapter(ArrayList<WeeklyTimeTable> weeklyTimeTables,Activity activity) {
         this.weeklyTimeTables = weeklyTimeTables;
         this.activity = activity;
     }
@@ -43,17 +47,14 @@ public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.ada
 
     @Override
     public void onBindViewHolder(@NonNull com.app.b4s.adapter.WeeklyTimeTableAdapter.ViewHolder holder, int position) {
-        int startTime = Integer.parseInt(weeklyTimeTables.get(position).start_time);
-        int endTime = Integer.parseInt(weeklyTimeTables.get(position).end_time);
 
-        holder.subjectM.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectT.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectTh.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectW.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectF.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectS.setText(weeklyTimeTables.get(position).getName());
-        holder.subjectSu.setText(weeklyTimeTables.get(position).getName());
-
+        holder.subjectM.setText(weeklyTimeTables.get(position).getMon_name());
+        holder.subjectT.setText(weeklyTimeTables.get(position).getTue_name());
+        holder.subjectW.setText(weeklyTimeTables.get(position).getWed_name());
+        holder.subjectTh.setText(weeklyTimeTables.get(position).getThurs_name());
+        holder.subjectF.setText(weeklyTimeTables.get(position).getFri_name());
+        holder.subjectS.setText(weeklyTimeTables.get(position).getSatur_name());
+        holder.subjectSu.setText(weeklyTimeTables.get(position).getSun_name());
     }
 
 
@@ -63,8 +64,9 @@ public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.ada
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView subjectM,subjectT,subjectW,subjectTh,subjectF,subjectS,subjectSu;
+        public TextView subjectM, subjectT, subjectW, subjectTh, subjectF, subjectS, subjectSu;
         public LinearLayout layout;
+        public RelativeLayout monday, tuesday, wednesday, thursday, friday, saturday, sunday;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +77,13 @@ public class WeeklyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.ada
             this.subjectF = itemView.findViewById(R.id.tvSubjectf);
             this.subjectS = itemView.findViewById(R.id.tvSubjects);
             this.subjectSu = itemView.findViewById(R.id.tvSubjectsu);
+            this.monday = itemView.findViewById(R.id.mondayView);
+            this.tuesday = itemView.findViewById(R.id.tuesdayView);
+            this.wednesday = itemView.findViewById(R.id.wednesdayView);
+            this.thursday = itemView.findViewById(R.id.thursDayView);
+            this.friday = itemView.findViewById(R.id.fridayView);
+            this.saturday = itemView.findViewById(R.id.saturView);
+            this.sunday = itemView.findViewById(R.id.sundayView);
         }
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,6 +51,7 @@
             android:weightSum="7">
 
             <TextView
+                android:id="@+id/tvTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -74,13 +75,14 @@
                 android:textSize="@dimen/_4sdp" />
 
             <LinearLayout
+                android:id="@+id/iconView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:layout_marginStart="70dp"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:layout_marginHorizontal="@dimen/_10sdp"
                 android:orientation="horizontal"
                 android:textSize="@dimen/_12sdp">
 
@@ -119,6 +121,20 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/studyView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="70dp"
+                android:layout_weight="2"
+                android:singleLine="true"
+                android:fontFamily="@font/open_sans"
+                android:text="Complete Chapter 1 &amp; 2"
+                android:textColor="#1298DC"
+                android:textSize="@dimen/_4sdp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tvDuriation"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -138,61 +154,80 @@
                 android:layout_weight="1" />
 
 
+            <TextView
+                android:id="@+id/tvViewSummeryView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="View summary"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_4sdp"
+                android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/tvSetReminderView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/set_reminder"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_4sdp"
+                android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/tvViewSummeryView"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="View summary"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_4sdp" />
-                <TextView
-                    android:id="@+id/tvSetReminderView"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="40dp"
-                    android:visibility="gone"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="@string/set_reminder"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_4sdp" />
-                <TextView
-                    android:id="@+id/tvOnReminderView"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="40dp"
-                    android:visibility="gone"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:fontFamily="@font/open_sans_bold"
-                    android:text="@string/my_text"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_4sdp" />
+            <TextView
+                android:id="@+id/tvOnReminderView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_bold"
+                android:text="@string/my_text"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_4sdp"
+                android:visibility="gone" />
+
             <TextView
                 android:id="@+id/tvJoinNowView"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_10sdp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:visibility="gone"
-                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginStart="40dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
                 android:background="@drawable/corner_textview"
                 android:fontFamily="@font/semibold"
                 android:gravity="center"
                 android:text="JOIN NOW"
                 android:textColor="@color/science_bg_col"
                 android:textSize="8sp"
-                app:backgroundTint="@color/white"/>
+                android:visibility="gone"
+                app:backgroundTint="@color/white" />
+            <TextView
+                android:id="@+id/tvEditPlaner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:singleLine="true"
+                android:fontFamily="@font/semibold"
+                android:gravity="center"
+                android:text="@string/edit_plan"
+                android:textColor="@color/science_bg_col"
+                android:textSize="@dimen/_6sdp"
+                android:visibility="gone"
+                app:backgroundTint="@color/white" />
 
         </LinearLayout>
 

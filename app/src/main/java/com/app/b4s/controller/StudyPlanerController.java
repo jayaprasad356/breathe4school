@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.app.b4s.commons.ResponseListener;
@@ -35,7 +36,6 @@ public class StudyPlanerController implements IStudyPlanerController {
         JSONArray jsonArray = new JSONArray();
 
         try {
-
             jsonObject.put(Constant.ACADEMIC_YEAR_ID, session.getData(Constant.ACADEMIC_YEAR_ID));
             jsonObject.put(Constant.SCHOOL_ID, session.getData(Constant.SCHOOL_ID));
             jsonObject.put(Constant.STANDARD_ID, session.getData(Constant.STANDARD_ID));
@@ -77,6 +77,7 @@ public class StudyPlanerController implements IStudyPlanerController {
                         error.printStackTrace();
                         Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
                     });
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
         }
     }
