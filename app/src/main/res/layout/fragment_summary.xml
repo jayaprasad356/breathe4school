@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DCM.Fragments.SummaryFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:text="@string/digital_class_management"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14sdp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/llProfileItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@drawable/ic_notification" />
+
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@drawable/img_profile" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/today_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today_digitla"
+                    android:textColor="@color/digital_sc_text_col"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/tvFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/today_status"
+                    android:layout_alignParentEnd="true"
+                    android:drawableStart="@drawable/ic_filter"
+                    android:text="@string/view_all"
+                    android:textColor="@color/digital_sc_text_col"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSubject"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                tools:listitem="@layout/layout_pending"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/_50sdp"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <TextView
+                    android:id="@+id/tvPreviousStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/previous"
+                    android:textColor="@color/digital_sc_text_col"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/tvViewAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/tvPreviousStatus"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/view_all"
+                    android:textColor="@color/digital_sc_text_col"
+                    android:textSize="@dimen/_10sdp" />
+            </RelativeLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPreviews"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                tools:listitem="@layout/layout_pending"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

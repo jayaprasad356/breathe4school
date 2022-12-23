@@ -100,6 +100,7 @@
     <string name="pre_read">Pre-read</string>
     <string name="activity">Activity</string>
     <string name="home_work_management">Home Work Management</string>
+    <string name="digital_class_management">Digital Class Management</string>
     <string name="subject_wise_home_work">Subject Wise Home Work</string>
     <string name="this_question">This Question</string>
     <string name="total_marks">Total Marks</string>
@@ -162,4 +163,28 @@
         <item>04:00 PM</item>
         <item>05:00 PM</item>
     </string-array>
+
+    <string name="summary">Summary</string>
+    <string name="live">LIVE</string>
+    <string name="assessment">Assessment</string>
+    <string name="today_digitla">Today(12)</string>
+    <string name="previous">Previous(16)</string>
+    <string name="view_all">View all</string>
+    <string name="total_summery">Total Summary</string>
+    <string name="lesson">1st Lesson</string>
+    <string name="three_pm">3:30 PM</string>
+    <string name="lesson_description">Lesson Description</string>
+    <string name="relevent_link_ref">Relevant links / references</string>
+    <string name="sample_text">Today we’re going to cover Chapter 1 with in-depth understanding and you can clear your doubts in the end of the class.</string>
+    <string name="digital_text"> Ao contrário da crença popular, o Lorem Ipsum não é simplesmente texto aleatório</string>
+    <string name="view"><u>View</u></string>
+    <string name="your_polls">Your Polls</string>
+    <string name="dummy_text">Lorem Ipsum is simply dummy text.</string>
+    <string name="polls">Polls 01</string>
+    <string name="polls_two">Polls 02</string>
+    <string name="your_activity">Your Activity</string>
+    <string name="your_assessment">Your Assessment</string>
+    <string name="take_assessment">Take Assessment</string>
+
+
 </resources>
