@@ -32,26 +32,8 @@ public class StudyPlanerController implements IStudyPlanerController {
         JSONObject lecture = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
-//        JsonArray citiesArray = new JsonArray();
-//        citiesArray.add("Dhaka");
-//        citiesArray.add("Örebro");
-//        JsonObject jsonObject = new JsonObject();
-//        JsonArray jsonArray = new JsonArray();
-//        jsonObject.addProperty(Constant.ACADEMIC_YEAR_ID, session.getData(Constant.ACADEMIC_YEAR_ID));
-//        jsonObject.addProperty(Constant.SCHOOL_ID, session.getData(Constant.SCHOOL_ID));
-//        jsonObject.addProperty(Constant.STANDARD_ID, session.getData(Constant.STANDARD_ID));
-//        jsonObject.addProperty(Constant.SECTION_ID, session.getData(Constant.SECTION_ID));
-//        jsonObject.addProperty(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
-//        jsonObject.addProperty(Constant.TIME_TABLE_SESSION_ID, session.getData(Constant.TIME_TABLE_SESSION_ID));
-//        lecture.addProperty(Constant.NAME, "StudyPlanerName");
-//        lecture.addProperty(Constant.DESCRIPTIO, "exam");
-//        lecture.addProperty(Constant.START_TIME, "1800");
-//        lecture.addProperty(Constant.END_TIME, "2000");
-//        lecture.addProperty(Constant.SUBJECT_ID, session.getData(Constant.SELECTED_SUBJECT_ID));
-//        lecture.add(Constant.DAY, citiesArray);
-//        jsonArray.add(lecture);
-//        schedule.add(Constant.LECTURES, jsonArray);
-//        jsonObject.add(Constant.SCHEDULES, schedule);
+        ArrayList<String> dayData= new ArrayList<>();
+
 
                 try {
             jsonObject.put(Constant.ACADEMIC_YEAR_ID, session.getData(Constant.ACADEMIC_YEAR_ID));
@@ -65,7 +47,31 @@ public class StudyPlanerController implements IStudyPlanerController {
             lecture.put(Constant.START_TIME, "1800");
             lecture.put(Constant.END_TIME, "2000");
             lecture.put(Constant.SUBJECT_ID, session.getData(Constant.SELECTED_SUBJECT_ID));
-            lecture.put(Constant.DAY, checkBoxData);
+                    String input = String.valueOf(checkBoxData);
+                    String[] elements = input.replace("[", "").replace("]", "").split(", "); // elements = ["Wednesday", "Friday"]
+
+                    String[] inut = {"Wednesday", "Friday"};
+                    System.out.println(inut);
+
+
+                    String[] array = checkBoxData.toArray(new String[checkBoxData.size()]);
+                    System.out.println(array);
+
+//                    for (int i = 0; i < checkBoxData.size(); i++) {
+//                        array[i] = checkBoxData.get(i);
+//                    }
+
+                    System.out.println(array);
+
+                    JSONObject json = new JSONObject();
+
+                    for (String element : array) {
+                       // json.put("key", element);
+                        lecture.put(Constant.DAY, element);
+
+                    }
+
+
             jsonArray.put(lecture);
             schedule.put(Constant.LECTURES, jsonArray);
             jsonObject.put(Constant.SCHEDULES, schedule);

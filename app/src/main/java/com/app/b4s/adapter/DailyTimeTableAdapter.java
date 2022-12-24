@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,9 +16,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.Dimension;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +41,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     ArrayList<DailyTimeTables> dailyTimeTables;
     private String type;
     private Session session;
+    boolean isJoinNow, setReminder, viewSummary;
 
     public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type) {
         this.dailyTimeTables = dailyTimeTables;
@@ -57,6 +61,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     @Override
     public void onBindViewHolder(@NonNull com.app.b4s.adapter.DailyTimeTableAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         session = new Session(activity);
+
         if (type.equals(Constant.STUDY_PLANER)) {
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
@@ -64,6 +69,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         } else if (type.equals(Constant.LIVE_SESSION)) {
             holder.iconView.setVisibility(View.VISIBLE);
             holder.studyView.setVisibility(View.GONE);
+            holder.iconView.setOnClickListener(view -> showClassDetailPopup());
         }
 
         int startTime = Integer.parseInt(dailyTimeTables.get(position).start_time);
@@ -77,6 +83,10 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
         holder.startTime.setText(commonMethods.militaryToOrdinaryTime(startTime));
         holder.endTime.setText(commonMethods.militaryToOrdinaryTime(endTime));
         int duriation = endTime - startTime;
+        if (duriation > 40) {
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, activity.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp));
+            holder.rcLayout.setLayoutParams(params);
+        }
         holder.duriation.setText(duriation + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
         iconVisibility(holder, position);
@@ -87,6 +97,42 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
                 showPopup(position);
             }
         });
+
+    }
+
+    private void showClassDetailPopup() {
+        Dialog dialog = new Dialog(activity);
+
+        dialog.setContentView(R.layout.time_table_detail_popup);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        View view=dialog.findViewById(R.id.emptyView);
+
+        if (isJoinNow) {
+            dialog.findViewById(R.id.upcommings).setVisibility(View.GONE);
+            dialog.findViewById(R.id.ivViewSummary).setVisibility(View.GONE);
+        }else if(viewSummary){
+            dialog.findViewById(R.id.btnJoinNow).setVisibility(View.GONE);
+            dialog.findViewById(R.id.sumEmptyView).setVisibility(View.GONE);
+            dialog.findViewById(R.id.layoutTopActiviyt).setVisibility(View.GONE);
+            view.setBackgroundColor(Color.parseColor("#C9C9C9"));
+        }else if(setReminder){
+            dialog.findViewById(R.id.layoutTopActiviyt).setVisibility(View.GONE);
+            dialog.findViewById(R.id.btnJoinNow).setVisibility(View.GONE);
+            dialog.findViewById(R.id.ivViewSummary).setVisibility(View.GONE);
+            dialog.findViewById(R.id.lastEmptyView).setVisibility(View.GONE);
+            view.setBackgroundColor(Color.parseColor("#28CD9C"));
+        }
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(activity.getDrawable(R.drawable.popup_background)); // Set the corner radius to 20dp
+        }
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
 
     }
 
@@ -261,12 +307,24 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             holder.editPlan.setVisibility(View.VISIBLE);
         } else {
             int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
-            if (currentTime > startTime && currentTime < endTime)
+            if (currentTime > startTime && currentTime < endTime) {
                 holder.joinNow.setVisibility(View.VISIBLE);
-            if (currentTime > startTime && currentTime > endTime)
+                isJoinNow = true;
+            } else {
+                isJoinNow = false;
+            }
+            if (currentTime > startTime && currentTime > endTime) {
                 holder.viewSummbery.setVisibility(View.VISIBLE);
-            if (!(currentTime > startTime && currentTime > endTime))
+                viewSummary = true;
+            } else {
+                viewSummary = false;
+            }
+            if (!(currentTime > startTime && currentTime > endTime)) {
                 holder.setReminer.setVisibility(View.VISIBLE);
+                setReminder = true;
+            } else {
+                setReminder = false;
+            }
         }
     }
 
@@ -277,7 +335,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             holder.assessmentView.setVisibility(View.INVISIBLE);
         if (dailyTimeTables.get(position).getPre_read_id() == null)
             holder.preReadView.setVisibility(View.INVISIBLE);
-        if (dailyTimeTables.get(position).getBbb_lecture_id() != null)
+        if (dailyTimeTables.get(position).getBbb_lecture_id() == null)
             holder.presentationView.setVisibility(View.INVISIBLE);
     }
 
@@ -290,7 +348,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery, studyView, editPlan, title;
         public LinearLayout layout, iconView;
+        public RelativeLayout rcLayout;
         public ImageView assessmentView, preReadView, activityView, presentationView;
+        public View emptyview;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -311,6 +371,8 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<com.app.b4s.adap
             this.studyView = itemView.findViewById(R.id.studyView);
             this.editPlan = itemView.findViewById(R.id.tvEditPlaner);
             this.title = itemView.findViewById(R.id.tvTitle);
+            this.rcLayout = itemView.findViewById(R.id.customHeightView);
+            this.emptyview = itemView.findViewById(R.id.tvview7);
         }
     }
 }

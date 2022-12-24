@@ -56,6 +56,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Map;
 
@@ -168,8 +169,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
     }
 
-    private void selectedDays(Dialog dialog, ArrayList<String> checkedBox) {
-
+    private ArrayList selectedDays(Dialog dialog, ArrayList<String> checkedBox) {
         CheckBox monday, tuesDay, wednesday, thursday, friday, saturday, sunday;
         monday = dialog.findViewById(R.id.cbMonday);
         tuesDay = dialog.findViewById(R.id.cbTuesday);
@@ -199,6 +199,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         if (sunday.isChecked()) {
             checkedBox.add("Sunday");
         }
+        return checkedBox;
     }
 
     private <T extends View> void checkStatus(View view, T viewById) {
@@ -301,8 +302,23 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         Log.d("DAILY TIME TABLES", schedules.toString());
                         Gson g = new Gson();
                         ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
+                        JSONObject jsonObject1 = null;
+                        JSONObject proxyObject = null;
+                        JSONArray proxyLectures = null;
+                        if (type.equals(Constant.LIVE_SESSION)) {
+                            JSONArray splLectures = jsonObject3.getJSONArray(Constant.SPECIAL_LECTURES);
+                            proxyLectures = jsonObject3.getJSONArray(Constant.PROXY_LECTURES);
+                            for (int j = 0; j < splLectures.length(); j++) {
+                                JSONObject splLectureObject = splLectures.getJSONObject(j);
+                                if (splLectureObject != null) {
+                                    DailyTimeTables group = g.fromJson(splLectureObject.toString(), DailyTimeTables.class);
+                                    dailyTimeTables.add(group);
+                                }
+                            }
+                        }
+
                         for (int i = 0; i < lectures.length(); i++) {
-                            JSONObject jsonObject1 = lectures.getJSONObject(i);
+                            jsonObject1 = lectures.getJSONObject(i);
                             if (jsonObject1 != null) {
                                 DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
                                 dailyTimeTables.add(group);
@@ -310,6 +326,30 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                 break;
                             }
                         }
+                        if (type.equals(Constant.LIVE_SESSION)) {
+                            for (int i = 0; i < proxyLectures.length(); i++) {
+                                proxyObject = proxyLectures.getJSONObject(i);
+                                if (proxyObject != null) {
+                                    for (int k = 0; k < dailyTimeTables.size(); k++) {
+                                        if (dailyTimeTables.get(k).getStart_time().equals(proxyObject.getString(Constant.START_TIME))) {
+                                            dailyTimeTables.get(k).setStart_time(proxyObject.getString(Constant.START_TIME));
+                                            dailyTimeTables.get(k).setEnd_time(proxyObject.getString(Constant.END_TIME));
+                                            dailyTimeTables.get(k).setActivity_id(proxyObject.getString(Constant.ACTIVITY_ID));
+                                            dailyTimeTables.get(k).setAssessment_id(proxyObject.getString(Constant.ASSESSMENT_ID));
+                                            dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
+                                            dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
+                                            dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
+                                            dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
+                                        }
+                                    }
+
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+
+
                         DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), type);
                         rcDailyTables.setAdapter(adapter);
                     } else {

@@ -14,33 +14,35 @@
         android:padding="@dimen/_2sdp"
         android:text="@string/create_study_plan"
         android:textColor="@color/black_text" />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:layout_marginHorizontal="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_10sdp"
-    android:background="@drawable/study_bg"
-    android:fontFamily="@font/open_sans">
-    <Spinner
-        android:id="@+id/spinnerSubjects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="4"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:padding="@dimen/_6sdp"
-        android:spinnerMode="dropdown" />
 
-    <ImageView
-        android:layout_width="@dimen/_10sdp"
-        android:layout_height="@dimen/_10sdp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:padding="@dimen/_3sdp"
-        android:src="@drawable/down_arrow" />
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/study_bg"
+        android:fontFamily="@font/open_sans">
+
+        <Spinner
+            android:id="@+id/spinnerSubjects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:padding="@dimen/_6sdp"
+            android:spinnerMode="dropdown" />
+
+        <ImageView
+            android:layout_width="@dimen/_10sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="@dimen/_3sdp"
+            android:src="@drawable/down_arrow" />
+    </LinearLayout>
 
 
     <LinearLayout
@@ -131,13 +133,13 @@
                 android:id="@+id/cbTuesday"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:background="@drawable/check_bg"
                 android:button="@android:color/transparent"
-                android:gravity="center"
                 android:fontFamily="@font/open_sans"
+                android:gravity="center"
                 android:text="T"
                 android:textSize="12sp" />
 
@@ -157,9 +159,9 @@
                 android:id="@+id/cbThurs"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:background="@drawable/check_bg"
                 android:button="@android:color/transparent"
                 android:gravity="center"
@@ -170,9 +172,9 @@
                 android:id="@+id/cbFriday"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:background="@drawable/check_bg"
                 android:button="@android:color/transparent"
                 android:gravity="center"
@@ -195,9 +197,9 @@
                 android:id="@+id/cbSun"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_14sdp"
+                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:layout_marginRight="2dp"
                 android:layout_weight="1"
-                android:layout_marginHorizontal="@dimen/_2sdp"
                 android:background="@drawable/check_bg"
                 android:button="@android:color/transparent"
                 android:gravity="center"
@@ -260,6 +262,7 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp" />
+
         <TextView
             android:id="@+id/btnDescardChanges"
             android:layout_width="wrap_content"
@@ -268,14 +271,14 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/discard_bg"
-            android:visibility="gone"
             android:fontFamily="@font/semibold"
-            android:paddingVertical="@dimen/_6sdp"
             android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_6sdp"
             android:text="@string/discard_chagnges"
             android:textAllCaps="false"
             android:textColor="@color/primary"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/btnSaveChanges"
@@ -286,14 +289,14 @@
             android:layout_marginBottom="@dimen/_10sdp"
             android:background="@drawable/discard_bg"
             android:backgroundTint="@color/primary"
-            android:visibility="gone"
             android:fontFamily="@font/semibold"
-            android:paddingVertical="@dimen/_6sdp"
             android:paddingHorizontal="@dimen/_6sdp"
+            android:paddingVertical="@dimen/_6sdp"
             android:text="@string/save_changes"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="@dimen/_12sdp" />
+            android:textSize="@dimen/_12sdp"
+            android:visibility="gone" />
 
     </LinearLayout>
 </LinearLayout>

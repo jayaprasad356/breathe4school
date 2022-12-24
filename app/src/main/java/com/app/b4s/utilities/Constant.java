@@ -81,6 +81,8 @@ public class Constant {
     public static final String SUBJECT_ID = "subject_id";
     public static final String STUDY_PLANER = "study_planer";
     public static final String LIVE_SESSION = "live_session";
+    public static final String SUBJECT = "subject";
+
 
     public static final String DAY = "day";
     public static final String MONDAY = "Monday";
@@ -100,5 +102,13 @@ public class Constant {
     public static final String SELECTED_SUBJECT = "selected_subject";
     public static final String SELECTED_SUBJECT_ID = "selected_subject_id";
 
+
+    public static final String ASSESSMENT_ID = "assessment_id";
+    public static final String BB_LECTURE_ID = "bbb_lecture_id";
+    public static final String PRE_READ_ID = "pre_read_id";
+    public static final String ACTIVITY_ID = "activity_id";
+
+    public static final String PROXY_LECTURES = "proxy_lectures";
+    public static final String SPECIAL_LECTURES = "special_lectures";
 
 }

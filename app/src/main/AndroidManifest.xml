@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".view.DCM.DigitalClassManagementActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -30,7 +30,7 @@
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".view.DCM.DigitalClassManagementActivity"
+            android:name=".view.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="landscape">
             <intent-filter>

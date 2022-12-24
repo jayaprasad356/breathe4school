@@ -185,6 +185,8 @@
     <string name="your_activity">Your Activity</string>
     <string name="your_assessment">Your Assessment</string>
     <string name="take_assessment">Take Assessment</string>
-
+    <string name="ms.jasmin">Ms. Jasmine</string>
+    <string name="presentation">Presentation</string>
+    <string name="view_summary">View Summary</string>
 
 </resources>
