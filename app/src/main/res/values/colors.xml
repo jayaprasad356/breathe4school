@@ -14,6 +14,7 @@
     <color name="black_text">#000A11</color>
     <color name="disable_btn">#F3F3F3</color>
     <color name="gray">#CCCCCC</color>
+    <color name="mid_gray">#999999</color>
     <color name="light_gray">#F8F9FD</color>
     <color name="text_gray">#666666</color>
     <color name="dark_blue">#003354</color>

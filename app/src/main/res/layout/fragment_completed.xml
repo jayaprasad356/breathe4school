@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CompletedFragment">
+    tools:context=".view.HWM.Fragment.CompletedFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCompleted"

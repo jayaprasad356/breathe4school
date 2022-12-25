@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.DCM.DigitalClassManagementActivity">
+        tools:context=".view.DCM.Activity.DigitalClassManagementActivity">
 
 
         <LinearLayout

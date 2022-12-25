@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.PendingActivity;
-import com.app.b4s.view.ActivityPendingActivity;
-import com.app.b4s.view.SubmissionHomeworkFormbasedActivity;
+import com.app.b4s.view.HWM.Activity.ActivityPendingActivity;
 
 import java.util.ArrayList;
 

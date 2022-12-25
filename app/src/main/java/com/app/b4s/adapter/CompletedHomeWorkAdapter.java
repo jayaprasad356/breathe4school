@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.ComplededHomeWork;
-import com.app.b4s.model.OnReviewHomeWork;
-import com.app.b4s.view.CompletedHomeworkActivity;
-import com.app.b4s.view.SubmissionHomeworkFormbasedActivity;
+import com.app.b4s.view.HWM.Activity.CompletedHomeworkActivity;
 
 import java.util.ArrayList;
 

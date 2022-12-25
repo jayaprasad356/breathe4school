@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.HomeWorkManagementActivity">
+    tools:context=".view.HWM.Activity.HomeWorkManagementActivity">
 
 
     <LinearLayout
+        android:layout_above="@+id/bottomnav"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
@@ -15,6 +16,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/nav_sidemenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.8">
@@ -55,6 +57,123 @@
 
 
 
+
+
+
+
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+
+        <LinearLayout
+            android:id="@+id/bn_Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_home"
+                android:backgroundTint="@color/mid_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Home"
+                android:textColor="@color/mid_gray"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/ic_rectangle_1506"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bn_DCM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_toRightOf="@+id/bn_Home"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_dcm"
+                android:backgroundTint="@color/mid_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="DCM"
+                android:textColor="@color/mid_gray"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/ic_rectangle_1506"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bn_HWM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_toRightOf="@+id/bn_DCM"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_hwm"
+                android:backgroundTint="@color/primary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="HWM"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:background="@drawable/ic_rectangle_1506" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -32,16 +32,19 @@
         <entry key="..\:/breathe4school/app/src/main/res/drawable/ic_waving_hand.xml" value="0.1555" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_completed.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_completed_homework.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_dcm.xml" value="0.10208333333333333" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_dcm2.xml" value="0.10208333333333333" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_digital_class_management.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgot_mpin.xml" value="0.18640777389407015" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgot_otp.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_forgotpassword.xml" value="0.19010416666666666" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_home.xml" value="0.20504855128347715" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_home_work_management.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_home_work_management.xml" value="0.16" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_face_idactivity.xml" value="0.25" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_mpin.xml" value="0.2" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_password.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_login_temp_password.xml" value="0.20416666666666666" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_main.xml" value="0.14" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_on_review.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_on_review2.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_otp.xml" value="0.22" />
@@ -54,7 +57,10 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_splash_screen.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_submission_homework_formbased.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_successfull.xml" value="0.20416666666666666" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_summary_details.xml" value="0.18" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/activity_test.xml" value="0.2359375" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_view_preview_summary.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/activity_view_summary.xml" value="0.12" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/custom_layout.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/custom_layout_activity.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/filter_popup.xml" value="0.1" />
@@ -62,15 +68,23 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_activity_completed.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_activity_onreview.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_activity_pending.xml" value="0.10208333333333333" />
-        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_calendar.xml" value="0.25" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_assement_completed.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_assessment_dcm.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_assessment_onreview.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_assessment_pending.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_completed.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_home_work_management.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_live_dcm.xml" value="0.18" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_my_feed.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_on_review.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_pending.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_preread.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_preread_completed.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_preread_pending.xml" value="0.10208333333333333" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_summary.xml" value="0.10208333333333333" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_summary_dcm.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/layout/fragment_today_summery_detail.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/home_menu_header.xml" value="0.1" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/layout_classes.xml" value="0.30757282692521576" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/layout_edit_profile.xml" value="0.2" />
@@ -83,6 +97,7 @@
         <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_layout.xml" value="0.30757282692521576" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_lyt.xml" value="0.14" />
         <entry key="..\:/breathe4school/app/src/main/res/layout/time_table_subjects.xml" value="0.1" />
+        <entry key="..\:/breathe4school/app/src/main/res/menu/dcm_menu.xml" value="0.153125" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/home_menu.xml" value="0.20416666666666666" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/homework_menu.xml" value="0.10208333333333333" />
         <entry key="..\:/breathe4school/app/src/main/res/menu/popup_menu.xml" value="0.10208333333333333" />

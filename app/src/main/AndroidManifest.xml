@@ -18,55 +18,81 @@
         android:theme="@style/Theme.Breathe4School"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
-            android:name=".view.DCM.DigitalClassManagementActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".view.HomeWorkManagementActivity"
-            android:exported="true"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".view.DCM.Activity.DcmActivity"
             android:exported="true"
             android:screenOrientation="landscape">
+
+
+        </activity>
+
+
+
+
+
+        <activity
+            android:name=".view.HWM.Activity.HomeWorkManagementActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+
+
         <activity
-            android:name=".view.ActivityCompletedActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.ActivityOnReviewActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.ActivityPendingActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.OnReviewActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.SubmissionHomeworkFormbasedActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.CompletedHomeworkActivity"
-            android:exported="false"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".view.HomeActivity"
+            android:name=".view.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.HWM.Activity.ActivityCompletedActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+
+        <activity
+            android:name=".view.DCM.Activity.SummaryDetailsActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            />
+        <activity
+            android:name=".view.DCM.Activity.ViewSummaryActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"
+            />
+
+        <activity
+            android:name=".view.HWM.Activity.ActivityOnReviewActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.HWM.Activity.ActivityPendingActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.HWM.Activity.OnReviewActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.HWM.Activity.SubmissionHomeworkFormbasedActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.HWM.Activity.CompletedHomeworkActivity"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".view.Home.Activity.HomeActivity"
+            android:exported="true"
+            android:screenOrientation="landscape" >
+
+
+
+        </activity>
         <activity
             android:name=".view.Login.LoginTempPasswordActivity"
             android:exported="false"

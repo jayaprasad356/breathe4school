@@ -12,8 +12,7 @@ import androidx.databinding.DataBindingUtil;
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySuccessfullBinding;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.view.HomeActivity;
-import com.app.b4s.view.Register.SetFaceIdActivity;
+import com.app.b4s.view.Home.Activity.HomeActivity;
 
 public class LoginSuccessfullActivity extends AppCompatActivity {
 

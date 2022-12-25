@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.app.b4s.view.CompletedFragment;
-import com.app.b4s.view.OnReviewFragment;
-import com.app.b4s.view.PendingFragment;
+import com.app.b4s.view.HWM.Fragment.CompletedFragment;
+import com.app.b4s.view.HWM.Fragment.OnReviewFragment;
+import com.app.b4s.view.HWM.Fragment.PendingFragment;
 
 public class ViewPagerAdapter
         extends FragmentPagerAdapter {

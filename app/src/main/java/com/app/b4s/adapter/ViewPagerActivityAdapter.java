@@ -5,11 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.app.b4s.view.ActivityCompletedFragment;
-import com.app.b4s.view.ActivityOnreviewFragment;
-import com.app.b4s.view.ActivityPendingFragment;
-import com.app.b4s.view.PrereadCompletedFragment;
-import com.app.b4s.view.PrereadPendingFragment;
+import com.app.b4s.view.HWM.Fragment.ActivityCompletedFragment;
+import com.app.b4s.view.HWM.Fragment.ActivityOnreviewFragment;
+import com.app.b4s.view.HWM.Fragment.ActivityPendingFragment;
 
 public class ViewPagerActivityAdapter
         extends FragmentPagerAdapter {

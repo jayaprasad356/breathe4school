@@ -100,7 +100,6 @@
     <string name="pre_read">Pre-read</string>
     <string name="activity">Activity</string>
     <string name="home_work_management">Home Work Management</string>
-    <string name="digital_class_management">Digital Class Management</string>
     <string name="subject_wise_home_work">Subject Wise Home Work</string>
     <string name="this_question">This Question</string>
     <string name="total_marks">Total Marks</string>
@@ -138,6 +137,7 @@
     <string name="mark_completed">Mark Completed</string>
     <string name="save_changes">Save Changes</string>
     <string name="discard_chagnges">Discard Chagnges</string>
+    <string name="preview">Preview</string>
     <string-array name="workinghour">
         <item>All</item>
         <item>Live Sessions</item>
@@ -164,6 +164,9 @@
         <item>05:00 PM</item>
     </string-array>
 
+
+
+
     <string name="summary">Summary</string>
     <string name="live">LIVE</string>
     <string name="assessment">Assessment</string>
@@ -185,8 +188,10 @@
     <string name="your_activity">Your Activity</string>
     <string name="your_assessment">Your Assessment</string>
     <string name="take_assessment">Take Assessment</string>
+    <string name="digital_class_management">Digital Class Management</string>
     <string name="ms.jasmin">Ms. Jasmine</string>
     <string name="presentation">Presentation</string>
     <string name="view_summary">View Summary</string>
+
 
 </resources>

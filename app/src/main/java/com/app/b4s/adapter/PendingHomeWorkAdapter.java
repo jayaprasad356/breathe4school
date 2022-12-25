@@ -11,9 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
-import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.PendingHomeWork;
-import com.app.b4s.view.SubmissionHomeworkFormbasedActivity;
+import com.app.b4s.view.HWM.Activity.SubmissionHomeworkFormbasedActivity;
 
 import java.util.ArrayList;
 

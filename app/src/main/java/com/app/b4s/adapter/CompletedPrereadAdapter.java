@@ -1,7 +1,6 @@
 package com.app.b4s.adapter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.CompletedPreread;
-import com.app.b4s.view.SubmissionHomeworkFormbasedActivity;
 
 import java.util.ArrayList;
 

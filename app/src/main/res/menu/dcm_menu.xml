@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item
+        android:id="@+id/nav_summary"
+        android:enabled="true"
+        android:icon="@drawable/ic_document"
+        android:title="@string/summary"
+        />
+    <item
+        android:id="@+id/nav_live"
+        android:enabled="true"
+        android:visible="true"
+        android:icon="@drawable/ic_video_camera"
+        android:title="@string/live"/>
+
+
+    <item
+        android:id="@+id/nav_assessment"
+        android:enabled="true"
+        android:visible="true"
+        android:icon="@drawable/ic_notebook"
+        android:title="@string/assessment"/>
+
+
+</menu>
