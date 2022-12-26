@@ -12,9 +12,9 @@ public class CommonMethods {
             return "";
         } else if (hour > 12) {
             hour = hour - 12;
-            period = "pm";
+            period = "PM";
         } else {
-            period = "am";
+            period = "AM";
         }
         if (hour == 0) {
             hour = 12;

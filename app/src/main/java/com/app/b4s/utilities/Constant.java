@@ -4,6 +4,8 @@ public class Constant {
     public static final String MainBaseUrl = "http://143.244.132.170:3001/api/v1/";
     public static final String BaseUrl = MainBaseUrl + "studentAuth/";
     public static final String MessageBoard = "messageBoard/";
+    public static final String HomeWork_Url = MainBaseUrl + "homework/";
+    public static final String FILTER_BY_STUDENT_ID = HomeWork_Url + "filterByStudentId/";
     public static final String NoticeBoard = "noticeBoard/notice/";
     public static final String VALIDATEUNIQUEID_URL = BaseUrl + "validateUniqueId";
     public static final String VALIDATE_EMAIL_OTP = BaseUrl + "validateEmailOtp";

@@ -32,7 +32,7 @@
 
 
         <activity
-            android:name=".view.HWM.Activity.HomeWorkManagementActivity"
+            android:name=".view.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="landscape" >
 
@@ -46,7 +46,7 @@
 
 
         <activity
-            android:name=".view.SplashScreenActivity"
+            android:name=".view.HWM.Activity.HomeWorkManagementActivity"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

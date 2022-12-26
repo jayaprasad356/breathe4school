@@ -2,6 +2,31 @@ package com.app.b4s.model;
 
 public class DailyTimeTables {
     public String name;
+    Boolean joinNow,viewSummery,setReminder;
+
+    public Boolean getJoinNow() {
+        return joinNow;
+    }
+
+    public void setJoinNow(Boolean joinNow) {
+        this.joinNow = joinNow;
+    }
+
+    public Boolean getViewSummery() {
+        return viewSummery;
+    }
+
+    public void setViewSummery(Boolean viewSummery) {
+        this.viewSummery = viewSummery;
+    }
+
+    public Boolean getSetReminder() {
+        return setReminder;
+    }
+
+    public void setSetReminder(Boolean setReminder) {
+        this.setReminder = setReminder;
+    }
 
     public String getDay() {
         return day;

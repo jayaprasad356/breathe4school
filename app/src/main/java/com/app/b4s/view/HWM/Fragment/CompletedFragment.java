@@ -11,16 +11,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.b4s.R;
-import com.app.b4s.adapter.CompletedHomeWorkAdapter;
-import com.app.b4s.model.ComplededHomeWork;
+import com.app.b4s.adapter.HomeWorkAdapter;
+import com.app.b4s.controller.FilterHomeWorkController;
+import com.app.b4s.controller.IFilterHomeWorkController;
+import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.preferences.Session;
+import com.app.b4s.view.DCM.FilterHomeWorkListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class CompletedFragment extends Fragment {
+public class CompletedFragment extends Fragment implements FilterHomeWorkListener {
 
     RecyclerView rvCompleted;
-    CompletedHomeWorkAdapter completedHomeWorkAdapter;
+    Session session;
+    IFilterHomeWorkController filterHomeWorkController;
+    HomeWorkAdapter onReviewHomeWorkAdapter;
+
 
 
     public CompletedFragment() {
@@ -35,38 +47,39 @@ public class CompletedFragment extends Fragment {
 
 
         rvCompleted = root.findViewById(R.id.rvCompleted);
-
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
-
-        rvCompleted.setLayoutManager(gridLayoutManager);
-        Completed();
+        filterHomeWorkController = new FilterHomeWorkController(this);
+        filterHomeWorkController.getFilterHomeWork("completed",getActivity());
 
 
         return root;
 
     }
 
-    private void Completed() {
-        ArrayList<ComplededHomeWork> complededHomeWorks = new ArrayList<>();
-
-        ComplededHomeWork rings1 = new ComplededHomeWork("Kannada","Poem","22/12/2022");
-        ComplededHomeWork rings2 = new ComplededHomeWork("Kannada","Poem","22/12/2022");
-        ComplededHomeWork rings3 = new ComplededHomeWork("Kannada","Poem","22/12/2022");
 
 
+    @Override
+    public void onSuccess(JSONArray jsonArray) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
 
-        complededHomeWorks.add(rings1);
-        complededHomeWorks.add(rings2);
-        complededHomeWorks.add(rings3);
+        rvCompleted.setLayoutManager(gridLayoutManager);
+        Gson g = new Gson();
+        ArrayList<OnHomeWordData>  filterData= new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject1 = null;
+            try {
+                jsonObject1 = jsonArray.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (jsonObject1 != null) {
+                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                filterData.add(group);
+            } else {
+                break;
+            }
+            onReviewHomeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            rvCompleted.setAdapter(onReviewHomeWorkAdapter);
 
-
-
-        completedHomeWorkAdapter = new CompletedHomeWorkAdapter(complededHomeWorks, getActivity());
-        rvCompleted.setAdapter(completedHomeWorkAdapter);
-
-
-
-
+        }
     }
 }

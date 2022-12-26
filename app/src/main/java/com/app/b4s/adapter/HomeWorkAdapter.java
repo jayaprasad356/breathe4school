@@ -11,17 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
-import com.app.b4s.model.OnReviewHomeWork;
+import com.app.b4s.model.OnHomeWordData;
 import com.app.b4s.view.HWM.Activity.OnReviewActivity;
 
 import java.util.ArrayList;
 
-public class OnReviewHomeWorkAdapter extends RecyclerView.Adapter<OnReviewHomeWorkAdapter.ViewHolder> {
+public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHolder> {
     Activity activity;
-    ArrayList<OnReviewHomeWork> onReviewHomeWorks;
+    ArrayList<OnHomeWordData> onHomeWordData;
 
-    public OnReviewHomeWorkAdapter(ArrayList<OnReviewHomeWork> onReviewHomeWorks, Activity activity) {
-        this.onReviewHomeWorks = onReviewHomeWorks;
+    public HomeWorkAdapter(ArrayList<OnHomeWordData> onReviewHomeWorks, Activity activity) {
+        this.onHomeWordData = onReviewHomeWorks;
         this.activity = activity;
     }
 
@@ -36,9 +36,8 @@ public class OnReviewHomeWorkAdapter extends RecyclerView.Adapter<OnReviewHomeWo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvSubName.setText(onReviewHomeWorks.get(position).getSub_name());
-        holder.tvTopic.setText(onReviewHomeWorks.get(position).getTopic());
-        holder.tvDate.setText(onReviewHomeWorks.get(position).getDate());
+        holder.tvSubName.setText(onHomeWordData.get(position).getName());
+        holder.tvDate.setText(onHomeWordData.get(position).getDeadline());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +52,7 @@ public class OnReviewHomeWorkAdapter extends RecyclerView.Adapter<OnReviewHomeWo
 
     @Override
     public int getItemCount() {
-        return onReviewHomeWorks.size();
+        return onHomeWordData.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

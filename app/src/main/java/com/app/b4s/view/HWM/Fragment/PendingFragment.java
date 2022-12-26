@@ -1,25 +1,32 @@
 package com.app.b4s.view.HWM.Fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.app.b4s.R;
-import com.app.b4s.adapter.PendingHomeWorkAdapter;
-import com.app.b4s.model.PendingHomeWork;
+import com.app.b4s.adapter.HomeWorkAdapter;
+import com.app.b4s.controller.IFilterHomeWorkController;
+import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.view.DCM.FilterHomeWorkListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class PendingFragment extends Fragment {
+public class PendingFragment extends Fragment implements FilterHomeWorkListener {
     RecyclerView rvpending;
-    PendingHomeWorkAdapter pendingHomeWorkAdapter;
+    IFilterHomeWorkController filterHomeWorkController;
+    HomeWorkAdapter homeWorkAdapter;
 
 
     public PendingFragment() {
@@ -34,37 +41,41 @@ public class PendingFragment extends Fragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_pending, container, false);
         rvpending = root.findViewById(R.id.rvpending);
+        filterHomeWorkController.getFilterHomeWork("pending",getActivity());
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
 
         rvpending.setLayoutManager(gridLayoutManager);
-        pending();
+       // pending();
 
 
         return root;
     }
 
-    private void pending() {
+    @Override
+    public void onSuccess(JSONArray jsonArray) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
 
+        rvpending.setLayoutManager(gridLayoutManager);
+        Gson g = new Gson();
+        ArrayList<OnHomeWordData>  filterData= new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject1 = null;
+            try {
+                jsonObject1 = jsonArray.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (jsonObject1 != null) {
+                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                filterData.add(group);
+            } else {
+                break;
+            }
+            homeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            rvpending.setAdapter(homeWorkAdapter);
 
-        ArrayList<PendingHomeWork> pendingHomeWorks = new ArrayList<>();
-
-        PendingHomeWork rings1 = new PendingHomeWork("Kannada","Poem","22/12/2022");
-        PendingHomeWork rings2 = new PendingHomeWork("Kannada","Poem","22/12/2022");
-        PendingHomeWork rings3 = new PendingHomeWork("Kannada","Poem","22/12/2022");
-
-
-
-        pendingHomeWorks.add(rings1);
-        pendingHomeWorks.add(rings2);
-        pendingHomeWorks.add(rings3);
-
-
-
-        pendingHomeWorkAdapter = new PendingHomeWorkAdapter(pendingHomeWorks, getActivity());
-        rvpending.setAdapter(pendingHomeWorkAdapter);
-
-
+        }
     }
 }

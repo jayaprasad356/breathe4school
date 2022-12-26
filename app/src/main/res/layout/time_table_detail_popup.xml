@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <View
@@ -42,6 +43,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSubject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans"
@@ -51,6 +53,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/open_sans_semibold"
@@ -69,6 +72,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tvDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -79,6 +83,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
@@ -89,16 +94,15 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvDuriation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-
                         android:fontFamily="@font/open_sans_semibold"
                         android:text="30 min"
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/_8sdp"
                         android:textStyle="bold" />
-
 
                 </LinearLayout>
 
@@ -113,8 +117,9 @@
                 android:background="@color/gray" />
 
             <LinearLayout
-                android:id="@+id/layoutTopActiviyt"
+                android:id="@+id/llActivityView"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="1">
@@ -178,21 +183,20 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/activityBtmView"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="gone"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:background="@color/gray" />
 
-            <LinearLayout
-                android:visibility="visible"
-                android:id="@+id/upcommings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+
 
                 <LinearLayout
+                    android:id="@+id/llAssessmentView"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1">
@@ -256,14 +260,18 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/assessmentView"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:background="@color/gray" />
 
                 <LinearLayout
+                    android:id="@+id/llPreReadView"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="1">
@@ -327,15 +335,19 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/preReadView"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:background="@color/gray" />
 
                 <LinearLayout
+                    android:id="@+id/llPresentationView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
@@ -398,11 +410,12 @@
                 </LinearLayout>
 
 
-            </LinearLayout>
+
             <View
                 android:id="@+id/lastEmptyView"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="gone"
                 android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:background="@color/gray" />

@@ -32,6 +32,7 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAdapter.ViewHolder> {
@@ -60,7 +61,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     @Override
     public void onBindViewHolder(@NonNull DailyTimeTableAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         session = new Session(activity);
-
+        int startTime = Integer.parseInt(dailyTimeTables.get(position).start_time);
+        int endTime = Integer.parseInt(dailyTimeTables.get(position).end_time);
+        int duriation = endTime - startTime;
         if (type.equals(Constant.STUDY_PLANER)) {
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
@@ -68,11 +71,12 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         } else if (type.equals(Constant.LIVE_SESSION)) {
             holder.iconView.setVisibility(View.VISIBLE);
             holder.studyView.setVisibility(View.GONE);
-            holder.iconView.setOnClickListener(view -> showClassDetailPopup());
+            holder.iconView.setOnClickListener(view -> {
+                showClassDetailPopup(startTime, endTime, position);
+            });
         }
 
-        int startTime = Integer.parseInt(dailyTimeTables.get(position).start_time);
-        int endTime = Integer.parseInt(dailyTimeTables.get(position).end_time);
+
         if (position % 2 == 0) {
             holder.layout.setBackgroundColor(Color.parseColor("#28cd9c"));
         } else {
@@ -81,7 +85,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
         holder.startTime.setText(commonMethods.militaryToOrdinaryTime(startTime));
         holder.endTime.setText(commonMethods.militaryToOrdinaryTime(endTime));
-        int duriation = endTime - startTime;
+
         if (duriation > 40) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, activity.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp));
             holder.rcLayout.setLayoutParams(params);
@@ -90,38 +94,44 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         holder.subject.setText(dailyTimeTables.get(position).getName());
         iconVisibility(holder, position);
         statusVisibility(holder, position, startTime, endTime);
-        holder.editPlan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopup(position);
-            }
-        });
+        holder.editPlan.setOnClickListener(view -> showPopup(position));
 
     }
 
-    private void showClassDetailPopup() {
+    private void showClassDetailPopup(int startTime, int endTime, int position) {
         Dialog dialog = new Dialog(activity);
-
+        int duriat = endTime - startTime;
+        String tim= commonMethods.militaryToOrdinaryTime(startTime)+" - "+commonMethods.militaryToOrdinaryTime(endTime);
         dialog.setContentView(R.layout.time_table_detail_popup);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
-        View view=dialog.findViewById(R.id.emptyView);
+        View view = dialog.findViewById(R.id.emptyView);
+        TextView name, subject, date, time, duriation;
+        name = dialog.findViewById(R.id.tvName);
+        subject = dialog.findViewById(R.id.tvSubject);
+        date = dialog.findViewById(R.id.tvDate);
+        time=dialog.findViewById(R.id.tvTime);
+        time.setText(tim);
+        duriation = dialog.findViewById(R.id.tvDuriation);
+        name.setText(session.getData(Constant.NAME));
+        subject.setText(dailyTimeTables.get(position).getName());
 
-        if (isJoinNow) {
-            dialog.findViewById(R.id.upcommings).setVisibility(View.GONE);
+        duriation.setText(duriat + "mins");
+
+        if (dailyTimeTables.get(0).getJoinNow()) {
             dialog.findViewById(R.id.ivViewSummary).setVisibility(View.GONE);
-        }else if(viewSummary){
+        } else if (dailyTimeTables.get(0).getViewSummery()) {
             dialog.findViewById(R.id.btnJoinNow).setVisibility(View.GONE);
-            dialog.findViewById(R.id.sumEmptyView).setVisibility(View.GONE);
-            dialog.findViewById(R.id.layoutTopActiviyt).setVisibility(View.GONE);
             view.setBackgroundColor(Color.parseColor("#C9C9C9"));
-        }else if(setReminder){
-            dialog.findViewById(R.id.layoutTopActiviyt).setVisibility(View.GONE);
+        } else if (dailyTimeTables.get(0).getSetReminder()) {
             dialog.findViewById(R.id.btnJoinNow).setVisibility(View.GONE);
             dialog.findViewById(R.id.ivViewSummary).setVisibility(View.GONE);
             dialog.findViewById(R.id.lastEmptyView).setVisibility(View.GONE);
             view.setBackgroundColor(Color.parseColor("#28CD9C"));
         }
+
+        iconVisibilityInDetailPopup(dialog, position);
+
         Window window = dialog.getWindow();
         if (window != null) {
             window.setBackgroundDrawable(activity.getDrawable(R.drawable.popup_background)); // Set the corner radius to 20dp
@@ -132,6 +142,26 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialog.getWindow().setAttributes(lp);
         dialog.show();
+
+    }
+
+    private void iconVisibilityInDetailPopup(Dialog dialog, int position) {
+        if (dailyTimeTables.get(position).getActivity_id() != null) {
+            dialog.findViewById(R.id.llActivityView).setVisibility(View.VISIBLE);
+            dialog.findViewById(R.id.activityBtmView).setVisibility(View.VISIBLE);
+        }
+        if (dailyTimeTables.get(position).getAssessment_id() != null) {
+            dialog.findViewById(R.id.llAssessmentView).setVisibility(View.VISIBLE);
+            dialog.findViewById(R.id.assessmentView).setVisibility(View.VISIBLE);
+        }
+        if (dailyTimeTables.get(position).getPre_read_id() != null) {
+            dialog.findViewById(R.id.llPreReadView).setVisibility(View.VISIBLE);
+            dialog.findViewById(R.id.preReadView).setVisibility(View.VISIBLE);
+        }
+        if (dailyTimeTables.get(position).getBbb_lecture_id() != null) {
+            dialog.findViewById(R.id.llPresentationView).setVisibility(View.VISIBLE);
+            dialog.findViewById(R.id.lastEmptyView).setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -301,28 +331,27 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
     private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
         if (type.equals(Constant.STUDY_PLANER)) {
-
             holder.title.setText("Study Planer 01");
             holder.editPlan.setVisibility(View.VISIBLE);
         } else {
             int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
             if (currentTime > startTime && currentTime < endTime) {
                 holder.joinNow.setVisibility(View.VISIBLE);
-                isJoinNow = true;
+                dailyTimeTables.get(0).setJoinNow(true);
             } else {
-                isJoinNow = false;
+                dailyTimeTables.get(0).setJoinNow(false);
             }
             if (currentTime > startTime && currentTime > endTime) {
                 holder.viewSummbery.setVisibility(View.VISIBLE);
-                viewSummary = true;
+                dailyTimeTables.get(0).setViewSummery(true);
             } else {
-                viewSummary = false;
+                dailyTimeTables.get(0).setViewSummery(false);
             }
             if (!(currentTime > startTime && currentTime > endTime)) {
                 holder.setReminer.setVisibility(View.VISIBLE);
-                setReminder = true;
+                dailyTimeTables.get(0).setSetReminder(true);
             } else {
-                setReminder = false;
+                dailyTimeTables.get(0).setSetReminder(false);
             }
         }
     }

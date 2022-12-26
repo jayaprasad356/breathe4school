@@ -1,6 +1,7 @@
 package com.app.b4s.model;
 
-public class ComplededHomeWork {
+public class OnHomeWordData {
+
 
     public String getName() {
         return name;
@@ -29,5 +30,6 @@ public class ComplededHomeWork {
     }
 
     Object subject_id;
+
 
 }

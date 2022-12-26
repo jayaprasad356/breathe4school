@@ -2,6 +2,8 @@ package com.app.b4s.view.HWM.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,23 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.app.b4s.R;
-import com.app.b4s.adapter.OnReviewHomeWorkAdapter;
-import com.app.b4s.model.OnReviewHomeWork;
+import com.app.b4s.adapter.HomeWorkAdapter;
+import com.app.b4s.controller.FilterHomeWorkController;
+import com.app.b4s.controller.IFilterHomeWorkController;
+import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.view.DCM.FilterHomeWorkListener;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class OnReviewFragment extends Fragment {
+public class OnReviewFragment extends Fragment implements FilterHomeWorkListener {
 
     RecyclerView rvReview;
-    OnReviewHomeWorkAdapter onReviewHomeWorkAdapter;
-
-
+    HomeWorkAdapter onReviewHomeWorkAdapter;
+    IFilterHomeWorkController filterHomeWorkController;
 
 
     public OnReviewFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -37,40 +45,43 @@ public class OnReviewFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_on_review, container, false);
 
         rvReview = root.findViewById(R.id.rvReview);
-
-
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
-
-        rvReview.setLayoutManager(gridLayoutManager);
-        Review();
-
+        filterHomeWorkController = new FilterHomeWorkController(this);
 
         return root;
 
 
     }
 
-    private void Review() {
-
-
-        ArrayList<OnReviewHomeWork> onReviewHomeWorks = new ArrayList<>();
-
-        OnReviewHomeWork rings1 = new OnReviewHomeWork("Kannada","Poem","22/12/2022");
-        OnReviewHomeWork rings2 = new OnReviewHomeWork("Kannada","Poem","22/12/2022");
-        OnReviewHomeWork rings3 = new OnReviewHomeWork("Kannada","Poem","22/12/2022");
-
-
-
-        onReviewHomeWorks.add(rings1);
-        onReviewHomeWorks.add(rings2);
-        onReviewHomeWorks.add(rings3);
-
-
-
-        onReviewHomeWorkAdapter = new OnReviewHomeWorkAdapter(onReviewHomeWorks, getActivity());
-        rvReview.setAdapter(onReviewHomeWorkAdapter);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        filterHomeWorkController.getFilterHomeWork("review",getActivity());
 
     }
 
+    @Override
+    public void onSuccess(JSONArray jsonArray) {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
 
+        rvReview.setLayoutManager(gridLayoutManager);
+        Gson g = new Gson();
+        ArrayList<OnHomeWordData>  filterData= new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject1 = null;
+            try {
+                jsonObject1 = jsonArray.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (jsonObject1 != null) {
+                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                filterData.add(group);
+            } else {
+                break;
+            }
+            onReviewHomeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            rvReview.setAdapter(onReviewHomeWorkAdapter);
+
+    }
+}
 }
