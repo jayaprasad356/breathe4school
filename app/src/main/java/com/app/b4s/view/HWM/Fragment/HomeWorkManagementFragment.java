@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -20,16 +21,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.b4s.R;
+import com.app.b4s.adapter.HomeWorkAdapter;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
 import com.app.b4s.adapter.ViewPagerAdapter;
+import com.app.b4s.controller.FilterHomeWorkController;
+import com.app.b4s.controller.IFilterHomeWorkController;
 import com.app.b4s.model.HomeWorkSubject;
+import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.view.DCM.FilterHomeWorkListener;
 import com.google.android.material.tabs.TabLayout;
+import com.google.gson.Gson;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 
-public class HomeWorkManagementFragment extends Fragment {
-    RecyclerView rvSubject;
+public class HomeWorkManagementFragment extends Fragment implements FilterHomeWorkListener {
+    RecyclerView rvSubject,rvpending,rvReview,rvCompleted;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
     TabLayout tabLayout;
     ViewPager viewPager;
@@ -37,6 +48,8 @@ public class HomeWorkManagementFragment extends Fragment {
     TextView tvSortby,tvFilter;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
+    IFilterHomeWorkController filterHomeWorkController;
+    HomeWorkAdapter homeWorkAdapter;
 
 
 
@@ -50,15 +63,68 @@ public class HomeWorkManagementFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home_work_management, container, false);
 
+        filterHomeWorkController = new FilterHomeWorkController(this);
 
-        viewPager = root.findViewById(R.id.view_pager);
+
+        rvpending = root.findViewById(R.id.rvpending);
+        rvReview = root.findViewById(R.id.rvReview);
+        rvCompleted = root.findViewById(R.id.rvCompleted);
+
         tabLayout = root.findViewById(R.id.tabs);
 
-        viewPagerAdapter = new ViewPagerAdapter(getFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
 
-        // It is used to join TabLayout with ViewPager.
-        tabLayout.setupWithViewPager(viewPager);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),3);
+        rvpending.setLayoutManager(gridLayoutManager);
+
+        GridLayoutManager gridLayoutManager1 = new GridLayoutManager(getActivity(),3);
+        rvReview.setLayoutManager(gridLayoutManager1);
+
+
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(),3);
+        rvCompleted.setLayoutManager(gridLayoutManager2);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Pending"));
+        tabLayout.addTab(tabLayout.newTab().setText("On Review"));
+        tabLayout.addTab(tabLayout.newTab().setText("Compleded"));
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
+
+                    case 0:
+                        rvCompleted.setVisibility(View.GONE);
+                        rvReview.setVisibility(View.GONE);
+                        rvpending.setVisibility(View.VISIBLE);
+                        filterHomeWorkController.getFilterHomeWork("pending",getActivity());
+
+                    case 1:
+                        rvCompleted.setVisibility(View.GONE);
+                        rvReview.setVisibility(View.VISIBLE);
+                        rvpending.setVisibility(View.GONE);
+                        filterHomeWorkController.getFilterHomeWork("review",getActivity());
+
+                    case 2:
+                        rvCompleted.setVisibility(View.VISIBLE);
+                        rvReview.setVisibility(View.GONE);
+                        rvpending.setVisibility(View.GONE);
+                        filterHomeWorkController.getFilterHomeWork("completed",getActivity());
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+
+        });
 
 
         rvSubject = root.findViewById(R.id.rvSubject);
@@ -183,7 +249,31 @@ public class HomeWorkManagementFragment extends Fragment {
     }
 
 
+    @Override
+    public void onSuccess(JSONArray jsonArray) {
 
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
 
+        rvpending.setLayoutManager(gridLayoutManager);
+        Gson g = new Gson();
+        ArrayList<OnHomeWordData>  filterData= new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jsonObject1 = null;
+            try {
+                jsonObject1 = jsonArray.getJSONObject(i);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            if (jsonObject1 != null) {
+                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                filterData.add(group);
+            } else {
+                break;
+            }
+            homeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            rvpending.setAdapter(homeWorkAdapter);
 
-}
+        }
+    }
+
+    }
