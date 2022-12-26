@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkAdapter;
+import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
 import com.app.b4s.model.OnHomeWordData;
 import com.app.b4s.view.DCM.FilterHomeWorkListener;
@@ -41,6 +42,8 @@ public class PendingFragment extends Fragment implements FilterHomeWorkListener 
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_pending, container, false);
         rvpending = root.findViewById(R.id.rvpending);
+        filterHomeWorkController = new FilterHomeWorkController(this);
+
         filterHomeWorkController.getFilterHomeWork("pending",getActivity());
 
 

@@ -57,7 +57,7 @@ public class HomeWorkManagementActivity extends AppCompatActivity {
         });
 
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.rlContainer, new PrereadFragment()).commit();
+        fragmentManager.beginTransaction().replace(R.id.rlContainer, new HomeWorkManagementFragment()).commit();
 
 
 
