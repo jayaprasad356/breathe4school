@@ -77,7 +77,7 @@ public class CompletedFragment extends Fragment implements FilterHomeWorkListene
             } else {
                 break;
             }
-            onReviewHomeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            onReviewHomeWorkAdapter = new HomeWorkAdapter("pending", filterData, getActivity());
             rvCompleted.setAdapter(onReviewHomeWorkAdapter);
 
         }

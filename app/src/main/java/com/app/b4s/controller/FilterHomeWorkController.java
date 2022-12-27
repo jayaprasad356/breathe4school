@@ -31,7 +31,7 @@ public class FilterHomeWorkController implements IFilterHomeWorkController {
         session = new Session(activity);
         String url;
        // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+type;
+        url = Constant.FILTER_BY_STUDENT_ID +session.getData(Constant.STUDENT_ID)+"/"+type;
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {

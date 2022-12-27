@@ -12,17 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.OnHomeWordData;
-import com.app.b4s.view.HWM.Activity.OnReviewActivity;
+import com.app.b4s.preferences.Session;
+import com.app.b4s.utilities.ApiConfig;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.HWM.Activity.QuestionsActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHolder> {
     Activity activity;
     ArrayList<OnHomeWordData> onHomeWordData;
+    Session session;
+    String type;
 
-    public HomeWorkAdapter(ArrayList<OnHomeWordData> onReviewHomeWorks, Activity activity) {
+    public HomeWorkAdapter(String type, ArrayList<OnHomeWordData> onReviewHomeWorks, Activity activity) {
         this.onHomeWordData = onReviewHomeWorks;
         this.activity = activity;
+        this.type=type;
     }
 
 
@@ -41,11 +52,35 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, OnReviewActivity.class);
-                activity.startActivity(intent);
+                loadHomeWordDetails();
             }
         });
 
+
+    }
+
+    private void loadHomeWordDetails() {
+
+        session = new Session(activity);
+        String url;
+        // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
+        url = Constant.HomeWork_Url +"get"+"/"+session.getData(Constant.HOMEWORD_ID);
+        Map<String, String> params = new HashMap<>();
+        ApiConfig.RequestToVolley((result, response) -> {
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        JSONObject jsonArray = jsonObject.getJSONObject(Constant.DATA);
+                        session.setData(Constant.QUESTION_DATA,jsonArray.toString());
+                        Intent intent = new Intent(activity, QuestionsActivity.class);
+                        activity.startActivity(intent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, url, params, true, 0);
 
     }
 

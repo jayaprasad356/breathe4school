@@ -79,7 +79,7 @@ public class OnReviewFragment extends Fragment implements FilterHomeWorkListener
             } else {
                 break;
             }
-            onReviewHomeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            onReviewHomeWorkAdapter = new HomeWorkAdapter("pending", filterData, getActivity());
             rvReview.setAdapter(onReviewHomeWorkAdapter);
 
     }

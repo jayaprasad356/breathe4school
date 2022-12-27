@@ -59,7 +59,7 @@ public class Constant {
     public static final String PARENT_EMAIL = "email";
     public static final String STUDENT_ID = "student_id";
     public static final String MESSAGE_SHOWEN_TIME = "message_showed_time";
-    public static final String MESSAGE_COUNT = "message_count";
+    public static final String SUBMITTED_ON = "submitted_on";
 
     public static final String ACADEMIC_YEAR_ID = "academic_year_id";
     public static final String SCHOOL_ID = "school_id";
@@ -112,5 +112,11 @@ public class Constant {
 
     public static final String PROXY_LECTURES = "proxy_lectures";
     public static final String SPECIAL_LECTURES = "special_lectures";
+
+    public static final String QUESTION_DATA="question_data";
+    public static final String HOMEWORD_ID="homeword_id";
+    public static final String QUESTIONS_ID="questions_id";
+
+
 
 }

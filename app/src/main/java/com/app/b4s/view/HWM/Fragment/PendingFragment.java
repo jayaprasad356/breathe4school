@@ -76,7 +76,7 @@ public class PendingFragment extends Fragment implements FilterHomeWorkListener 
             } else {
                 break;
             }
-            homeWorkAdapter = new HomeWorkAdapter(filterData, getActivity());
+            homeWorkAdapter = new HomeWorkAdapter("pending", filterData, getActivity());
             rvpending.setAdapter(homeWorkAdapter);
 
         }

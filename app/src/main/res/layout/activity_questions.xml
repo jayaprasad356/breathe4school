@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.HWM.Activity.QuestionsActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp">
+
+
+                <ImageButton
+                    android:id="@+id/ibBackBtn"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_back_arrow" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/ibBackBtn"
+                    android:text="Navellaru Onde Poem"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_10sdp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kannada | "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Submit on"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 28/02/2022"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:text="@string/result"
+                            android:textSize="@dimen/_10sdp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="-/-"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvQuestion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_10sdp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/tvQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Q1. Lorem Ipsum is simply dummy text of the printing and typesetting industry.?"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tvmark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_toRightOf="@+id/tvQuestion"
+                        android:text="5 mark"
+                        android:textSize="@dimen/_10sdp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:weightSum="2">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rectangle_bg" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/upload_cam" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/upload_your_files_here"
+                                    android:textSize="@dimen/_10sdp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/open_camera"
+                                    android:textColor="@color/primary"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_120sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rectangle_bg" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+
+                                android:orientation="vertical">
+
+
+                                <ImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/upload_doc" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/upload_your_files_here"
+                                    android:textSize="@dimen/_10sdp"
+
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/choose_file"
+                                    android:textColor="@color/primary"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+
+                                    />
+
+
+                            </LinearLayout>
+
+
+                        </RelativeLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvQuestion"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+
+                    <CheckBox
+                        android:id="@+id/cbFirstOpt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        android:visibility="gone" />
+
+                    <CheckBox
+                        android:id="@+id/cbSecondOpt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        android:visibility="gone" />
+
+                    <CheckBox
+                        android:id="@+id/cbThirdOpt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        android:visibility="gone" />
+
+                    <CheckBox
+                        android:id="@+id/cbFourthOpt"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                        android:visibility="gone" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:text="Next"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/primary" />
+
+    </RelativeLayout>
+</layout>
