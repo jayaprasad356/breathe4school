@@ -37,7 +37,7 @@
     <color name="digital_sc_text_col">#000A11</color>
     <color name="digital_text_col">#666666</color>
     <color name="border_popup_btn">#2E3A59</color>
-
-
+    <color name="check_box_green">#ECF9EE</color>
+    <color name="check_box_red">#FBE7E7</color>
 
 </resources>

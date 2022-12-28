@@ -1,6 +1,9 @@
 package com.app.b4s.view.HWM.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,8 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class QuestionsActivity extends AppCompatActivity {
     private ActivityQuestionsBinding binding;
@@ -37,8 +38,13 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject jsonObject;
     private JSONArray jsonArray = null;
     private JSONArray options = null;
+    private JSONArray correctAnswers = null;
+    private JSONObject questions = null;
+    private JSONObject questionsResponse = null;
+    private JSONObject answer = null;
     private String title = "";
     private Boolean A, B, C, D;
+    private String type;
 
     Activity activity;
 
@@ -47,51 +53,80 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
         rvQuestions = binding.rvQuestion;
+
         activity = this;
         session = new Session(activity);
+        Intent intent = getIntent();
+        type = intent.getStringExtra(Constant.TYPE);
+        if (type.equals(Constant.REVIEW) || type.equals(Constant.COMPLETED)) {
+            setDisable();
+        }
         setQuestions(0);
+
+
         binding.tvQuestion.setText(title);
+
+
         binding.cbFirstOpt.setOnClickListener(view -> {
-            A = true;
-            B = false;
-            C = false;
-            D = false;
-            binding.cbFirstOpt.setChecked(true);
-            binding.cbSecondOpt.setChecked(false);
-            binding.cbThirdOpt.setChecked(false);
-            binding.cbFourthOpt.setChecked(false);
+            if (type.equals(Constant.PENDING)) {
+                A = true;
+                B = false;
+                C = false;
+                D = false;
+                binding.cbFirstOpt.setChecked(true);
+                binding.cbSecondOpt.setChecked(false);
+                binding.cbThirdOpt.setChecked(false);
+                binding.cbFourthOpt.setChecked(false);
+            }
+            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+                binding.cbFirstOpt.setChecked(true);
+            }
+
         });
         binding.cbSecondOpt.setOnClickListener(view -> {
-            A = false;
-            B = true;
-            C = false;
-            D = false;
-            binding.cbFirstOpt.setChecked(false);
-            binding.cbSecondOpt.setChecked(true);
-            binding.cbThirdOpt.setChecked(false);
-            binding.cbFourthOpt.setChecked(false);
+            if (type.equals(Constant.PENDING)) {
+                A = false;
+                B = true;
+                C = false;
+                D = false;
+                binding.cbFirstOpt.setChecked(false);
+                binding.cbSecondOpt.setChecked(true);
+                binding.cbThirdOpt.setChecked(false);
+                binding.cbFourthOpt.setChecked(false);
+            }
+            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+                binding.cbSecondOpt.setChecked(true);
+            }
         });
-
         binding.cbThirdOpt.setOnClickListener(view -> {
-            A = false;
-            B = false;
-            C = true;
-            D = false;
-            binding.cbFirstOpt.setChecked(false);
-            binding.cbSecondOpt.setChecked(false);
-            binding.cbThirdOpt.setChecked(true);
-            binding.cbFourthOpt.setChecked(false);
+            if (type.equals(Constant.PENDING)) {
+                A = false;
+                B = false;
+                C = true;
+                D = false;
+                binding.cbFirstOpt.setChecked(false);
+                binding.cbSecondOpt.setChecked(false);
+                binding.cbThirdOpt.setChecked(true);
+                binding.cbFourthOpt.setChecked(false);
+            }
+            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+                binding.cbThirdOpt.setChecked(true);
+            }
         });
-
         binding.cbFourthOpt.setOnClickListener(view -> {
-            A = false;
-            B = false;
-            C = false;
-            D = true;
-            binding.cbFirstOpt.setChecked(false);
-            binding.cbSecondOpt.setChecked(false);
-            binding.cbThirdOpt.setChecked(false);
-            binding.cbFourthOpt.setChecked(true);
+            if (type.equals(Constant.PENDING)) {
+                A = false;
+                B = false;
+                C = false;
+                D = true;
+                binding.cbFirstOpt.setChecked(false);
+                binding.cbSecondOpt.setChecked(false);
+                binding.cbThirdOpt.setChecked(false);
+                binding.cbFourthOpt.setChecked(true);
+            }
+            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+                binding.cbFourthOpt.setChecked(true);
+            }
         });
 
 
@@ -103,43 +138,70 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setBackground = setBackground + 1;
-
-                ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
-                JSONObject test = new JSONObject();
-
-                String ans = "";
-                if (A) {
-                    ans = "A";
-                } else if (B) {
-                    ans = "B";
-                } else if (C) {
-                    ans = "C";
-                } else if (D) {
-                    ans = "D";
-                }
-                try {
-                    test.put("question_id", session.getData(Constant.QUESTIONS_ID));
-                    test.put("answer", ans);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                jsonArrayList.add(test);
-
-
-                if (i > setBackground) {
-                    setQuestions(setBackground);
-                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
-                    rvQuestions.setAdapter(questionsCountAdapter);
-                    questionsCountAdapter.notifyDataSetChanged();
-                } else {
-                    finishQuestion(jsonArrayList);
+                if (type.equals(Constant.PENDING))
+                    pendingFlow();
+                else if (type.equals(Constant.REVIEW)) {
+                    setBackground = setBackground + 1;
+                    if (i > setBackground) {
+                        setQuestions(setBackground);
+                        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
+                        rvQuestions.setAdapter(questionsCountAdapter);
+                        questionsCountAdapter.notifyDataSetChanged();
+                    } else {
+                        //finishQuestion(jsonArrayList);
+                    }
+                } else if (type.equals(Constant.COMPLETED)) {
+                    setBackground = setBackground + 1;
+                    if (i > setBackground) {
+                        setQuestions(setBackground);
+                        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
+                        rvQuestions.setAdapter(questionsCountAdapter);
+                        questionsCountAdapter.notifyDataSetChanged();
+                    }
                 }
 
             }
         });
 
 
+    }
+
+    private void pendingFlow() {
+        if (!(A == null && B == null && C == null && D == null)) {
+            setBackground = setBackground + 1;
+
+            ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
+            JSONObject test = new JSONObject();
+
+            String ans = "";
+            if (A) {
+                ans = "A";
+            } else if (B) {
+                ans = "B";
+            } else if (C) {
+                ans = "C";
+            } else if (D) {
+                ans = "D";
+            }
+            try {
+                test.put("question_id", session.getData(Constant.QUESTIONS_ID));
+                test.put(Constant.ANSWERS, ans);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonArrayList.add(test);
+
+
+            if (i > setBackground) {
+                setQuestions(setBackground);
+                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
+                rvQuestions.setAdapter(questionsCountAdapter);
+                questionsCountAdapter.notifyDataSetChanged();
+            } else {
+                finishQuestion(jsonArrayList);
+            }
+        } else
+            Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
     }
 
     private void finishQuestion(ArrayList<JSONObject> answersList) {
@@ -153,7 +215,7 @@ public class QuestionsActivity extends AppCompatActivity {
         try {
             jsonObject.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
             jsonObject.put(Constant.SUBMITTED_ON, "23/12/2022");
-            jsonObject.put("answers",answersList);
+            jsonObject.put(Constant.ANSWERS, answersList);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -185,37 +247,257 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void setQuestions(int i) {
-        try {
-            jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
-            jsonArray = jsonObject.getJSONArray("questions");
-            session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
-            title = jsonArray.getJSONObject(i).getString("title");
-            options = jsonArray.getJSONObject(i).getJSONArray("options");
-            System.out.println(options);
-            for (int j = 0; j < options.length(); j++) {
-                JSONObject option = options.getJSONObject(j);
-                String key = option.getString("key");
-                String value = option.getString("value");
-                if (j == 0) {
-                    binding.cbFirstOpt.setVisibility(View.VISIBLE);
-                    binding.cbFirstOpt.setText(value);
+
+
+        if (type.equals(Constant.PENDING)) {
+            try {
+                setUnCheck();
+                jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
+                jsonArray = jsonObject.getJSONArray(Constant.QUESTIONS);
+                session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
+                title = jsonArray.getJSONObject(i).getString(Constant.title);
+                options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
+                System.out.println(options);
+                setOptionsForPending();
+                this.i = jsonObject.getInt(Constant.TOTAL_QUESTIONS);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        if (type.equals(Constant.REVIEW)) {
+            try {
+                jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
+                jsonArray = jsonObject.getJSONArray(Constant.ANSWERS);
+                questions = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION);
+                title = questions.getString(Constant.title);
+                options = questions.getJSONArray(Constant.OPTIONS);
+                answer = jsonArray.getJSONObject(i).getJSONObject(Constant.ANSWER);
+                setOptionsForReview(answer);
+                this.i = questions.length();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+        if (type.equals(Constant.COMPLETED)) {
+            try {
+                jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
+                jsonArray = jsonObject.getJSONArray(Constant.RESULTS);
+                questionsResponse = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION_RESPONSE);
+                answer = questionsResponse.getJSONObject(Constant.ANSWER);
+                questions = questionsResponse.getJSONObject(Constant.QUESTION);
+                options = questions.getJSONArray(Constant.OPTIONS);
+                title = questions.getString(Constant.title);
+                correctAnswers = questions.getJSONArray(Constant.CORRECT_ANSWERS);
+                setOptionsForCompleted();
+                this.i = questionsResponse.length();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+    private void setOptionsForCompleted() throws JSONException {
+        setUnCheck();
+        removeBackground();
+        setDisable();
+        int green = Color.parseColor("#45BF55");
+        ColorStateList GreencolorStateList = new ColorStateList(
+                new int[][]{
+                        new int[]{android.R.attr.state_checked}
+                },
+                new int[]{
+                       green
                 }
-                if (j == 1) {
-                    binding.cbSecondOpt.setVisibility(View.VISIBLE);
-                    binding.cbSecondOpt.setText(value);
+        );
+        int red = Color.parseColor("#D40D12");
+        ColorStateList RedcolorStateList = new ColorStateList(
+
+                new int[][]{
+                        new int[]{android.R.attr.state_checked}
+                },
+                new int[]{
+                        red
                 }
-                if (j == 2) {
-                    binding.cbThirdOpt.setVisibility(View.VISIBLE);
-                    binding.cbThirdOpt.setText(value);
+        );
+        for (int j = 0; j < options.length(); j++) {
+            JSONObject option = options.getJSONObject(j);
+            String key = option.getString(Constant.KEY);
+            String value = option.getString("value");
+            //todo Your answer
+            if (answer.get(Constant.KEY).equals(Constant.A)) {
+                binding.cbFirstOpt.setEnabled(true);
+                binding.cbFirstOpt.setChecked(true);
+                if (answer.get(Constant.KEY).equals(correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY))) {
+                    binding.cbFirstOpt.setButtonTintList(GreencolorStateList);
+                    binding.cbFirstOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                } else {
+                    binding.cbFirstOpt.setButtonTintList(RedcolorStateList);
+                    binding.cbFirstOpt.setBackground(activity.getDrawable(R.color.check_box_red));
                 }
-                if (j == 3) {
-                    binding.cbFourthOpt.setVisibility(View.VISIBLE);
-                    binding.cbFourthOpt.setText(value);
+            } else if (answer.get(Constant.KEY).equals(Constant.B)) {
+                binding.cbSecondOpt.setEnabled(true);
+                binding.cbSecondOpt.setChecked(true);
+                if (answer.get(Constant.KEY).equals(correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY))) {
+                    binding.cbSecondOpt.setButtonTintList(GreencolorStateList);
+                    binding.cbSecondOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                } else {
+                    binding.cbSecondOpt.setButtonTintList(RedcolorStateList);
+                    binding.cbSecondOpt.setBackground(activity.getDrawable(R.color.check_box_red));
+                }
+            } else if (answer.get(Constant.KEY).equals(Constant.C)) {
+                binding.cbThirdOpt.setEnabled(true);
+                binding.cbThirdOpt.setChecked(true);
+                if (answer.get(Constant.KEY).equals(correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY))) {
+                    binding.cbThirdOpt.setButtonTintList(GreencolorStateList);
+                    binding.cbThirdOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                } else {
+                    binding.cbThirdOpt.setButtonTintList(RedcolorStateList);
+                    binding.cbThirdOpt.setBackground(activity.getDrawable(R.color.check_box_red));
+                }
+            } else if (answer.get(Constant.KEY).equals(Constant.D)) {
+                binding.cbFourthOpt.setEnabled(true);
+                binding.cbFourthOpt.setChecked(true);
+                if (answer.get(Constant.KEY).equals(correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY))) {
+                    binding.cbFourthOpt.setButtonTintList(GreencolorStateList);
+                    binding.cbFourthOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                } else {
+                    binding.cbFourthOpt.setButtonTintList(RedcolorStateList);
+                    binding.cbFourthOpt.setBackground(activity.getDrawable(R.color.check_box_red));
                 }
             }
-            this.i = jsonObject.getInt("total_questions");
-        } catch (JSONException e) {
-            e.printStackTrace();
+
+            //todo Correct Answer
+            if (correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY).equals(Constant.A)) {
+                binding.cbFirstOpt.setEnabled(true);
+                binding.cbFirstOpt.setChecked(true);
+                binding.cbFirstOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                binding.cbFirstOpt.setButtonTintList(GreencolorStateList);
+
+            } else if (correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY).equals(Constant.B)) {
+                binding.cbSecondOpt.setEnabled(true);
+                binding.cbSecondOpt.setChecked(true);
+                binding.cbSecondOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                binding.cbSecondOpt.setButtonTintList(GreencolorStateList);
+
+            } else if (correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY).equals(Constant.C)) {
+                binding.cbThirdOpt.setEnabled(true);
+                binding.cbThirdOpt.setChecked(true);
+                binding.cbThirdOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                binding.cbThirdOpt.setButtonTintList(GreencolorStateList);
+
+            } else if (correctAnswers.getJSONObject(0).get(Constant.OPTION_KEY).equals(Constant.D)) {
+                binding.cbFourthOpt.setEnabled(true);
+                binding.cbFourthOpt.setChecked(true);
+                binding.cbFourthOpt.setBackground(activity.getDrawable(R.color.check_box_green));
+                binding.cbFourthOpt.setButtonTintList(GreencolorStateList);
+            }
+
+            if (j == 0) {
+                binding.cbFirstOpt.setVisibility(View.VISIBLE);
+                binding.cbFirstOpt.setText(value);
+            }
+            if (j == 1) {
+                binding.cbSecondOpt.setVisibility(View.VISIBLE);
+                binding.cbSecondOpt.setText(value);
+            }
+            if (j == 2) {
+                binding.cbThirdOpt.setVisibility(View.VISIBLE);
+                binding.cbThirdOpt.setText(value);
+            }
+            if (j == 3) {
+                binding.cbFourthOpt.setVisibility(View.VISIBLE);
+                binding.cbFourthOpt.setText(value);
+            }
         }
     }
+
+
+    private void setOptionsForPending() throws JSONException {
+        for (int j = 0; j < options.length(); j++) {
+            JSONObject option = options.getJSONObject(j);
+            String key = option.getString(Constant.KEY);
+            String value = option.getString(Constant.VALUE);
+            if (j == 0) {
+                binding.cbFirstOpt.setVisibility(View.VISIBLE);
+                binding.cbFirstOpt.setText(value);
+            }
+            if (j == 1) {
+                binding.cbSecondOpt.setVisibility(View.VISIBLE);
+                binding.cbSecondOpt.setText(value);
+            }
+            if (j == 2) {
+                binding.cbThirdOpt.setVisibility(View.VISIBLE);
+                binding.cbThirdOpt.setText(value);
+            }
+            if (j == 3) {
+                binding.cbFourthOpt.setVisibility(View.VISIBLE);
+                binding.cbFourthOpt.setText(value);
+            }
+        }
+    }
+
+    private void setOptionsForReview(JSONObject answer) throws JSONException {
+        setUnCheck();
+        setDisable();
+        for (int j = 0; j < options.length(); j++) {
+            JSONObject option = options.getJSONObject(j);
+            String key = option.getString(Constant.KEY);
+            String value = option.getString(Constant.VALUE);
+            if (answer.get(Constant.KEY).equals(Constant.A)) {
+                binding.cbFirstOpt.setEnabled(true);
+                binding.cbFirstOpt.setChecked(true);
+            } else if (answer.get(Constant.KEY).equals(Constant.B)) {
+                binding.cbSecondOpt.setEnabled(true);
+                binding.cbSecondOpt.setChecked(true);
+            } else if (answer.get(Constant.KEY).equals(Constant.C)) {
+                binding.cbThirdOpt.setEnabled(true);
+                binding.cbThirdOpt.setChecked(true);
+            } else if (answer.get(Constant.KEY).equals(Constant.D)) {
+                binding.cbFourthOpt.setEnabled(true);
+                binding.cbFourthOpt.setChecked(true);
+            }
+            if (j == 0) {
+                binding.cbFirstOpt.setVisibility(View.VISIBLE);
+                binding.cbFirstOpt.setText(value);
+            }
+            if (j == 1) {
+                binding.cbSecondOpt.setVisibility(View.VISIBLE);
+                binding.cbSecondOpt.setText(value);
+            }
+            if (j == 2) {
+                binding.cbThirdOpt.setVisibility(View.VISIBLE);
+                binding.cbThirdOpt.setText(value);
+            }
+            if (j == 3) {
+                binding.cbFourthOpt.setVisibility(View.VISIBLE);
+                binding.cbFourthOpt.setText(value);
+            }
+        }
+    }
+
+    private void setUnCheck() {
+        binding.cbFirstOpt.setChecked(false);
+        binding.cbSecondOpt.setChecked(false);
+        binding.cbThirdOpt.setChecked(false);
+        binding.cbFourthOpt.setChecked(false);
+    }
+
+    private void removeBackground() {
+        binding.cbFirstOpt.setBackground(null);
+        binding.cbSecondOpt.setBackground(null);
+        binding.cbThirdOpt.setBackground(null);
+        binding.cbFourthOpt.setBackground(null);
+        binding.cbFirstOpt.setButtonTintList(null);
+    }
+
+    private void setDisable() {
+        binding.cbFirstOpt.setEnabled(false);
+        binding.cbSecondOpt.setEnabled(false);
+        binding.cbThirdOpt.setEnabled(false);
+        binding.cbFourthOpt.setEnabled(false);
+    }
+
 }

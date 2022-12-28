@@ -109,6 +109,8 @@ public class Constant {
     public static final String BB_LECTURE_ID = "bbb_lecture_id";
     public static final String PRE_READ_ID = "pre_read_id";
     public static final String ACTIVITY_ID = "activity_id";
+    public static final String OPTION_KEY="option_key";
+
 
     public static final String PROXY_LECTURES = "proxy_lectures";
     public static final String SPECIAL_LECTURES = "special_lectures";
@@ -116,7 +118,29 @@ public class Constant {
     public static final String QUESTION_DATA="question_data";
     public static final String HOMEWORD_ID="homeword_id";
     public static final String QUESTIONS_ID="questions_id";
+    public static final String ANSWERS="answers";
+    public static final String ANSWER="answer";
+    public static final String QUESTION="question";
+    public static final String QUESTIONS="questions";
+    public static final String OPTIONS="options";
+    public static final String TOTAL_QUESTIONS="total_questions";
+    public static final String CORRECT_ANSWERS="correct_answers";
+    public static final String QUESTION_RESPONSE="question_response";
+    public static final String RESULTS="results";
 
 
 
+    public static final String REVIEW="review";
+    public static final String PENDING="pending";
+    public static final String COMPLETED="completed";
+    public static final String title="title";
+
+
+    public static final String A="A";
+    public static final String B="B";
+    public static final String C="C";
+    public static final String D="D";
+
+    public static final String KEY="key";
+    public static final String VALUE="value";
 }

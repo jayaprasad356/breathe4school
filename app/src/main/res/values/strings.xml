@@ -192,6 +192,7 @@
     <string name="ms.jasmin">Ms. Jasmine</string>
     <string name="presentation">Presentation</string>
     <string name="view_summary">View Summary</string>
+    <string name="select_any_option">Please select any OPTION</string>
 
 
 </resources>

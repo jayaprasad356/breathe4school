@@ -33,7 +33,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
     public HomeWorkAdapter(String type, ArrayList<OnHomeWordData> onReviewHomeWorks, Activity activity) {
         this.onHomeWordData = onReviewHomeWorks;
         this.activity = activity;
-        this.type=type;
+        this.type = type;
     }
 
 
@@ -62,9 +62,14 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
     private void loadHomeWordDetails() {
 
         session = new Session(activity);
-        String url;
+        String url="";
         // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.HomeWork_Url +"get"+"/"+session.getData(Constant.HOMEWORD_ID);
+        if (type.equals(Constant.COMPLETED))
+            url = Constant.HomeWork_Url + session.getData(Constant.HOMEWORD_ID) + "/studentResult/student" + "/" + session.getData(Constant.STUDENT_ID) + "/get";
+        if (type.equals(Constant.REVIEW))
+            url = Constant.HomeWork_Url + session.getData(Constant.HOMEWORD_ID) + "/studentResponse/student" + "/" + session.getData(Constant.STUDENT_ID) + "/get";
+        if (type.equals(Constant.PENDING))
+            url = Constant.HomeWork_Url + "get" + "/" + session.getData(Constant.HOMEWORD_ID);
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {
@@ -72,8 +77,9 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getBoolean(Constant.STATUS)) {
                         JSONObject jsonArray = jsonObject.getJSONObject(Constant.DATA);
-                        session.setData(Constant.QUESTION_DATA,jsonArray.toString());
+                        session.setData(Constant.QUESTION_DATA, jsonArray.toString());
                         Intent intent = new Intent(activity, QuestionsActivity.class);
+                        intent.putExtra(Constant.TYPE,type);
                         activity.startActivity(intent);
                     }
                 } catch (JSONException e) {
@@ -91,7 +97,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView tvSubName,tvTopic,tvDate;
+        public TextView tvSubName, tvTopic, tvDate;
 
         public ViewHolder(View itemView) {
             super(itemView);

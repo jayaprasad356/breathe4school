@@ -1,6 +1,7 @@
 package com.app.b4s.view.HWM.Fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -26,6 +27,7 @@ import com.app.b4s.adapter.HomeWorkSubjectAdapter;
 import com.app.b4s.adapter.ViewPagerAdapter;
 import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
+import com.app.b4s.databinding.FragmentHomeWorkManagementBinding;
 import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.OnHomeWordData;
 import com.app.b4s.preferences.Session;
@@ -44,7 +46,6 @@ import java.util.ArrayList;
 public class HomeWorkManagementFragment extends Fragment implements FilterHomeWorkListener {
     RecyclerView rvSubject, rvpending, rvReview, rvCompleted;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
-    TabLayout tabLayout;
     ViewPager viewPager;
     ViewPagerAdapter viewPagerAdapter;
     TextView tvSortby, tvFilter;
@@ -54,6 +55,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
     HomeWorkAdapter homeWorkAdapter;
     Boolean pending = false, review = false, completed = false;
     Session session;
+    FragmentHomeWorkManagementBinding binding;
 
 
     public HomeWorkManagementFragment() {
@@ -63,16 +65,15 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home_work_management, container, false);
+        binding = FragmentHomeWorkManagementBinding.inflate(inflater, container, false);
+
 
         filterHomeWorkController = new FilterHomeWorkController(this);
 
         session = new Session(getActivity());
-        rvpending = root.findViewById(R.id.rvpending);
-        rvReview = root.findViewById(R.id.rvReview);
-        rvCompleted = root.findViewById(R.id.rvCompleted);
-
-        tabLayout = root.findViewById(R.id.tabs);
+        rvpending = binding.rvpending;
+        rvReview = binding.rvReview;
+        rvCompleted = binding.rvCompleted;
 
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
@@ -84,64 +85,72 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
 
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
         rvCompleted.setLayoutManager(gridLayoutManager2);
-
-        tabLayout.addTab(tabLayout.newTab().setText("Pending"));
-        tabLayout.addTab(tabLayout.newTab().setText("On Review"));
-        tabLayout.addTab(tabLayout.newTab().setText("Compleded"));
-
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        pending = true;
+        review = false;
+        completed = false;
+        filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
+        binding.tvPending.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()) {
-
-                    case 0:
-                        rvCompleted.setVisibility(View.GONE);
-                        rvReview.setVisibility(View.GONE);
-                        rvpending.setVisibility(View.VISIBLE);
-                        pending = true;
-                        completed = false;
-                        review = false;
-                        filterHomeWorkController.getFilterHomeWork("pending", getActivity());
-
-                    case 1:
-                        rvCompleted.setVisibility(View.GONE);
-                        rvReview.setVisibility(View.VISIBLE);
-                        rvpending.setVisibility(View.GONE);
-                        pending = false;
-                        completed = false;
-                        review = true;
-
-                        filterHomeWorkController.getFilterHomeWork("review", getActivity());
-
-                    case 2:
-                        rvCompleted.setVisibility(View.VISIBLE);
-                        rvReview.setVisibility(View.GONE);
-                        rvpending.setVisibility(View.GONE);
-                        pending = false;
-                        completed = true;
-                        review = false;
-                        filterHomeWorkController.getFilterHomeWork("completed", getActivity());
-                }
+            public void onClick(View view) {
+                pending = true;
+                review = false;
+                completed = false;
+                rvCompleted.setVisibility(View.GONE);
+                rvReview.setVisibility(View.GONE);
+                rvpending.setVisibility(View.VISIBLE);
+                binding.viewCompleted.setBackgroundColor(0);
+                binding.viewOnReview.setBackgroundColor(0);
+                binding.viewPending.setBackgroundColor(getActivity().getColor(R.color.primary));
+                binding.tvOnReview.setTypeface(null);
+                binding.tvCompleted.setTypeface(null);
+                binding.tvPending.setTypeface(null, Typeface.BOLD);
+                filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
             }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-
         });
 
 
-        rvSubject = root.findViewById(R.id.rvSubject);
-        tvSortby = root.findViewById(R.id.tvSortby);
-        tvFilter = root.findViewById(R.id.tvFilter);
-        linearLayout1 = root.findViewById(R.id.linearLayout1);
+        binding.tvOnReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pending = false;
+                review = true;
+                completed = false;
+                rvCompleted.setVisibility(View.GONE);
+                rvReview.setVisibility(View.VISIBLE);
+                rvpending.setVisibility(View.GONE);
+                binding.viewCompleted.setBackgroundColor(0);
+                binding.viewOnReview.setBackgroundColor(getActivity().getColor(R.color.primary));
+                binding.viewPending.setBackgroundColor(0);
+                filterHomeWorkController.getFilterHomeWork(Constant.REVIEW, getActivity());
+                binding.tvOnReview.setTypeface(null, Typeface.BOLD);
+                binding.tvCompleted.setTypeface(null);
+                binding.tvPending.setTypeface(null);
+            }
+        });
+        binding.tvCompleted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pending = false;
+                review = false;
+                completed = true;
+                rvCompleted.setVisibility(View.VISIBLE);
+                rvReview.setVisibility(View.GONE);
+                rvpending.setVisibility(View.GONE);
+                binding.viewCompleted.setBackgroundColor(getActivity().getColor(R.color.primary));
+                binding.viewOnReview.setBackgroundColor(0);
+                binding.viewPending.setBackgroundColor(0);
+                binding.tvOnReview.setTypeface(null);
+                binding.tvCompleted.setTypeface(null, Typeface.BOLD);
+                binding.tvPending.setTypeface(null);
+                filterHomeWorkController.getFilterHomeWork(Constant.COMPLETED, getActivity());
+            }
+        });
+
+
+        rvSubject = binding.rvSubject;
+        tvSortby = binding.tvSortby;
+        tvFilter = binding.tvFilter;
+        linearLayout1 = binding.linearLayout1;
 
         tvSortby.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,7 +230,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
         homework();
 
 
-        return root;
+        return binding.getRoot();
     }
 
     private void homework() {
@@ -264,13 +273,13 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
             }
 
             if (pending) {
-                homeWorkAdapter = new HomeWorkAdapter("pending",filterData, getActivity());
+                homeWorkAdapter = new HomeWorkAdapter(Constant.PENDING, filterData, getActivity());
                 rvpending.setAdapter(homeWorkAdapter);
             } else if (completed) {
-                homeWorkAdapter = new HomeWorkAdapter("completed", filterData, getActivity());
+                homeWorkAdapter = new HomeWorkAdapter(Constant.COMPLETED, filterData, getActivity());
                 rvCompleted.setAdapter(homeWorkAdapter);
             } else if (review) {
-                homeWorkAdapter = new HomeWorkAdapter("review", filterData, getActivity());
+                homeWorkAdapter = new HomeWorkAdapter(Constant.REVIEW, filterData, getActivity());
                 rvReview.setAdapter(homeWorkAdapter);
 
             }
