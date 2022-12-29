@@ -1,5 +1,7 @@
 package com.app.b4s.commons;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CommonMethods {
@@ -43,6 +45,18 @@ public class CommonMethods {
 
         String time = String.valueOf(hour) + String.valueOf(minute);
         return time;
+    }
+    public String dateFomater(String dateString){
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date = null;
+        try {
+            date = inputFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String formattedDate = outputFormat.format(date);
+        return formattedDate;
     }
 
 }

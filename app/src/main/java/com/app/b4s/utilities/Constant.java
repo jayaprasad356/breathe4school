@@ -29,6 +29,7 @@ public class Constant {
     public static final String EMAIL_OTP_VERIFY = "mail_otp_verify";
     public static final String MOBILE_OTP = "mobile_otp";
     public static final String TYPE = "type";
+    public static final String DATE = "date";
     public static final String MOBILE = "mobile";
     public static final String MOBILE_NUMBER = "mobileNumber";
     public static final String EMAIL = "email";
@@ -127,6 +128,9 @@ public class Constant {
     public static final String CORRECT_ANSWERS="correct_answers";
     public static final String QUESTION_RESPONSE="question_response";
     public static final String RESULTS="results";
+    public static final String HOMEWORK="homework";
+    public static final String OPTAINED_MARK="obtained_marks";
+    public static final String TOTAL_MARK="total_marks";
 
 
 

@@ -31,20 +31,96 @@
 
                 <TextView
                     android:id="@+id/tvTitle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_toRightOf="@+id/ibBackBtn"
                     android:text="Navellaru Onde Poem"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
-
+                <TextView
+                    android:id="@+id/tvOnReview"
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/tvTitle"
+                    android:gravity="center"
+                    android:backgroundTint="#335C76"
+                    android:textColor="@color/white"
+                    android:visibility="gone"
+                    android:background="@drawable/corner_textview"
+                    android:paddingHorizontal="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_centerVertical="true"
+                    android:text="On Review"
+                    android:layout_height="wrap_content"/>
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/layoutTotalMarks"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <TextView
+                    android:id="@+id/tvTotalMark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/tvTotalMarknum"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:text="@string/total_marks"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvTotalMarknum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:text="10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/layoutThisQuestion"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvThisQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/tvQuestionNumber"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:text="@string/this_question"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvQuestionNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:text="01"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8sdp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,28 +136,31 @@
 
 
                     <TextView
+                        android:id="@+id/tvSubject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Kannada | "
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textStyle="bold" />
 
 
                     <TextView
+                        android:id="@+id/tvDateStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Submit on"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textColor="#666666"
+                        android:textSize="@dimen/_8sdp" />
 
 
                     <TextView
+                        android:id="@+id/tvDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" 28/02/2022"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textStyle="bold" />
 
 
@@ -103,18 +182,21 @@
 
 
                         <TextView
+                            android:id="@+id/tvResult"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:text="@string/result"
-                            android:textSize="@dimen/_10sdp" />
+                            android:textColor="#666666"
+                            android:textSize="@dimen/_8sdp" />
 
                         <TextView
+                            android:id="@+id/tvMarkDetails"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_5sdp"
                             android:text="-/-"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_8sdp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -127,7 +209,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvQuestion"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_10sdp" />
 
 
             <LinearLayout
@@ -148,7 +231,7 @@
                         android:layout_height="wrap_content"
                         android:text="Q1. Lorem Ipsum is simply dummy text of the printing and typesetting industry.?"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp"
+                        android:textSize="@dimen/_8sdp"
                         android:textStyle="bold" />
 
 
@@ -352,6 +435,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/open_sans"
             android:text="Next"
             android:textAllCaps="false"
             app:backgroundTint="@color/primary" />

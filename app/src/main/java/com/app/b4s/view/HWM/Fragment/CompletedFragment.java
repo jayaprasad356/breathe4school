@@ -14,7 +14,7 @@ import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkAdapter;
 import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
-import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.model.OnHomeWorkData;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.view.DCM.FilterHomeWorkListener;
 import com.google.gson.Gson;
@@ -63,7 +63,7 @@ public class CompletedFragment extends Fragment implements FilterHomeWorkListene
 
         rvCompleted.setLayoutManager(gridLayoutManager);
         Gson g = new Gson();
-        ArrayList<OnHomeWordData>  filterData= new ArrayList<>();
+        ArrayList<OnHomeWorkData>  filterData= new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject1 = null;
             try {
@@ -72,7 +72,7 @@ public class CompletedFragment extends Fragment implements FilterHomeWorkListene
                 e.printStackTrace();
             }
             if (jsonObject1 != null) {
-                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                OnHomeWorkData group = g.fromJson(jsonObject1.toString(), OnHomeWorkData.class);
                 filterData.add(group);
             } else {
                 break;

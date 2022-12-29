@@ -30,9 +30,11 @@ import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.google.gson.internal.LinkedTreeMap;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAdapter.ViewHolder> {
@@ -64,23 +66,47 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         int startTime = Integer.parseInt(dailyTimeTables.get(position).start_time);
         int endTime = Integer.parseInt(dailyTimeTables.get(position).end_time);
         int duriation = endTime - startTime;
+        LocalTime startTim;
+        LocalTime endTim;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+
+        if (startTime < 1000)
+            startTim = LocalTime.parse("0" + dailyTimeTables.get(position).getStart_time(),formatter);
+        else
+            startTim = LocalTime.parse(dailyTimeTables.get(position).getStart_time(),formatter);
+        if (endTime < 1000)
+            endTim = LocalTime.parse("0" + dailyTimeTables.get(position).getEnd_time(),formatter);
+        else
+            endTim = LocalTime.parse(dailyTimeTables.get(position).getEnd_time(),formatter);
+
+        Duration duration = Duration.between(startTim, endTim);
+        long minutes = duration.toMinutes();
+
+
         if (type.equals(Constant.STUDY_PLANER)) {
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
 
         } else if (type.equals(Constant.LIVE_SESSION)) {
-            holder.iconView.setVisibility(View.VISIBLE);
-            holder.studyView.setVisibility(View.GONE);
-            holder.iconView.setOnClickListener(view -> {
-                showClassDetailPopup(startTime, endTime, position);
-            });
+            if (!(dailyTimeTables.get(position).getName().equals(activity.getString(R.string.lunch)))) {
+                holder.iconView.setVisibility(View.VISIBLE);
+                holder.studyView.setVisibility(View.GONE);
+                holder.iconView.setOnClickListener(view -> {
+                    showClassDetailPopup(startTime, endTime, position);
+                });
+            }else {
+                holder.timeTableLayout.setVisibility(View.GONE);
+                holder.lunchLayout.setVisibility(View.VISIBLE);
+
+            }
+
         }
 
 
         if (position % 2 == 0) {
-            holder.layout.setBackgroundColor(Color.parseColor("#28cd9c"));
+            holder.timeTableLayout.setBackgroundColor(Color.parseColor("#28cd9c"));
         } else {
-            holder.layout.setBackgroundColor(Color.parseColor("#ff848e"));
+            holder.timeTableLayout.setBackgroundColor(Color.parseColor("#ff848e"));
         }
 
         holder.startTime.setText(commonMethods.militaryToOrdinaryTime(startTime));
@@ -90,7 +116,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, activity.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp));
             holder.rcLayout.setLayoutParams(params);
         }
-        holder.duriation.setText(duriation + "mins");
+        holder.duriation.setText(minutes + "mins");
         holder.subject.setText(dailyTimeTables.get(position).getName());
         iconVisibility(holder, position);
         statusVisibility(holder, position, startTime, endTime);
@@ -101,7 +127,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     private void showClassDetailPopup(int startTime, int endTime, int position) {
         Dialog dialog = new Dialog(activity);
         int duriat = endTime - startTime;
-        String tim= commonMethods.militaryToOrdinaryTime(startTime)+" - "+commonMethods.militaryToOrdinaryTime(endTime);
+        String tim = commonMethods.militaryToOrdinaryTime(startTime) + " - " + commonMethods.militaryToOrdinaryTime(endTime);
         dialog.setContentView(R.layout.time_table_detail_popup);
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
@@ -110,7 +136,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         name = dialog.findViewById(R.id.tvName);
         subject = dialog.findViewById(R.id.tvSubject);
         date = dialog.findViewById(R.id.tvDate);
-        time=dialog.findViewById(R.id.tvTime);
+        time = dialog.findViewById(R.id.tvTime);
         time.setText(tim);
         duriation = dialog.findViewById(R.id.tvDuriation);
         name.setText(session.getData(Constant.NAME));
@@ -375,7 +401,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery, studyView, editPlan, title;
-        public LinearLayout layout, iconView;
+        public LinearLayout timeTableLayout, iconView,lunchLayout;
         public RelativeLayout rcLayout;
         public ImageView assessmentView, preReadView, activityView, presentationView;
         public View emptyview;
@@ -386,7 +412,8 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             this.endTime = itemView.findViewById(R.id.tvEndTime);
             this.duriation = itemView.findViewById(R.id.tvDuriation);
             this.subject = itemView.findViewById(R.id.tvSubject);
-            this.layout = itemView.findViewById(R.id.timeTableLayout);
+            this.timeTableLayout = itemView.findViewById(R.id.timeTableLayout);
+            this.lunchLayout=itemView.findViewById(R.id.LunchLayout);
             this.activityView = itemView.findViewById(R.id.ivActivity);
             this.assessmentView = itemView.findViewById(R.id.ivAssessment);
             this.preReadView = itemView.findViewById(R.id.ivPreRead);

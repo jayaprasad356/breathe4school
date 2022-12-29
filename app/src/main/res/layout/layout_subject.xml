@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingHorizontal="@dimen/_15sdp"
-        android:paddingVertical="@dimen/_15sdp">
+        android:padding="@dimen/_6sdp"
+        >
 
 
         <RelativeLayout
@@ -29,14 +29,14 @@
                 android:text="Kannada"
                 android:textColor="@color/black"
                 android:layout_centerVertical="true"
-                android:textSize="@dimen/_12sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textStyle="bold" />
 
 
             <ImageView
                 android:id="@+id/ivSubImage"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_toRightOf="@id/tvSubName"
@@ -49,9 +49,10 @@
         <TextView
             android:id="@+id/tvStarted"
             android:layout_width="match_parent"
+            android:fontFamily="@font/open_sans"
             android:layout_height="wrap_content"
             android:text="Not Started"
-            android:textSize="@dimen/_10sdp" />
+            android:textSize="@dimen/_8sdp" />
 
 
         <TextView
@@ -59,7 +60,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="on review"
-            android:textSize="@dimen/_10sdp" />
+            android:fontFamily="@font/open_sans"
+            android:textSize="@dimen/_8sdp" />
 
 
         <TextView
@@ -67,7 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Completed"
-            android:textSize="@dimen/_10sdp" />
+            android:fontFamily="@font/open_sans"
+            android:textSize="@dimen/_8sdp" />
 
 
     </LinearLayout>

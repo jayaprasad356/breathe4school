@@ -12,8 +12,8 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:paddingVertical="@dimen/_15sdp"
-       android:paddingHorizontal="@dimen/_15sdp"
+       android:padding="@dimen/_4sdp"
+
        android:orientation="vertical"
        >
 
@@ -23,17 +23,22 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="Kannada"
-           android:textColor="@color/black"
-           android:layout_marginBottom="@dimen/_5sdp"
+           android:layout_marginLeft="@dimen/_4sdp"
+           android:textSize="@dimen/_8sdp"
+           android:textColor="#335C76"
+           android:layout_marginBottom="@dimen/_4sdp"
            />
 
 
        <TextView
-           android:id="@+id/tvTopic"
+           android:id="@+id/tvDescription"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="Navellaru Onde Poem"
-           android:textSize="@dimen/_10sdp"
+           android:layout_marginLeft="@dimen/_4sdp"
+
+           android:textColor="@color/black"
+           android:textSize="@dimen/_8sdp"
            android:textStyle="bold"
            />
 
@@ -50,11 +55,17 @@
 
 
            <TextView
-               android:layout_marginTop="@dimen/_5sdp"
+               android:id="@+id/tvSubmitted"
+               android:layout_marginTop="@dimen/_4sdp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="Submit Date"
-               android:textSize="@dimen/_10sdp"
+               android:fontFamily="@font/open_sans"
+               android:textStyle="bold"
+               android:layout_marginLeft="@dimen/_4sdp"
+
+               android:textColor="#666666"
+               android:textSize="@dimen/_8sdp"
                />
            <TextView
                android:layout_marginTop="@dimen/_5sdp"
@@ -63,7 +74,7 @@
                android:layout_height="wrap_content"
                android:text="20-92"
                android:layout_marginStart="@dimen/_5sdp"
-               android:textSize="@dimen/_10sdp"
+               android:textSize="@dimen/_8sdp"
                android:textStyle="bold"
                android:textColor="@color/black"
                />

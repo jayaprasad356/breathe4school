@@ -29,11 +29,10 @@ import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
 import com.app.b4s.databinding.FragmentHomeWorkManagementBinding;
 import com.app.b4s.model.HomeWorkSubject;
-import com.app.b4s.model.OnHomeWordData;
+import com.app.b4s.model.OnHomeWorkData;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.DCM.FilterHomeWorkListener;
-import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -254,7 +253,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
         // rvpending.setLayoutManager(gridLayoutManager);
         Gson g = new Gson();
-        ArrayList<OnHomeWordData> filterData = new ArrayList<>();
+        ArrayList<OnHomeWorkData> filterData = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject1 = null;
 
@@ -266,7 +265,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
                 e.printStackTrace();
             }
             if (jsonObject1 != null) {
-                OnHomeWordData group = g.fromJson(jsonObject1.toString(), OnHomeWordData.class);
+                OnHomeWorkData group = g.fromJson(jsonObject1.toString(), OnHomeWorkData.class);
                 filterData.add(group);
             } else {
                 break;

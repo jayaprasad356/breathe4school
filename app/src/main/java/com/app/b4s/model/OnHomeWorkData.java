@@ -1,6 +1,6 @@
 package com.app.b4s.model;
 
-public class OnHomeWordData {
+public class OnHomeWorkData {
 
 
     public String getName() {
@@ -19,7 +19,18 @@ public class OnHomeWordData {
         this.deadline = deadline;
     }
 
-    String  name,deadline;
+    String  name;
+    String deadline;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    String description;
 
     public Object getSubject_id() {
         return subject_id;

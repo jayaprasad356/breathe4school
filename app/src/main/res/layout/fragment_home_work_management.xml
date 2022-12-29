@@ -27,17 +27,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/home_work_management"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_10sdp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:layout_marginBottom="@dimen/_10sdp" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp" />
 
 
                 <LinearLayout
                     android:id="@+id/llProfileItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:gravity="right"
                     android:orientation="horizontal">
@@ -65,9 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/subject_wise_home_work"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_8sdp"
                 android:textColor="@color/black"
-                android:layout_marginBottom="@dimen/_10sdp" />
+                android:layout_marginBottom="@dimen/_4sdp" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -86,6 +87,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:layout_height="wrap_content">
 
                     <LinearLayout
@@ -107,7 +109,7 @@
                                 android:textStyle="bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:text="Pending" />
 
                             <View
@@ -132,7 +134,7 @@
                                 android:fontFamily="@font/open_sans"
                                 android:text="On review"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_10sdp" />
+                                android:textSize="@dimen/_8sdp" />
 
                             <View
                                 android:id="@+id/viewOnReview"
@@ -154,7 +156,7 @@
                                 android:paddingHorizontal="@dimen/_3sdp"
 
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_10sdp"
+                                android:textSize="@dimen/_8sdp"
                                 android:text="Completed" />
 
                             <View
@@ -186,19 +188,20 @@
                             android:paddingVertical="@dimen/_5sdp"
                             android:text="Filter"
                             android:textColor="#668598"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_8sdp" />
 
 
                         <TextView
                             android:id="@+id/tvSortby"
                             android:layout_width="wrap_content"
                             android:layout_height="29dp"
+                            android:gravity="center"
                             android:layout_marginLeft="@dimen/_20sdp"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:drawablePadding="@dimen/_5sdp"
                             android:text="Sort by"
                             android:textColor="@color/dark_blue"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_8sdp"
 
                             />
 
@@ -222,8 +225,8 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCompleted"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:visibility="gone" />
 
 

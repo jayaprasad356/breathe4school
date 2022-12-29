@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="2dp"
                 android:layout_toEndOf="@id/tvstartTime"
-                android:background="#c7c7c7" />
+                android:background="#F3F3F3" />
 
 
             <LinearLayout
@@ -242,6 +242,32 @@
                     android:textSize="@dimen/_6sdp"
                     android:visibility="gone"
                     app:backgroundTint="@color/white" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/LunchLayout"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/tvview7"
+                android:background="#F3F3F3"
+                android:gravity="center"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LUNCH"
+                    android:letterSpacing="1"
+                    android:textSize="17sp"
+                    android:gravity="center"
+                    android:textColor="#FDD3A6"
+                    android:fontFamily="@font/open_sans_bold"
+                    android:layout_gravity="center"/>
+
 
             </LinearLayout>
 

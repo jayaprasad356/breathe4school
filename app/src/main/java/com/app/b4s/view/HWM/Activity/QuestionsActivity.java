@@ -1,5 +1,6 @@
 package com.app.b4s.view.HWM.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -36,6 +37,7 @@ public class QuestionsActivity extends AppCompatActivity {
     int i, setBackground;
     private Session session;
     private JSONObject jsonObject;
+    private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
     private JSONArray options = null;
     private JSONArray correctAnswers = null;
@@ -44,7 +46,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject answer = null;
     private String title = "";
     private Boolean A, B, C, D;
-    private String type;
+    private String type, date,titleSubject,descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
 
@@ -58,9 +60,15 @@ public class QuestionsActivity extends AppCompatActivity {
         session = new Session(activity);
         Intent intent = getIntent();
         type = intent.getStringExtra(Constant.TYPE);
+        date = intent.getStringExtra(Constant.DATE);
+        titleSubject=intent.getStringExtra(Constant.SUBJECT);
+        description=intent.getStringExtra(Constant.DESCRIPTIO);
         if (type.equals(Constant.REVIEW) || type.equals(Constant.COMPLETED)) {
             setDisable();
         }
+        binding.tvDate.setText(date);
+        binding.tvTitle.setText(description);
+        binding.tvSubject.setText(titleSubject + " | ");
         setQuestions(0);
 
 
@@ -78,7 +86,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.cbThirdOpt.setChecked(false);
                 binding.cbFourthOpt.setChecked(false);
             }
-            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+            if (type.equals(Constant.COMPLETED) || type.equals(Constant.REVIEW)) {
                 binding.cbFirstOpt.setChecked(true);
             }
 
@@ -94,7 +102,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.cbThirdOpt.setChecked(false);
                 binding.cbFourthOpt.setChecked(false);
             }
-            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+            if (type.equals(Constant.COMPLETED) || type.equals(Constant.REVIEW)) {
                 binding.cbSecondOpt.setChecked(true);
             }
         });
@@ -109,7 +117,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.cbThirdOpt.setChecked(true);
                 binding.cbFourthOpt.setChecked(false);
             }
-            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+            if (type.equals(Constant.COMPLETED) || type.equals(Constant.REVIEW)) {
                 binding.cbThirdOpt.setChecked(true);
             }
         });
@@ -124,7 +132,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.cbThirdOpt.setChecked(false);
                 binding.cbFourthOpt.setChecked(true);
             }
-            if (type.equals(Constant.COMPLETED)||type.equals(Constant.REVIEW)) {
+            if (type.equals(Constant.COMPLETED) || type.equals(Constant.REVIEW)) {
                 binding.cbFourthOpt.setChecked(true);
             }
         });
@@ -246,20 +254,40 @@ public class QuestionsActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void setQuestions(int i) {
 
 
         if (type.equals(Constant.PENDING)) {
             try {
                 setUnCheck();
+                binding.layoutThisQuestion.setVisibility(View.VISIBLE);
+                binding.layoutTotalMarks.setVisibility(View.VISIBLE);
+                binding.tvDateStatus.setText(R.string.dead_line);
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.QUESTIONS);
+                String totalMark = jsonObject.getString(Constant.TOTAL_MARK);
+                binding.tvTotalMarknum.setText(totalMark);
+                String count = "";
+                if (i < 10) {
+                    count = String.valueOf(i + 1);
+                    count = "0" + count;
+                } else {
+                    count = String.valueOf(i);
+                }
+
+                String questionCount = String.valueOf(i + 1);
+                binding.tvQuestionNumber.setText(count);
+                binding.tvResult.setText("Questions" + ":");
+                String totQuestion = jsonObject.getString(Constant.TOTAL_QUESTIONS);
+                binding.tvMarkDetails.setText(questionCount + "/" + totQuestion);
                 session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 title = jsonArray.getJSONObject(i).getString(Constant.title);
                 options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
                 System.out.println(options);
                 setOptionsForPending();
                 this.i = jsonObject.getInt(Constant.TOTAL_QUESTIONS);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -272,6 +300,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 title = questions.getString(Constant.title);
                 options = questions.getJSONArray(Constant.OPTIONS);
                 answer = jsonArray.getJSONObject(i).getJSONObject(Constant.ANSWER);
+                binding.tvOnReview.setVisibility(View.VISIBLE);
                 setOptionsForReview(answer);
                 this.i = questions.length();
             } catch (JSONException e) {
@@ -283,11 +312,15 @@ public class QuestionsActivity extends AppCompatActivity {
             try {
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.RESULTS);
+                homeWorkObject = jsonObject.getJSONObject(Constant.HOMEWORK);
                 questionsResponse = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION_RESPONSE);
                 answer = questionsResponse.getJSONObject(Constant.ANSWER);
                 questions = questionsResponse.getJSONObject(Constant.QUESTION);
                 options = questions.getJSONArray(Constant.OPTIONS);
                 title = questions.getString(Constant.title);
+                totalMark = homeWorkObject.getString(Constant.TOTAL_MARK);
+                optainedMark = jsonObject.getString(Constant.OPTAINED_MARK);
+                binding.tvMarkDetails.setText(optainedMark + "/" + totalMark);
                 correctAnswers = questions.getJSONArray(Constant.CORRECT_ANSWERS);
                 setOptionsForCompleted();
                 this.i = questionsResponse.length();
@@ -309,7 +342,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         new int[]{android.R.attr.state_checked}
                 },
                 new int[]{
-                       green
+                        green
                 }
         );
         int red = Color.parseColor("#D40D12");
