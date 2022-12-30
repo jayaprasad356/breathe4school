@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,8 +16,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.ClientError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.app.b4s.R;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
@@ -28,6 +36,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -37,6 +47,10 @@ public class QuestionsActivity extends AppCompatActivity {
     int i, setBackground;
     private Session session;
     private JSONObject jsonObject;
+    private JSONObject request;
+    private RequestQueue requestQueue;
+
+
     private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
     private JSONArray options = null;
@@ -46,6 +60,9 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject answer = null;
     private String title = "";
     private Boolean A, B, C, D;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
+    private String dat;
     private String type, date,titleSubject,descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
@@ -55,9 +72,10 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_questions);
         rvQuestions = binding.rvQuestion;
-
+        calendar = Calendar.getInstance();
         activity = this;
         session = new Session(activity);
+        requestQueue=Volley.newRequestQueue(this);
         Intent intent = getIntent();
         type = intent.getStringExtra(Constant.TYPE);
         date = intent.getStringExtra(Constant.DATE);
@@ -216,41 +234,98 @@ public class QuestionsActivity extends AppCompatActivity {
 
         session = new Session(activity);
         String url;
-        JSONObject jsonObject = new JSONObject();
+        JSONObject requestBody = new JSONObject();
+        JSONArray answers = new JSONArray();
+
+
 
         // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.HomeWork_Url + session.getData(Constant.HOMEWORD_ID) + "/" + "/studentResponse/create";
+        url = Constant.HomeWork_Url + "63ab230d6356fe0dfe1f85ce" + "/" + "studentResponse/create";
+        String  jsonString = "";
         try {
-            jsonObject.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
-            jsonObject.put(Constant.SUBMITTED_ON, "23/12/2022");
-            jsonObject.put(Constant.ANSWERS, answersList);
+            dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            dat = dateFormat.format(calendar.getTime());
+            requestBody.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
+            requestBody.put(Constant.SUBMITTED_ON, dat);
+
+            for (int i = 0; i < answersList.size(); i++) {
+                // create a JSON object for each answer
+                JSONObject answer = new JSONObject();
+                answer.put("question_id", answersList.get(i).getString("question_id"));
+                answer.put("answer", answersList.get(i).getString("answers"));
+
+                // add the answer to the array
+                answers.put(answer);
+            }
+
+            requestBody.put(Constant.ANSWERS, answers);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(jsonObject);
-
+        System.out.println(requestBody);
+//        String finalJsonString = jsonString;
+//        StringRequest request = new StringRequest(Request.Method.POST, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Toast.makeText(QuestionsActivity.this, response, Toast.LENGTH_SHORT).show();
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        // handle the error
+//                        Toast.makeText(QuestionsActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }) {
+//            @Override
+//            public String getBodyContentType() {
+//                return "application/json; charset=utf-8";
+//            }
+//
+//            @Override
+//            public byte[] getBody() {
+//                String requestBody = finalJsonString;
+//                try {
+//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+//                } catch (UnsupportedEncodingException uee) {
+//                    // handle exception
+//                    Toast.makeText(QuestionsActivity.this, "un", Toast.LENGTH_SHORT).show();
+//                    return null;
+//                }
+//            }
+//        };
+//
+//// add the request to the request queue
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        queue.add(request);
         if (ApiConfig.isConnected(activity)) {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, jsonObject, response -> {
-                        Log.d("TEST_RES", response.toString());
-                        try {
-                            if (response.getBoolean(Constant.STATUS)) {
-                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Toast.makeText(activity, response.toString(), Toast.LENGTH_SHORT).show();
                         }
-                        System.out.print(response);
-
-                    }, error -> {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                        Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // Handle the error
+                            if (error instanceof ClientError) {
+                                Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
+                                // This is a client error, such as a 4xx HTTP status code
+                                // Handle the client error
+                            } else {
+                                Toast.makeText(activity, "serv", Toast.LENGTH_SHORT).show();
+                                // This is a server error, such as a 5xx HTTP status code
+                                // Handle the server error
+                            }
+                        }
                     });
-            ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
+
+// Add the request to the request queue
+            requestQueue.add(jsonObjectRequest);
         }
     }
 

@@ -28,9 +28,12 @@ import com.app.b4s.adapter.ViewPagerAdapter;
 import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
 import com.app.b4s.databinding.FragmentHomeWorkManagementBinding;
+import com.app.b4s.model.DailyTimeTables;
+import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.OnHomeWorkData;
 import com.app.b4s.preferences.Session;
+import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.DCM.FilterHomeWorkListener;
 import com.google.gson.Gson;
@@ -40,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class HomeWorkManagementFragment extends Fragment implements FilterHomeWorkListener {
@@ -235,15 +240,37 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
     private void homework() {
 
         ArrayList<HomeWorkSubject> homeWorkSubjects = new ArrayList<>();
+        String url;
+        Gson g = new Gson();
+        // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
+        url = Constant.HomeWork_Url + Constant.STUDENT_SUMMARY + "get/" + Constant.STUDENTID + session.getData(Constant.STUDENT_ID);
 
-        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada", "Not Started", "On review", "Completed");
 
 
-        homeWorkSubjects.add(rings1);
+        Map<String, String> params = new HashMap<>();
 
+        ApiConfig.RequestToVolley((result, response) -> {
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
 
-        homeWorkSubjectAdapter = new HomeWorkSubjectAdapter(homeWorkSubjects, getActivity());
-        rvSubject.setAdapter(homeWorkSubjectAdapter);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            HomeWorkSubject group = g.fromJson(jsonObject1.toString(), HomeWorkSubject.class);
+                            homeWorkSubjects.add(group);
+
+                        }
+                        homeWorkSubjectAdapter = new HomeWorkSubjectAdapter(homeWorkSubjects, getActivity());
+                        rvSubject.setAdapter(homeWorkSubjectAdapter);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, getActivity(), url, params, true, 0);
+
     }
 
 

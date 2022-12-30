@@ -180,7 +180,7 @@ public class ActivityFragment extends Fragment {
 
         ArrayList<HomeWorkSubject> homeWorkSubjects = new ArrayList<>();
 
-        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada","Not Started","On review","Completed");
+        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada","Not Started","On review");
 
 
 

@@ -6,6 +6,8 @@ public class Constant {
     public static final String MessageBoard = "messageBoard/";
     public static final String HomeWork_Url = MainBaseUrl + "homework/";
     public static final String FILTER_BY_STUDENT_ID = HomeWork_Url + "filterByStudentId/";
+    public static final String STUDENT_SUMMARY = "studentSummary/";
+    public static final String STUDENTID = "studentId/";
     public static final String NoticeBoard = "noticeBoard/notice/";
     public static final String VALIDATEUNIQUEID_URL = BaseUrl + "validateUniqueId";
     public static final String VALIDATE_EMAIL_OTP = BaseUrl + "validateEmailOtp";
@@ -47,7 +49,6 @@ public class Constant {
     public static final String TICKET_NUMBER = "ticket_number";
     public static final String DATA = "data";
     public static final String ON_THIS_DAY = "get_on_this_day";
-    public static final String ON_THIS_DAY_TITLE = "on_this_day_title";
     public static final String QUOTE = "quote";
     public static final String AUTHOR = "author";
     public static final String NAME = "name";
@@ -59,7 +60,6 @@ public class Constant {
     public static final String FATHER_NAME = "emergency_contact_name";
     public static final String PARENT_EMAIL = "email";
     public static final String STUDENT_ID = "student_id";
-    public static final String MESSAGE_SHOWEN_TIME = "message_showed_time";
     public static final String SUBMITTED_ON = "submitted_on";
 
     public static final String ACADEMIC_YEAR_ID = "academic_year_id";
@@ -110,41 +110,50 @@ public class Constant {
     public static final String BB_LECTURE_ID = "bbb_lecture_id";
     public static final String PRE_READ_ID = "pre_read_id";
     public static final String ACTIVITY_ID = "activity_id";
-    public static final String OPTION_KEY="option_key";
+    public static final String OPTION_KEY = "option_key";
 
 
     public static final String PROXY_LECTURES = "proxy_lectures";
     public static final String SPECIAL_LECTURES = "special_lectures";
 
-    public static final String QUESTION_DATA="question_data";
-    public static final String HOMEWORD_ID="homeword_id";
-    public static final String QUESTIONS_ID="questions_id";
-    public static final String ANSWERS="answers";
-    public static final String ANSWER="answer";
-    public static final String QUESTION="question";
-    public static final String QUESTIONS="questions";
-    public static final String OPTIONS="options";
-    public static final String TOTAL_QUESTIONS="total_questions";
-    public static final String CORRECT_ANSWERS="correct_answers";
-    public static final String QUESTION_RESPONSE="question_response";
-    public static final String RESULTS="results";
-    public static final String HOMEWORK="homework";
-    public static final String OPTAINED_MARK="obtained_marks";
-    public static final String TOTAL_MARK="total_marks";
+    public static final String QUESTION_DATA = "question_data";
+    public static final String HOMEWORD_ID = "homeword_id";
+    public static final String QUESTIONS_ID = "questions_id";
+    public static final String ANSWERS = "answers";
+    public static final String ANSWER = "answer";
+    public static final String QUESTION = "question";
+    public static final String QUESTIONS = "questions";
+    public static final String OPTIONS = "options";
+    public static final String TOTAL_QUESTIONS = "total_questions";
+    public static final String CORRECT_ANSWERS = "correct_answers";
+    public static final String QUESTION_RESPONSE = "question_response";
+    public static final String RESULTS = "results";
+    public static final String HOMEWORK = "homework";
+    public static final String OPTAINED_MARK = "obtained_marks";
+    public static final String TOTAL_MARK = "total_marks";
 
 
+    public static final String REVIEW = "review";
+    public static final String PENDING = "pending";
+    public static final String COMPLETED = "completed";
+    public static final String title = "title";
 
-    public static final String REVIEW="review";
-    public static final String PENDING="pending";
-    public static final String COMPLETED="completed";
-    public static final String title="title";
 
+    public static final String A = "A";
+    public static final String B = "B";
+    public static final String C = "C";
+    public static final String D = "D";
 
-    public static final String A="A";
-    public static final String B="B";
-    public static final String C="C";
-    public static final String D="D";
+    public static final String KEY = "key";
+    public static final String VALUE = "value";
 
-    public static final String KEY="key";
-    public static final String VALUE="value";
+    //Subjects
+    public static final String MATHS = "Maths";
+    public static final String KANNADA = "Kannada";
+    public static final String SCIENCE = "Science";
+    public static final String SOCIAL = "Social";
+    public static final String HINDI = "Hindi";
+    public static final String ENGLISH = "English";
+    public static final String PHYSICS = "Physics";
+
 }

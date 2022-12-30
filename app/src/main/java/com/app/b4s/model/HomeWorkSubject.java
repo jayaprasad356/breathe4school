@@ -1,44 +1,47 @@
 package com.app.b4s.model;
 
+import org.json.JSONObject;
+
 public class HomeWorkSubject {
-    String sub_name,started,review,status;
+    String not_started, completed, on_review;
+           Subject subject;
 
-    public HomeWorkSubject(String sub_name, String started, String review, String status) {
-        this.sub_name = sub_name;
-        this.started = started;
-        this.review = review;
-        this.status = status;
+    public HomeWorkSubject(String sub_name, String started, String review) {
+        this.not_started = sub_name;
+        this.completed = started;
+        this.on_review = review;
+
     }
 
-    public String getSub_name() {
-        return sub_name;
+    public String getNot_started() {
+        return not_started;
     }
 
-    public void setSub_name(String sub_name) {
-        this.sub_name = sub_name;
+    public void setNot_started(String not_started) {
+        this.not_started = not_started;
     }
 
-    public String getStarted() {
-        return started;
+    public String getCompleted() {
+        return completed;
     }
 
-    public void setStarted(String started) {
-        this.started = started;
+    public void setCompleted(String completed) {
+        this.completed = completed;
     }
 
-    public String getReview() {
-        return review;
+    public String getOn_review() {
+        return on_review;
     }
 
-    public void setReview(String review) {
-        this.review = review;
+    public void setOn_review(String on_review) {
+        this.on_review = on_review;
     }
 
-    public String getStatus() {
-        return status;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
     }
 }
