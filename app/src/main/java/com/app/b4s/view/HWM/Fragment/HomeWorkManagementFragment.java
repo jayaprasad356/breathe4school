@@ -286,7 +286,6 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
 
             try {
                 JSONObject homeWorkObject = jsonArray.getJSONObject(i);
-                session.setData(Constant.HOMEWORD_ID, homeWorkObject.getString(Constant.ID));
                 jsonObject1 = jsonArray.getJSONObject(i);
             } catch (JSONException e) {
                 e.printStackTrace();

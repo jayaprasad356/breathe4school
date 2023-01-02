@@ -1,5 +1,6 @@
 package com.app.b4s.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -49,7 +50,8 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        session=new Session(activity);
         if (type.equals(Constant.PENDING)) {
             holder.tvSubmitted.setText(R.string.dead_line);
         }
@@ -61,24 +63,27 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadHomeWordDetails(holder.tvDate.getText().toString(),holder.tvSubName.getText().toString(),holder.tvDescription.getText().toString());
+                session.setData(Constant.HOMEWORD_ID, onHomeWordData.get(position).getId());
+                loadHomeWordDetails(onHomeWordData.get(position).getId(),holder.tvDate.getText().toString(),holder.tvSubName.getText().toString(),holder.tvDescription.getText().toString());
             }
         });
 
 
     }
 
-    private void loadHomeWordDetails(String date, String subject, String description) {
+    private void loadHomeWordDetails(String homeWorkId, String date, String subject, String description) {
 
         session = new Session(activity);
         String url = "";
         // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
         if (type.equals(Constant.COMPLETED))
-            url = Constant.HomeWork_Url + session.getData(Constant.HOMEWORD_ID) + "/studentResult/student" + "/" + session.getData(Constant.STUDENT_ID) + "/get";
+            url = Constant.HomeWork_Url + homeWorkId + "/studentResult/student" + "/" +
+                    session.getData(Constant.STUDENT_ID) + "/get";
         if (type.equals(Constant.REVIEW))
-            url = Constant.HomeWork_Url + session.getData(Constant.HOMEWORD_ID) + "/studentResponse/student" + "/" + session.getData(Constant.STUDENT_ID) + "/get";
+            url = Constant.HomeWork_Url + homeWorkId + "/studentResponse/student" + "/" +
+                    session.getData(Constant.STUDENT_ID) + "/get";
         if (type.equals(Constant.PENDING))
-            url = Constant.HomeWork_Url + "get" + "/" + session.getData(Constant.HOMEWORD_ID);
+            url = Constant.HomeWork_Url + "get" + "/" + homeWorkId;
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {

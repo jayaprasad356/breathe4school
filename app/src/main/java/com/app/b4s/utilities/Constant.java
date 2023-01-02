@@ -131,6 +131,8 @@ public class Constant {
     public static final String HOMEWORK = "homework";
     public static final String OPTAINED_MARK = "obtained_marks";
     public static final String TOTAL_MARK = "total_marks";
+    public static final String EXPLANATION = "explanation";
+    public static final String QUESTION_ID = "question_id";
 
 
     public static final String REVIEW = "review";
@@ -146,6 +148,11 @@ public class Constant {
 
     public static final String KEY = "key";
     public static final String VALUE = "value";
+
+    public static final String A_VALUE = "a_value";
+    public static final String B_VALUE = "b_value";
+    public static final String C_VALUE = "c_value";
+    public static final String D_VALUE = "c_value";
 
     //Subjects
     public static final String MATHS = "Maths";

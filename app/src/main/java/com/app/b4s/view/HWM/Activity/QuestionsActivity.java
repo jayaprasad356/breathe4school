@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.b4s.R;
+import com.app.b4s.TestActivity;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
 import com.app.b4s.preferences.Session;
@@ -63,7 +64,10 @@ public class QuestionsActivity extends AppCompatActivity {
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String dat;
-    private String type, date,titleSubject,descriptin, totalMark, optainedMark, subject, description;
+    ArrayList<JSONObject> jsonArrayList = new ArrayList<>();;
+    JSONObject test;
+
+    private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
 
@@ -75,12 +79,12 @@ public class QuestionsActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         activity = this;
         session = new Session(activity);
-        requestQueue=Volley.newRequestQueue(this);
+        requestQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         type = intent.getStringExtra(Constant.TYPE);
         date = intent.getStringExtra(Constant.DATE);
-        titleSubject=intent.getStringExtra(Constant.SUBJECT);
-        description=intent.getStringExtra(Constant.DESCRIPTIO);
+        titleSubject = intent.getStringExtra(Constant.SUBJECT);
+        description = intent.getStringExtra(Constant.DESCRIPTIO);
         if (type.equals(Constant.REVIEW) || type.equals(Constant.COMPLETED)) {
             setDisable();
         }
@@ -176,7 +180,8 @@ public class QuestionsActivity extends AppCompatActivity {
                     } else {
                         //finishQuestion(jsonArrayList);
                     }
-                } else if (type.equals(Constant.COMPLETED)) {
+                }
+                else if (type.equals(Constant.COMPLETED)) {
                     setBackground = setBackground + 1;
                     if (i > setBackground) {
                         setQuestions(setBackground);
@@ -196,8 +201,7 @@ public class QuestionsActivity extends AppCompatActivity {
         if (!(A == null && B == null && C == null && D == null)) {
             setBackground = setBackground + 1;
 
-            ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
-            JSONObject test = new JSONObject();
+
 
             String ans = "";
             if (A) {
@@ -210,8 +214,21 @@ public class QuestionsActivity extends AppCompatActivity {
                 ans = "D";
             }
             try {
-                test.put("question_id", session.getData(Constant.QUESTIONS_ID));
+
+                test = new JSONObject();
+                test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
                 test.put(Constant.ANSWERS, ans);
+                String explanation="";
+                if (ans.equals("A")){
+                    explanation=session.getData(Constant.A_VALUE);
+                }else if (ans.equals("B")){
+                    explanation=session.getData(Constant.B_VALUE);
+                }else if (ans.equals("C")){
+                    explanation=session.getData(Constant.C_VALUE);
+                }else if (ans.equals("D")){
+                    explanation=session.getData(Constant.D_VALUE);
+                }
+                test.put("explanation",explanation);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -232,101 +249,80 @@ public class QuestionsActivity extends AppCompatActivity {
 
     private void finishQuestion(ArrayList<JSONObject> answersList) {
 
-        session = new Session(activity);
-        String url;
+        JSONArray allAnswers = new JSONArray();
         JSONObject requestBody = new JSONObject();
-        JSONArray answers = new JSONArray();
 
 
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dat = dateFormat.format(calendar.getTime());
 
-        // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.HomeWork_Url + "63ab230d6356fe0dfe1f85ce" + "/" + "studentResponse/create";
-        String  jsonString = "";
         try {
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            dat = dateFormat.format(calendar.getTime());
             requestBody.put(Constant.STUDENT_ID, session.getData(Constant.STUDENT_ID));
             requestBody.put(Constant.SUBMITTED_ON, dat);
-
             for (int i = 0; i < answersList.size(); i++) {
                 // create a JSON object for each answer
+                JSONObject answers = new JSONObject();
                 JSONObject answer = new JSONObject();
-                answer.put("question_id", answersList.get(i).getString("question_id"));
-                answer.put("answer", answersList.get(i).getString("answers"));
+                answers.put("question_id", answersList.get(i).getString("question_id"));
+                answer.put(Constant.KEY,answersList.get(i).getString(Constant.ANSWERS));
+                answer.put(Constant.EXPLANATION,answersList.get(i).getString(Constant.EXPLANATION));
+                answers.put(Constant.ANSWERS,answer);
 
                 // add the answer to the array
-                answers.put(answer);
+                allAnswers.put(answers);
             }
-
-            requestBody.put(Constant.ANSWERS, answers);
-
+            requestBody.put("answers", allAnswers);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        System.out.println(requestBody);
-//        String finalJsonString = jsonString;
-//        StringRequest request = new StringRequest(Request.Method.POST, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Toast.makeText(QuestionsActivity.this, response, Toast.LENGTH_SHORT).show();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        // handle the error
-//                        Toast.makeText(QuestionsActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }) {
-//            @Override
-//            public String getBodyContentType() {
-//                return "application/json; charset=utf-8";
-//            }
-//
-//            @Override
-//            public byte[] getBody() {
-//                String requestBody = finalJsonString;
-//                try {
-//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-//                } catch (UnsupportedEncodingException uee) {
-//                    // handle exception
-//                    Toast.makeText(QuestionsActivity.this, "un", Toast.LENGTH_SHORT).show();
-//                    return null;
-//                }
-//            }
-//        };
-//
-//// add the request to the request queue
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        queue.add(request);
-        if (ApiConfig.isConnected(activity)) {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Toast.makeText(activity, response.toString(), Toast.LENGTH_SHORT).show();
+
+
+        //jsonObject2 is the payload to server here you can use JsonObjectRequest
+
+        String url = "http://143.244.132.170:3001/api/v1/homework/" + session.getData(Constant.HOMEWORD_ID) + "/studentResponse/create";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST, url, requestBody, new com.android.volley.Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("STUDENT_RESPONSE", response.toString());
+                        //   Toast.makeText(QuestionsActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionsActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+
+                        try {
+                            //TODO: Handle your response here
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // Handle the error
-                            if (error instanceof ClientError) {
-                                Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
-                                // This is a client error, such as a 4xx HTTP status code
-                                // Handle the client error
-                            } else {
-                                Toast.makeText(activity, "serv", Toast.LENGTH_SHORT).show();
-                                // This is a server error, such as a 5xx HTTP status code
-                                // Handle the server error
+                        System.out.print(response);
+
+                    }
+                }, new com.android.volley.Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO: Handle error
+                        String body = "";
+                        //get status code here
+                        String statusCode = String.valueOf(error.networkResponse.statusCode);
+                        //get response body and parse with appropriate encoding
+                        if (error.networkResponse.data != null) {
+                            try {
+                                body = new String(error.networkResponse.data, "UTF-8");
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
                             }
                         }
-                    });
+                        Toast.makeText(QuestionsActivity.this, "failed", Toast.LENGTH_SHORT).show();
 
-// Add the request to the request queue
-            requestQueue.add(jsonObjectRequest);
-        }
+                    }
+
+
+                });
+
+        ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
     }
 
     @SuppressLint("SetTextI18n")
@@ -531,18 +527,22 @@ public class QuestionsActivity extends AppCompatActivity {
             if (j == 0) {
                 binding.cbFirstOpt.setVisibility(View.VISIBLE);
                 binding.cbFirstOpt.setText(value);
+                session.setData(Constant.A_VALUE,value);
             }
             if (j == 1) {
                 binding.cbSecondOpt.setVisibility(View.VISIBLE);
                 binding.cbSecondOpt.setText(value);
+                session.setData(Constant.B_VALUE,value);
             }
             if (j == 2) {
                 binding.cbThirdOpt.setVisibility(View.VISIBLE);
                 binding.cbThirdOpt.setText(value);
+                session.setData(Constant.C_VALUE,value);
             }
             if (j == 3) {
                 binding.cbFourthOpt.setVisibility(View.VISIBLE);
                 binding.cbFourthOpt.setText(value);
+                session.setData(Constant.D_VALUE,value);
             }
         }
     }
