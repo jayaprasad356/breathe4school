@@ -1,17 +1,26 @@
 package com.app.b4s.view.HWM.Activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.icu.util.Calendar;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,6 +64,8 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
     private JSONArray options = null;
+    private JSONArray attachment = null;
+    private boolean isAttached = false;
     private JSONArray correctAnswers = null;
     private JSONObject questions = null;
     private JSONObject questionsResponse = null;
@@ -64,12 +75,16 @@ public class QuestionsActivity extends AppCompatActivity {
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String dat;
-    ArrayList<JSONObject> jsonArrayList = new ArrayList<>();;
+    ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
+    ;
     JSONObject test;
 
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
+
+    private ActivityResultLauncher<Intent> resultLauncher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,13 +103,13 @@ public class QuestionsActivity extends AppCompatActivity {
         if (type.equals(Constant.REVIEW) || type.equals(Constant.COMPLETED)) {
             setDisable();
         }
+        activiytResult();
         binding.tvDate.setText(date);
         binding.tvTitle.setText(description);
         binding.tvSubject.setText(titleSubject + " | ");
         setQuestions(0);
+        binding.ivOpenFiles.setOnClickListener(view -> doSelectionProcess());
 
-
-        binding.tvQuestion.setText(title);
 
 
         binding.cbFirstOpt.setOnClickListener(view -> {
@@ -180,8 +195,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     } else {
                         //finishQuestion(jsonArrayList);
                     }
-                }
-                else if (type.equals(Constant.COMPLETED)) {
+                } else if (type.equals(Constant.COMPLETED)) {
                     setBackground = setBackground + 1;
                     if (i > setBackground) {
                         setQuestions(setBackground);
@@ -197,44 +211,74 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
+    private void doSelectionProcess() {
+        if (ActivityCompat.checkSelfPermission(
+                QuestionsActivity.this,
+                Manifest.permission
+                        .READ_EXTERNAL_STORAGE)
+                != PackageManager
+                .PERMISSION_GRANTED) {
+            // When permission is not granted
+            // Result permission
+            ActivityCompat.requestPermissions(
+                    QuestionsActivity.this,
+                    new String[]{
+                            Manifest.permission
+                                    .READ_EXTERNAL_STORAGE},
+                    1);
+        } else {
+            // When permission is granted
+            // Create method
+            selectPDF();
+        }
+    }
+
+    private void selectPDF() {
+        // Initialize intent
+        Intent intent
+                = new Intent(Intent.ACTION_GET_CONTENT);
+        // set type
+        intent.setType("application/pdf");
+        // Launch intent
+        resultLauncher.launch(intent);
+    }
+
+    private void activiytResult() {
+        resultLauncher = registerForActivityResult(
+                new ActivityResultContracts
+                        .StartActivityForResult(),
+                result -> {
+                    // Initialize result data
+                    Intent data = result.getData();
+                    // check condition
+                    if (data != null) {
+                        // When data is not equal to empty
+                        // Get PDf uri
+                        Uri sUri = data.getData();
+                        // set Uri on text view
+                        String tvUri = Html.fromHtml(
+                                "<big><b>PDF Uri</b></big><br>"
+                                        + sUri).toString();
+                        binding.ivOpenFiles.setVisibility(View.GONE);
+                        binding.ivFileSuccess.setVisibility(View.VISIBLE);
+
+                        // Get PDF path
+                        String sPath = sUri.getPath();
+                        // Set path on text view
+                        String tvPath;
+                        tvPath = Html.fromHtml(
+                                "<big><b>PDF Path</b></big><br>"
+                                        + sPath).toString();
+                    }
+                });
+    }
+
     private void pendingFlow() {
-        if (!(A == null && B == null && C == null && D == null)) {
+        if (isAttached) {
             setBackground = setBackground + 1;
-
-
-
-            String ans = "";
-            if (A) {
-                ans = "A";
-            } else if (B) {
-                ans = "B";
-            } else if (C) {
-                ans = "C";
-            } else if (D) {
-                ans = "D";
-            }
-            try {
-
-                test = new JSONObject();
-                test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
-                test.put(Constant.ANSWERS, ans);
-                String explanation="";
-                if (ans.equals("A")){
-                    explanation=session.getData(Constant.A_VALUE);
-                }else if (ans.equals("B")){
-                    explanation=session.getData(Constant.B_VALUE);
-                }else if (ans.equals("C")){
-                    explanation=session.getData(Constant.C_VALUE);
-                }else if (ans.equals("D")){
-                    explanation=session.getData(Constant.D_VALUE);
-                }
-                test.put("explanation",explanation);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            jsonArrayList.add(test);
-
-
+            isAttached = false;
+            binding.llUploadPdf.setVisibility(View.GONE);
+            binding.llCheckBoxes.setVisibility(View.VISIBLE);
             if (i > setBackground) {
                 setQuestions(setBackground);
                 questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
@@ -243,8 +287,51 @@ public class QuestionsActivity extends AppCompatActivity {
             } else {
                 finishQuestion(jsonArrayList);
             }
-        } else
-            Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
+        } else {
+            if (!(A == null && B == null && C == null && D == null)) {
+                setBackground = setBackground + 1;
+
+                String ans = "";
+                if (A) {
+                    ans = "A";
+                } else if (B) {
+                    ans = "B";
+                } else if (C) {
+                    ans = "C";
+                } else if (D) {
+                    ans = "D";
+                }
+                try {
+                    test = new JSONObject();
+                    test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
+                    test.put(Constant.ANSWERS, ans);
+                    String explanation = "";
+                    if (ans.equals("A")) {
+                        explanation = session.getData(Constant.A_VALUE);
+                    } else if (ans.equals("B")) {
+                        explanation = session.getData(Constant.B_VALUE);
+                    } else if (ans.equals("C")) {
+                        explanation = session.getData(Constant.C_VALUE);
+                    } else if (ans.equals("D")) {
+                        explanation = session.getData(Constant.D_VALUE);
+                    }
+                    test.put("explanation", explanation);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                jsonArrayList.add(test);
+
+                if (i > setBackground) {
+                    setQuestions(setBackground);
+                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
+                    rvQuestions.setAdapter(questionsCountAdapter);
+                    questionsCountAdapter.notifyDataSetChanged();
+                } else {
+                    finishQuestion(jsonArrayList);
+                }
+            } else
+                Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void finishQuestion(ArrayList<JSONObject> answersList) {
@@ -264,9 +351,9 @@ public class QuestionsActivity extends AppCompatActivity {
                 JSONObject answers = new JSONObject();
                 JSONObject answer = new JSONObject();
                 answers.put("question_id", answersList.get(i).getString("question_id"));
-                answer.put(Constant.KEY,answersList.get(i).getString(Constant.ANSWERS));
-                answer.put(Constant.EXPLANATION,answersList.get(i).getString(Constant.EXPLANATION));
-                answers.put(Constant.ANSWERS,answer);
+                answer.put(Constant.KEY, answersList.get(i).getString(Constant.ANSWERS));
+                answer.put(Constant.EXPLANATION, answersList.get(i).getString(Constant.EXPLANATION));
+                answers.put(Constant.ANSWERS, answer);
 
                 // add the answer to the array
                 allAnswers.put(answers);
@@ -346,7 +433,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 } else {
                     count = String.valueOf(i);
                 }
-
+                attachment = new JSONArray();
                 String questionCount = String.valueOf(i + 1);
                 binding.tvQuestionNumber.setText(count);
                 binding.tvResult.setText("Questions" + ":");
@@ -354,7 +441,13 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.tvMarkDetails.setText(questionCount + "/" + totQuestion);
                 session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 title = jsonArray.getJSONObject(i).getString(Constant.title);
-                options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
+                binding.tvQuestion.setText(title);
+                attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                if (attachment.length() >= 1) {
+                    attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                    isAttached = true;
+                } else
+                    options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
                 System.out.println(options);
                 setOptionsForPending();
                 this.i = jsonObject.getInt(Constant.TOTAL_QUESTIONS);
@@ -520,31 +613,39 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     private void setOptionsForPending() throws JSONException {
-        for (int j = 0; j < options.length(); j++) {
-            JSONObject option = options.getJSONObject(j);
-            String key = option.getString(Constant.KEY);
-            String value = option.getString(Constant.VALUE);
-            if (j == 0) {
-                binding.cbFirstOpt.setVisibility(View.VISIBLE);
-                binding.cbFirstOpt.setText(value);
-                session.setData(Constant.A_VALUE,value);
-            }
-            if (j == 1) {
-                binding.cbSecondOpt.setVisibility(View.VISIBLE);
-                binding.cbSecondOpt.setText(value);
-                session.setData(Constant.B_VALUE,value);
-            }
-            if (j == 2) {
-                binding.cbThirdOpt.setVisibility(View.VISIBLE);
-                binding.cbThirdOpt.setText(value);
-                session.setData(Constant.C_VALUE,value);
-            }
-            if (j == 3) {
-                binding.cbFourthOpt.setVisibility(View.VISIBLE);
-                binding.cbFourthOpt.setText(value);
-                session.setData(Constant.D_VALUE,value);
+        if (isAttached) {
+            binding.llUploadPdf.setVisibility(View.VISIBLE);
+
+            binding.llCheckBoxes.setVisibility(View.GONE);
+
+        } else {
+            for (int j = 0; j < options.length(); j++) {
+                JSONObject option = options.getJSONObject(j);
+                String key = option.getString(Constant.KEY);
+                String value = option.getString(Constant.VALUE);
+                if (j == 0) {
+                    binding.cbFirstOpt.setVisibility(View.VISIBLE);
+                    binding.cbFirstOpt.setText(value);
+                    session.setData(Constant.A_VALUE, value);
+                }
+                if (j == 1) {
+                    binding.cbSecondOpt.setVisibility(View.VISIBLE);
+                    binding.cbSecondOpt.setText(value);
+                    session.setData(Constant.B_VALUE, value);
+                }
+                if (j == 2) {
+                    binding.cbThirdOpt.setVisibility(View.VISIBLE);
+                    binding.cbThirdOpt.setText(value);
+                    session.setData(Constant.C_VALUE, value);
+                }
+                if (j == 3) {
+                    binding.cbFourthOpt.setVisibility(View.VISIBLE);
+                    binding.cbFourthOpt.setText(value);
+                    session.setData(Constant.D_VALUE, value);
+                }
             }
         }
+
     }
 
     private void setOptionsForReview(JSONObject answer) throws JSONException {

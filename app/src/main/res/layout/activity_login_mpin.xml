@@ -90,6 +90,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edMPinId"
+                            android:text="2022"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberPassword"
@@ -105,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginHorizontal="@dimen/_100sdp"
-                        android:enabled="false"
+                        android:enabled="true"
                         android:fontFamily="@font/semibold"
                         android:padding="@dimen/_8sdp"
                         android:text="@string/login"
