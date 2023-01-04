@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -141,6 +142,42 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        Spinner startTime = dialog.findViewById(R.id.spinnerST);
+        Spinner endTime = dialog.findViewById(R.id.spinnerET);
+        startTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 1) {
+                    String startDate = adapterView.getItemAtPosition(i).toString();
+                    session.setData(Constant.START_TIME, commonMethods.ordinaryToMilitaryTime(startDate));
+                    System.out.println(startDate);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        endTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i >= 1) {
+                    String endTime = adapterView.getItemAtPosition(i).toString();
+                    session.setData(Constant.END_TIME, commonMethods.ordinaryToMilitaryTime(endTime));
+                    System.out.println(endTime);
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         dialog.findViewById(R.id.cbMonday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbMonday)));
         dialog.findViewById(R.id.cbTuesday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbTuesday)));
@@ -149,6 +186,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         dialog.findViewById(R.id.cbFriday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbFriday)));
         dialog.findViewById(R.id.cbSatur).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSatur)));
         dialog.findViewById(R.id.cbSun).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSun)));
+
         dialog.findViewById(R.id.btnCreateStudy).setOnClickListener(view -> apiCall(dialog));
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
@@ -163,6 +201,11 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     private void apiCall(Dialog dialog) {
         ArrayList<String> checkedBox = new ArrayList<>();
         selectedDays(dialog, checkedBox);
+        String subName, description;
+        TextView planerName = dialog.findViewById(R.id.tvPlanerName);
+        TextView planerDesc = dialog.findViewById(R.id.etDescription);
+        session.setData(Constant.PLANER_NAME, planerName.getText().toString());
+        session.setData(Constant.PLANER_DESC, planerDesc.getText().toString());
         studyPlanerController.createStudyPlaner(getActivity(), checkedBox);
 
 
@@ -300,7 +343,9 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                             JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
                             JSONObject jsonObject3 = schedules.getJSONObject(0);
                             JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
-                            JSONArray general_categories = jsonObject3.getJSONArray("general_categories");
+                            JSONArray general_categories = null;
+                            if (jsonObject3.has("general_categories"))
+                                general_categories = jsonObject3.getJSONArray("general_categories");
 
 
                             Log.d("DAILY TIME TABLES", schedules.toString());
@@ -327,14 +372,16 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                             for (int i = 0; i < lectures.length(); i++) {
                                 jsonObject1 = lectures.getJSONObject(i);
                                 if (jsonObject1 != null) {
-                                    if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
-                                        lunch = false;
-                                        lunchObject = general_categories.getJSONObject(0);
-                                        if (lunchObject != null) {
-                                            DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
-                                            dailyTimeTables.add(groups);
+                                    if (type.equals(Constant.LIVE_SESSION)){
+                                        if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
+                                            lunch = false;
+                                            lunchObject = general_categories.getJSONObject(0);
+                                            if (lunchObject != null) {
+                                                DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
+                                                dailyTimeTables.add(groups);
+                                            }
                                         }
-                                    }
+                                }
                                     DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
                                     dailyTimeTables.add(group);
                                 } else {

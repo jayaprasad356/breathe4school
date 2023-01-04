@@ -87,6 +87,10 @@ public class Constant {
     public static final String SUBJECT = "subject";
     public static final String LINK = "link";
 
+    public static final String PLANER_NAME = "name";
+    public static final String PLANER_DESC = "desc";
+
+
 
     public static final String DAY = "day";
     public static final String MONDAY = "Monday";

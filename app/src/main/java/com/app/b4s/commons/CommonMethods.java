@@ -1,5 +1,6 @@
 package com.app.b4s.commons;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +32,21 @@ public class CommonMethods {
         }
         String ordTime = hour + ":" + min + " " + period;
         return ordTime;
+    }
+    public String ordinaryToMilitaryTime(String time){
+
+        SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
+        java.util.Date date = null;
+        try {
+            date = inputFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String militaryTime = outputFormat.format(date);
+
+
+        return militaryTime.replace(":", "");
     }
 
     public String getCurrentMilitaryTime() {
