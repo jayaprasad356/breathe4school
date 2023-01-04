@@ -5,7 +5,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.app.b4s.TestActivity;
 import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
@@ -15,7 +17,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StudyPlanerController implements IStudyPlanerController {
     ResponseListener responseListener;
@@ -65,11 +69,15 @@ public class StudyPlanerController implements IStudyPlanerController {
 
                     JSONObject json = new JSONObject();
 
-                    for (String element : array) {
-                       // json.put("key", element);
-                        lecture.put(Constant.DAY, element);
+//                    for (String element : array) {
+//                       // json.put("key", element);
+//                        lecture.put(Constant.DAY, element);
+//
+//                    }
 
-                    }
+                    String[] days = {"Monday", "Tuesday"};
+
+                    lecture.put(Constant.DAY,days);
 
 
             jsonArray.put(lecture);
@@ -81,6 +89,52 @@ public class StudyPlanerController implements IStudyPlanerController {
         }
         String url = "http://143.244.132.170:3001/api/v1/studyPlanner/create";
 
+
+
+
+
+
+
+
+
+
+
+        //jsonObject2 is the payload to server here you can use JsonObjectRequest
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.POST,url, jsonObject, response -> {
+                    Log.d("STUDENT_RESPONSE",response.toString());
+                    Toast.makeText(activity, ""+response, Toast.LENGTH_SHORT).show();
+
+
+                    try {
+                        //TODO: Handle your response here
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    System.out.print(response);
+
+                }, error -> {
+                    // TODO: Handle error
+                    String body= "";
+                    //get status code here
+                    String statusCode = String.valueOf(error.networkResponse.statusCode);
+                    //get response body and parse with appropriate encoding
+                    if(error.networkResponse.data!=null) {
+                        try {
+                            body = new String(error.networkResponse.data,"UTF-8");
+                            Toast.makeText(activity, ""+body, Toast.LENGTH_SHORT).show();
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                });
+
+        ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
 //
 //        IRetrofit jsonPostService = ServiceGenerator.createService(IRetrofit.class, "http://143.244.132.170:3001/api/v1/studyPlanner/");
 //        Call<ResponseBody> call = jsonPostService.postRawJSON(jsonObject);
@@ -104,29 +158,29 @@ public class StudyPlanerController implements IStudyPlanerController {
 //        });
 
 
-        if (ApiConfig.isConnected(activity)) {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                    (Request.Method.POST, url, jsonObject, response -> {
-                        Log.d("TEST_RES", response.toString());
-                        try {
-                            if (response.getBoolean(Constant.STATUS)) {
-                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                            }
-                            Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                        System.out.print(response);
-
-                    }, error -> {
-                        // TODO: Handle error
-                        error.printStackTrace();
-                        Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
-                    });
-            //jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-            ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
-        }
+//        if (ApiConfig.isConnected(activity)) {
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+//                    (Request.Method.POST, url, jsonObject, response -> {
+//                        Log.d("TEST_RES", response.toString());
+//                        try {
+//                            if (response.getBoolean(Constant.STATUS)) {
+//                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+//                            }
+//                            Toast.makeText(activity, response.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                        System.out.print(response);
+//
+//                    }, error -> {
+//                        // TODO: Handle error
+//                        error.printStackTrace();
+//                        Toast.makeText(activity, error.toString(), Toast.LENGTH_SHORT).show();
+//                    });
+//            //jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(30000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//            ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
+//        }
     }
 }

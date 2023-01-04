@@ -40,28 +40,29 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/tvOnReview"
                     android:layout_width="wrap_content"
-                    android:layout_toRightOf="@id/tvTitle"
-                    android:gravity="center"
-                    android:backgroundTint="#335C76"
-                    android:textColor="@color/white"
-                    android:visibility="gone"
-                    android:background="@drawable/corner_textview"
-                    android:paddingHorizontal="@dimen/_4sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_toRightOf="@id/tvTitle"
+                    android:background="@drawable/corner_textview"
+                    android:backgroundTint="#335C76"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_4sdp"
                     android:text="On Review"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/white"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/layoutTotalMarks"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvTotalMark"
@@ -89,11 +90,12 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/layoutThisQuestion"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tvThisQuestion"
@@ -121,6 +123,7 @@
                     android:textStyle="bold" />
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -248,6 +251,47 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rlPdfView"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="@dimen/_10sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_30sdp">
+
+
+                    <ImageView
+                        android:id="@+id/ivPdf"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@drawable/pdf_img" />
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:layout_toRightOf="@+id/ivPdf"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:id="@+id/tvcontent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:text="PDF"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10sdp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/ll_uploadPdf"
@@ -375,13 +419,14 @@
 
 
                             </LinearLayout>
+
                             <ImageView
                                 android:id="@+id/ivFileSuccess"
-                                android:visibility="gone"
-                                android:src="@drawable/img_success_greentick"
-                                android:layout_centerInParent="true"
                                 android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"/>
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/img_success_greentick"
+                                android:visibility="gone" />
 
 
                         </RelativeLayout>

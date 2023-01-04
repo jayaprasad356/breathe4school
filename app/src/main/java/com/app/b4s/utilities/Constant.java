@@ -85,6 +85,7 @@ public class Constant {
     public static final String STUDY_PLANER = "study_planer";
     public static final String LIVE_SESSION = "live_session";
     public static final String SUBJECT = "subject";
+    public static final String LINK = "link";
 
 
     public static final String DAY = "day";
@@ -121,6 +122,7 @@ public class Constant {
     public static final String QUESTIONS_ID = "questions_id";
     public static final String ANSWERS = "answers";
     public static final String ANSWER = "answer";
+    public static final String ATTACHMENTS = "attachments";
     public static final String QUESTION = "question";
     public static final String QUESTIONS = "questions";
     public static final String OPTIONS = "options";

@@ -109,8 +109,17 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.tvSubject.setText(titleSubject + " | ");
         setQuestions(0);
         binding.ivOpenFiles.setOnClickListener(view -> doSelectionProcess());
+        binding.ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-
+                String string = Constant.LINK;
+                String link = string.substring(1);
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse("http://143.244.132.170:3001" + link));
+                startActivity(browserIntent);
+            }
+        });
 
         binding.cbFirstOpt.setOnClickListener(view -> {
             if (type.equals(Constant.PENDING)) {
@@ -261,7 +270,7 @@ public class QuestionsActivity extends AppCompatActivity {
                                         + sUri).toString();
                         binding.ivOpenFiles.setVisibility(View.GONE);
                         binding.ivFileSuccess.setVisibility(View.VISIBLE);
-
+//63b24bea4b9835c031eaab09
                         // Get PDF path
                         String sPath = sUri.getPath();
                         // Set path on text view
@@ -458,29 +467,57 @@ public class QuestionsActivity extends AppCompatActivity {
         }
         if (type.equals(Constant.REVIEW)) {
             try {
+                attachment = new JSONArray();
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.ANSWERS);
                 questions = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION);
                 title = questions.getString(Constant.title);
-                options = questions.getJSONArray(Constant.OPTIONS);
-                answer = jsonArray.getJSONObject(i).getJSONObject(Constant.ANSWER);
+                if (questions.has(Constant.OPTIONS)) {
+                    binding.rlPdfView.setVisibility(View.GONE);
+                    binding.llCheckBoxes.setVisibility(View.VISIBLE);
+                    options = questions.getJSONArray(Constant.OPTIONS);
+                }
+                if (jsonArray.getJSONObject(i).has(Constant.ANSWER))
+                    answer = jsonArray.getJSONObject(i).getJSONObject(Constant.ANSWER);
+                if (jsonArray.getJSONObject(i).has("attachments")) {
+                    binding.rlPdfView.setVisibility(View.VISIBLE);
+                    binding.llCheckBoxes.setVisibility(View.GONE);
+                    attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                    session.setData(Constant.LINK, attachment.getString(0));
+
+                    Toast.makeText(this, "found", Toast.LENGTH_SHORT).show();
+                }
                 binding.tvOnReview.setVisibility(View.VISIBLE);
                 setOptionsForReview(answer);
-                this.i = questions.length();
+                this.i = jsonArray.length();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
         if (type.equals(Constant.COMPLETED)) {
             try {
+                attachment = new JSONArray();
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.RESULTS);
                 homeWorkObject = jsonObject.getJSONObject(Constant.HOMEWORK);
                 questionsResponse = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION_RESPONSE);
-                answer = questionsResponse.getJSONObject(Constant.ANSWER);
+                if (questionsResponse.has(Constant.ANSWER))
+                    answer = questionsResponse.getJSONObject(Constant.ANSWER);
                 questions = questionsResponse.getJSONObject(Constant.QUESTION);
-                options = questions.getJSONArray(Constant.OPTIONS);
+                if (questions.has(Constant.OPTIONS)) {
+                    binding.llCheckBoxes.setVisibility(View.VISIBLE);
+                    binding.rlPdfView.setVisibility(View.GONE);
+                    options = questions.getJSONArray(Constant.OPTIONS);
+                } else {
+                    binding.llCheckBoxes.setVisibility(View.GONE);
+                }
+                if (jsonArray.getJSONObject(i).has(Constant.ATTACHMENTS)) {
+                    attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
+                    if (attachment.length() >= 1) {
+                        binding.rlPdfView.setVisibility(View.VISIBLE);
+                        session.setData(Constant.LINK, attachment.getString(0));
+                    }
+                }
                 title = questions.getString(Constant.title);
                 totalMark = homeWorkObject.getString(Constant.TOTAL_MARK);
                 optainedMark = jsonObject.getString(Constant.OPTAINED_MARK);
@@ -491,9 +528,7 @@ public class QuestionsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
-
     }
 
     private void setOptionsForCompleted() throws JSONException {

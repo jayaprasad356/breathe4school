@@ -19,6 +19,7 @@ public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAd
 
     public QuestionsCountAdapter(int i, int setBackground, Activity activity) {
         this.activity = activity;
+
         this.count=i;
         this.setBackground=setBackground;
     }
