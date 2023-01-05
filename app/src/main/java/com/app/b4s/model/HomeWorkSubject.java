@@ -1,15 +1,14 @@
 package com.app.b4s.model;
 
-import org.json.JSONObject;
-
 public class HomeWorkSubject {
     String not_started, completed, on_review;
            Subject subject;
 
-    public HomeWorkSubject(String sub_name, String started, String review) {
+    public HomeWorkSubject(String sub_name, String started, String review, Subject subject) {
         this.not_started = sub_name;
         this.completed = started;
         this.on_review = review;
+        this.subject=subject;
 
     }
 

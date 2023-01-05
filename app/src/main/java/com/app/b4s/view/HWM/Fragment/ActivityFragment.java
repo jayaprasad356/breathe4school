@@ -23,6 +23,7 @@ import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
 import com.app.b4s.adapter.ViewPagerActivityAdapter;
 import com.app.b4s.model.HomeWorkSubject;
+import com.app.b4s.model.Subject;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -179,8 +180,9 @@ public class ActivityFragment extends Fragment {
     private void homework() {
 
         ArrayList<HomeWorkSubject> homeWorkSubjects = new ArrayList<>();
+        Subject subject = new Subject("1", "Hindi");
 
-        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada","Not Started","On review");
+        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada","Not Started","On review",subject);
 
 
 

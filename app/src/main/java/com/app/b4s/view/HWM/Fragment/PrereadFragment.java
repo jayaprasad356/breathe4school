@@ -22,8 +22,8 @@ import android.widget.Toast;
 import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
 import com.app.b4s.adapter.ViewPagerPreReadAdapter;
-import com.app.b4s.adapter.ViewPagerPreReadAdapter;
 import com.app.b4s.model.HomeWorkSubject;
+import com.app.b4s.model.Subject;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -51,8 +51,6 @@ public class PrereadFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_preread, container, false);
-
-
 
         viewPager = root.findViewById(R.id.view_pager);
         tabLayout = root.findViewById(R.id.tabs);
@@ -115,7 +113,6 @@ public class PrereadFragment extends Fragment {
                             return true;
                         }
 
-
                         return false;
                     }
                 });
@@ -124,10 +121,7 @@ public class PrereadFragment extends Fragment {
                 //display the popup window
                 popupWindow.showAsDropDown(tvFilter, -650, -100);
 
-
                 //close the popup window on button click
-
-
                 tvFilterclose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -145,11 +139,8 @@ public class PrereadFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
         rvSubject.setLayoutManager(linearLayoutManager);
+
         homework();
-
-
-
-
 
         return root;
     }
@@ -157,8 +148,8 @@ public class PrereadFragment extends Fragment {
     private void homework() {
 
         ArrayList<HomeWorkSubject> homeWorkSubjects = new ArrayList<>();
-
-        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada", "Not Started", "On review");
+        Subject subject = new Subject("1", "Hindi");
+        HomeWorkSubject rings1 = new HomeWorkSubject("Kannada", "Not Started", "On review", subject);
 
 
         homeWorkSubjects.add(rings1);

@@ -2,21 +2,31 @@ package com.app.b4s.view.HWM.Activity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
+
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,17 +35,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.ClientError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.b4s.R;
-import com.app.b4s.TestActivity;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
 import com.app.b4s.preferences.Session;
@@ -46,9 +51,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class QuestionsActivity extends AppCompatActivity {
     private ActivityQuestionsBinding binding;
@@ -65,6 +74,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONArray jsonArray = null;
     private JSONArray options = null;
     private JSONArray attachment = null;
+    private JSONArray attach = null;
     private boolean isAttached = false;
     private JSONArray correctAnswers = null;
     private JSONObject questions = null;
@@ -76,7 +86,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormat;
     private String dat;
     ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
-    ;
+
     JSONObject test;
 
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
@@ -264,6 +274,26 @@ public class QuestionsActivity extends AppCompatActivity {
                         // When data is not equal to empty
                         // Get PDf uri
                         Uri sUri = data.getData();
+
+
+                        String filePath = getFilePath(sUri);
+                        //String pdf=getPDFPath(sUri);
+                        String test=getPath(sUri);
+                        System.out.println(test);
+                       // System.out.println(pdf);
+                        System.out.println(filePath);
+
+
+
+                        try {
+                            InputStream inputStream = getContentResolver().openInputStream(sUri);
+                            System.out.println(inputStream);
+                            // Now you can read the input stream and upload it to your API.
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+
                         // set Uri on text view
                         String tvUri = Html.fromHtml(
                                 "<big><b>PDF Uri</b></big><br>"
@@ -273,22 +303,245 @@ public class QuestionsActivity extends AppCompatActivity {
 //63b24bea4b9835c031eaab09
                         // Get PDF path
                         String sPath = sUri.getPath();
+                        File file = new File(sPath);
+                        file = new File(file.getAbsolutePath());
+                        String dir = file.getParent();
+                        File dirAsFile = file.getParentFile();
+                        System.out.println(dir);
+                        System.out.println(dirAsFile);
+
                         // Set path on text view
                         String tvPath;
                         tvPath = Html.fromHtml(
                                 "<big><b>PDF Path</b></big><br>"
                                         + sPath).toString();
+                        System.out.println(tvPath);
+                        session.setData(Constant.PDF_UPLOAD_LINK, sPath);
+                        System.out.println(tvUri);
                     }
                 });
     }
 
+    @SuppressLint("Range")
+    private String getFilePath(Uri fileUri) {
+        String filePath = null;
+        if (fileUri != null) {
+            //String[] projection = {MediaStore.Files.FileColumns.DATA};
+            Cursor cursor = activity.getContentResolver().query(fileUri, null, null, null, null);
+            try {
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    filePath = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+//                    int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA);
+//                    filePath = cursor.getString(columnIndex);
+//                    cursor.close();
+                }
+            } finally {
+                cursor.close();
+            }
+            if (filePath==null){
+                filePath=fileUri.getPath();
+                int cutt=filePath.lastIndexOf('/');
+                if (cutt != -1) {
+                    filePath=fileUri.getLastPathSegment();
+
+                   // filePath=filePath.substring(cutt+1);
+                }
+            }
+        }
+        return filePath;
+    }
+    private String getPath(final Uri uri) {
+
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        if(isKitKat) {
+            // MediaStore (and general)
+            return getForApi19(uri);
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+
+    @TargetApi(19)
+    private String getForApi19(Uri uri) {
+      //  Log.e(, "+++ API 19 URI :: " + uri);
+        if (DocumentsContract.isDocumentUri(this, uri)) {
+           // Log.e(tag, "+++ Document URI");
+            // ExternalStorageProvider
+            if (isExternalStorageDocument(uri)) {
+              //  Log.e(tag, "+++ External Document URI");
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                if ("primary".equalsIgnoreCase(type)) {
+                   // Log.e(tag, "+++ Primary External Document URI");
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+
+                // TODO handle non-primary volumes
+            }
+            // DownloadsProvider
+            else if (isDownloadsDocument(uri)) {
+              //  Log.e(tag, "+++ Downloads External Document URI");
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                return getDataColumn(contentUri, null, null);
+            }
+            // MediaProvider
+            else if (isMediaDocument(uri)) {
+               // Log.e(tag, "+++ Media Document URI");
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                   // Log.e(tag, "+++ Image Media Document URI");
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                  //  Log.e(tag, "+++ Video Media Document URI");
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    //Log.e(tag, "+++ Audio Media Document URI");
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }else if ("document".equals(type))
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] {
+                        split[1]
+                };
+
+                return getDataColumn(contentUri, selection, selectionArgs);
+            }
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {
+           // Log.e(tag, "+++ No DOCUMENT URI :: CONTENT ");
+
+            // Return the remote address
+            if (isGooglePhotosUri(uri))
+                return uri.getLastPathSegment();
+
+            return getDataColumn(uri, null, null);
+        }
+        // File
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+          //  Log.e(tag, "+++ No DOCUMENT URI :: FILE ");
+            return uri.getPath();
+        }
+        return null;
+    }
+
+    /**
+     * Get the value of the data column for this Uri. This is useful for
+     * MediaStore Uris, and other file-based ContentProviders.
+     *
+     * @param uri The Uri to query.
+     * @param selection (Optional) Filter used in the query.
+     * @param selectionArgs (Optional) Selection arguments used in the query.
+     * @return The value of the _data column, which is typically a file path.
+     */
+    public String getDataColumn(Uri uri, String selection,
+                                String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is Google Photos.
+     */
+    public static boolean isGooglePhotosUri(Uri uri) {
+        return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+    public String getPDFPath(Uri uri){
+
+        final String id = DocumentsContract.getDocumentId(uri);
+        final Uri contentUri = ContentUris.withAppendedId(
+                Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
+
     private void pendingFlow() {
         if (isAttached) {
+            attach = new JSONArray();
             setBackground = setBackground + 1;
             isAttached = false;
             binding.llUploadPdf.setVisibility(View.GONE);
             binding.llCheckBoxes.setVisibility(View.VISIBLE);
+            test = new JSONObject();
+            attach.put(session.getData(Constant.PDF_UPLOAD_LINK));
+            try {
+                test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
+                test.put(Constant.ATTACHMENTS, attach);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonArrayList.add(test);
+
             if (i > setBackground) {
+                setSubmitText(i, setBackground);
                 setQuestions(setBackground);
                 questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
                 rvQuestions.setAdapter(questionsCountAdapter);
@@ -331,6 +584,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 jsonArrayList.add(test);
 
                 if (i > setBackground) {
+                    setSubmitText(i, setBackground);
                     setQuestions(setBackground);
                     questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
                     rvQuestions.setAdapter(questionsCountAdapter);
@@ -340,6 +594,13 @@ public class QuestionsActivity extends AppCompatActivity {
                 }
             } else
                 Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setSubmitText(int totalCount, int setBackground) {
+        int temp = setBackground + 1;
+        if (temp == totalCount) {
+            binding.btnNext.setText("Submit");
         }
     }
 
@@ -359,13 +620,18 @@ public class QuestionsActivity extends AppCompatActivity {
                 // create a JSON object for each answer
                 JSONObject answers = new JSONObject();
                 JSONObject answer = new JSONObject();
-                answers.put("question_id", answersList.get(i).getString("question_id"));
-                answer.put(Constant.KEY, answersList.get(i).getString(Constant.ANSWERS));
-                answer.put(Constant.EXPLANATION, answersList.get(i).getString(Constant.EXPLANATION));
-                answers.put(Constant.ANSWERS, answer);
 
-                // add the answer to the array
-                allAnswers.put(answers);
+                if (answersList.get(i).has(Constant.ANSWERS)) {
+                    answers.put("question_id", answersList.get(i).getString("question_id"));
+                    answer.put(Constant.KEY, answersList.get(i).getString(Constant.ANSWERS));
+                    answer.put(Constant.EXPLANATION, answersList.get(i).getString(Constant.EXPLANATION));
+                    answers.put(Constant.ANSWERS, answer);
+                    // add the answer to the array
+                    allAnswers.put(answers);
+                }
+                if (answersList.get(i).has(Constant.ATTACHMENTS))
+                    allAnswers.put(answersList.get(i));
+
             }
             requestBody.put("answers", allAnswers);
         } catch (JSONException e) {
@@ -451,9 +717,9 @@ public class QuestionsActivity extends AppCompatActivity {
                 session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 title = jsonArray.getJSONObject(i).getString(Constant.title);
                 binding.tvQuestion.setText(title);
-                attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                 if (attachment.length() >= 1) {
-                    attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                    attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                     isAttached = true;
                 } else
                     options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
