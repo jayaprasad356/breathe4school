@@ -1,9 +1,11 @@
 package com.app.b4s.view.HWM.Fragment;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -20,9 +22,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.b4s.R;
+import com.app.b4s.adapter.CompletedPrereadAdapter;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
-import com.app.b4s.adapter.ViewPagerPreReadAdapter;
+import com.app.b4s.adapter.PendingPrereadAdapter;
+import com.app.b4s.databinding.FragmentPrereadBinding;
+import com.app.b4s.model.CompletedPreread;
 import com.app.b4s.model.HomeWorkSubject;
+import com.app.b4s.model.PendingPreread;
 import com.app.b4s.model.Subject;
 import com.google.android.material.tabs.TabLayout;
 
@@ -35,10 +41,14 @@ public class PrereadFragment extends Fragment {
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
     TabLayout tabLayout;
     ViewPager viewPager;
-    ViewPagerPreReadAdapter viewPagerPreReadAdapter;
     TextView tvSortby, tvFilter;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
+    Boolean pending = false, completed = false;
+    PendingPrereadAdapter pendingPrereadAdapter;
+    CompletedPrereadAdapter completedPrereadAdapter;
+
+    FragmentPrereadBinding binding;
 
 
     public PrereadFragment() {
@@ -50,20 +60,17 @@ public class PrereadFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_preread, container, false);
+        binding = FragmentPrereadBinding.inflate(inflater, container, false);
 
-        viewPager = root.findViewById(R.id.view_pager);
-        tabLayout = root.findViewById(R.id.tabs);
-        viewPagerPreReadAdapter = new ViewPagerPreReadAdapter(getParentFragmentManager());
-        viewPager.setAdapter(viewPagerPreReadAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        rvSubject = binding.rvSubject;
+        tvSortby = binding.tvSortby;
+        tvFilter = binding.tvFilter;
+        linearLayout1 = binding.linearLayout1;
 
-        rvSubject = root.findViewById(R.id.rvSubject);
-        tvSortby = root.findViewById(R.id.tvSortby);
-        tvFilter = root.findViewById(R.id.tvFilter);
-        linearLayout1 = root.findViewById(R.id.linearLayout1);
+        setLayoutManagers();
+        pending = true;
 
-
+        completed = false;
 
         tvSortby.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,17 +92,46 @@ public class PrereadFragment extends Fragment {
                 popupMenu.show();
             }
         });
+        binding.tvPending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pending = true;
+                completed = false;
+                binding.rvCompleted.setVisibility(View.GONE);
+                binding.rvReview.setVisibility(View.GONE);
+                binding.rvpending.setVisibility(View.VISIBLE);
+                binding.viewCompleted.setBackgroundColor(0);
+                binding.viewPending.setBackgroundColor(getActivity().getColor(R.color.primary));
+                pending();
+                binding.tvCompleted.setTypeface(null);
+                binding.tvPending.setTypeface(null, Typeface.BOLD);
+            }
+        });
 
+        binding.tvCompleted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pending = false;
+                completed = true;
+                binding.rvCompleted.setVisibility(View.VISIBLE);
+                binding.rvReview.setVisibility(View.GONE);
+                binding.rvpending.setVisibility(View.GONE);
+                binding.viewCompleted.setBackgroundColor(getActivity().getColor(R.color.primary));
+                binding.viewPending.setBackgroundColor(0);
+                binding.tvCompleted.setTypeface(null, Typeface.BOLD);
+                binding.tvPending.setTypeface(null);
+                Completed();
+//                filterHomeWorkController.getFilterHomeWork(Constant.COMPLETED, getActivity());
+            }
+        });
 
         tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 tvFilter.setVisibility(View.INVISIBLE);
 
-
                 LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 View customView = layoutInflater.inflate(R.layout.filter_popup, null);
-
 
                 TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
 
@@ -117,7 +153,6 @@ public class PrereadFragment extends Fragment {
                     }
                 });
 
-
                 //display the popup window
                 popupWindow.showAsDropDown(tvFilter, -650, -100);
 
@@ -129,10 +164,7 @@ public class PrereadFragment extends Fragment {
                         tvFilter.setVisibility(View.VISIBLE);
                     }
                 });
-
-
             }
-
         });
 
 
@@ -141,8 +173,17 @@ public class PrereadFragment extends Fragment {
         rvSubject.setLayoutManager(linearLayoutManager);
 
         homework();
+        pending();
 
-        return root;
+        return binding.getRoot();
+    }
+
+    private void setLayoutManagers() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 3);
+        binding.rvpending.setLayoutManager(gridLayoutManager);
+
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getActivity(), 3);
+        binding.rvCompleted.setLayoutManager(gridLayoutManager2);
     }
 
     private void homework() {
@@ -159,6 +200,46 @@ public class PrereadFragment extends Fragment {
         rvSubject.setAdapter(homeWorkSubjectAdapter);
     }
 
+    private void pending() {
+
+
+        ArrayList<PendingPreread> pendingPrereads = new ArrayList<>();
+
+        PendingPreread rings1 = new PendingPreread("Kannada", "Poem", "Today | 10:30 AM");
+        PendingPreread rings2 = new PendingPreread("Kannada", "Poem", "Today | 10:30 AM");
+        PendingPreread rings3 = new PendingPreread("Kannada", "Poem", "Today | 10:30 AM");
+
+
+        pendingPrereads.add(rings1);
+        pendingPrereads.add(rings2);
+        pendingPrereads.add(rings3);
+
+
+        pendingPrereadAdapter = new PendingPrereadAdapter(pendingPrereads, getActivity());
+        binding.rvpending.setAdapter(pendingPrereadAdapter);
+
+    }
+
+    private void Completed() {
+
+
+        ArrayList<CompletedPreread> completedPrereads = new ArrayList<>();
+
+        CompletedPreread rings1 = new CompletedPreread("Kannada","Poem","Today | 10:30 AM");
+        CompletedPreread rings2 = new CompletedPreread("Kannada","Poem","Today | 10:30 AM");
+        CompletedPreread rings3 = new CompletedPreread("Kannada","Poem","Today | 10:30 AM");
+
+
+
+        completedPrereads.add(rings1);
+        completedPrereads.add(rings2);
+        completedPrereads.add(rings3);
+
+
+
+        completedPrereadAdapter = new CompletedPrereadAdapter(completedPrereads, getActivity());
+        binding.rvCompleted.setAdapter(completedPrereadAdapter);
+    }
 }
 
 

@@ -24,12 +24,9 @@ import android.widget.Toast;
 import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkAdapter;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
-import com.app.b4s.adapter.ViewPagerAdapter;
 import com.app.b4s.controller.FilterHomeWorkController;
 import com.app.b4s.controller.IFilterHomeWorkController;
 import com.app.b4s.databinding.FragmentHomeWorkManagementBinding;
-import com.app.b4s.model.DailyTimeTables;
-import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.OnHomeWorkData;
 import com.app.b4s.preferences.Session;
@@ -51,7 +48,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
     RecyclerView rvSubject, rvpending, rvReview, rvCompleted;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
     ViewPager viewPager;
-    ViewPagerAdapter viewPagerAdapter;
+
     TextView tvSortby, tvFilter;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
@@ -111,8 +108,6 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
                 filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
             }
         });
-
-
         binding.tvOnReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,14 +157,22 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
                 // Initializing the popup menu and giving the reference as current context
                 PopupMenu popupMenu = new PopupMenu(getActivity(), tvSortby);
 
+                tvSortby.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.up_arrows, 0);
                 // Inflating popup menu from popup_menu.xml file
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
+                        tvSortby.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
                         // Toast message on menu item clicked
                         Toast.makeText(getActivity(), "You Clicked " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
                         return true;
+                    }
+                });
+                popupMenu.setOnDismissListener(new PopupMenu.OnDismissListener() {
+                    @Override
+                    public void onDismiss(PopupMenu popupMenu) {
+                        tvSortby.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_arrow_down, 0);
                     }
                 });
                 // Showing the popup menu

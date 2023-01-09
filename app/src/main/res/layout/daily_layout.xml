@@ -160,6 +160,7 @@
                     android:textSize="@dimen/_6sdp" />
 
                 <ImageView
+                    android:id="@+id/ivDeleteIcon"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_6sdp"
                     android:layout_gravity="center"

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,8 @@ public class PendingActivityAdapter extends RecyclerView.Adapter<PendingActivity
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvSubject.setText(pendingActivities.get(position).getSub());
+        holder.imageView.setBackground(activity.getDrawable(R.drawable.grey_lap));
+
         holder.tvcontent.setText(pendingActivities.get(position).getContent());
         holder.tvTime.setText(pendingActivities.get(position).getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -56,12 +59,14 @@ public class PendingActivityAdapter extends RecyclerView.Adapter<PendingActivity
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvSubject,tvcontent,tvTime;
+        public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvSubject = itemView.findViewById(R.id.tvSubject);
             this.tvcontent = itemView.findViewById(R.id.tvcontent);
             this.tvTime = itemView.findViewById(R.id.tvTime);
+            this.imageView=itemView.findViewById(R.id.ivfolder);
         }
     }
 }

@@ -24,6 +24,7 @@ public class Constant {
     public static final String GET_NOTICE_BY_STUDENT_ID = MainBaseUrl + NoticeBoard + "getByStudent";
     public static final String UNIQUE_ID = "unique_id";
     public static final String IS_REGISTER = "isRegistered";
+    public static final String IS_LOGEDIN = "is_logedin";
     public static final String STATUS = "status";
     public static final String MESSAGE = "message";
     public static final String EMAIL_OTP = "email_otp";

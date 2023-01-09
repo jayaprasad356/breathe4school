@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_union"
-    android:padding="10px"
-    >
+    android:orientation="vertical"
+    android:padding="10px">
 
 
     <TextView
@@ -25,213 +25,239 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
+        android:layout_below="@+id/tvFilterclose"
         android:layout_centerInParent="true"
-        >
+        android:orientation="horizontal"
+        android:weightSum="2">
 
 
         <LinearLayout
-            android:layout_weight="1.4"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:layout_weight="1.4"
+            android:orientation="vertical">
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/subject"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
-                />
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
 
             <CheckBox
-                android:layout_marginTop="@dimen/_10sdp"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
                 android:checked="true"
-                android:text="@string/english"/>
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/maths"/>
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/science"/>
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/social_science"/>
-            <CheckBox
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/sanskrit"/>
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/english"
+                android:textSize="@dimen/_8sdp" />
 
             <CheckBox
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/hindi"/>
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/maths"
+                android:textSize="@dimen/_8sdp" />
 
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/science"
+                android:textSize="@dimen/_8sdp" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/social_science"
+                android:textSize="@dimen/_8sdp" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/sanskrit"
+                android:textSize="@dimen/_8sdp" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-5dp"
+                android:layout_marginRight="-5dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:scaleX="0.70"
+                android:scaleY="0.70"
+                android:text="@string/hindi"
+                android:textSize="@dimen/_8sdp" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="0.6"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:layout_weight="0.6"
+            android:orientation="vertical">
 
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/time"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
-                />
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp"
                 android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-
-
-
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:padding="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/corner_stroke_primary"
-                android:layout_marginRight="@dimen/_5sdp"
-                >
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/today"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_weight="1"
-                android:padding="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/corner_stroke_primary"
-                android:layout_marginRight="@dimen/_5sdp"
-
-                >
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/yesterday"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/_10sdp"
-                    android:textColor="@color/black"
-                    />
-
-            </RelativeLayout>
-
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-
-
-
-
-            <RelativeLayout
-                android:layout_weight="1"
-                android:padding="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/corner_stroke_primary"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:backgroundTint="@color/primary"
-                >
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/this_week"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_weight="1"
-                android:padding="@dimen/_5sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/corner_stroke_primary"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:backgroundTint="@color/primary"
-                >
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/last_week"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp" />
-
-            </RelativeLayout>
-
-
-
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:layout_marginTop="@dimen/_10sdp"
-                >
-
-
-
+                android:weightSum="2">
 
 
                 <RelativeLayout
-                    android:layout_weight="1"
-                    android:padding="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/corner_stroke_primary"
                     android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:padding="@dimen/_3sdp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/today"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:padding="@dimen/_3sdp"
+
                     >
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/yesterday"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_8sdp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:backgroundTint="@color/primary"
+                    android:padding="@dimen/_3sdp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/this_week"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:backgroundTint="@color/primary"
+                    android:padding="@dimen/_3sdp">
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/last_week"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8sdp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:padding="@dimen/_3sdp">
 
 
                     <TextView
@@ -240,16 +266,17 @@
                         android:text="@string/this_month"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_8sdp" />
 
                 </RelativeLayout>
+
                 <RelativeLayout
-                    android:layout_weight="1"
-                    android:padding="@dimen/_5sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/corner_stroke_primary"
                     android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/corner_stroke_primary"
+                    android:padding="@dimen/_3sdp"
 
                     >
 
@@ -260,65 +287,49 @@
                         android:text="@string/last_month"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="@dimen/_8sdp" />
 
                 </RelativeLayout>
-
-
 
 
             </LinearLayout>
 
 
-
-
             <TextView
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/pick_a_date"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_10sdp"
-                android:textStyle="bold"
-                />
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="bold" />
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/corner_stroke_primary"
-                android:padding="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                >
-
+                android:background="@drawable/corner_stroke_primary"
+                android:padding="@dimen/_3sdp">
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:drawableTint="@color/primary"
                     android:text="17/02/2022"
                     android:textAlignment="viewStart"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:drawableTint="@color/primary"
-                    />
+                    android:textSize="@dimen/_8sdp" />
 
             </RelativeLayout>
-
-
-
-
 
 
         </LinearLayout>
 
 
-
-
-
     </LinearLayout>
-
 
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class OnReviewActivityAdapter extends RecyclerView.Adapter<OnReviewActivi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvSubject.setText(onReviewActivities.get(position).getSub());
         holder.tvcontent.setText(onReviewActivities.get(position).getContent());
+        holder.imageView.setBackground(activity.getDrawable(R.drawable.grey_lap));
         holder.tvTime.setText(onReviewActivities.get(position).getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +58,14 @@ public class OnReviewActivityAdapter extends RecyclerView.Adapter<OnReviewActivi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvSubject,tvcontent,tvTime;
+        public ImageView imageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvSubject = itemView.findViewById(R.id.tvSubject);
             this.tvcontent = itemView.findViewById(R.id.tvcontent);
             this.tvTime = itemView.findViewById(R.id.tvTime);
+            this.imageView=itemView.findViewById(R.id.ivfolder);
         }
     }
 }

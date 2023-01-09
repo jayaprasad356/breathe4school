@@ -51,7 +51,7 @@ public class AssessmentViewPagerAdapter
         else if (position == 1)
             title = "On Review";
         else if (position == 2)
-            title = "Compleded";
+            title = "Completed";
 
         return title;
     }

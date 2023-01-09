@@ -71,19 +71,21 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
 
         if (startTime < 1000)
-            startTim = LocalTime.parse("0" + dailyTimeTables.get(position).getStart_time(),formatter);
+            startTim = LocalTime.parse("0" + dailyTimeTables.get(position).getStart_time(), formatter);
         else
-            startTim = LocalTime.parse(dailyTimeTables.get(position).getStart_time(),formatter);
+            startTim = LocalTime.parse(dailyTimeTables.get(position).getStart_time(), formatter);
         if (endTime < 1000)
-            endTim = LocalTime.parse("0" + dailyTimeTables.get(position).getEnd_time(),formatter);
+            endTim = LocalTime.parse("0" + dailyTimeTables.get(position).getEnd_time(), formatter);
         else
-            endTim = LocalTime.parse(dailyTimeTables.get(position).getEnd_time(),formatter);
+            endTim = LocalTime.parse(dailyTimeTables.get(position).getEnd_time(), formatter);
 
         Duration duration = Duration.between(startTim, endTim);
         long minutes = duration.toMinutes();
 
 
         if (type.equals(Constant.STUDY_PLANER)) {
+
+            holder.deleteImage.setImageDrawable(activity.getDrawable(R.drawable.bin));
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
 
@@ -94,24 +96,25 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
                 holder.iconView.setOnClickListener(view -> {
                     showClassDetailPopup(startTime, endTime, position);
                 });
-            }else {
+            } else {
                 holder.timeTableLayout.setVisibility(View.GONE);
                 holder.lunchLayout.setVisibility(View.VISIBLE);
 
             }
 
+
         }
 
-
+//todo color setup
         if (position % 2 == 0) {
             holder.timeTableLayout.setBackgroundColor(Color.parseColor("#28cd9c"));
         } else {
             holder.timeTableLayout.setBackgroundColor(Color.parseColor("#ff848e"));
         }
-
+//todo StartTime and EndTime setup
         holder.startTime.setText(commonMethods.militaryToOrdinaryTime(startTime));
         holder.endTime.setText(commonMethods.militaryToOrdinaryTime(endTime));
-
+//todo layout height setup based on duriation
         if (duriation > 40) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, activity.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp));
             holder.rcLayout.setLayoutParams(params);
@@ -401,9 +404,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery, studyView, editPlan, title;
-        public LinearLayout timeTableLayout, iconView,lunchLayout;
+        public LinearLayout timeTableLayout, iconView, lunchLayout;
         public RelativeLayout rcLayout;
-        public ImageView assessmentView, preReadView, activityView, presentationView;
+        public ImageView assessmentView, preReadView, activityView, presentationView,deleteImage;
         public View emptyview;
 
         public ViewHolder(View itemView) {
@@ -413,7 +416,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             this.duriation = itemView.findViewById(R.id.tvDuriation);
             this.subject = itemView.findViewById(R.id.tvSubject);
             this.timeTableLayout = itemView.findViewById(R.id.timeTableLayout);
-            this.lunchLayout=itemView.findViewById(R.id.LunchLayout);
+            this.lunchLayout = itemView.findViewById(R.id.LunchLayout);
             this.activityView = itemView.findViewById(R.id.ivActivity);
             this.assessmentView = itemView.findViewById(R.id.ivAssessment);
             this.preReadView = itemView.findViewById(R.id.ivPreRead);
@@ -428,6 +431,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             this.title = itemView.findViewById(R.id.tvTitle);
             this.rcLayout = itemView.findViewById(R.id.customHeightView);
             this.emptyview = itemView.findViewById(R.id.tvview7);
+            this.deleteImage=itemView.findViewById(R.id.ivDeleteIcon);
         }
     }
 }

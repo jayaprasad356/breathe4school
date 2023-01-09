@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".utilities.ApiConfig"
@@ -19,43 +19,39 @@
         android:theme="@style/Theme.Breathe4School"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".PreReadCompletedActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".view.HWM.Activity.PreReadActivity"
+            android:exported="false"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".view.DCM.Activity.DcmActivity"
             android:exported="true"
-            android:screenOrientation="landscape">
-
-
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".TestActivity"
             android:exported="true"
-            android:screenOrientation="landscape"
-            >
-
-
-
-        </activity>
-
-
-
-
-
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.SplashScreenActivity"
             android:exported="true"
-            android:screenOrientation="landscape" >
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
         </activity>
-
-
         <activity
             android:name=".view.HWM.Activity.HomeWorkManagementActivity"
             android:exported="true"
@@ -64,18 +60,14 @@
             android:name=".view.HWM.Activity.ActivityCompletedActivity"
             android:exported="false"
             android:screenOrientation="landscape" />
-
         <activity
             android:name=".view.DCM.Activity.SummaryDetailsActivity"
             android:exported="true"
-            android:screenOrientation="landscape"
-            />
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.DCM.Activity.ViewSummaryActivity"
             android:exported="true"
-            android:screenOrientation="landscape"
-            />
-
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.HWM.Activity.ActivityOnReviewActivity"
             android:exported="false"
@@ -99,11 +91,7 @@
         <activity
             android:name=".view.Home.Activity.HomeActivity"
             android:exported="true"
-            android:screenOrientation="landscape" >
-
-
-
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
             android:name=".view.Login.LoginTempPasswordActivity"
             android:exported="false"

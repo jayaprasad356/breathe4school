@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.app.b4s.R;
 import com.app.b4s.databinding.ActivitySuccessfullBinding;
+import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.Home.Activity.HomeActivity;
 
@@ -21,6 +22,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
     ActivitySuccessfullBinding binding;
     Handler handler;
     String uniqueId;
+    Session session;
 
 
     @Override
@@ -30,6 +32,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
         activity = LoginSuccessfullActivity.this;
         uniqueId = getIntent().getStringExtra(Constant.UNIQUE_ID);
         tvTitle = binding.tvTitle;
+        session=new Session(activity);
         tvdescription = binding.tvdescription;
 
 
@@ -45,6 +48,7 @@ public class LoginSuccessfullActivity extends AppCompatActivity {
 
     private void GotoActivity() {
         handler.postDelayed(() -> {
+            session.setBoolean(Constant.IS_LOGEDIN,true);
             Intent intent = new Intent(LoginSuccessfullActivity.this, HomeActivity.class);
             finishAffinity();
             intent.putExtra(Constant.SKIP_FACE_ID, true);

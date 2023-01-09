@@ -1,6 +1,7 @@
 package com.app.b4s.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.CompletedPreread;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.HWM.Activity.ActivityPendingActivity;
+import com.app.b4s.view.HWM.Activity.PreReadActivity;
 
 import java.util.ArrayList;
 
@@ -37,6 +41,11 @@ public class CompletedPrereadAdapter extends RecyclerView.Adapter<CompletedPrere
         holder.tvSubject.setText(completedPrereads.get(position).getSub());
         holder.tvcontent.setText(completedPrereads.get(position).getContent());
         holder.tvTime.setText(completedPrereads.get(position).getTime());
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(activity, PreReadActivity.class);
+            intent.putExtra(Constant.TYPE,Constant.COMPLETED);
+            activity.startActivity(intent);
+        });
 
     }
 

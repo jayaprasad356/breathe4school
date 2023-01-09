@@ -1,6 +1,7 @@
 package com.app.b4s.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.model.PendingPreread;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.HWM.Activity.PreReadActivity;
 
 import java.util.ArrayList;
 
@@ -37,6 +40,14 @@ public class PendingPrereadAdapter extends RecyclerView.Adapter<PendingPrereadAd
         holder.tvSubject.setText(pendingPrereads.get(position).getSub());
         holder.tvcontent.setText(pendingPrereads.get(position).getContent());
         holder.tvTime.setText(pendingPrereads.get(position).getTime());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, PreReadActivity.class);
+                intent.putExtra(Constant.TYPE,Constant.PENDING);
+                activity.startActivity(intent);
+            }
+        });
 
     }
 
