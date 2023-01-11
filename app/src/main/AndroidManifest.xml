@@ -20,7 +20,8 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".PreReadCompletedActivity"
+            android:name=".view.Home.Activity.ViewSummeryActivity"
+            android:screenOrientation="landscape"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

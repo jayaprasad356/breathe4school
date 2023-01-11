@@ -29,19 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="4"
-            android:background="@android:color/transparent"
+            android:layout_weight="5"
             android:gravity="center"
             android:padding="@dimen/_6sdp"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown" >
 
-        <ImageView
-            android:layout_width="@dimen/_10sdp"
-            android:layout_height="@dimen/_10sdp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:padding="@dimen/_3sdp"
-            android:src="@drawable/down_arrow" />
+        </Spinner>
+
+
     </LinearLayout>
 
 
@@ -67,8 +62,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+
                 android:background="@android:color/transparent"
-                android:entries="@array/Timings"
+                android:entries="@array/star_timings"
                 android:gravity="center"
                 android:padding="@dimen/_6sdp"
                 android:spinnerMode="dropdown" />
@@ -95,7 +91,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:entries="@array/Timings"
+                android:entries="@array/end_timings"
                 android:gravity="center"
                 android:padding="@dimen/_6sdp"
                 android:spinnerMode="dropdown" />

@@ -24,15 +24,15 @@ import android.widget.Toast;
 import com.app.b4s.R;
 import com.app.b4s.adapter.HomeWorkAdapter;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
-import com.app.b4s.controller.FilterHomeWorkController;
-import com.app.b4s.controller.IFilterHomeWorkController;
+import com.app.b4s.controller.FilterController;
+import com.app.b4s.controller.IfilterController;
 import com.app.b4s.databinding.FragmentHomeWorkManagementBinding;
 import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.OnHomeWorkData;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
-import com.app.b4s.view.DCM.FilterHomeWorkListener;
+import com.app.b4s.view.DCM.FilterListener;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class HomeWorkManagementFragment extends Fragment implements FilterHomeWorkListener {
+public class HomeWorkManagementFragment extends Fragment implements FilterListener {
     RecyclerView rvSubject, rvpending, rvReview, rvCompleted;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
     ViewPager viewPager;
@@ -52,7 +52,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
     TextView tvSortby, tvFilter;
     PopupWindow popupWindow;
     LinearLayout linearLayout1;
-    IFilterHomeWorkController filterHomeWorkController;
+    IfilterController filterHomeWorkController;
     HomeWorkAdapter homeWorkAdapter;
     Boolean pending = false, review = false, completed = false;
     Session session;
@@ -69,7 +69,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterHomeWo
         binding = FragmentHomeWorkManagementBinding.inflate(inflater, container, false);
 
 
-        filterHomeWorkController = new FilterHomeWorkController(this);
+        filterHomeWorkController = new FilterController(this);
 
         session = new Session(getActivity());
         rvpending = binding.rvpending;

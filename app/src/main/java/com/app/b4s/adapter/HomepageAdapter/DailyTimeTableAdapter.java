@@ -3,6 +3,7 @@ package com.app.b4s.adapter.HomepageAdapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,9 +26,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
+import com.app.b4s.commons.OnSelectedListener;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.DCM.Fragment.TodaySummeryDetailFragment;
 import com.google.gson.internal.LinkedTreeMap;
 
 import java.time.Duration;
@@ -44,11 +47,13 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     private String type;
     private Session session;
     boolean isJoinNow, setReminder, viewSummary;
+    OnSelectedListener onSelectedListener;
 
-    public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type) {
+    public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type, OnSelectedListener onSelectedListener) {
         this.dailyTimeTables = dailyTimeTables;
         this.activity = activity;
         this.type = type;
+        this.onSelectedListener = onSelectedListener;
     }
 
 
@@ -372,6 +377,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             }
             if (currentTime > startTime && currentTime > endTime) {
                 holder.viewSummbery.setVisibility(View.VISIBLE);
+                holder.viewSummbery.setOnClickListener(view -> {
+                    onSelectedListener.onPositionClicked();
+                });
                 dailyTimeTables.get(0).setViewSummery(true);
             } else {
                 dailyTimeTables.get(0).setViewSummery(false);
@@ -406,7 +414,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         public TextView startTime, duriation, subject, endTime, setReminer, joinNow, onReminder, viewSummbery, studyView, editPlan, title;
         public LinearLayout timeTableLayout, iconView, lunchLayout;
         public RelativeLayout rcLayout;
-        public ImageView assessmentView, preReadView, activityView, presentationView,deleteImage;
+        public ImageView assessmentView, preReadView, activityView, presentationView, deleteImage;
         public View emptyview;
 
         public ViewHolder(View itemView) {
@@ -431,7 +439,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             this.title = itemView.findViewById(R.id.tvTitle);
             this.rcLayout = itemView.findViewById(R.id.customHeightView);
             this.emptyview = itemView.findViewById(R.id.tvview7);
-            this.deleteImage=itemView.findViewById(R.id.ivDeleteIcon);
+            this.deleteImage = itemView.findViewById(R.id.ivDeleteIcon);
         }
     }
 }

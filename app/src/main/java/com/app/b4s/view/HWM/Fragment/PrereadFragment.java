@@ -25,17 +25,23 @@ import com.app.b4s.R;
 import com.app.b4s.adapter.CompletedPrereadAdapter;
 import com.app.b4s.adapter.HomeWorkSubjectAdapter;
 import com.app.b4s.adapter.PendingPrereadAdapter;
+import com.app.b4s.controller.FilterController;
+import com.app.b4s.controller.IfilterController;
 import com.app.b4s.databinding.FragmentPrereadBinding;
 import com.app.b4s.model.CompletedPreread;
 import com.app.b4s.model.HomeWorkSubject;
 import com.app.b4s.model.PendingPreread;
 import com.app.b4s.model.Subject;
+import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.DCM.FilterListener;
 import com.google.android.material.tabs.TabLayout;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
 
-public class PrereadFragment extends Fragment {
+public class PrereadFragment extends Fragment implements FilterListener {
 
     RecyclerView rvSubject;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
@@ -47,7 +53,7 @@ public class PrereadFragment extends Fragment {
     Boolean pending = false, completed = false;
     PendingPrereadAdapter pendingPrereadAdapter;
     CompletedPrereadAdapter completedPrereadAdapter;
-
+    IfilterController filterPreReadController;
     FragmentPrereadBinding binding;
 
 
@@ -66,7 +72,7 @@ public class PrereadFragment extends Fragment {
         tvSortby = binding.tvSortby;
         tvFilter = binding.tvFilter;
         linearLayout1 = binding.linearLayout1;
-
+        filterPreReadController = new FilterController(this);
         setLayoutManagers();
         pending = true;
 
@@ -108,63 +114,57 @@ public class PrereadFragment extends Fragment {
             }
         });
 
-        binding.tvCompleted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pending = false;
-                completed = true;
-                binding.rvCompleted.setVisibility(View.VISIBLE);
-                binding.rvReview.setVisibility(View.GONE);
-                binding.rvpending.setVisibility(View.GONE);
-                binding.viewCompleted.setBackgroundColor(getActivity().getColor(R.color.primary));
-                binding.viewPending.setBackgroundColor(0);
-                binding.tvCompleted.setTypeface(null, Typeface.BOLD);
-                binding.tvPending.setTypeface(null);
-                Completed();
+        binding.tvCompleted.setOnClickListener(view -> {
+            pending = false;
+            completed = true;
+            binding.rvCompleted.setVisibility(View.VISIBLE);
+            binding.rvReview.setVisibility(View.GONE);
+            binding.rvpending.setVisibility(View.GONE);
+            binding.viewCompleted.setBackgroundColor(getActivity().getColor(R.color.primary));
+            binding.viewPending.setBackgroundColor(0);
+            binding.tvCompleted.setTypeface(null, Typeface.BOLD);
+            binding.tvPending.setTypeface(null);
+            Completed();
 //                filterHomeWorkController.getFilterHomeWork(Constant.COMPLETED, getActivity());
-            }
         });
 
-        tvFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvFilter.setVisibility(View.INVISIBLE);
+        tvFilter.setOnClickListener(v -> {
+            tvFilter.setVisibility(View.INVISIBLE);
 
-                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.filter_popup, null);
+            LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View customView = layoutInflater.inflate(R.layout.filter_popup, null);
 
-                TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
+            TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
 
-                //instantiate popup window
-                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            //instantiate popup window
+            popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setTouchInterceptor(new View.OnTouchListener() {
 
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            popupWindow.dismiss();
-                            tvFilter.setVisibility(View.VISIBLE);
-
-                            return true;
-                        }
-
-                        return false;
-                    }
-                });
-
-                //display the popup window
-                popupWindow.showAsDropDown(tvFilter, -650, -100);
-
-                //close the popup window on button click
-                tvFilterclose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                         popupWindow.dismiss();
                         tvFilter.setVisibility(View.VISIBLE);
+
+                        return true;
                     }
-                });
-            }
+
+                    return false;
+                }
+            });
+
+            //display the popup window
+            popupWindow.showAsDropDown(tvFilter, -650, -100);
+
+            //close the popup window on button click
+            tvFilterclose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    popupWindow.dismiss();
+                    tvFilter.setVisibility(View.VISIBLE);
+                }
+            });
         });
 
 
@@ -173,7 +173,8 @@ public class PrereadFragment extends Fragment {
         rvSubject.setLayoutManager(linearLayoutManager);
 
         homework();
-        pending();
+       // pending();
+        filterPreReadController.getFilterPreRead(Constant.PENDING, getActivity());
 
         return binding.getRoot();
     }
@@ -239,6 +240,11 @@ public class PrereadFragment extends Fragment {
 
         completedPrereadAdapter = new CompletedPrereadAdapter(completedPrereads, getActivity());
         binding.rvCompleted.setAdapter(completedPrereadAdapter);
+    }
+
+    @Override
+    public void onSuccess(JSONArray jsonArray) {
+        pending();
     }
 }
 

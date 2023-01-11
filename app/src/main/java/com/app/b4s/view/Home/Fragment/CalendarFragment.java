@@ -3,6 +3,7 @@ package com.app.b4s.view.Home.Fragment;
 import static com.app.b4s.utilities.Constant.STATUS;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +30,7 @@ import com.app.b4s.R;
 import com.app.b4s.adapter.HomepageAdapter.DailyTimeTableAdapter;
 import com.app.b4s.adapter.HomepageAdapter.WeeklyTimeTableAdapter;
 import com.app.b4s.commons.CommonMethods;
+import com.app.b4s.commons.OnSelectedListener;
 import com.app.b4s.commons.ResponseListener;
 import com.app.b4s.controller.CalendarController;
 import com.app.b4s.controller.CalendarResponse;
@@ -48,6 +51,11 @@ import com.app.b4s.model.days.Wednesday;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.view.DCM.Fragment.SummaryFragment;
+import com.app.b4s.view.DCM.Fragment.TodaySummeryDetailFragment;
+import com.app.b4s.view.HWM.Activity.HomeWorkManagementActivity;
+import com.app.b4s.view.HWM.Activity.SubmissionHomeworkFormbasedActivity;
+import com.app.b4s.view.Home.Activity.ViewSummeryActivity;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
 
@@ -70,6 +78,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     RecyclerView rcDailyTables, rcWeeklyTables;
     private Spinner spinner;
     private PopupWindow popupWindow;
+    OnSelectedListener onSelectedListener;
+    FragmentManager fragmentManager;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -90,6 +100,12 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         LinearLayoutManager weeklyTimeTable = new LinearLayoutManager(getActivity());
         rcDailyTables = binding.dailyRecycler;
         rcWeeklyTables = binding.rcWeekly;
+
+        onSelectedListener = () -> {
+            Intent intent = new Intent(getActivity(), ViewSummeryActivity.class);
+            startActivity(intent);
+        };
+
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -372,7 +388,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                             for (int i = 0; i < lectures.length(); i++) {
                                 jsonObject1 = lectures.getJSONObject(i);
                                 if (jsonObject1 != null) {
-                                    if (type.equals(Constant.LIVE_SESSION)){
+                                    if (type.equals(Constant.LIVE_SESSION)) {
                                         if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
                                             lunch = false;
                                             lunchObject = general_categories.getJSONObject(0);
@@ -381,7 +397,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                                 dailyTimeTables.add(groups);
                                             }
                                         }
-                                }
+                                    }
                                     DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
                                     dailyTimeTables.add(group);
                                 } else {
@@ -419,7 +435,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                             }
                             rcDailyTables.setVisibility(View.VISIBLE);
                             binding.titleLayout.setVisibility(View.VISIBLE);
-                            DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), type);
+                            DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), type, onSelectedListener);
                             rcDailyTables.setAdapter(adapter);
                         } else {
                             rcDailyTables.setVisibility(View.GONE);
@@ -506,7 +522,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
     }
 
-    private String sundaySubjects(int startTime, int endTime, JSONObject jsonObject1, String sunday, String sun_name) throws JSONException {
+    private String sundaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            sunday, String sun_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
             sun_name = jsonObject1.getString(Constant.NAME);
         }
@@ -530,7 +547,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return sun_name;
     }
 
-    private String saturdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String saturday, String satur_name) throws JSONException {
+    private String saturdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            saturday, String satur_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
             satur_name = jsonObject1.getString(Constant.NAME);
         }
@@ -553,7 +571,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return satur_name;
     }
 
-    private String fridaySubjects(int startTime, int endTime, JSONObject jsonObject1, String friday, String fri_name) throws JSONException {
+    private String fridaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            friday, String fri_name) throws JSONException {
 
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
             fri_name = jsonObject1.getString(Constant.NAME);
@@ -573,7 +592,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return fri_name;
     }
 
-    private String thursdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String thursday, String thurs_name) throws JSONException {
+    private String thursdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            thursday, String thurs_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
             thurs_name = jsonObject1.getString(Constant.NAME);
         }
@@ -592,7 +612,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return thurs_name;
     }
 
-    private String wednesdaySunjects(int startTime, int endTime, JSONObject jsonObject1, String wednesday, String wed_name) throws JSONException {
+    private String wednesdaySunjects(int startTime, int endTime, JSONObject
+            jsonObject1, String wednesday, String wed_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
             wed_name = jsonObject1.getString(Constant.NAME);
         }
@@ -611,7 +632,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return wed_name;
     }
 
-    private String tuesdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String tuesday, String tue_name) throws JSONException {
+    private String tuesdaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            tuesday, String tue_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.TUESDAY)) {
             tue_name = jsonObject1.get(Constant.NAME).toString();
         }
@@ -630,7 +652,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return tue_name;
     }
 
-    private String mondaySubjects(int startTime, int endTime, JSONObject jsonObject1, String monday, String mon_name) throws JSONException {
+    private String mondaySubjects(int startTime, int endTime, JSONObject jsonObject1, String
+            monday, String mon_name) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(monday)) {
             mon_name = jsonObject1.get(Constant.NAME).toString();
         }
@@ -654,7 +677,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     }
 
 
-    private void wednesDayDatas(Gson g, ArrayList<Wednesday> wednesdays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
+    private void wednesDayDatas(Gson g, ArrayList<Wednesday> wednesdays, JSONObject
+            jsonObject1, int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.WEDNESDAY)) {
 
             Wednesday group = g.fromJson(jsonObject1.toString(), Wednesday.class);
@@ -682,7 +706,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         }
     }
 
-    private void thursDayDatas(Gson g, ArrayList<Thursday> thursdays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
+    private void thursDayDatas(Gson g, ArrayList<Thursday> thursdays, JSONObject jsonObject1,
+                               int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
             Thursday group = g.fromJson(jsonObject1.toString(), Thursday.class);
             thursdays.add(group);
@@ -705,7 +730,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         }
     }
 
-    private void fridayDatas(Gson g, ArrayList<Friday> fridays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
+    private void fridayDatas(Gson g, ArrayList<Friday> fridays, JSONObject jsonObject1,
+                             int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.FRIDAY)) {
             Friday group = g.fromJson(jsonObject1.toString(), Friday.class);
             fridays.add(group);
@@ -728,7 +754,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         }
     }
 
-    private void saturdayDatas(Gson g, ArrayList<Saturday> saturdays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
+    private void saturdayDatas(Gson g, ArrayList<Saturday> saturdays, JSONObject jsonObject1,
+                               int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.SATURDAY)) {
             Saturday group = g.fromJson(jsonObject1.toString(), Saturday.class);
             saturdays.add(group);
@@ -751,7 +778,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         }
     }
 
-    private void sundayDatas(Gson g, ArrayList<Sunday> sundays, JSONObject jsonObject1, int startTime, int endTime) throws JSONException {
+    private void sundayDatas(Gson g, ArrayList<Sunday> sundays, JSONObject jsonObject1,
+                             int startTime, int endTime) throws JSONException {
         if (startTime >= 700 && endTime <= 740 && jsonObject1.get(Constant.DAY).equals(Constant.THURSDAY)) {
             Sunday group = g.fromJson(jsonObject1.toString(), Sunday.class);
             sundays.add(group);

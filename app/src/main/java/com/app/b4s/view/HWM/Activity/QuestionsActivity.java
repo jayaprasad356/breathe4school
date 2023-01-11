@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,7 +15,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.FileUtils;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
@@ -24,8 +22,6 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -57,7 +53,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 public class QuestionsActivity extends AppCompatActivity {
     private ActivityQuestionsBinding binding;
@@ -68,7 +63,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject jsonObject;
     private JSONObject request;
     private RequestQueue requestQueue;
-
+    PositionPicker positionPicker;
 
     private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
@@ -81,7 +76,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject questionsResponse = null;
     private JSONObject answer = null;
     private String title = "";
-    private Boolean A, B, C, D;
+    private Boolean A = false, B = false, C = false, D = false;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     private String dat;
@@ -104,6 +99,12 @@ public class QuestionsActivity extends AppCompatActivity {
         calendar = Calendar.getInstance();
         activity = this;
         session = new Session(activity);
+        positionPicker = position -> {
+            setQuestions(position);
+            questionsCountAdapter = new QuestionsCountAdapter(i, position, activity, positionPicker);
+            rvQuestions.setAdapter(questionsCountAdapter);
+            questionsCountAdapter.notifyDataSetChanged();
+        };
         requestQueue = Volley.newRequestQueue(this);
         Intent intent = getIntent();
         type = intent.getStringExtra(Constant.TYPE);
@@ -197,34 +198,31 @@ public class QuestionsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvQuestions.setLayoutManager(linearLayoutManager);
         setBackground = 0;
-        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, this);
+        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, this, positionPicker);
         rvQuestions.setAdapter(questionsCountAdapter);
-        binding.btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (type.equals(Constant.PENDING))
-                    pendingFlow();
-                else if (type.equals(Constant.REVIEW)) {
-                    setBackground = setBackground + 1;
-                    if (i > setBackground) {
-                        setQuestions(setBackground);
-                        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
-                        rvQuestions.setAdapter(questionsCountAdapter);
-                        questionsCountAdapter.notifyDataSetChanged();
-                    } else {
-                        //finishQuestion(jsonArrayList);
-                    }
-                } else if (type.equals(Constant.COMPLETED)) {
-                    setBackground = setBackground + 1;
-                    if (i > setBackground) {
-                        setQuestions(setBackground);
-                        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
-                        rvQuestions.setAdapter(questionsCountAdapter);
-                        questionsCountAdapter.notifyDataSetChanged();
-                    }
+        binding.btnNext.setOnClickListener(view -> {
+            if (type.equals(Constant.PENDING)) {
+                pendingFlow();
+            } else if (type.equals(Constant.REVIEW)) {
+                setBackground = setBackground + 1;
+                if (i > setBackground) {
+                    setQuestions(setBackground);
+                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                    rvQuestions.setAdapter(questionsCountAdapter);
+                    questionsCountAdapter.notifyDataSetChanged();
+                } else {
+                    //finishQuestion(jsonArrayList);
                 }
-
+            } else if (type.equals(Constant.COMPLETED)) {
+                setBackground = setBackground + 1;
+                if (i > setBackground) {
+                    setQuestions(setBackground);
+                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                    rvQuestions.setAdapter(questionsCountAdapter);
+                    questionsCountAdapter.notifyDataSetChanged();
+                }
             }
+
         });
 
 
@@ -278,11 +276,10 @@ public class QuestionsActivity extends AppCompatActivity {
 
                         String filePath = getFilePath(sUri);
                         //String pdf=getPDFPath(sUri);
-                        String test=getPath(sUri);
+                        String test = getPath(sUri);
                         System.out.println(test);
-                       // System.out.println(pdf);
+                        // System.out.println(pdf);
                         System.out.println(filePath);
-
 
 
                         try {
@@ -339,22 +336,23 @@ public class QuestionsActivity extends AppCompatActivity {
             } finally {
                 cursor.close();
             }
-            if (filePath==null){
-                filePath=fileUri.getPath();
-                int cutt=filePath.lastIndexOf('/');
+            if (filePath == null) {
+                filePath = fileUri.getPath();
+                int cutt = filePath.lastIndexOf('/');
                 if (cutt != -1) {
-                    filePath=fileUri.getLastPathSegment();
+                    filePath = fileUri.getLastPathSegment();
 
-                   // filePath=filePath.substring(cutt+1);
+                    // filePath=filePath.substring(cutt+1);
                 }
             }
         }
         return filePath;
     }
+
     private String getPath(final Uri uri) {
 
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
-        if(isKitKat) {
+        if (isKitKat) {
             // MediaStore (and general)
             return getForApi19(uri);
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
@@ -375,18 +373,18 @@ public class QuestionsActivity extends AppCompatActivity {
 
     @TargetApi(19)
     private String getForApi19(Uri uri) {
-      //  Log.e(, "+++ API 19 URI :: " + uri);
+        //  Log.e(, "+++ API 19 URI :: " + uri);
         if (DocumentsContract.isDocumentUri(this, uri)) {
-           // Log.e(tag, "+++ Document URI");
+            // Log.e(tag, "+++ Document URI");
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
-              //  Log.e(tag, "+++ External Document URI");
+                //  Log.e(tag, "+++ External Document URI");
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
                 if ("primary".equalsIgnoreCase(type)) {
-                   // Log.e(tag, "+++ Primary External Document URI");
+                    // Log.e(tag, "+++ Primary External Document URI");
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
                 }
 
@@ -394,7 +392,7 @@ public class QuestionsActivity extends AppCompatActivity {
             }
             // DownloadsProvider
             else if (isDownloadsDocument(uri)) {
-              //  Log.e(tag, "+++ Downloads External Document URI");
+                //  Log.e(tag, "+++ Downloads External Document URI");
                 final String id = DocumentsContract.getDocumentId(uri);
                 final Uri contentUri = ContentUris.withAppendedId(
                         Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
@@ -403,33 +401,33 @@ public class QuestionsActivity extends AppCompatActivity {
             }
             // MediaProvider
             else if (isMediaDocument(uri)) {
-               // Log.e(tag, "+++ Media Document URI");
+                // Log.e(tag, "+++ Media Document URI");
                 final String docId = DocumentsContract.getDocumentId(uri);
                 final String[] split = docId.split(":");
                 final String type = split[0];
 
                 Uri contentUri = null;
                 if ("image".equals(type)) {
-                   // Log.e(tag, "+++ Image Media Document URI");
+                    // Log.e(tag, "+++ Image Media Document URI");
                     contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
                 } else if ("video".equals(type)) {
-                  //  Log.e(tag, "+++ Video Media Document URI");
+                    //  Log.e(tag, "+++ Video Media Document URI");
                     contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
                 } else if ("audio".equals(type)) {
                     //Log.e(tag, "+++ Audio Media Document URI");
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                }else if ("document".equals(type))
+                } else if ("document".equals(type))
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] {
+                final String[] selectionArgs = new String[]{
                         split[1]
                 };
 
                 return getDataColumn(contentUri, selection, selectionArgs);
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
-           // Log.e(tag, "+++ No DOCUMENT URI :: CONTENT ");
+            // Log.e(tag, "+++ No DOCUMENT URI :: CONTENT ");
 
             // Return the remote address
             if (isGooglePhotosUri(uri))
@@ -439,7 +437,7 @@ public class QuestionsActivity extends AppCompatActivity {
         }
         // File
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
-          //  Log.e(tag, "+++ No DOCUMENT URI :: FILE ");
+            //  Log.e(tag, "+++ No DOCUMENT URI :: FILE ");
             return uri.getPath();
         }
         return null;
@@ -449,8 +447,8 @@ public class QuestionsActivity extends AppCompatActivity {
      * Get the value of the data column for this Uri. This is useful for
      * MediaStore Uris, and other file-based ContentProviders.
      *
-     * @param uri The Uri to query.
-     * @param selection (Optional) Filter used in the query.
+     * @param uri           The Uri to query.
+     * @param selection     (Optional) Filter used in the query.
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
@@ -509,13 +507,14 @@ public class QuestionsActivity extends AppCompatActivity {
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
-    public String getPDFPath(Uri uri){
+
+    public String getPDFPath(Uri uri) {
 
         final String id = DocumentsContract.getDocumentId(uri);
         final Uri contentUri = ContentUris.withAppendedId(
                 Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
-        String[] projection = { MediaStore.Images.Media.DATA };
+        String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
@@ -543,57 +542,63 @@ public class QuestionsActivity extends AppCompatActivity {
             if (i > setBackground) {
                 setSubmitText(i, setBackground);
                 setQuestions(setBackground);
-                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
+                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
                 rvQuestions.setAdapter(questionsCountAdapter);
                 questionsCountAdapter.notifyDataSetChanged();
             } else {
                 finishQuestion(jsonArrayList);
             }
         } else {
-            if (!(A == null && B == null && C == null && D == null)) {
-                setBackground = setBackground + 1;
+//            if (!(A == null && B == null && C == null && D == null)) {
+            setBackground = setBackground + 1;
 
-                String ans = "";
-                if (A) {
-                    ans = "A";
-                } else if (B) {
-                    ans = "B";
-                } else if (C) {
-                    ans = "C";
-                } else if (D) {
-                    ans = "D";
+            String ans = "";
+            boolean answred = false;
+            if (A) {
+                ans = "A";
+                answred = true;
+            } else if (B) {
+                ans = "B";
+                answred = true;
+            } else if (C) {
+                ans = "C";
+                answred = true;
+            } else if (D) {
+                ans = "D";
+                answred = true;
+            }
+            try {
+                test = new JSONObject();
+                test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
+                test.put(Constant.ANSWERS, ans);
+                String explanation = "";
+                if (ans.equals("A")) {
+                    explanation = session.getData(Constant.A_VALUE);
+                } else if (ans.equals("B")) {
+                    explanation = session.getData(Constant.B_VALUE);
+                } else if (ans.equals("C")) {
+                    explanation = session.getData(Constant.C_VALUE);
+                } else if (ans.equals("D")) {
+                    explanation = session.getData(Constant.D_VALUE);
                 }
-                try {
-                    test = new JSONObject();
-                    test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
-                    test.put(Constant.ANSWERS, ans);
-                    String explanation = "";
-                    if (ans.equals("A")) {
-                        explanation = session.getData(Constant.A_VALUE);
-                    } else if (ans.equals("B")) {
-                        explanation = session.getData(Constant.B_VALUE);
-                    } else if (ans.equals("C")) {
-                        explanation = session.getData(Constant.C_VALUE);
-                    } else if (ans.equals("D")) {
-                        explanation = session.getData(Constant.D_VALUE);
-                    }
-                    test.put("explanation", explanation);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                jsonArrayList.add(test);
+                test.put("explanation", explanation);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            jsonArrayList.add(test);
 
-                if (i > setBackground) {
-                    setSubmitText(i, setBackground);
-                    setQuestions(setBackground);
-                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity);
-                    rvQuestions.setAdapter(questionsCountAdapter);
-                    questionsCountAdapter.notifyDataSetChanged();
-                } else {
-                    finishQuestion(jsonArrayList);
-                }
-            } else
-                Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
+            if (i > setBackground) {
+                setSubmitText(i, setBackground);
+                setQuestions(setBackground);
+
+                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                rvQuestions.setAdapter(questionsCountAdapter);
+                questionsCountAdapter.notifyDataSetChanged();
+            } else {
+                finishQuestion(jsonArrayList);
+            }
+//            } else
+//                Toast.makeText(activity, R.string.select_any_option, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -690,7 +695,6 @@ public class QuestionsActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setQuestions(int i) {
 
-
         if (type.equals(Constant.PENDING)) {
             try {
                 setUnCheck();
@@ -721,8 +725,10 @@ public class QuestionsActivity extends AppCompatActivity {
                 if (attachment.length() >= 1) {
                     attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                     isAttached = true;
-                } else
+                } else {
                     options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
+                    isAttached=false;
+                }
                 System.out.println(options);
                 setOptionsForPending();
                 this.i = jsonObject.getInt(Constant.TOTAL_QUESTIONS);
@@ -916,10 +922,9 @@ public class QuestionsActivity extends AppCompatActivity {
     private void setOptionsForPending() throws JSONException {
         if (isAttached) {
             binding.llUploadPdf.setVisibility(View.VISIBLE);
-
             binding.llCheckBoxes.setVisibility(View.GONE);
-
         } else {
+            setVisibility();
             for (int j = 0; j < options.length(); j++) {
                 JSONObject option = options.getJSONObject(j);
                 String key = option.getString(Constant.KEY);
@@ -993,6 +998,15 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.cbSecondOpt.setChecked(false);
         binding.cbThirdOpt.setChecked(false);
         binding.cbFourthOpt.setChecked(false);
+    }
+
+    private void setVisibility() {
+        binding.llCheckBoxes.setVisibility(View.VISIBLE);
+        binding.llUploadPdf.setVisibility(View.GONE);
+        binding.cbFirstOpt.setVisibility(View.GONE);
+        binding.cbSecondOpt.setVisibility(View.GONE);
+        binding.cbThirdOpt.setVisibility(View.GONE);
+        binding.cbFourthOpt.setVisibility(View.GONE);
     }
 
     private void removeBackground() {

@@ -11,17 +11,20 @@ package com.app.b4s.adapter;
         import androidx.recyclerview.widget.RecyclerView;
 
         import com.app.b4s.R;
+        import com.app.b4s.view.HWM.Activity.PositionPicker;
 
 public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAdapter.ViewHolder> {
     Activity activity;
     int count;
     int setBackground;
+    boolean answred;
+    PositionPicker positionPicker;
 
-    public QuestionsCountAdapter(int count, int setBackground, Activity activity) {
+    public QuestionsCountAdapter(int count, int setBackground, Activity activity, PositionPicker positionPicker) {
         this.activity = activity;
-
         this.count=count;
         this.setBackground=setBackground;
+        this.positionPicker=positionPicker;
     }
 
 
@@ -41,7 +44,12 @@ public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAd
            holder.question.setBackground(activity.getDrawable(R.drawable.question_tv_checked));
            holder.question.setTextColor(activity.getColor(R.color.primary));
        }
-
+       holder.itemView.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               positionPicker.selectedPosition(position);
+           }
+       });
     }
 
 

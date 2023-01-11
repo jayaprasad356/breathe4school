@@ -109,7 +109,7 @@
     <string name="choose_file">Choose file</string>
     <string name="you_have_successfully_submitted_the_homework">You Have successfully submitted the homework</string>
     <string name="maths">Maths</string>
-    <string name="create_study_plan">Create Study Planer</string>
+    <string name="create_study_plan">Create Study Planner</string>
     <string name="study_planner_name">Study planner name</string>
     <string name="complete_chapter"><![CDATA[Complete Chapter 1 & 2]]></string>
     <string name="create">Create</string>
@@ -149,8 +149,22 @@
         <item>Once</item>
         <item>Everyday</item>
     </string-array>
-    <string-array name="Timings">
+    <string-array name="star_timings">
         <item>Start time</item>
+        <item>07:00 AM</item>
+        <item>08:00 AM</item>
+        <item>09:00 AM</item>
+        <item>10:00 AM</item>
+        <item>11:00 AM</item>
+        <item>12:00 PM</item>
+        <item>01:00 PM</item>
+        <item>02:00 PM</item>
+        <item>03:00 PM</item>
+        <item>04:00 PM</item>
+        <item>05:00 PM</item>
+    </string-array>
+    <string-array name="end_timings">
+        <item>End time</item>
         <item>07:00 AM</item>
         <item>08:00 AM</item>
         <item>09:00 AM</item>
@@ -171,7 +185,7 @@
     <string name="today_digitla">Today(12)</string>
     <string name="previous">Previous(16)</string>
     <string name="view_all">View all</string>
-    <string name="total_summery">Total Summary</string>
+    <string name="total_summery">Today Summary</string>
     <string name="lesson">1st Lesson</string>
     <string name="three_pm">3:30 PM</string>
     <string name="lesson_description">Lesson Description</string>
