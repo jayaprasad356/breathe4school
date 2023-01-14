@@ -1,9 +1,13 @@
 package com.app.b4s.view.Home.Fragment;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.app.b4s.utilities.Constant.STATUS;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,7 +17,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -78,9 +85,10 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     RecyclerView rcDailyTables, rcWeeklyTables;
     private Spinner spinner;
     private PopupWindow popupWindow;
+    TextView holidays;
     OnSelectedListener onSelectedListener;
     FragmentManager fragmentManager;
-
+    private LayoutInflater layoutInflater;
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -100,11 +108,51 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         LinearLayoutManager weeklyTimeTable = new LinearLayoutManager(getActivity());
         rcDailyTables = binding.dailyRecycler;
         rcWeeklyTables = binding.rcWeekly;
+        holidays=binding.tvListOfHoliday;
+
+        layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         onSelectedListener = () -> {
             Intent intent = new Intent(getActivity(), ViewSummeryActivity.class);
             startActivity(intent);
         };
+        holidays.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View popupView = layoutInflater.inflate(R.layout.holidays_lyt, null);
+                popupWindow = new PopupWindow(
+                        popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setFocusable(true);
+                popupWindow.setOutsideTouchable(true);
+                popupWindow.setContentView(popupView);
+               TextView monthName= popupView.findViewById(R.id.tvMonthName);
+               monthName.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+                       Toast.makeText(getActivity(), "te", Toast.LENGTH_SHORT).show();
+                   }
+               });
+                ImageView leftArrow = popupView.findViewById(R.id.ivLeftArow);
+                leftArrow.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Move week backward
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+                        popupWindow.setContentView(leftArrow);
+                        // Update UI or data with new week
+                    }
+                });
+
+
+                popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                int location[] = new int[2];
+                v.getLocationOnScreen(location);
+                popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0], location[1] + v.getHeight());
+            }
+        });
 
         binding.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

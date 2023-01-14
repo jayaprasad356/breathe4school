@@ -1,23 +1,35 @@
 package com.app.b4s.view.HWM.Fragment;
 
-import android.content.Context;
-import android.graphics.Typeface;
-import android.os.Bundle;
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.app.TimePickerDialog;
+
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,10 +45,12 @@ import com.app.b4s.model.PendingActivity;
 import com.app.b4s.model.Subject;
 import com.google.android.material.tabs.TabLayout;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
-public class ActivityFragment extends Fragment {
+public class ActivityFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
     RecyclerView rvSubject;
     HomeWorkSubjectAdapter homeWorkSubjectAdapter;
     TabLayout tabLayout;
@@ -49,6 +63,8 @@ public class ActivityFragment extends Fragment {
     Boolean pending = false, review = false, completed = false;
     FragmentActivityBinding binding;
     PendingActivityAdapter pendingActivityAdapter;
+    TextView datePicker;
+    private LayoutInflater layoutInflater;
 
     public ActivityFragment() {
         // Required empty public constructor
@@ -127,6 +143,7 @@ public class ActivityFragment extends Fragment {
         tvSortby = binding.tvSortby;
         tvFilter = binding.tvFilter;
         linearLayout1 = binding.linearLayout1;
+        layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         tvSortby.setOnClickListener(v -> {
             // Initializing the popup menu and giving the reference as current context
@@ -149,50 +166,26 @@ public class ActivityFragment extends Fragment {
         tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvFilter.setVisibility(View.INVISIBLE);
-
-
-                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.filter_popup, null);
-
-
-                TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
-
-                //instantiate popup window
-                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
+                View popupView = layoutInflater.inflate(R.layout.filter_popup, null);
+                popupWindow = new PopupWindow(
+                        popupView,
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
-                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            popupWindow.dismiss();
-                            tvFilter.setVisibility(View.VISIBLE);
-
-                            return true;
-                        }
-
-
-                        return false;
-                    }
-                });
-
-
-                //display the popup window
-                popupWindow.showAsDropDown(tvFilter, -650, -100);
-
-
-                //close the popup window on button click
-
-
-                tvFilterclose.setOnClickListener(new View.OnClickListener() {
+                popupWindow.setContentView(popupView);
+                TextView monthName= popupView.findViewById(R.id.time);
+                monthName.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                        tvFilter.setVisibility(View.VISIBLE);
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), "te", Toast.LENGTH_SHORT).show();
                     }
                 });
 
+                popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                int location[] = new int[2];
+                v.getLocationOnScreen(location);
+                popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0], location[1] + v.getHeight());
 
             }
 
@@ -273,9 +266,9 @@ public class ActivityFragment extends Fragment {
 
 
         ArrayList<CompletedActivitymodel> completedActivitymodels = new ArrayList<>();
-        CompletedActivitymodel rings1 = new CompletedActivitymodel("Kannada","Poem2","Today | 10:30 AM");
-        CompletedActivitymodel rings2 = new CompletedActivitymodel("Kannada","Poem","Today | 10:30 AM");
-        CompletedActivitymodel rings3 = new CompletedActivitymodel("Kannada","Poem","Today | 10:30 AM");
+        CompletedActivitymodel rings1 = new CompletedActivitymodel("Kannada", "Poem2", "Today | 10:30 AM");
+        CompletedActivitymodel rings2 = new CompletedActivitymodel("Kannada", "Poem", "Today | 10:30 AM");
+        CompletedActivitymodel rings3 = new CompletedActivitymodel("Kannada", "Poem", "Today | 10:30 AM");
 
         completedActivitymodels.add(rings1);
         completedActivitymodels.add(rings2);
@@ -285,4 +278,13 @@ public class ActivityFragment extends Fragment {
         binding.rvCompleted.setAdapter(completedActivityAdapter);
     }
 
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        Calendar mCalendar = Calendar.getInstance();
+        mCalendar.set(Calendar.YEAR, year);
+        mCalendar.set(Calendar.MONTH, month);
+        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+        datePicker.setText(selectedDate);
+    }
 }
