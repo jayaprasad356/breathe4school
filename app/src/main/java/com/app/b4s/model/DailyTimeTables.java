@@ -1,8 +1,41 @@
 package com.app.b4s.model;
 
 public class DailyTimeTables {
-    public String name;
+    public String name,id,day;
     Boolean joinNow,viewSummery,setReminder;
+    public String description;
+    public String  start_time;
+    public  String end_time;
+    public Object subject;
+    public String activity_id;
+    public String assessment_id;
+    public String bbb_lecture_id;
+    public String pre_read_id;
+    public Teacher teacher;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
 
     public Boolean getJoinNow() {
         return joinNow;
@@ -28,32 +61,12 @@ public class DailyTimeTables {
         this.setReminder = setReminder;
     }
 
-    public String getDay() {
-        return day;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
-
-    public String day;
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getStart_time() {
@@ -79,19 +92,6 @@ public class DailyTimeTables {
     public void setSubject(Object subject) {
         this.subject = subject;
     }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-
-    public String  start_time;
-    public  String end_time;
-    public Object subject;
-    public String activity_id;
 
     public String getActivity_id() {
         return activity_id;
@@ -125,8 +125,11 @@ public class DailyTimeTables {
         this.pre_read_id = pre_read_id;
     }
 
-    public String assessment_id;
-    public String bbb_lecture_id;
-    public String pre_read_id;
-    public Teacher teacher;
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 }

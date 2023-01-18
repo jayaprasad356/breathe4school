@@ -3,7 +3,9 @@ package com.app.b4s.view.Home.Fragment;
 import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.app.b4s.utilities.Constant.STATUS;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -24,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.app.b4s.R;
 import com.app.b4s.adapter.HomepageAdapter.DailyTimeTableAdapter;
 import com.app.b4s.adapter.HomepageAdapter.WeeklyTimeTableAdapter;
+import com.app.b4s.adapter.WeekDayAdapter;
 import com.app.b4s.commons.CommonMethods;
 import com.app.b4s.commons.OnSelectedListener;
 import com.app.b4s.commons.ResponseListener;
@@ -47,6 +51,7 @@ import com.app.b4s.controller.StudyPlanerController;
 import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.DayOfLine;
+import com.app.b4s.model.WeekDay;
 import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Friday;
 import com.app.b4s.model.days.Monday;
@@ -70,7 +75,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +98,13 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     OnSelectedListener onSelectedListener;
     FragmentManager fragmentManager;
     private LayoutInflater layoutInflater;
+    Activity activity;
+    int currentWeek;
+    WeekDayAdapter weekDayAdapter;
+    ArrayList<WeekDay> weekdays = new ArrayList<>();
+    String currentDateString;
+    private int mYear, mMonth, mDay, mHour, mMinute;
+
     public CalendarFragment() {
         // Required empty public constructor
     }
@@ -101,6 +117,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false);
         commonMethods = new CommonMethods();
         session = new Session(getActivity());
+        activity = getActivity();
         studyPlanerController = new StudyPlanerController(this);
         ICalendarController calendarController = new CalendarController(this);
         calendarController.loadTimeTable(getActivity());
@@ -111,6 +128,94 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         holidays=binding.tvListOfHoliday;
 
         layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        Calendar cal = Calendar.getInstance();
+        //int weekNumber = calendar.get(Calendar.WEEK_OF_MONTH);
+        currentWeek = cal.get(Calendar.WEEK_OF_YEAR);
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+
+        String monthName1 = months[month];
+        binding.tvMonthName.setText(monthName1 +" " +year);
+        binding.tvWeekname.setText("Week "+currentWeek);
+
+        binding.imgWeekNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weekdays.clear();
+                currentWeek++;
+                cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
+                binding.tvWeekname.setText("Week "+currentWeek);
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                String monthName1 = months[month];
+                binding.tvMonthName.setText(monthName1 +" " +year);
+                cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                for (int i = 0; i < 7; i++) {
+                    String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
+                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
+
+                    //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
+                    cal.add(Calendar.DATE, 1);
+                }
+                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+                binding.rvWeekDays.setAdapter(weekDayAdapter);
+
+
+            }
+        });
+        binding.imgWeekPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                weekdays.clear();
+                currentWeek--;
+                cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
+                binding.tvWeekname.setText("Week "+currentWeek);
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                String monthName1 = months[month];
+                binding.tvMonthName.setText(monthName1 +" " +year);
+                cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
+                cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+                for (int i = 0; i < 7; i++) {
+                    String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
+                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
+
+                    Log.d("WEEK_DAYS",cal.get(Calendar.DAY_OF_MONTH)+"");
+                    //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
+                    cal.add(Calendar.DATE, 1);
+                }
+                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+                binding.rvWeekDays.setAdapter(weekDayAdapter);
+
+
+            }
+        });
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        binding.rvWeekDays.setLayoutManager(linearLayoutManager);
+
+        cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
+        cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+
+        for (int i = 0; i < 7; i++) {
+            String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
+            weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
+            Log.d("WEEK_DAYS",cal.get(Calendar.DAY_OF_MONTH)+"");
+            //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
+            cal.add(Calendar.DATE, 1);
+        }
+        weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+        binding.rvWeekDays.setAdapter(weekDayAdapter);
+
+        Date currentDate = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        currentDateString = dateFormat.format(currentDate);
+        //Toast.makeText(activity, ""+dayOfWeek, Toast.LENGTH_SHORT).show();
 
         onSelectedListener = () -> {
             Intent intent = new Intent(getActivity(), ViewSummeryActivity.class);
@@ -127,24 +232,51 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                 popupWindow.setFocusable(true);
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setContentView(popupView);
-               TextView monthName= popupView.findViewById(R.id.tvMonthName);
-               monthName.setOnClickListener(new View.OnClickListener() {
-                   @Override
-                   public void onClick(View view) {
-                       Toast.makeText(getActivity(), "te", Toast.LENGTH_SHORT).show();
-                   }
-               });
-                ImageView leftArrow = popupView.findViewById(R.id.ivLeftArow);
-                leftArrow.setOnClickListener(new View.OnClickListener() {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                Calendar cal = Calendar.getInstance();
+                DateFormatSymbols dfs = new DateFormatSymbols();
+                String[] months = dfs.getMonths();
+
+// Get the current date from the DatePicker or CalendarView
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                String date = sdf.format(cal.getTime());
+                TextView monthName= popupView.findViewById(R.id.tvMonthName);
+                TextView tvHolidays = popupView.findViewById(R.id.tvHolidays);
+                ImageView imgNext = popupView.findViewById(R.id.imgNext);
+                ImageView imgPrevious = popupView.findViewById(R.id.imgPrevious);
+                String monthName1 = months[month];
+                monthName.setText(monthName1 +" " +year);
+                imgNext.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-                        // Move week backward
-                        Calendar calendar = Calendar.getInstance();
-                        calendar.add(Calendar.WEEK_OF_YEAR, -1);
-                        popupWindow.setContentView(leftArrow);
-                        // Update UI or data with new week
+                    public void onClick(View view) {
+                        cal.add(Calendar.MONTH, 1);
+                        int year = cal.get(Calendar.YEAR);
+                        int month = cal.get(Calendar.MONTH);
+                        int day = cal.get(Calendar.DAY_OF_MONTH);
+                        String date = sdf.format(cal.getTime());
+                        String monthName1 = months[month];
+                        monthName.setText(monthName1 +" " +year);
+                        callHistoryApi(date,tvHolidays);
                     }
                 });
+                imgPrevious.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        cal.add(Calendar.MONTH, -1);
+                        int year = cal.get(Calendar.YEAR);
+                        int month = cal.get(Calendar.MONTH);
+                        int day = cal.get(Calendar.DAY_OF_MONTH);
+                        String date = sdf.format(cal.getTime());
+                        String monthName1 = months[month];
+                        monthName.setText(monthName1 +" " +year);
+                        callHistoryApi(date,tvHolidays);
+                    }
+                });
+                callHistoryApi(date,tvHolidays);
+
 
 
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
@@ -159,7 +291,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item_position = String.valueOf(i);
                 int itemposition = Integer.parseInt(item_position);
-                loadDailyTimeTables(itemposition);
+                loadDailyTimeTables(itemposition,currentDateString);
                 System.out.println(itemposition);
             }
 
@@ -170,7 +302,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         });
         rcWeeklyTables.setLayoutManager(weeklyTimeTable);
         rcDailyTables.setLayoutManager(dailyTimeTable);
-        loadDailyTimeTables(1);
+        loadDailyTimeTables(1,currentDateString);
         binding.ivAddStudyPlaner.setOnClickListener(view -> showPopup());
         binding.tvWeekly.setOnClickListener(view -> {
             handleWeekly();
@@ -183,13 +315,49 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         return binding.getRoot();
     }
 
+    private void callHistoryApi(String date, TextView tvHolidays) {
+        Map<String, String> params = new HashMap<>();
+        ApiConfig.RequestToVolley((result, response) -> {
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(STATUS)) {
+                        JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                        ArrayList<String> holidays = new ArrayList<>();
+                        Gson g = new Gson();
+                        String holidaysstr = "";
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
+                            if (jsonObject1 != null) {
+                                holidaysstr = holidaysstr + jsonObject1.getString("total_days")+" "+jsonObject1.getString("name") + " \n";
+                            } else {
+                                break;
+                            }
+                        }
+                        tvHolidays.setText(holidaysstr);
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, Constant.GET_MONTHLY_HOLIDAY +date, params, true,0);
+
+    }
+
     private void showPopup() {
+
 
         List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
         List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
         Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.add_study_planer);
+        LinearLayout lystarttime = dialog.findViewById(R.id.lystarttime);
+        LinearLayout lyendtime = dialog.findViewById(R.id.lyendtime);
         Spinner spinner = dialog.findViewById(R.id.spinnerSubjects);
+        TextView spinnerST = dialog.findViewById(R.id.spinnerST);
+        TextView spinnerET = dialog.findViewById(R.id.spinnerET);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, subjects);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
@@ -206,39 +374,55 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        Spinner startTime = dialog.findViewById(R.id.spinnerST);
-        Spinner endTime = dialog.findViewById(R.id.spinnerET);
-        startTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        lystarttime.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 1) {
-                    String startDate = adapterView.getItemAtPosition(i).toString();
-                    session.setData(Constant.START_TIME, commonMethods.ordinaryToMilitaryTime(startDate));
-                    System.out.println(startDate);
+            public void onClick(View view) {
+                // Get Current Time
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
 
-                }
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(activity,
+                        new TimePickerDialog.OnTimeSetListener() {
 
-            }
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                String inputTime = hourOfDay + ":" + minute;
+                                String outputTime = inputTime.replace(":", "");
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                                spinnerST.setText(inputTime);
+                                session.setData(Constant.START_TIME, outputTime);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
 
             }
         });
-        endTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        lyendtime.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (i >= 1) {
-                    String endTime = adapterView.getItemAtPosition(i).toString();
-                    session.setData(Constant.END_TIME, commonMethods.ordinaryToMilitaryTime(endTime));
-                    System.out.println(endTime);
+            public void onClick(View view) {
+                // Get Current Time
+                final Calendar c = Calendar.getInstance();
+                mHour = c.get(Calendar.HOUR_OF_DAY);
+                mMinute = c.get(Calendar.MINUTE);
 
-                }
+                // Launch Time Picker Dialog
+                TimePickerDialog timePickerDialog = new TimePickerDialog(activity,
+                        new TimePickerDialog.OnTimeSetListener() {
 
-            }
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                String inputTime = hourOfDay + ":" + minute;
+                                String outputTime = inputTime.replace(":", "");
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+                                spinnerET.setText(inputTime);
+                                session.setData(Constant.END_TIME, outputTime);
+                            }
+                        }, mHour, mMinute, false);
+                timePickerDialog.show();
 
             }
         });
@@ -318,7 +502,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
 
     private void handleDaily() {
-        loadDailyTimeTables(1);
+        loadDailyTimeTables(1,currentDateString);
         binding.tvWeekly.setBackgroundResource(R.drawable.underline_drawable);
         binding.tvDaily.setBackgroundResource(0);
         binding.weeklyCard.setRadius(0);
@@ -377,7 +561,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
     }
 
-    private void loadDailyTimeTables(int itemposition) {
+    public void loadDailyTimeTables(int itemposition,String date) {
         String url, type;
         if (itemposition == 2) {
             type = Constant.STUDY_PLANER;
@@ -387,14 +571,17 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                     session.getData(Constant.SECTION_ID) + "/studentId/" + session.getData(Constant.STUDENT_ID);
         } else {
             type = Constant.LIVE_SESSION;
-            url = "http://143.244.132.170:3001/api/v1/timetable/getDailyTimetable/academicYearId/" +
+            url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
-                    session.getData(Constant.TIME_TABLE_SESSION_ID);
+                    session.getData(Constant.TIME_TABLE_SESSION_ID)+"/date/"+date;
+            //url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/638c7782068611a103ff3987/schoolId/638d745f9e7aa8249cdd42c3/standardId/63429dc80015eb1fd9c86f3c/sectionId/63429de00015eb1fd9c86f3d/timetableSessionId/638d74f59e7aa8249cdd42c7/date/2022-01-02";
+
         }
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
+            Log.d("CAL_RES",response);
 
             if (result) {
                 try {

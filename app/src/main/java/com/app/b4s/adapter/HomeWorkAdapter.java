@@ -3,6 +3,7 @@ package com.app.b4s.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,8 +85,11 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
                     session.getData(Constant.STUDENT_ID) + "/get";
         if (type.equals(Constant.PENDING))
             url = Constant.HomeWork_Url + "get" + "/" + homeWorkId;
+
+        Log.d("HOME_WORK_ADAP",url);
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
+
             if (result) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);

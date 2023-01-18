@@ -22,6 +22,8 @@ public class Constant {
     public static final String GET_ALL_TIME_TABLE = MainBaseUrl + "timetable/get";
     public static final String GET_THOUGHT_OF_THE_DAY = MainBaseUrl + MessageBoard + "getThoughtOfTheDay";
     public static final String GET_NOTICE_BY_STUDENT_ID = MainBaseUrl + NoticeBoard + "getByStudent";
+    public static final String GET_MONTHLY_HOLIDAY = MainBaseUrl +  "school/holiday/getMonthlyHoliday/date/";
+    public static final String DELETE_STUDY_PLANNER = MainBaseUrl +  "studyPlanner/delete/";
     public static final String UNIQUE_ID = "unique_id";
     public static final String IS_REGISTER = "isRegistered";
     public static final String IS_LOGEDIN = "is_logedin";

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,24 +23,33 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
 import com.app.b4s.R;
 import com.app.b4s.commons.CommonMethods;
 import com.app.b4s.commons.OnSelectedListener;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.preferences.Session;
+import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
 import com.app.b4s.view.DCM.Fragment.TodaySummeryDetailFragment;
+import com.app.b4s.view.HWM.Activity.QuestionsActivity;
 import com.google.gson.internal.LinkedTreeMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAdapter.ViewHolder> {
@@ -94,6 +106,11 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
 
+            holder.deleteImage.setOnClickListener(view -> {
+                deletePopup(dailyTimeTables.get(position).getId());
+
+            });
+
         } else if (type.equals(Constant.LIVE_SESSION)) {
             if (!(dailyTimeTables.get(position).getName().equals(activity.getString(R.string.lunch)))) {
                 holder.iconView.setVisibility(View.VISIBLE);
@@ -129,6 +146,69 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         iconVisibility(holder, position);
         statusVisibility(holder, position, startTime, endTime);
         holder.editPlan.setOnClickListener(view -> showPopup(position));
+
+    }
+
+    private void deletePopup(String id) {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.delete_study_planer_lyt);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        View view = dialog.findViewById(R.id.emptyView);
+        Button btnYes,btnNo;
+        btnYes = dialog.findViewById(R.id.btnYes);
+        btnNo = dialog.findViewById(R.id.btnNo);
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteStudyPlanner(id,dialog);
+
+            }
+        });
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+            }
+        });
+
+
+
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setBackgroundDrawable(activity.getDrawable(R.drawable.popup_background)); // Set the corner radius to 20dp
+        }
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(lp);
+        dialog.show();
+    }
+
+    private void deleteStudyPlanner(String id, Dialog dialog) {
+        Map<String, String> params = new HashMap<>();
+        ApiConfig.RequestToVolley((result, response) -> {
+            Log.d("DEL_STU",response + " "+id);
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (jsonObject.getBoolean(Constant.STATUS)) {
+                        dialog.dismiss();
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
+
+                    }else {
+                        Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, activity, Constant.DELETE_STUDY_PLANNER+id, params, true, Request.Method.DELETE);
 
     }
 
@@ -345,14 +425,6 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             endTime.setSelection(11);
 
 
-//        monday=dialog.findViewById(R.id.cbMonday).setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbMonday)));
-//        dialog.findViewById(R.id.cbTuesday)         .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbTuesday)));
-//        dialog.findViewById(R.id.cbWednes)      .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbWednes)));
-//        dialog.findViewById(R.id.cbThurs)           .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbThurs)));
-//        dialog.findViewById(R.id.cbFriday)          .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbFriday)));
-//        dialog.findViewById(R.id.cbSatur)           .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSatur)));
-//        dialog.findViewById(R.id.cbSun)                 .setOnClickListener(view -> checkStatus(view, dialog.findViewById(R.id.cbSun)));
-//        dialog.findViewById(R.id.btnCreateStudy)            .setOnClickListener(view -> apiCall(dialog));
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
