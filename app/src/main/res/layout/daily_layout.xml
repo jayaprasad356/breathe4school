@@ -2,11 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
-
-
 
         <RelativeLayout
             android:id="@+id/customHeightView"
@@ -24,7 +19,7 @@
                 android:text="3 PM"
                 android:textStyle="bold"
                 android:textColor="#99ADBB"
-                android:textSize="@dimen/_6sdp" />
+                android:textSize="@dimen/_4sdp" />
 
             <TextView
                 android:id="@+id/tvEndTime"
@@ -55,7 +50,6 @@
 
             <LinearLayout
                 android:id="@+id/timeTableLayout"
-                android:layout_marginTop="@dimen/_4sdp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@id/tvview7"
@@ -73,7 +67,7 @@
                     android:fontFamily="@font/open_sans_semibold"
                     android:text="Live Session"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp" />
+                    android:textSize="@dimen/_5sdp" />
 
                 <TextView
                     android:id="@+id/tvSubject"
@@ -85,7 +79,7 @@
                     android:fontFamily="@font/open_sans"
                     android:text="Maths"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp" />
+                    android:textSize="@dimen/_5sdp" />
 
                 <LinearLayout
                     android:id="@+id/iconView"
@@ -97,7 +91,7 @@
                     android:layout_weight="2"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:textSize="@dimen/_12sdp">
+                  >
 
                     <ImageView
                         android:id="@+id/ivAssessment"
@@ -157,15 +151,15 @@
                     android:fontFamily="@font/open_sans"
                     android:text="60 mins"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp" />
+                    android:textSize="@dimen/_5sdp" />
 
                 <ImageView
                     android:id="@+id/ivDeleteIcon"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_6sdp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="60dp"
-                    android:layout_weight=".75" />
+                    android:layout_weight="0.75" />
 
 
                 <TextView
@@ -179,7 +173,7 @@
                     android:fontFamily="@font/open_sans"
                     android:text="View summary"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:visibility="gone" />
 
                 <TextView
@@ -193,7 +187,7 @@
                     android:fontFamily="@font/open_sans"
                     android:text="@string/set_reminder"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:visibility="gone" />
 
                 <TextView
@@ -207,7 +201,7 @@
                     android:fontFamily="@font/open_sans"
                     android:text="@string/my_text"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:visibility="gone" />
 
                 <TextView
@@ -240,7 +234,7 @@
                     android:gravity="center"
                     android:text="@string/edit_plan"
                     android:textColor="@color/science_bg_col"
-                    android:textSize="@dimen/_6sdp"
+                    android:textSize="@dimen/_5sdp"
                     android:visibility="gone"
                     app:backgroundTint="@color/white" />
 

@@ -262,7 +262,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right">
 
-        <TextView
+        <Button
             android:id="@+id/btnCreateStudy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp" />
 
-        <TextView
+        <Button
             android:id="@+id/btnDescardChanges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -296,7 +296,7 @@
             android:textSize="@dimen/_12sdp"
             android:visibility="gone" />
 
-        <TextView
+        <Button
             android:id="@+id/btnSaveChanges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
