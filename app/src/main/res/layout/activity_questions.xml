@@ -251,189 +251,226 @@
 
                 </RelativeLayout>
 
-                <RelativeLayout
-                    android:id="@+id/rlPdfView"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp"
-                    android:paddingRight="@dimen/_30sdp">
+                    android:orientation="horizontal"
+                    android:weightSum="2">
 
+                    <RelativeLayout
+                        android:id="@+id/vidoLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_150sdp"
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
-                    <ImageView
-                        android:id="@+id/ivPdf"
-                        android:layout_width="@dimen/_30sdp"
+                        <VideoView
+                            android:id="@+id/video_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/imageLayout"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/_30sdp"
-                        android:background="@drawable/pdf_img" />
+                        android:layout_weight="1"
+                        android:visibility="gone">
 
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlPdfView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/_10sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_30sdp"
+                        android:visibility="gone">
+
+
+                        <ImageView
+                            android:id="@+id/ivPdf"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:background="@drawable/pdf_img" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivPdf"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/tvcontent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:text="PDF"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ll_uploadPdf"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="@dimen/_10sdp"
-                        android:layout_toRightOf="@+id/ivPdf"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:weightSum="2">
 
 
-                        <TextView
-                            android:id="@+id/tvcontent"
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_2sdp"
-                            android:text="PDF"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_10sdp"
-                            android:textStyle="bold" />
+                            android:layout_height="@dimen/_75sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                                <ImageView
+                                    android:id="@+id/ivOpenCamera"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/rectangle_bg" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+
+                                    android:layout_centerInParent="true"
+                                    android:orientation="vertical">
+
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/upload_cam" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/open_sans"
+                                        android:text="@string/upload_your_files_here"
+                                        android:textSize="@dimen/_8sdp"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/open_sans_bold"
+                                        android:text="@string/open_camera"
+                                        android:textColor="@color/primary"
+                                        android:textSize="@dimen/_8sdp"
+                                        android:textStyle="bold"
+
+                                        />
+
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_75sdp"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_weight="1">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/rectangle_bg" />
+
+                                <LinearLayout
+                                    android:id="@+id/ivOpenFiles"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:orientation="vertical">
+
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/upload_doc" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/open_sans"
+                                        android:gravity="center"
+                                        android:text="@string/upload_your_files_here"
+                                        android:textSize="@dimen/_8sdp"
+
+                                        />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/open_sans_bold"
+                                        android:text="@string/choose_file"
+                                        android:textColor="@color/primary"
+                                        android:textSize="@dimen/_8sdp"
+                                        android:textStyle="bold"
+
+                                        />
+
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:id="@+id/ivFileSuccess"
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/img_success_greentick"
+                                    android:visibility="gone" />
+
+
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
 
 
                     </LinearLayout>
-
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/ll_uploadPdf"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    android:weightSum="2">
-
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_75sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_weight="1">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-
-                            <ImageView
-                                android:id="@+id/ivOpenCamera"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_bg" />
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-
-                                android:layout_centerInParent="true"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/upload_cam" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/open_sans"
-                                    android:text="@string/upload_your_files_here"
-                                    android:textSize="@dimen/_8sdp"
-
-                                    />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="@string/open_camera"
-                                    android:textColor="@color/primary"
-                                    android:textSize="@dimen/_8sdp"
-                                    android:textStyle="bold"
-
-                                    />
-
-
-                            </LinearLayout>
-
-
-                        </RelativeLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_75sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_weight="1">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/rectangle_bg" />
-
-                            <LinearLayout
-                                android:id="@+id/ivOpenFiles"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:orientation="vertical">
-
-
-                                <ImageView
-                                    android:layout_width="@dimen/_20sdp"
-                                    android:layout_height="@dimen/_20sdp"
-                                    android:layout_gravity="center"
-                                    android:background="@drawable/upload_doc" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/open_sans"
-                                    android:text="@string/upload_your_files_here"
-                                    android:textSize="@dimen/_8sdp"
-
-                                    />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:fontFamily="@font/open_sans_bold"
-                                    android:text="@string/choose_file"
-                                    android:textColor="@color/primary"
-                                    android:textSize="@dimen/_8sdp"
-                                    android:textStyle="bold"
-
-                                    />
-
-
-                            </LinearLayout>
-
-                            <ImageView
-                                android:id="@+id/ivFileSuccess"
-                                android:layout_width="@dimen/_25sdp"
-                                android:layout_height="@dimen/_25sdp"
-                                android:layout_centerInParent="true"
-                                android:src="@drawable/img_success_greentick"
-                                android:visibility="gone" />
-
-
-                        </RelativeLayout>
-
-
-                    </androidx.cardview.widget.CardView>
-
 
                 </LinearLayout>
 

@@ -175,12 +175,7 @@ public class ActivityFragment extends Fragment implements DatePickerDialog.OnDat
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setContentView(popupView);
                 TextView monthName= popupView.findViewById(R.id.time);
-                monthName.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "te", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                monthName.setOnClickListener(view -> Toast.makeText(getActivity(), "te", Toast.LENGTH_SHORT).show());
 
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 int location[] = new int[2];

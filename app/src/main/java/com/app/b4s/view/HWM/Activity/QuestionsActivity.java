@@ -21,7 +21,9 @@ import android.provider.OpenableColumns;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -42,6 +44,7 @@ import com.app.b4s.databinding.ActivityQuestionsBinding;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,7 +86,7 @@ public class QuestionsActivity extends AppCompatActivity {
     ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
 
     JSONObject test;
-
+    MediaController mediaController;
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
@@ -523,6 +526,9 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     private void pendingFlow() {
+        binding.videoView.stopPlayback();
+        if (mediaController != null)
+            mediaController.hide();
         if (isAttached) {
             attach = new JSONArray();
             setBackground = setBackground + 1;
@@ -721,13 +727,46 @@ public class QuestionsActivity extends AppCompatActivity {
                 session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 title = jsonArray.getJSONObject(i).getString(Constant.title);
                 binding.tvQuestion.setText(title);
+                binding.imageLayout.setVisibility(View.GONE);
+                binding.vidoLayout.setVisibility(View.GONE);
                 attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                 if (attachment.length() >= 1) {
                     attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                     isAttached = true;
+                    if (true) {
+                        String picUrl = Constant.SERVER + attachment.get(0);
+                        String url = picUrl.replace("./", "/");
+                        if (url.contains(".png")) {
+                            binding.imageLayout.setVisibility(View.VISIBLE);
+                            Glide.with(this)
+                                    .load(url) // image url
+                                    .into(binding.imageView);
+                        } else {
+                            binding.vidoLayout.setVisibility(View.VISIBLE);
+                            VideoView videoView = binding.videoView;
+                            String videoUrl = url;
+                            Uri uri = Uri.parse(videoUrl);
+                            videoView.setVideoURI(uri);
+                            mediaController = new MediaController(this);
+
+                            // sets the anchor view
+                            // anchor view for the videoView
+                            mediaController.setAnchorView(videoView);
+
+                            // sets the media player to the videoView
+                            mediaController.setMediaPlayer(videoView);
+
+                            // sets the media controller to the videoView
+                            videoView.setMediaController(mediaController);
+
+                            // starts the video
+                            videoView.start();
+                        }
+
+                    }
                 } else {
                     options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
-                    isAttached=false;
+                    isAttached = false;
                 }
                 System.out.println(options);
                 setOptionsForPending();
