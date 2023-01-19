@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
@@ -57,13 +58,29 @@ public class WeekDayAdapter extends RecyclerView.Adapter<WeekDayAdapter.ViewHold
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tvWeekDAY.setText(onHomeWordData.get(position).getDay());
-        if(selectedPosition==position)
-            holder.imgText.setImageResource(R.drawable.bg_circle_week);
-        else
-            holder.imgText.setImageResource(0);
+        if(selectedPosition==position){
+
+
+
+           // holder.tvWeekDAY.setBackgroundDrawable(R.drawable.bg_circle_week);
+            holder.tvWeekDAY.setBackground(ContextCompat.getDrawable(activity, R.drawable.bg_circle_week));
+            holder.tvWeekDAY.setTextColor(ContextCompat.getColor(activity, R.color.white));
+
+        }
+
+        else{
+
+            holder.tvWeekDAY.setBackground(ContextCompat.getDrawable(activity, R.color.white));
+            holder.tvWeekDAY.setTextColor(ContextCompat.getColor(activity, R.color.text_gray));
+
+        }
+
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,12 +100,12 @@ public class WeekDayAdapter extends RecyclerView.Adapter<WeekDayAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView tvWeekDAY;
-        public ImageView imgText;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.tvWeekDAY = itemView.findViewById(R.id.tvWeekDAY);
-            this.imgText = itemView.findViewById(R.id.imgText);
+
 
         }
     }

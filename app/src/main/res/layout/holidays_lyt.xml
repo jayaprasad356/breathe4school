@@ -9,11 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/_5sdp"
         android:fontFamily="@font/open_sans_bold"
         android:text="@string/list_of_holidays"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:textColor="#335C76"
-        android:textSize="@dimen/_8sdp" />
+        android:textSize="@dimen/_6sdp" />
 
     <RelativeLayout
         android:layout_width="@dimen/_80sdp"
@@ -23,8 +23,8 @@
 
         <ImageView
             android:id="@+id/imgPrevious"
-            android:layout_width="13dp"
-            android:layout_height="13dp"
+            android:layout_width="@dimen/_8sdp"
+            android:layout_height="@dimen/_8sdp"
             android:layout_centerVertical="true"
             android:src="@drawable/left_arrow" />
 
@@ -38,15 +38,16 @@
             android:gravity="center"
             android:textColor="#4C4C4C"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/_8sdp" />
+            android:textSize="@dimen/_6sdp" />
 
 
         <ImageView
             android:id="@+id/imgNext"
-            android:layout_width="13dp"
-            android:layout_height="13dp"
+            android:layout_width="@dimen/_8sdp"
+            android:layout_height="@dimen/_8sdp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/_2sdp"
             android:src="@drawable/arrow_right" />
     </RelativeLayout>
 
@@ -54,8 +55,9 @@
         android:id="@+id/tvHolidays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:textSize="@dimen/_8sdp"
-        android:fontFamily="@font/open_sans_bold"
+        android:textSize="@dimen/_6sdp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/open_sans"
+        android:layout_gravity="center"
         android:text="Republic Day \nIndependence\nKumbakonam "/>
 </LinearLayout>
