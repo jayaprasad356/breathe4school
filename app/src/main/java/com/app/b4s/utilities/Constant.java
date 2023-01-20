@@ -94,6 +94,7 @@ public class Constant {
     public static final String LIVE_SESSION = "live_session";
     public static final String SUBJECT = "subject";
     public static final String LINK = "link";
+    public static final String ANSWER_PDF_LINK = "answer_pdf_link";
     public static final String PDF_UPLOAD_LINK = "pdf_upload_link";
 
     public static final String PLANER_NAME = "name";

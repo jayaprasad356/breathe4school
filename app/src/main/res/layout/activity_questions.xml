@@ -260,7 +260,7 @@
                     <RelativeLayout
                         android:id="@+id/vidoLayout"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/_150sdp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:visibility="gone">
 
@@ -271,24 +271,11 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/imageLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_weight="1"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/imageView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
                         android:id="@+id/rlPdfView"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:paddingVertical="@dimen/_10sdp"
+                        android:paddingVertical="@dimen/_40sdp"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingRight="@dimen/_30sdp"
                         android:visibility="gone">
@@ -297,7 +284,7 @@
                         <ImageView
                             android:id="@+id/ivPdf"
                             android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
+                            android:layout_height="match_parent"
                             android:background="@drawable/pdf_img" />
 
 
@@ -315,7 +302,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_2sdp"
-                                android:text="PDF"
+                                android:text="PDF Question"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
@@ -326,11 +313,81 @@
 
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:id="@+id/rlAnsPdfView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/_40sdp"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:paddingRight="@dimen/_30sdp"
+                        android:visibility="gone">
+
+
+                        <ImageView
+                            android:id="@+id/ivAnsPdf"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/pdf_img" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivAnsPdf"
+                            android:orientation="vertical">
+
+
+                            <TextView
+                                android:id="@+id/tvAnscontent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_2sdp"
+                                android:text="PDF Answer"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/imageLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/answerImageLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:id="@+id/answerImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </RelativeLayout>
+
                     <LinearLayout
                         android:id="@+id/ll_uploadPdf"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:visibility="gone"
                         android:weightSum="2">
@@ -402,6 +459,8 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_75sdp"
+
+                            android:layout_gravity="center"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:layout_weight="1">
 

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,6 +22,7 @@ import android.provider.OpenableColumns;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -33,29 +35,40 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.app.b4s.R;
+import com.app.b4s.VolleyMultipartRequest;
+import com.app.b4s.VolleySingleton;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.utilities.ProgressDisplay;
 import com.bumptech.glide.Glide;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuestionsActivity extends AppCompatActivity {
     private ActivityQuestionsBinding binding;
@@ -67,11 +80,13 @@ public class QuestionsActivity extends AppCompatActivity {
     private JSONObject request;
     private RequestQueue requestQueue;
     PositionPicker positionPicker;
+    byte[] fileBytes = null;
 
     private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
     private JSONArray options = null;
     private JSONArray attachment = null;
+    private JSONArray ansAttachment = null;
     private JSONArray attach = null;
     private boolean isAttached = false;
     private JSONArray correctAnswers = null;
@@ -90,6 +105,8 @@ public class QuestionsActivity extends AppCompatActivity {
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
+    ProgressDisplay progressDisplay;
+
 
     private ActivityResultLauncher<Intent> resultLauncher;
 
@@ -101,6 +118,8 @@ public class QuestionsActivity extends AppCompatActivity {
         rvQuestions = binding.rvQuestion;
         calendar = Calendar.getInstance();
         activity = this;
+        progressDisplay = new ProgressDisplay(activity);
+
         session = new Session(activity);
         positionPicker = position -> {
             setQuestions(position);
@@ -123,16 +142,13 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.tvSubject.setText(titleSubject + " | ");
         setQuestions(0);
         binding.ivOpenFiles.setOnClickListener(view -> doSelectionProcess());
-        binding.ivPdf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String string = Constant.LINK;
-                String link = string.substring(1);
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-                browserIntent.setData(Uri.parse("http://143.244.132.170:3001" + link));
-                startActivity(browserIntent);
-            }
+        binding.ivPdf.setOnClickListener(view -> {
+            String string = session.getData(Constant.LINK);
+            showPdf(string);
+        });
+        binding.ivAnsPdf.setOnClickListener(view -> {
+            String string = session.getData(Constant.ANSWER_PDF_LINK);
+            showPdf(string);
         });
 
         binding.cbFirstOpt.setOnClickListener(view -> {
@@ -204,6 +220,9 @@ public class QuestionsActivity extends AppCompatActivity {
         questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, this, positionPicker);
         rvQuestions.setAdapter(questionsCountAdapter);
         binding.btnNext.setOnClickListener(view -> {
+            binding.videoView.stopPlayback();
+            if (mediaController != null)
+                mediaController.hide();
             if (type.equals(Constant.PENDING)) {
                 pendingFlow();
             } else if (type.equals(Constant.REVIEW)) {
@@ -231,6 +250,13 @@ public class QuestionsActivity extends AppCompatActivity {
 
     }
 
+    private void showPdf(String string) {
+        String link = string.substring(1);
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+        browserIntent.setData(Uri.parse("http://143.244.132.170:3001" + link));
+        startActivity(browserIntent);
+    }
+
     private void doSelectionProcess() {
         if (ActivityCompat.checkSelfPermission(
                 QuestionsActivity.this,
@@ -249,16 +275,16 @@ public class QuestionsActivity extends AppCompatActivity {
         } else {
             // When permission is granted
             // Create method
-            selectPDF();
+            selectFile();
         }
     }
 
-    private void selectPDF() {
+    private void selectFile() {
         // Initialize intent
         Intent intent
                 = new Intent(Intent.ACTION_GET_CONTENT);
         // set type
-        intent.setType("application/pdf");
+        intent.setType("*/*");
         // Launch intent
         resultLauncher.launch(intent);
     }
@@ -278,9 +304,17 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
                         String filePath = getFilePath(sUri);
+
                         //String pdf=getPDFPath(sUri);
                         String test = getPath(sUri);
+                        progressDisplay.showProgress();
+                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        saveProfileAccount(sUri);
                         System.out.println(test);
+                        // getAttachResponse(test);
+
+
                         // System.out.println(pdf);
                         System.out.println(filePath);
 
@@ -316,7 +350,6 @@ public class QuestionsActivity extends AppCompatActivity {
                                 "<big><b>PDF Path</b></big><br>"
                                         + sPath).toString();
                         System.out.println(tvPath);
-                        session.setData(Constant.PDF_UPLOAD_LINK, sPath);
                         System.out.println(tvUri);
                     }
                 });
@@ -526,9 +559,6 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     private void pendingFlow() {
-        binding.videoView.stopPlayback();
-        if (mediaController != null)
-            mediaController.hide();
         if (isAttached) {
             attach = new JSONArray();
             setBackground = setBackground + 1;
@@ -621,7 +651,7 @@ public class QuestionsActivity extends AppCompatActivity {
         JSONObject requestBody = new JSONObject();
 
 
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dat = dateFormat.format(calendar.getTime());
 
         try {
@@ -729,14 +759,18 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.tvQuestion.setText(title);
                 binding.imageLayout.setVisibility(View.GONE);
                 binding.vidoLayout.setVisibility(View.GONE);
+                binding.rlPdfView.setVisibility(View.GONE);
                 attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                 if (attachment.length() >= 1) {
+                    binding.ivOpenFiles.setVisibility(View.VISIBLE);
+                    binding.ivFileSuccess.setVisibility(View.GONE);
                     attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                     isAttached = true;
-                    if (true) {
-                        String picUrl = Constant.SERVER + attachment.get(0);
-                        String url = picUrl.replace("./", "/");
-                        if (url.contains(".png")) {
+                    String picUrl = Constant.SERVER + attachment.get(0);
+                    String url = picUrl.replace("./", "/");
+                    if (!(url.contains(".pdf"))) {
+
+                        if (url.contains(".png") || url.contains(".jpeg")) {
                             binding.imageLayout.setVisibility(View.VISIBLE);
                             Glide.with(this)
                                     .load(url) // image url
@@ -762,6 +796,10 @@ public class QuestionsActivity extends AppCompatActivity {
                             // starts the video
                             videoView.start();
                         }
+                    } else if (url.contains(".pdf")) {
+                        binding.rlPdfView.setVisibility(View.VISIBLE);
+                        session.setData(Constant.LINK, attachment.getString(0));
+
 
                     }
                 } else {
@@ -779,10 +817,16 @@ public class QuestionsActivity extends AppCompatActivity {
         if (type.equals(Constant.REVIEW)) {
             try {
                 attachment = new JSONArray();
+                ansAttachment = new JSONArray();
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.ANSWERS);
                 questions = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION);
                 title = questions.getString(Constant.title);
+                binding.imageLayout.setVisibility(View.GONE);
+                binding.answerImageLayout.setVisibility(View.GONE);
+                binding.vidoLayout.setVisibility(View.GONE);
+                binding.rlPdfView.setVisibility(View.GONE);
+                binding.rlAnsPdfView.setVisibility(View.GONE);
                 if (questions.has(Constant.OPTIONS)) {
                     binding.rlPdfView.setVisibility(View.GONE);
                     binding.llCheckBoxes.setVisibility(View.VISIBLE);
@@ -790,16 +834,90 @@ public class QuestionsActivity extends AppCompatActivity {
                 }
                 if (jsonArray.getJSONObject(i).has(Constant.ANSWER))
                     answer = jsonArray.getJSONObject(i).getJSONObject(Constant.ANSWER);
+                //Answer Attachment
                 if (jsonArray.getJSONObject(i).has("attachments")) {
-                    binding.rlPdfView.setVisibility(View.VISIBLE);
                     binding.llCheckBoxes.setVisibility(View.GONE);
-                    attachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
-                    session.setData(Constant.LINK, attachment.getString(0));
+                    ansAttachment = jsonArray.getJSONObject(i).getJSONArray("attachments");
+                    if (ansAttachment.length() != 0) {
+                        String responseUrl = Constant.SERVER + ansAttachment.get(0);
+                        String url = responseUrl.replace("./", "/");
+                        if (!(url.contains(".pdf"))) {
+                            if (url.contains(".png") || url.contains(".jpeg") || url.contains("image")) {
+                                binding.answerImageLayout.setVisibility(View.VISIBLE);
+                                Glide.with(this)
+                                        .load(url) // image url
+                                        .into(binding.answerImageView);
+                            } else {
+                                binding.vidoLayout.setVisibility(View.VISIBLE);
+                                VideoView videoView = binding.videoView;
+                                String videoUrl = url;
+                                Uri uri = Uri.parse(videoUrl);
+                                videoView.setVideoURI(uri);
+                                mediaController = new MediaController(this);
 
-                    Toast.makeText(this, "found", Toast.LENGTH_SHORT).show();
+                                // sets the anchor view
+                                // anchor view for the videoView
+                                mediaController.setAnchorView(videoView);
+
+                                // sets the media player to the videoView
+                                mediaController.setMediaPlayer(videoView);
+
+                                // sets the media controller to the videoView
+                                videoView.setMediaController(mediaController);
+
+                                // starts the video
+                                videoView.start();
+                            }
+                        } else {
+                            binding.rlAnsPdfView.setVisibility(View.VISIBLE);
+                            session.setData(Constant.ANSWER_PDF_LINK, ansAttachment.getString(0));
+                        }
+                    }
+                }
+                //Questions Attachment
+                if (questions.has(Constant.ATTACHMENTS)) {
+                    attachment = (JSONArray) questions.get(Constant.ATTACHMENTS);
+                    if (attachment.length() != 0) {
+                        Toast.makeText(this, "found", Toast.LENGTH_SHORT).show();
+                        String responseUrl = Constant.SERVER + attachment.get(0);
+                        String url = responseUrl.replace("./", "/");
+                        if (!(url.contains(".pdf"))) {
+
+                            if (url.contains(".png") || url.contains(".jpeg")) {
+                                binding.imageLayout.setVisibility(View.VISIBLE);
+                                Glide.with(this)
+                                        .load(url) // image url
+                                        .into(binding.imageView);
+                            } else {
+                                binding.vidoLayout.setVisibility(View.VISIBLE);
+                                VideoView videoView = binding.videoView;
+                                String videoUrl = url;
+                                Uri uri = Uri.parse(videoUrl);
+                                videoView.setVideoURI(uri);
+                                mediaController = new MediaController(this);
+
+                                // sets the anchor view
+                                // anchor view for the videoView
+                                mediaController.setAnchorView(videoView);
+
+                                // sets the media player to the videoView
+                                mediaController.setMediaPlayer(videoView);
+
+                                // sets the media controller to the videoView
+                                videoView.setMediaController(mediaController);
+
+                                // starts the video
+                                videoView.start();
+                            }
+                        } else if (url.contains(".pdf")) {
+                            binding.rlPdfView.setVisibility(View.VISIBLE);
+                            session.setData(Constant.LINK, attachment.getString(0));
+                        }
+                    }
                 }
                 binding.tvOnReview.setVisibility(View.VISIBLE);
-                setOptionsForReview(answer);
+                if (answer != null)
+                    setOptionsForReview(answer);
                 this.i = jsonArray.length();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1061,6 +1179,101 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.cbSecondOpt.setEnabled(false);
         binding.cbThirdOpt.setEnabled(false);
         binding.cbFourthOpt.setEnabled(false);
+    }
+
+    private void saveProfileAccount(Uri fileUri) {
+
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(fileUri);
+            fileBytes = IOUtils.toByteArray(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ContentResolver cR = getContentResolver();
+        String mimeType = cR.getType(fileUri);
+        File file = new File(fileUri.getPath());
+        String fileName = file.getName();
+        //String url = "http://www.angga-ari.com/api/something/awesome";
+        String url = Constant.UPLOADATTACHMENT + session.getData(Constant.STUDENT_ID);
+
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST, url, new Response.Listener<NetworkResponse>() {
+            @Override
+            public void onResponse(NetworkResponse response) {
+                String resultResponse = new String(response.data);
+                Log.d("RESPONSE", resultResponse);
+
+                try {
+                    JSONObject result = new JSONObject(resultResponse);
+                    String status = result.getString("status");
+                    String message = result.getString("message");
+
+                    session.setData(Constant.PDF_UPLOAD_LINK, String.valueOf(result.get("data")));
+                    progressDisplay.hideProgress();
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+//                    if (status.equals(Constant.REQUEST_SUCCESS)) {
+//                        // tell everybody you have succed upload image and post strings
+//                        Log.i("Messsage", message);
+//                    } else {
+//                        Log.i("Unexpected", message);
+//                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                NetworkResponse networkResponse = error.networkResponse;
+                String errorMessage = "Unknown error";
+                if (networkResponse == null) {
+                    if (error.getClass().equals(TimeoutError.class)) {
+                        errorMessage = "Request timeout";
+                    } else if (error.getClass().equals(NoConnectionError.class)) {
+                        errorMessage = "Failed to connect server";
+                    }
+                } else {
+                    String result = new String(networkResponse.data);
+                    try {
+                        JSONObject response = new JSONObject(result);
+                        String status = response.getString("status");
+                        String message = response.getString("message");
+
+                        Log.e("Error Status", status);
+                        Log.e("Error Message", message);
+
+                        if (networkResponse.statusCode == 404) {
+                            errorMessage = "Resource not found";
+                        } else if (networkResponse.statusCode == 401) {
+                            errorMessage = message + " Please login again";
+                        } else if (networkResponse.statusCode == 400) {
+                            errorMessage = message + " Check your inputs";
+                        } else if (networkResponse.statusCode == 500) {
+                            errorMessage = message + " Something is getting wrong";
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                Log.i("Error", errorMessage);
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("api_token", "gh659gjhvdyudo973823tt9gvjf7i6ric75r76");
+                return params;
+            }
+
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                params.put(Constant.UploadresponseAttachemnt, new DataPart(fileName, fileBytes, mimeType));
+                return params;
+            }
+        };
+
+        VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
     }
 
 }
