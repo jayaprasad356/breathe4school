@@ -24,6 +24,7 @@ public class Constant {
     public static final String GET_NOTICE_BY_STUDENT_ID = MainBaseUrl + NoticeBoard + "getByStudent";
     public static final String GET_MONTHLY_HOLIDAY = MainBaseUrl +  "school/holiday/getMonthlyHoliday/date/";
     public static final String DELETE_STUDY_PLANNER = MainBaseUrl +  "studyPlanner/delete/";
+    public static final String UPLOADATTACHMENT = HomeWork_Url +  "studentResponse/uploadAttachment/studentId/";
     public static final String UNIQUE_ID = "unique_id";
     public static final String IS_REGISTER = "isRegistered";
     public static final String IS_LOGEDIN = "is_logedin";
@@ -35,6 +36,7 @@ public class Constant {
     public static final String EMAIL_OTP_VERIFY = "mail_otp_verify";
     public static final String MOBILE_OTP = "mobile_otp";
     public static final String TYPE = "type";
+    public static final String UploadresponseAttachemnt = "uploadResponseAttachment";
     public static final String DATE = "date";
     public static final String MOBILE = "mobile";
     public static final String MOBILE_NUMBER = "mobileNumber";

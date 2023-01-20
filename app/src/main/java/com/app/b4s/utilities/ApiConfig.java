@@ -131,6 +131,36 @@ public class ApiConfig extends Application {
         return mInstance;
     }
 
+    public static void RequestToVolley(final VolleyCallback callback, final Activity activity, final String url, final Map<String, String> params, final Map<String, String> fileParams) {
+        if (isConnected(activity)) {
+            VolleyMultiPartRequest multipartRequest = new VolleyMultiPartRequest(url,
+                    response -> callback.onSuccess(true, response),
+                    error -> callback.onSuccess(false, "")) {
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> params1 = new HashMap<>();
+                    //params1.put(Constant.AUTHORIZATION, "Bearer " + createJWT("eKart", "eKart Authentication"));
+                    return params1;
+                }
+
+                @Override
+                public Map<String, String> getDefaultParams() {
+                    //params.put(Constant.AccessKey, Constant.AccessKeyVal);
+                    return params;
+                }
+
+                @Override
+                public Map<String, String> getFileParams() {
+                    return fileParams;
+                }
+            };
+
+            multipartRequest.setRetryPolicy(new DefaultRetryPolicy(0, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            getInstance().getRequestQueue().getCache().clear();
+            getInstance().addToRequestQueue(multipartRequest);
+        }
+    }
+
 
     public static Boolean isConnected(final Activity activity) {
         boolean check = false;
