@@ -51,6 +51,7 @@ import com.app.b4s.controller.StudyPlanerController;
 import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.DayOfLine;
+import com.app.b4s.model.Dcm.AllData;
 import com.app.b4s.model.WeekDay;
 import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Friday;
@@ -571,129 +572,244 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     }
 
     public void loadDailyTimeTables(int itemposition,String date) {
-        String url, type;
+        String url="", type="";
+        Map<String, String> params = new HashMap<>();
         if (itemposition == 2) {
             type = Constant.STUDY_PLANER;
             url = "http://143.244.132.170:3001/api/v1/studyPlanner/getDailyStudyPlanner/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/studentId/" + session.getData(Constant.STUDENT_ID);
-        } else {
+        } else if (itemposition==1){
             type = Constant.LIVE_SESSION;
             url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
                     session.getData(Constant.TIME_TABLE_SESSION_ID)+"/date/"+date;
-            //url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/638c7782068611a103ff3987/schoolId/638d745f9e7aa8249cdd42c3/standardId/63429dc80015eb1fd9c86f3c/sectionId/63429de00015eb1fd9c86f3d/timetableSessionId/638d74f59e7aa8249cdd42c7/date/2022-01-02";
+        }else if (itemposition==0){
+            type = Constant.ALL;
+            url = "http://143.244.132.170:3001/api/v1/timetable/getDailyTimetableAndStudyPlanner/academicYearId/" +
+                    session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
+                    "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
+                    session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
+                    session.getData(Constant.TIME_TABLE_SESSION_ID)+"/studentId/"+session.getData(Constant.STUDENT_ID)+"/date/"+date;
 
-        }
-        Map<String, String> params = new HashMap<>();
-        ApiConfig.RequestToVolley((result, response) -> {
-            Log.d("CAL_RES",response);
+            ApiConfig.RequestToVolley((result, response) -> {
+                Log.d("CAL_RES",response);
 
-            if (result) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    if (jsonObject.getBoolean(STATUS)) {
-                        JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
-                        ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
-                        if (!(jsonArray.length() == 0)) {
-                            JSONObject jsonObject2 = jsonArray.getJSONObject(0);
-                            JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
-                            JSONObject jsonObject3 = schedules.getJSONObject(0);
-                            JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
-                            JSONArray general_categories = null;
-                            if (jsonObject3.has("general_categories"))
-                                general_categories = jsonObject3.getJSONArray("general_categories");
+                if (result) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (jsonObject.getBoolean(STATUS)) {
+                            JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                            ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
+                            if (!(jsonArray.length() == 0)) {
+                                JSONObject jsonObject2 = jsonArray.getJSONObject(0);
+                                JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
+                                JSONObject jsonObject3 = schedules.getJSONObject(0);
+                                JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
+                                JSONArray general_categories = null;
+                                if (jsonObject3.has("general_categories"))
+                                    general_categories = jsonObject3.getJSONArray("general_categories");
 
 
-                            Log.d("DAILY TIME TABLES", schedules.toString());
-                            Gson g = new Gson();
+                                Log.d("DAILY TIME TABLES", schedules.toString());
+                                Gson g = new Gson();
 
-                            JSONObject jsonObject1 = null;
-                            JSONObject proxyObject = null;
-                            Boolean lunch = true;
-                            JSONArray proxyLectures = null;
-                            JSONObject lunchObject = null;
+                                JSONObject jsonObject1 = null;
+                                JSONObject proxyObject = null;
+                                Boolean lunch = true;
+                                JSONArray proxyLectures = null;
+                                JSONObject lunchObject = null;
 
-                            if (type.equals(Constant.LIVE_SESSION)) {
-                                JSONArray splLectures = jsonObject3.getJSONArray(Constant.SPECIAL_LECTURES);
-                                proxyLectures = jsonObject3.getJSONArray(Constant.PROXY_LECTURES);
-                                for (int j = 0; j < splLectures.length(); j++) {
-                                    JSONObject splLectureObject = splLectures.getJSONObject(j);
-                                    if (splLectureObject != null) {
-                                        DailyTimeTables group = g.fromJson(splLectureObject.toString(), DailyTimeTables.class);
+                                if (true) {
+                                    JSONArray splLectures = jsonObject3.getJSONArray(Constant.SPECIAL_LECTURES);
+                                    proxyLectures = jsonObject3.getJSONArray(Constant.PROXY_LECTURES);
+                                    for (int j = 0; j < splLectures.length(); j++) {
+                                        JSONObject splLectureObject = splLectures.getJSONObject(j);
+                                        if (splLectureObject != null) {
+                                            DailyTimeTables group = g.fromJson(splLectureObject.toString(), DailyTimeTables.class);
+                                            dailyTimeTables.add(group);
+                                        }
+                                    }
+                                }
+
+                                for (int i = 0; i < lectures.length(); i++) {
+                                    jsonObject1 = lectures.getJSONObject(i);
+                                    if (jsonObject1 != null) {
+                                        if (true) {
+                                            if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
+                                                lunch = false;
+                                                lunchObject = general_categories.getJSONObject(0);
+                                                if (lunchObject != null) {
+                                                    DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
+                                                    dailyTimeTables.add(groups);
+                                                }
+                                            }
+                                        }
+                                        DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
                                         dailyTimeTables.add(group);
-                                    }
-                                }
-                            }
-
-                            for (int i = 0; i < lectures.length(); i++) {
-                                jsonObject1 = lectures.getJSONObject(i);
-                                if (jsonObject1 != null) {
-                                    if (type.equals(Constant.LIVE_SESSION)) {
-                                        if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
-                                            lunch = false;
-                                            lunchObject = general_categories.getJSONObject(0);
-                                            if (lunchObject != null) {
-                                                DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
-                                                dailyTimeTables.add(groups);
-                                            }
-                                        }
-                                    }
-                                    DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
-                                    dailyTimeTables.add(group);
-                                } else {
-                                    break;
-                                }
-                            }
-                            if (type.equals(Constant.LIVE_SESSION) && lunch) {
-                                lunchObject = general_categories.getJSONObject(0);
-                                if (lunchObject != null) {
-                                    DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
-                                    dailyTimeTables.add(groups);
-                                }
-                            }
-                            if (type.equals(Constant.LIVE_SESSION)) {
-                                for (int i = 0; i < proxyLectures.length(); i++) {
-                                    proxyObject = proxyLectures.getJSONObject(i);
-                                    if (proxyObject != null) {
-                                        for (int k = 0; k < dailyTimeTables.size(); k++) {
-                                            if (dailyTimeTables.get(k).getStart_time().equals(proxyObject.getString(Constant.START_TIME))) {
-                                                dailyTimeTables.get(k).setStart_time(proxyObject.getString(Constant.START_TIME));
-                                                dailyTimeTables.get(k).setEnd_time(proxyObject.getString(Constant.END_TIME));
-                                                dailyTimeTables.get(k).setActivity_id(proxyObject.getString(Constant.ACTIVITY_ID));
-                                                dailyTimeTables.get(k).setAssessment_id(proxyObject.getString(Constant.ASSESSMENT_ID));
-                                                dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
-                                                dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
-                                                dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
-                                                dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
-                                            }
-                                        }
-
                                     } else {
                                         break;
                                     }
                                 }
-                            }
-                            rcDailyTables.setVisibility(View.VISIBLE);
-                            binding.titleLayout.setVisibility(View.VISIBLE);
-                            DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), type, onSelectedListener);
-                            rcDailyTables.setAdapter(adapter);
-                        } else {
-                            rcDailyTables.setVisibility(View.GONE);
-                            binding.titleLayout.setVisibility(View.GONE);
-                        }
+                                if (true) {
+                                    lunchObject = general_categories.getJSONObject(0);
+                                    if (lunchObject != null) {
+                                        DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
+                                        dailyTimeTables.add(groups);
+                                    }
+                                }
+                                if (true) {
+                                    for (int i = 0; i < proxyLectures.length(); i++) {
+                                        proxyObject = proxyLectures.getJSONObject(i);
+                                        if (proxyObject != null) {
+                                            for (int k = 0; k < dailyTimeTables.size(); k++) {
+                                                if (dailyTimeTables.get(k).getStart_time().equals(proxyObject.getString(Constant.START_TIME))) {
+                                                    dailyTimeTables.get(k).setStart_time(proxyObject.getString(Constant.START_TIME));
+                                                    dailyTimeTables.get(k).setEnd_time(proxyObject.getString(Constant.END_TIME));
+                                                    dailyTimeTables.get(k).setActivity_id(proxyObject.getString(Constant.ACTIVITY_ID));
+                                                    dailyTimeTables.get(k).setAssessment_id(proxyObject.getString(Constant.ASSESSMENT_ID));
+                                                    dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
+                                                    dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
+                                                    dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
+                                                    dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
+                                                }
+                                            }
 
-                    } else {
-                        Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            break;
+                                        }
+                                    }
+                                }
+                                rcDailyTables.setVisibility(View.VISIBLE);
+                                binding.titleLayout.setVisibility(View.VISIBLE);
+                                DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), Constant.LIVE_SESSION, onSelectedListener);
+                                rcDailyTables.setAdapter(adapter);
+                            } else {
+                                rcDailyTables.setVisibility(View.GONE);
+                                binding.titleLayout.setVisibility(View.GONE);
+                            }
+
+                        }else {
+                            Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            }
-        }, getActivity(), url, params, true, 0);
+            }, getActivity(), url, params, true, 0);
+
+        }
+        if (type.equals(Constant.LIVE_SESSION) || type.equals(Constant.STUDY_PLANER)) {
+            String finalType = type;
+            ApiConfig.RequestToVolley((result, response) -> {
+                Log.d("CAL_RES",response);
+
+                if (result) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (jsonObject.getBoolean(STATUS)) {
+                            JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
+                            ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
+                            if (!(jsonArray.length() == 0)) {
+                                JSONObject jsonObject2 = jsonArray.getJSONObject(0);
+                                JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
+                                JSONObject jsonObject3 = schedules.getJSONObject(0);
+                                JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
+                                JSONArray general_categories = null;
+                                if (jsonObject3.has("general_categories"))
+                                    general_categories = jsonObject3.getJSONArray("general_categories");
+
+
+                                Log.d("DAILY TIME TABLES", schedules.toString());
+                                Gson g = new Gson();
+
+                                JSONObject jsonObject1 = null;
+                                JSONObject proxyObject = null;
+                                Boolean lunch = true;
+                                JSONArray proxyLectures = null;
+                                JSONObject lunchObject = null;
+
+                                if (finalType.equals(Constant.LIVE_SESSION)) {
+                                    JSONArray splLectures = jsonObject3.getJSONArray(Constant.SPECIAL_LECTURES);
+                                    proxyLectures = jsonObject3.getJSONArray(Constant.PROXY_LECTURES);
+                                    for (int j = 0; j < splLectures.length(); j++) {
+                                        JSONObject splLectureObject = splLectures.getJSONObject(j);
+                                        if (splLectureObject != null) {
+                                            DailyTimeTables group = g.fromJson(splLectureObject.toString(), DailyTimeTables.class);
+                                            dailyTimeTables.add(group);
+                                        }
+                                    }
+                                }
+
+                                for (int i = 0; i < lectures.length(); i++) {
+                                    jsonObject1 = lectures.getJSONObject(i);
+                                    if (jsonObject1 != null) {
+                                        if (finalType.equals(Constant.LIVE_SESSION)) {
+                                            if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
+                                                lunch = false;
+                                                lunchObject = general_categories.getJSONObject(0);
+                                                if (lunchObject != null) {
+                                                    DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
+                                                    dailyTimeTables.add(groups);
+                                                }
+                                            }
+                                        }
+                                        DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
+                                        dailyTimeTables.add(group);
+                                    } else {
+                                        break;
+                                    }
+                                }
+                                if (finalType.equals(Constant.LIVE_SESSION) && lunch) {
+                                    lunchObject = general_categories.getJSONObject(0);
+                                    if (lunchObject != null) {
+                                        DailyTimeTables groups = g.fromJson(lunchObject.toString(), DailyTimeTables.class);
+                                        dailyTimeTables.add(groups);
+                                    }
+                                }
+                                if (finalType.equals(Constant.LIVE_SESSION)) {
+                                    for (int i = 0; i < proxyLectures.length(); i++) {
+                                        proxyObject = proxyLectures.getJSONObject(i);
+                                        if (proxyObject != null) {
+                                            for (int k = 0; k < dailyTimeTables.size(); k++) {
+                                                if (dailyTimeTables.get(k).getStart_time().equals(proxyObject.getString(Constant.START_TIME))) {
+                                                    dailyTimeTables.get(k).setStart_time(proxyObject.getString(Constant.START_TIME));
+                                                    dailyTimeTables.get(k).setEnd_time(proxyObject.getString(Constant.END_TIME));
+                                                    dailyTimeTables.get(k).setActivity_id(proxyObject.getString(Constant.ACTIVITY_ID));
+                                                    dailyTimeTables.get(k).setAssessment_id(proxyObject.getString(Constant.ASSESSMENT_ID));
+                                                    dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
+                                                    dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
+                                                    dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
+                                                    dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
+                                                }
+                                            }
+
+                                        } else {
+                                            break;
+                                        }
+                                    }
+                                }
+                                rcDailyTables.setVisibility(View.VISIBLE);
+                                binding.titleLayout.setVisibility(View.VISIBLE);
+                                DailyTimeTableAdapter adapter = new DailyTimeTableAdapter(dailyTimeTables, getActivity(), finalType, onSelectedListener);
+                                rcDailyTables.setAdapter(adapter);
+                            } else {
+                                rcDailyTables.setVisibility(View.GONE);
+                                binding.titleLayout.setVisibility(View.GONE);
+                            }
+
+                        } else {
+                            Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, getActivity(), url, params, true, 0);
+        }
 
     }
 

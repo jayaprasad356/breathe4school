@@ -92,6 +92,7 @@ public class Constant {
     public static final String SUBJECT_ID = "subject_id";
     public static final String STUDY_PLANER = "study_planer";
     public static final String LIVE_SESSION = "live_session";
+    public static final String ALL = "all";
     public static final String SUBJECT = "subject";
     public static final String LINK = "link";
     public static final String ANSWER_PDF_LINK = "answer_pdf_link";
