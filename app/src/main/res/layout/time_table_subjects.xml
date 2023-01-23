@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/time_table_sub_bg"
+        android:background="@color/maths_bg_col"
         android:orientation="horizontal"
         android:weightSum="7.05">
 
@@ -15,7 +15,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_50sdp"
             android:layout_weight="0.05"
-            android:background="@color/time_table_sub_bg" />
+            android:background="@color/maths_bg_col" />
 
         <TextView
             android:layout_width="0dp"

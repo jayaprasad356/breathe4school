@@ -70,7 +70,7 @@
                     android:singleLine="true"
                     android:text="18 February 2022, Friday"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_4sdp" />
+                    android:textSize="@dimen/_6sdp" />
 
                 <LinearLayout
                     android:id="@+id/lytTabs"

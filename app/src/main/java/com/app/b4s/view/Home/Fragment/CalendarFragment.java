@@ -127,6 +127,15 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         rcWeeklyTables = binding.rcWeekly;
         holidays=binding.tvListOfHoliday;
 
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, EEEE");
+        Date todayDate = new Date(); // current date and time
+        String formattedDate = sdf.format(todayDate);
+        System.out.println("++++++++++++++++++++++++++++++++++");
+        System.out.println(formattedDate);
+        // holder.date.setText(formattedDate);
+        binding.tvDate.setText(formattedDate);
+
         layoutInflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
 
         Calendar cal = Calendar.getInstance();
@@ -162,7 +171,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                     //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
                     cal.add(Calendar.DATE, 1);
                 }
-                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
                 binding.rvWeekDays.setAdapter(weekDayAdapter);
 
 
@@ -190,7 +199,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                     //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
                     cal.add(Calendar.DATE, 1);
                 }
-                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
                 binding.rvWeekDays.setAdapter(weekDayAdapter);
 
 
@@ -209,7 +218,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
             cal.add(Calendar.DATE, 1);
         }
-        weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this);
+        weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
         binding.rvWeekDays.setAdapter(weekDayAdapter);
 
         Date currentDate = Calendar.getInstance().getTime();

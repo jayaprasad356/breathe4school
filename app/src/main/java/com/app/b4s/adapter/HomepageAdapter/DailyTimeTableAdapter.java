@@ -128,16 +128,31 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         }
 
 //todo color setup
-        if (position % 2 == 0) {
-            holder.timeTableLayout.setBackgroundColor(Color.parseColor("#28cd9c"));
-        } else {
-            holder.timeTableLayout.setBackgroundColor(Color.parseColor("#ff848e"));
+        switch (dailyTimeTables.get(position).getName()) {
+            case "Hindi":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.hindi_bg_col));
+                break;
+            case "Science":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.science_bg_col));
+                break;
+            case "Maths":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.maths_bg_col));
+                break;
+            case "English":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.engligh_bg_col));
+                break;
+            case "Sanskrit":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.sanscrit_bg_col));
+                break;
+            case "Social Science":
+                holder.timeTableLayout.setBackgroundColor(activity.getColor(R.color.social_bg_col));
+                break;
         }
 //todo StartTime and EndTime setup
         holder.startTime.setText(commonMethods.militaryToOrdinaryTime(startTime));
         holder.endTime.setText(commonMethods.militaryToOrdinaryTime(endTime));
 //todo layout height setup based on duriation
-        if (duriation > 40) {
+        if (minutes > 40) {
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, activity.getResources().getDimensionPixelSize(com.intuit.sdp.R.dimen._30sdp));
             holder.rcLayout.setLayoutParams(params);
         }
