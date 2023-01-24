@@ -59,6 +59,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     private String type;
     private Session session;
     boolean isJoinNow, setReminder, viewSummary;
+    String temps = "tet";
     OnSelectedListener onSelectedListener;
 
     public DailyTimeTableAdapter(ArrayList<DailyTimeTables> dailyTimeTables, Activity activity, String type, OnSelectedListener onSelectedListener) {
@@ -98,10 +99,9 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
         Duration duration = Duration.between(startTim, endTim);
         long minutes = duration.toMinutes();
-
-
-        if (type.equals(Constant.STUDY_PLANER)) {
-
+        if (dailyTimeTables.get(position).getType() != null)
+            temps = dailyTimeTables.get(position).getType();
+        if (type.equals(Constant.STUDY_PLANER) || temps.equals("study")) {
             holder.deleteImage.setImageDrawable(activity.getDrawable(R.drawable.bin));
             holder.studyView.setVisibility(View.VISIBLE);
             holder.iconView.setVisibility(View.GONE);
@@ -157,7 +157,10 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
             holder.rcLayout.setLayoutParams(params);
         }
         holder.duriation.setText(minutes + "mins");
-        holder.subject.setText(dailyTimeTables.get(position).getName());
+        if (dailyTimeTables.get(position).getType() != null && dailyTimeTables.get(position).getType().equals("study"))
+            holder.subject.setText(dailyTimeTables.get(position).getSubject().getName());
+        else
+            holder.subject.setText(dailyTimeTables.get(position).getName());
         iconVisibility(holder, position);
         statusVisibility(holder, position, startTime, endTime);
         holder.editPlan.setOnClickListener(view -> showPopup(position));
@@ -170,13 +173,13 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         dialog.getWindow().setGravity(Gravity.CENTER);
         dialog.setCancelable(true);
         View view = dialog.findViewById(R.id.emptyView);
-        Button btnYes,btnNo;
+        Button btnYes, btnNo;
         btnYes = dialog.findViewById(R.id.btnYes);
         btnNo = dialog.findViewById(R.id.btnNo);
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteStudyPlanner(id,dialog);
+                deleteStudyPlanner(id, dialog);
 
             }
         });
@@ -187,7 +190,6 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
 
             }
         });
-
 
 
         Window window = dialog.getWindow();
@@ -205,7 +207,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     private void deleteStudyPlanner(String id, Dialog dialog) {
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
-            Log.d("DEL_STU",response + " "+id);
+            Log.d("DEL_STU", response + " " + id);
 
             if (result) {
                 try {
@@ -215,7 +217,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
 
-                    }else {
+                    } else {
                         Toast.makeText(activity, jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
 
                     }
@@ -223,7 +225,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
                     e.printStackTrace();
                 }
             }
-        }, activity, Constant.DELETE_STUDY_PLANNER+id, params, true, Request.Method.DELETE);
+        }, activity, Constant.DELETE_STUDY_PLANNER + id, params, true, Request.Method.DELETE);
 
     }
 
@@ -305,7 +307,7 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
         Dialog dialog = new Dialog(activity);
         dialog.setContentView(R.layout.add_study_planer);
         Spinner spinner = dialog.findViewById(R.id.spinnerSubjects);
-        String sub = String.valueOf(((LinkedTreeMap) dailyTimeTables.get(position).getSubject()).get("name"));
+        String sub = String.valueOf(dailyTimeTables.get(position).getSubject().getName());
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, subjects);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -451,9 +453,10 @@ public class DailyTimeTableAdapter extends RecyclerView.Adapter<DailyTimeTableAd
     }
 
     private void statusVisibility(@NonNull ViewHolder holder, int position, int startTime, int endTime) {
-        if (type.equals(Constant.STUDY_PLANER)) {
+        if (type.equals(Constant.STUDY_PLANER)|| temps.equals("study")) {
             holder.title.setText("Study Planer 01");
             holder.editPlan.setVisibility(View.VISIBLE);
+            temps = "";
         } else {
             int currentTime = Integer.parseInt(commonMethods.getCurrentMilitaryTime());
             if (currentTime > startTime && currentTime < endTime) {

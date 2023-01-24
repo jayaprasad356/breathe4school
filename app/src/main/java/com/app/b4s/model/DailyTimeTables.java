@@ -1,12 +1,21 @@
 package com.app.b4s.model;
 
 public class DailyTimeTables {
-    public String name,id,day;
+    public String name,id,day,type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     Boolean joinNow,viewSummery,setReminder;
     public String description;
     public String  start_time;
     public  String end_time;
-    public Object subject;
+    public Subject subject;
     public String activity_id;
     public String assessment_id;
     public String bbb_lecture_id;
@@ -85,11 +94,11 @@ public class DailyTimeTables {
         this.end_time = end_time;
     }
 
-    public Object getSubject() {
+    public Subject getSubject() {
         return subject;
     }
 
-    public void setSubject(Object subject) {
+    public void setSubject(Subject subject) {
         this.subject = subject;
     }
 

@@ -52,6 +52,7 @@ import com.app.b4s.databinding.FragmentCalendarBinding;
 import com.app.b4s.model.DailyTimeTables;
 import com.app.b4s.model.DayOfLine;
 import com.app.b4s.model.Dcm.AllData;
+import com.app.b4s.model.Subject;
 import com.app.b4s.model.WeekDay;
 import com.app.b4s.model.WeeklyTimeTable;
 import com.app.b4s.model.days.Friday;
@@ -76,6 +77,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.SQLOutput;
 import java.text.DateFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -126,7 +128,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         LinearLayoutManager weeklyTimeTable = new LinearLayoutManager(getActivity());
         rcDailyTables = binding.dailyRecycler;
         rcWeeklyTables = binding.rcWeekly;
-        holidays=binding.tvListOfHoliday;
+        holidays = binding.tvListOfHoliday;
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy, EEEE");
@@ -148,8 +150,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         int month = cal.get(Calendar.MONTH);
 
         String monthName1 = months[month];
-        binding.tvMonthName.setText(monthName1 +" " +year);
-        binding.tvWeekname.setText("Week "+currentWeek);
+        binding.tvMonthName.setText(monthName1 + " " + year);
+        binding.tvWeekname.setText("Week " + currentWeek);
 
         binding.imgWeekNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,22 +159,22 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                 weekdays.clear();
                 currentWeek++;
                 cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
-                binding.tvWeekname.setText("Week "+currentWeek);
+                binding.tvWeekname.setText("Week " + currentWeek);
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 String monthName1 = months[month];
-                binding.tvMonthName.setText(monthName1 +" " +year);
+                binding.tvMonthName.setText(monthName1 + " " + year);
                 cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
                 cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 for (int i = 0; i < 7; i++) {
-                    String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
-                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
+                    String date = cal.get(Calendar.YEAR) + "-" + String.format("%02d", (cal.get(Calendar.MONTH) + 1)) + "-" + String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1));
+                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) + "", date));
 
                     //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
                     cal.add(Calendar.DATE, 1);
                 }
-                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
+                weekDayAdapter = new WeekDayAdapter(weekdays, activity, CalendarFragment.this, binding.tvDate);
                 binding.rvWeekDays.setAdapter(weekDayAdapter);
 
 
@@ -184,23 +186,23 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                 weekdays.clear();
                 currentWeek--;
                 cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
-                binding.tvWeekname.setText("Week "+currentWeek);
+                binding.tvWeekname.setText("Week " + currentWeek);
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 String monthName1 = months[month];
-                binding.tvMonthName.setText(monthName1 +" " +year);
+                binding.tvMonthName.setText(monthName1 + " " + year);
                 cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
                 cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
                 for (int i = 0; i < 7; i++) {
-                    String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
-                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
+                    String date = cal.get(Calendar.YEAR) + "-" + String.format("%02d", (cal.get(Calendar.MONTH) + 1)) + "-" + String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1));
+                    weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) + "", date));
 
-                    Log.d("WEEK_DAYS",cal.get(Calendar.DAY_OF_MONTH)+"");
+                    Log.d("WEEK_DAYS", cal.get(Calendar.DAY_OF_MONTH) + "");
                     //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
                     cal.add(Calendar.DATE, 1);
                 }
-                weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
+                weekDayAdapter = new WeekDayAdapter(weekdays, activity, CalendarFragment.this, binding.tvDate);
                 binding.rvWeekDays.setAdapter(weekDayAdapter);
 
 
@@ -213,13 +215,13 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         cal.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
 
         for (int i = 0; i < 7; i++) {
-            String date = cal.get(Calendar.YEAR) +"-"+ String.format("%02d", (cal.get(Calendar.MONTH) + 1 ))+"-"+String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1 ));
-            weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) +"",date));
-            Log.d("WEEK_DAYS",cal.get(Calendar.DAY_OF_MONTH)+"");
+            String date = cal.get(Calendar.YEAR) + "-" + String.format("%02d", (cal.get(Calendar.MONTH) + 1)) + "-" + String.format("%02d", (cal.get(Calendar.DAY_OF_MONTH) + 1));
+            weekdays.add(new WeekDay(cal.get(Calendar.DAY_OF_MONTH) + "", date));
+            Log.d("WEEK_DAYS", cal.get(Calendar.DAY_OF_MONTH) + "");
             //textView.setText(getDayOfWeekName(calendar.get(Calendar.DAY_OF_WEEK)));
             cal.add(Calendar.DATE, 1);
         }
-        weekDayAdapter = new WeekDayAdapter(weekdays,activity,CalendarFragment.this,binding.tvDate);
+        weekDayAdapter = new WeekDayAdapter(weekdays, activity, CalendarFragment.this, binding.tvDate);
         binding.rvWeekDays.setAdapter(weekDayAdapter);
 
         Date currentDate = Calendar.getInstance().getTime();
@@ -253,12 +255,12 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 String date = sdf.format(cal.getTime());
-                TextView monthName= popupView.findViewById(R.id.tvMonthName);
+                TextView monthName = popupView.findViewById(R.id.tvMonthName);
                 TextView tvHolidays = popupView.findViewById(R.id.tvHolidays);
                 ImageView imgNext = popupView.findViewById(R.id.imgNext);
                 ImageView imgPrevious = popupView.findViewById(R.id.imgPrevious);
                 String monthName1 = months[month];
-                monthName.setText(monthName1 +" " +year);
+                monthName.setText(monthName1 + " " + year);
                 imgNext.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -268,8 +270,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         int day = cal.get(Calendar.DAY_OF_MONTH);
                         String date = sdf.format(cal.getTime());
                         String monthName1 = months[month];
-                        monthName.setText(monthName1 +" " +year);
-                        callHistoryApi(date,tvHolidays);
+                        monthName.setText(monthName1 + " " + year);
+                        callHistoryApi(date, tvHolidays);
                     }
                 });
                 imgPrevious.setOnClickListener(new View.OnClickListener() {
@@ -281,18 +283,17 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         int day = cal.get(Calendar.DAY_OF_MONTH);
                         String date = sdf.format(cal.getTime());
                         String monthName1 = months[month];
-                        monthName.setText(monthName1 +" " +year);
-                        callHistoryApi(date,tvHolidays);
+                        monthName.setText(monthName1 + " " + year);
+                        callHistoryApi(date, tvHolidays);
                     }
                 });
-                callHistoryApi(date,tvHolidays);
-
+                callHistoryApi(date, tvHolidays);
 
 
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 int location[] = new int[2];
                 v.getLocationOnScreen(location);
-                popupWindow.showAtLocation(v, Gravity.NO_GRAVITY,location[0], location[1] + v.getHeight());
+                popupWindow.showAtLocation(v, Gravity.NO_GRAVITY, location[0], location[1] + v.getHeight());
             }
         });
 
@@ -301,7 +302,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String item_position = String.valueOf(i);
                 int itemposition = Integer.parseInt(item_position);
-                loadDailyTimeTables(itemposition,currentDateString);
+                loadDailyTimeTables(itemposition, currentDateString);
                 System.out.println(itemposition);
             }
 
@@ -312,7 +313,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         });
         rcWeeklyTables.setLayoutManager(weeklyTimeTable);
         rcDailyTables.setLayoutManager(dailyTimeTable);
-        loadDailyTimeTables(1,currentDateString);
+        loadDailyTimeTables(1, currentDateString);
         binding.ivAddStudyPlaner.setOnClickListener(view -> showPopup());
         binding.tvWeekly.setOnClickListener(view -> {
             handleWeekly();
@@ -339,7 +340,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             if (jsonObject1 != null) {
-                                holidaysstr = holidaysstr + jsonObject1.getString("total_days")+" "+jsonObject1.getString("name") + " \n";
+                                holidaysstr = holidaysstr + jsonObject1.getString("total_days") + " " + jsonObject1.getString("name") + " \n";
                             } else {
                                 break;
                             }
@@ -352,7 +353,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                     e.printStackTrace();
                 }
             }
-        }, activity, Constant.GET_MONTHLY_HOLIDAY +date, params, true,0);
+        }, activity, Constant.GET_MONTHLY_HOLIDAY + date, params, true, 0);
 
     }
 
@@ -512,7 +513,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
 
     private void handleDaily() {
-        loadDailyTimeTables(1,currentDateString);
+        loadDailyTimeTables(1, currentDateString);
         binding.tvWeekly.setBackgroundResource(R.drawable.underline_drawable);
         binding.tvDaily.setBackgroundResource(0);
         binding.weeklyCard.setRadius(0);
@@ -571,8 +572,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
 
     }
 
-    public void loadDailyTimeTables(int itemposition,String date) {
-        String url="", type="";
+    public void loadDailyTimeTables(int itemposition, String date) {
+        String url = "", type = "";
         Map<String, String> params = new HashMap<>();
         if (itemposition == 2) {
             type = Constant.STUDY_PLANER;
@@ -580,23 +581,23 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/studentId/" + session.getData(Constant.STUDENT_ID);
-        } else if (itemposition==1){
+        } else if (itemposition == 1) {
             type = Constant.LIVE_SESSION;
             url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
-                    session.getData(Constant.TIME_TABLE_SESSION_ID)+"/date/"+date;
-        }else if (itemposition==0){
+                    session.getData(Constant.TIME_TABLE_SESSION_ID) + "/date/" + date;
+        } else if (itemposition == 0) {
             type = Constant.ALL;
             url = "http://143.244.132.170:3001/api/v1/timetable/getDailyTimetableAndStudyPlanner/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
-                    session.getData(Constant.TIME_TABLE_SESSION_ID)+"/studentId/"+session.getData(Constant.STUDENT_ID)+"/date/"+date;
+                    session.getData(Constant.TIME_TABLE_SESSION_ID) + "/studentId/" + session.getData(Constant.STUDENT_ID) + "/date/" + date;
 
             ApiConfig.RequestToVolley((result, response) -> {
-                Log.d("CAL_RES",response);
+                Log.d("CAL_RES", response);
 
                 if (result) {
                     try {
@@ -605,29 +606,49 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                             JSONArray jsonArray = jsonObject.getJSONArray(Constant.DATA);
                             ArrayList<DailyTimeTables> dailyTimeTables = new ArrayList<>();
                             if (!(jsonArray.length() == 0)) {
-                                JSONObject jsonObject2 = jsonArray.getJSONObject(0);
-                                JSONArray schedules = jsonObject2.getJSONArray(Constant.SCHEDULES);
-                                JSONObject jsonObject3 = schedules.getJSONObject(0);
-                                JSONArray lectures = jsonObject3.getJSONArray(Constant.LECTURES);
+                                JSONObject timeTableHeadObject = jsonArray.getJSONObject(0);
+                                JSONObject studyPlanerHeadObject = jsonArray.getJSONObject(1);
+
+                                JSONObject timeTable = timeTableHeadObject.getJSONObject("timetable");
+                                JSONObject studyPlanner = studyPlanerHeadObject.getJSONObject("studyPlanner");
+
+                                JSONArray timeTableschedules = timeTable.getJSONArray(Constant.SCHEDULES);
+                                JSONArray studyPlanschedules = studyPlanner.getJSONArray(Constant.SCHEDULES);
+
+
+                                JSONObject timeTableInsideHeadObject = timeTableschedules.getJSONObject(0);
+                                JSONObject studyPlanInsideHeadObject = studyPlanschedules.getJSONObject(0);
+
+
+                                JSONArray timeTablelectures = timeTableInsideHeadObject.getJSONArray(Constant.LECTURES);
+                                JSONArray studyPlanlectures = studyPlanInsideHeadObject.getJSONArray(Constant.LECTURES);
+
+                                System.out.println(timeTablelectures);
+                                System.out.println(studyPlanlectures);
+
+                                //todo this is only for time table
                                 JSONArray general_categories = null;
-                                if (jsonObject3.has("general_categories"))
-                                    general_categories = jsonObject3.getJSONArray("general_categories");
+                                if (timeTableInsideHeadObject.has("general_categories"))
+                                    general_categories = timeTableInsideHeadObject.getJSONArray("general_categories");
 
 
-                                Log.d("DAILY TIME TABLES", schedules.toString());
+                                Log.d("DAILY TIME TABLES", timeTableschedules.toString());
+                                Log.d("DAILY STUDY PLANERS", studyPlanschedules.toString());
                                 Gson g = new Gson();
 
-                                JSONObject jsonObject1 = null;
+                                JSONObject timeTablejsonObject1 = null;
+                                JSONObject studyplanjsonObject1 = null;
+
                                 JSONObject proxyObject = null;
                                 Boolean lunch = true;
                                 JSONArray proxyLectures = null;
                                 JSONObject lunchObject = null;
 
                                 if (true) {
-                                    JSONArray splLectures = jsonObject3.getJSONArray(Constant.SPECIAL_LECTURES);
-                                    proxyLectures = jsonObject3.getJSONArray(Constant.PROXY_LECTURES);
-                                    for (int j = 0; j < splLectures.length(); j++) {
-                                        JSONObject splLectureObject = splLectures.getJSONObject(j);
+                                    JSONArray timeTablesplLectures = timeTableInsideHeadObject.getJSONArray(Constant.SPECIAL_LECTURES);
+                                    proxyLectures = timeTableInsideHeadObject.getJSONArray(Constant.PROXY_LECTURES);
+                                    for (int j = 0; j < timeTablesplLectures.length(); j++) {
+                                        JSONObject splLectureObject = timeTablesplLectures.getJSONObject(j);
                                         if (splLectureObject != null) {
                                             DailyTimeTables group = g.fromJson(splLectureObject.toString(), DailyTimeTables.class);
                                             dailyTimeTables.add(group);
@@ -635,11 +656,11 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                     }
                                 }
 
-                                for (int i = 0; i < lectures.length(); i++) {
-                                    jsonObject1 = lectures.getJSONObject(i);
-                                    if (jsonObject1 != null) {
+                                for (int i = 0; i < timeTablelectures.length(); i++) {
+                                    timeTablejsonObject1 = timeTablelectures.getJSONObject(i);
+                                    if (timeTablejsonObject1 != null) {
                                         if (true) {
-                                            if (jsonObject1.getInt(Constant.START_TIME) >= 1400) {
+                                            if (timeTablejsonObject1.getInt(Constant.START_TIME) >= 1400) {
                                                 lunch = false;
                                                 lunchObject = general_categories.getJSONObject(0);
                                                 if (lunchObject != null) {
@@ -648,12 +669,13 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                                 }
                                             }
                                         }
-                                        DailyTimeTables group = g.fromJson(jsonObject1.toString(), DailyTimeTables.class);
+                                        DailyTimeTables group = g.fromJson(timeTablejsonObject1.toString(), DailyTimeTables.class);
                                         dailyTimeTables.add(group);
                                     } else {
                                         break;
                                     }
                                 }
+
                                 if (true) {
                                     lunchObject = general_categories.getJSONObject(0);
                                     if (lunchObject != null) {
@@ -674,13 +696,24 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                                     dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
                                                     dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
                                                     dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
-                                                    dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
+                                                    Subject subject = new Subject(proxyObject.getString("id"),proxyObject.getString(Constant.SUBJECT));
+                                                    dailyTimeTables.get(k).setSubject(subject);
                                                 }
                                             }
 
                                         } else {
                                             break;
                                         }
+                                    }
+                                }
+                                for (int i = 0; i < studyPlanlectures.length(); i++) {
+                                    studyplanjsonObject1 = studyPlanlectures.getJSONObject(i);
+                                    if (studyplanjsonObject1 != null) {
+                                        studyplanjsonObject1.put("type", "study"); // Adding the extra data to JSON object
+                                        DailyTimeTables group = g.fromJson(studyplanjsonObject1.toString(), DailyTimeTables.class);
+                                        dailyTimeTables.add(group);
+                                    } else {
+                                        break;
                                     }
                                 }
                                 rcDailyTables.setVisibility(View.VISIBLE);
@@ -692,7 +725,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                 binding.titleLayout.setVisibility(View.GONE);
                             }
 
-                        }else {
+                        } else {
                             Toast.makeText(getActivity(), jsonObject.getString(Constant.MESSAGE), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
@@ -705,7 +738,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         if (type.equals(Constant.LIVE_SESSION) || type.equals(Constant.STUDY_PLANER)) {
             String finalType = type;
             ApiConfig.RequestToVolley((result, response) -> {
-                Log.d("CAL_RES",response);
+                Log.d("CAL_RES", response);
 
                 if (result) {
                     try {
@@ -783,7 +816,8 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
                                                     dailyTimeTables.get(k).setPre_read_id(proxyObject.getString(Constant.PRE_READ_ID));
                                                     dailyTimeTables.get(k).setBbb_lecture_id(proxyObject.getString(Constant.BB_LECTURE_ID));
                                                     dailyTimeTables.get(k).setName(proxyObject.getString(Constant.NAME));
-                                                    dailyTimeTables.get(k).setSubject(proxyObject.getString(Constant.SUBJECT));
+                                                    Subject subject = new Subject(proxyObject.getString("id"),proxyObject.getString(Constant.SUBJECT));
+                                                    dailyTimeTables.get(k).setSubject(subject);
                                                 }
                                             }
 
