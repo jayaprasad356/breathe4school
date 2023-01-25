@@ -127,6 +127,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_10sdp">
 
@@ -212,6 +213,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvQuestion"
                 android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_25sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp" />
 
@@ -219,6 +221,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
                 android:orientation="vertical"
                 android:padding="@dimen/_10sdp">
 
@@ -389,16 +392,16 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:weightSum="2">
 
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
+                            android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_75sdp"
                             android:layout_marginRight="@dimen/_10sdp"
                             android:layout_weight="1"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -406,15 +409,14 @@
 
 
                                 <ImageView
-                                    android:id="@+id/ivOpenCamera"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:background="@drawable/rectangle_bg" />
 
                                 <LinearLayout
+                                    android:id="@+id/LLOpenCamera"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-
                                     android:layout_centerInParent="true"
                                     android:orientation="vertical">
 
@@ -429,6 +431,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
+                                        android:gravity="center"
                                         android:fontFamily="@font/open_sans"
                                         android:text="@string/upload_your_files_here"
                                         android:textSize="@dimen/_8sdp"
@@ -439,6 +442,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
+                                        android:gravity="center"
                                         android:fontFamily="@font/open_sans_bold"
                                         android:text="@string/open_camera"
                                         android:textColor="@color/primary"
@@ -449,7 +453,13 @@
 
 
                                 </LinearLayout>
-
+                                <ImageView
+                                    android:id="@+id/ivCameraSuccess"
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/img_success_greentick"
+                                    android:visibility="gone" />
 
                             </RelativeLayout>
 
@@ -459,7 +469,6 @@
                         <androidx.cardview.widget.CardView
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_75sdp"
-
                             android:layout_gravity="center"
                             android:layout_marginHorizontal="@dimen/_10sdp"
                             android:layout_weight="1">

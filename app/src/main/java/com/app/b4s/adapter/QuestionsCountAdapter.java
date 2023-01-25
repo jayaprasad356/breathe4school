@@ -38,7 +38,8 @@ public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String text="Q"+position;
+        int quesNumber=1+position;
+        String text="Q"+quesNumber;
         holder.question.setText(text);
        if (position==setBackground){
            holder.question.setBackground(activity.getDrawable(R.drawable.question_tv_checked));

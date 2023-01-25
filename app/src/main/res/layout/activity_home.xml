@@ -32,9 +32,9 @@
                     android:id="@+id/navigationRailView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:padding="@dimen/_8sdp"
                     app:headerLayout="@layout/home_menu_header"
                     app:itemIconSize="@dimen/_14sdp"
-                    android:padding="@dimen/_8sdp"
                     app:menu="@menu/home_menu" />
 
 

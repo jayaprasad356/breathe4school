@@ -4,13 +4,17 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Build;
@@ -19,18 +23,20 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.text.Html;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
 import android.widget.VideoView;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,8 +66,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -99,6 +105,9 @@ public class QuestionsActivity extends AppCompatActivity {
     private SimpleDateFormat dateFormat;
     private String dat;
     ArrayList<JSONObject> jsonArrayList = new ArrayList<>();
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    static int PICK_FILE_REQUEST = 2;
+    private static final int REQUEST_CAMERA_PERMISSION = 1;
 
     JSONObject test;
     MediaController mediaController;
@@ -107,8 +116,6 @@ public class QuestionsActivity extends AppCompatActivity {
     Activity activity;
     ProgressDisplay progressDisplay;
 
-
-    private ActivityResultLauncher<Intent> resultLauncher;
 
 
     @Override
@@ -121,6 +128,7 @@ public class QuestionsActivity extends AppCompatActivity {
         progressDisplay = new ProgressDisplay(activity);
 
         session = new Session(activity);
+        binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
         positionPicker = position -> {
             setQuestions(position);
             questionsCountAdapter = new QuestionsCountAdapter(i, position, activity, positionPicker);
@@ -136,7 +144,7 @@ public class QuestionsActivity extends AppCompatActivity {
         if (type.equals(Constant.REVIEW) || type.equals(Constant.COMPLETED)) {
             setDisable();
         }
-        activiytResult();
+
         binding.tvDate.setText(date);
         binding.tvTitle.setText(description);
         binding.tvSubject.setText(titleSubject + " | ");
@@ -145,6 +153,22 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.ivPdf.setOnClickListener(view -> {
             String string = session.getData(Constant.LINK);
             showPdf(string);
+        });
+        binding.LLOpenCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                } else {
+                    // Permission has already been granted
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+                    }
+                }
+
+
+            }
         });
         binding.ivAnsPdf.setOnClickListener(view -> {
             String string = session.getData(Constant.ANSWER_PDF_LINK);
@@ -221,6 +245,8 @@ public class QuestionsActivity extends AppCompatActivity {
         rvQuestions.setAdapter(questionsCountAdapter);
         binding.btnNext.setOnClickListener(view -> {
             binding.videoView.stopPlayback();
+            binding.LLOpenCamera.setVisibility(View.VISIBLE);
+            binding.ivCameraSuccess.setVisibility(View.GONE);
             if (mediaController != null)
                 mediaController.hide();
             if (type.equals(Constant.PENDING)) {
@@ -280,80 +306,15 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     private void selectFile() {
-        // Initialize intent
-        Intent intent
-                = new Intent(Intent.ACTION_GET_CONTENT);
-        // set type
+        // Create an Intent to open the file picker
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");
-        // Launch intent
-        resultLauncher.launch(intent);
+
+// Start the file picker activity
+        startActivityForResult(intent, PICK_FILE_REQUEST);
     }
 
-    private void activiytResult() {
-        resultLauncher = registerForActivityResult(
-                new ActivityResultContracts
-                        .StartActivityForResult(),
-                result -> {
-                    // Initialize result data
-                    Intent data = result.getData();
-                    // check condition
-                    if (data != null) {
-                        // When data is not equal to empty
-                        // Get PDf uri
-                        Uri sUri = data.getData();
-
-
-                        String filePath = getFilePath(sUri);
-
-                        //String pdf=getPDFPath(sUri);
-                        String test = getPath(sUri);
-                        progressDisplay.showProgress();
-                        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                                WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-                        saveProfileAccount(sUri);
-                        System.out.println(test);
-                        // getAttachResponse(test);
-
-
-                        // System.out.println(pdf);
-                        System.out.println(filePath);
-
-
-                        try {
-                            InputStream inputStream = getContentResolver().openInputStream(sUri);
-                            System.out.println(inputStream);
-                            // Now you can read the input stream and upload it to your API.
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-
-
-                        // set Uri on text view
-                        String tvUri = Html.fromHtml(
-                                "<big><b>PDF Uri</b></big><br>"
-                                        + sUri).toString();
-                        binding.ivOpenFiles.setVisibility(View.GONE);
-                        binding.ivFileSuccess.setVisibility(View.VISIBLE);
-//63b24bea4b9835c031eaab09
-                        // Get PDF path
-                        String sPath = sUri.getPath();
-                        File file = new File(sPath);
-                        file = new File(file.getAbsolutePath());
-                        String dir = file.getParent();
-                        File dirAsFile = file.getParentFile();
-                        System.out.println(dir);
-                        System.out.println(dirAsFile);
-
-                        // Set path on text view
-                        String tvPath;
-                        tvPath = Html.fromHtml(
-                                "<big><b>PDF Path</b></big><br>"
-                                        + sPath).toString();
-                        System.out.println(tvPath);
-                        System.out.println(tvUri);
-                    }
-                });
-    }
 
     @SuppressLint("Range")
     private String getFilePath(Uri fileUri) {
@@ -691,7 +652,23 @@ public class QuestionsActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d("STUDENT_RESPONSE", response.toString());
                         //   Toast.makeText(QuestionsActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-                        Toast.makeText(QuestionsActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                        final View customLayout = getLayoutInflater().inflate(R.layout.custom_layout_activity, null);
+                        builder.setView(customLayout);
+
+                        Button btnOk = customLayout.findViewById(R.id.btnOk);
+                        btnOk.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                Intent intent = new Intent(activity, HomeWorkManagementActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        });
+                        AlertDialog dialog
+                                = builder.create();
+                        dialog.show();
 
 
                         try {
@@ -714,11 +691,21 @@ public class QuestionsActivity extends AppCompatActivity {
                         if (error.networkResponse.data != null) {
                             try {
                                 body = new String(error.networkResponse.data, "UTF-8");
+
+                                String message = null;
+                                try {
+                                    JSONObject response = new JSONObject(body);
+                                    message = response.getString(Constant.MESSAGE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                System.out.println(message);
+
+                                Toast.makeText(QuestionsActivity.this, message, Toast.LENGTH_SHORT).show();
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
                         }
-                        Toast.makeText(QuestionsActivity.this, "failed", Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -775,6 +762,13 @@ public class QuestionsActivity extends AppCompatActivity {
                             Glide.with(this)
                                     .load(url) // image url
                                     .into(binding.imageView);
+                            binding.imageLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                   showImagePopup(url);
+
+                                }
+                            });
                         } else {
                             binding.vidoLayout.setVisibility(View.VISIBLE);
                             VideoView videoView = binding.videoView;
@@ -794,7 +788,13 @@ public class QuestionsActivity extends AppCompatActivity {
                             videoView.setMediaController(mediaController);
 
                             // starts the video
-                            videoView.start();
+                            //videoView.start();
+                            binding.vidoLayout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    showVideoPopup(videoUrl);
+                                }
+                            });
                         }
                     } else if (url.contains(".pdf")) {
                         binding.rlPdfView.setVisibility(View.VISIBLE);
@@ -847,6 +847,12 @@ public class QuestionsActivity extends AppCompatActivity {
                                 Glide.with(this)
                                         .load(url) // image url
                                         .into(binding.answerImageView);
+                                binding.answerImageLayout.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                       showImagePopup(url);
+                                    }
+                                });
                             } else {
                                 binding.vidoLayout.setVisibility(View.VISIBLE);
                                 VideoView videoView = binding.videoView;
@@ -866,7 +872,13 @@ public class QuestionsActivity extends AppCompatActivity {
                                 videoView.setMediaController(mediaController);
 
                                 // starts the video
-                                videoView.start();
+                                //  videoView.start();
+                                binding.vidoLayout.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        showVideoPopup(videoUrl);
+                                    }
+                                });
                             }
                         } else {
                             binding.rlAnsPdfView.setVisibility(View.VISIBLE);
@@ -958,6 +970,37 @@ public class QuestionsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void showVideoPopup(String videoUrl) {
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.dialog_video);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(150, 128, 128, 128)));
+        dialog.getWindow().setDimAmount(0);
+
+        VideoView videoView = dialog.findViewById(R.id.video_view);
+        Uri uri = Uri.parse(videoUrl);
+        videoView.setVideoURI(uri);
+
+        mediaController = new MediaController(this);
+
+        // sets the anchor view
+        // anchor view for the videoView
+        mediaController.setAnchorView(videoView);
+
+        // sets the media player to the videoView
+        mediaController.setMediaPlayer(videoView);
+
+        // sets the media controller to the videoView
+        videoView.setMediaController(mediaController);
+        // starts the video
+        videoView.start();
+        dialog.show();
+
+
     }
 
     private void setOptionsForCompleted() throws JSONException {
@@ -1224,6 +1267,7 @@ public class QuestionsActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 NetworkResponse networkResponse = error.networkResponse;
+                progressDisplay.hideProgress();
                 String errorMessage = "Unknown error";
                 if (networkResponse == null) {
                     if (error.getClass().equals(TimeoutError.class)) {
@@ -1274,6 +1318,63 @@ public class QuestionsActivity extends AppCompatActivity {
         };
 
         VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            binding.LLOpenCamera.setVisibility(View.GONE);
+            binding.ivCameraSuccess.setVisibility(View.VISIBLE);
+
+            Bitmap imageBitmap = (Bitmap) data.getExtras().get(Constant.DATE);
+            Uri imageUri = getImageUri(this, imageBitmap);
+
+            progressDisplay.showProgress();
+            saveProfileAccount(imageUri);
+        }
+
+        if (requestCode == PICK_FILE_REQUEST && resultCode == RESULT_OK) {
+
+            if (data != null) {
+
+                Uri sUri = data.getData();
+                binding.ivOpenFiles.setVisibility(View.GONE);
+                binding.ivFileSuccess.setVisibility(View.VISIBLE);
+                progressDisplay.showProgress();
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                saveProfileAccount(sUri);
+
+            }
+        }
+
+    }
+
+    public Uri getImageUri(Activity context, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+    public void showImagePopup(String url){
+
+
+        Dialog dialog = new Dialog(activity);
+        dialog.setContentView(R.layout.dialog_image);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setCancelable(true);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.argb(150, 128, 128, 128)));
+        dialog.getWindow().setDimAmount(0);
+        ImageView dialogImageView = dialog.findViewById(R.id.image_view);
+        dialog.show();
+        Glide.with(this)
+                .load(url) // image url
+                .into(dialogImageView);
+
+
     }
 
 }

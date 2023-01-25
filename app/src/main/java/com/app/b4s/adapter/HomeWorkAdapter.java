@@ -64,6 +64,7 @@ public class HomeWorkAdapter extends RecyclerView.Adapter<HomeWorkAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                holder.tvDescription.setTextColor(activity.getColor(R.color.primary));
                 session.setData(Constant.HOMEWORD_ID, onHomeWordData.get(position).getId());
                 loadHomeWordDetails(onHomeWordData.get(position).getId(),holder.tvDate.getText().toString(),holder.tvSubName.getText().toString(),holder.tvDescription.getText().toString());
             }

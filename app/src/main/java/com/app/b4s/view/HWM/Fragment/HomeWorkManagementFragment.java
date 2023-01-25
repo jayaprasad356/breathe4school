@@ -90,12 +90,14 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
         review = false;
         completed = false;
         filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
+        binding.tvToday.setVisibility(View.VISIBLE);
         binding.tvPending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pending = true;
                 review = false;
                 completed = false;
+                binding.tvToday.setVisibility(View.VISIBLE);
                 rvCompleted.setVisibility(View.GONE);
                 rvReview.setVisibility(View.GONE);
                 rvpending.setVisibility(View.VISIBLE);
@@ -114,6 +116,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 pending = false;
                 review = true;
                 completed = false;
+                binding.tvToday.setVisibility(View.GONE);
                 rvCompleted.setVisibility(View.GONE);
                 rvReview.setVisibility(View.VISIBLE);
                 rvpending.setVisibility(View.GONE);
@@ -132,6 +135,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 pending = false;
                 review = false;
                 completed = true;
+                binding.tvToday.setVisibility(View.GONE);
                 rvCompleted.setVisibility(View.VISIBLE);
                 rvReview.setVisibility(View.GONE);
                 rvpending.setVisibility(View.GONE);
@@ -301,6 +305,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
             }
 
             if (pending) {
+                binding.tvToday.setText(String.format("Today (%d)", filterData.size()));
                 homeWorkAdapter = new HomeWorkAdapter(Constant.PENDING, filterData, getActivity());
                 rvpending.setAdapter(homeWorkAdapter);
             } else if (completed) {

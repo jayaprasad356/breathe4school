@@ -10,6 +10,7 @@
         android:enabled="true"
         android:visible="true"
         android:icon="@drawable/ic_calendar"
+        android:background="@drawable/round_orange_bg"
         android:title="@string/calendar"/>
 
 </menu>
