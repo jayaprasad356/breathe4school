@@ -1,7 +1,7 @@
 package com.app.b4s.utilities;
 
 public class Constant {
-    public static final String MainBaseUrl = "http://143.244.132.170:3001/api/v1/";
+    public static final String MainBaseUrl = "http://64.227.182.105:3001/api/v1/";
     public static final String BaseUrl = MainBaseUrl + "studentAuth/";
     public static final String MessageBoard = "messageBoard/";
     public static final String HomeWork_Url = MainBaseUrl + "homework/";
