@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_2sdp"
     android:layout_marginHorizontal="@dimen/_4sdp"
     android:layout_marginVertical="@dimen/_4sdp"
     >
@@ -12,8 +12,8 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:padding="@dimen/_4sdp"
-
+       android:paddingVertical="@dimen/_8sdp"
+       android:paddingHorizontal="@dimen/_5sdp"
        android:orientation="vertical"
        >
 
@@ -22,9 +22,10 @@
            android:id="@+id/tvSubName"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:fontFamily="@font/open_sans_semibold"
            android:text="Kannada"
            android:layout_marginLeft="@dimen/_4sdp"
-           android:textSize="@dimen/_8sdp"
+           android:textSize="@dimen/_6sdp"
            android:textColor="#335C76"
            android:layout_marginBottom="@dimen/_4sdp"
            />
@@ -35,10 +36,11 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:text="Navellaru Onde Poem"
+           android:fontFamily="@font/open_sans_semibold"
            android:layout_marginLeft="@dimen/_4sdp"
 
            android:textColor="@color/black"
-           android:textSize="@dimen/_8sdp"
+           android:textSize="@dimen/_6sdp"
            android:textStyle="bold"
            />
 
@@ -50,31 +52,32 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="horizontal"
+           android:layout_marginTop="@dimen/_4sdp"
            >
 
 
 
            <TextView
                android:id="@+id/tvSubmitted"
-               android:layout_marginTop="@dimen/_4sdp"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="Submit Date"
+               android:text="Submit on"
                android:fontFamily="@font/open_sans"
                android:textStyle="bold"
+               android:layout_gravity="center"
                android:layout_marginLeft="@dimen/_4sdp"
-
                android:textColor="#666666"
-               android:textSize="@dimen/_8sdp"
+               android:textSize="@dimen/_6sdp"
                />
            <TextView
-               android:layout_marginTop="@dimen/_5sdp"
                android:id="@+id/tvDate"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:text="20-92"
+               android:layout_gravity="center"
+               android:fontFamily="@font/open_sans_semibold"
                android:layout_marginStart="@dimen/_5sdp"
-               android:textSize="@dimen/_8sdp"
+               android:textSize="@dimen/_6sdp"
                android:textStyle="bold"
                android:textColor="@color/black"
                />

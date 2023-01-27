@@ -479,10 +479,12 @@
                         android:fontFamily="@font/open_sans_bold"
                         android:text="@string/my_feed"
                         android:textColor="@color/black"
-                        android:textSize="26sp" />
+                        android:textSize="@dimen/_10sdp"
+                        />
 
 
                     <RelativeLayout
+                        android:layout_marginTop="@dimen/_20sdp"
                         android:id="@+id/rlTitleCard"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_60sdp"
@@ -620,7 +622,7 @@
                     android:fontFamily="@font/open_sans_bold"
                     android:text="@string/upcoming_classes"
                     android:textColor="@color/text_dark_blue"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/_10sdp"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView

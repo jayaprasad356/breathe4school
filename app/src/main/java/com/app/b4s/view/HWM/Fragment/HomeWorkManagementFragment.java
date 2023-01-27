@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -186,7 +187,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
         tvFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvFilter.setVisibility(View.INVISIBLE);
+                tvFilter.setVisibility(View.VISIBLE);
 
 
                 LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -194,9 +195,19 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
 
 
                 TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
+                RelativeLayout apply = customView.findViewById(R.id.apply);
+
+
+                apply.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), "Hi", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 //instantiate popup window
-                popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow = new PopupWindow(customView, 600, 400, true);
+               // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -205,7 +216,6 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                         if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                             popupWindow.dismiss();
                             tvFilter.setVisibility(View.VISIBLE);
-
                             return true;
                         }
 
@@ -216,7 +226,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
 
 
                 //display the popup window
-                popupWindow.showAsDropDown(tvFilter, -650, -100);
+                popupWindow.showAsDropDown(tvFilter, -434, -68);
 
 
                 //close the popup window on button click

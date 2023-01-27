@@ -27,6 +27,7 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:text="@string/digital_class_management"
                 android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
 
@@ -74,6 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/today_digitla"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textColor="@color/digital_sc_text_col"
                     android:textSize="@dimen/_10sdp" />
 
@@ -114,6 +116,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/previous"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textColor="@color/digital_sc_text_col"
                     android:textSize="@dimen/_10sdp" />
 
