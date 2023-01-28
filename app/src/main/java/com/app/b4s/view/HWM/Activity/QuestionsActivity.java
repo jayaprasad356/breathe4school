@@ -55,9 +55,11 @@ import com.app.b4s.VolleyMultipartRequest;
 import com.app.b4s.VolleySingleton;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
+import com.app.b4s.model.Attach;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
 import com.app.b4s.utilities.Constant;
+import com.app.b4s.utilities.DatabaseHelper;
 import com.app.b4s.utilities.ProgressDisplay;
 import com.bumptech.glide.Glide;
 
@@ -87,6 +89,7 @@ public class QuestionsActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     PositionPicker positionPicker;
     byte[] fileBytes = null;
+    DatabaseHelper databaseHelper;
 
     private JSONObject homeWorkObject;
     private JSONArray jsonArray = null;
@@ -109,13 +112,14 @@ public class QuestionsActivity extends AppCompatActivity {
     static int PICK_FILE_REQUEST = 2;
     private static final int REQUEST_CAMERA_PERMISSION = 1;
 
+    ArrayList<Attach> answeredAttaches;
+
     JSONObject test;
     MediaController mediaController;
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
 
     Activity activity;
     ProgressDisplay progressDisplay;
-
 
 
     @Override
@@ -125,6 +129,7 @@ public class QuestionsActivity extends AppCompatActivity {
         rvQuestions = binding.rvQuestion;
         calendar = Calendar.getInstance();
         activity = this;
+        databaseHelper = new DatabaseHelper(this);
         progressDisplay = new ProgressDisplay(activity);
 
         session = new Session(activity);
@@ -520,6 +525,10 @@ public class QuestionsActivity extends AppCompatActivity {
 
 
     private void pendingFlow() {
+        String qid = "";
+        String attach_Link = "";
+        String explanation = "";
+
         if (isAttached) {
             attach = new JSONArray();
             setBackground = setBackground + 1;
@@ -528,13 +537,18 @@ public class QuestionsActivity extends AppCompatActivity {
             binding.llCheckBoxes.setVisibility(View.VISIBLE);
             test = new JSONObject();
             attach.put(session.getData(Constant.PDF_UPLOAD_LINK));
+
             try {
+                qid = session.getData(Constant.QUESTIONS_ID);
+                attach_Link = session.getData(Constant.PDF_UPLOAD_LINK);
                 test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
                 test.put(Constant.ATTACHMENTS, attach);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            databaseHelper.AddAttachQuestion(qid, attach_Link, "", "");
             jsonArrayList.add(test);
+            session.setData(Constant.PDF_UPLOAD_LINK, "");
 
             if (i > setBackground) {
                 setSubmitText(i, setBackground);
@@ -550,25 +564,29 @@ public class QuestionsActivity extends AppCompatActivity {
             setBackground = setBackground + 1;
 
             String ans = "";
-            boolean answred = false;
-            if (A) {
+            if (binding.cbFirstOpt.isChecked()) {
                 ans = "A";
-                answred = true;
-            } else if (B) {
+            } else if (binding.cbSecondOpt.isChecked()) {
                 ans = "B";
-                answred = true;
-            } else if (C) {
+            } else if (binding.cbThirdOpt.isChecked()) {
                 ans = "C";
-                answred = true;
-            } else if (D) {
+            } else if (binding.cbFourthOpt.isChecked()) {
                 ans = "D";
-                answred = true;
             }
+//            if (A) {
+//                ans = "A";
+//            } else if (B) {
+//                ans = "B";
+//            } else if (C) {
+//                ans = "C";
+//            } else if (D) {
+//                ans = "D";
+//            }
             try {
                 test = new JSONObject();
+                qid = session.getData(Constant.QUESTIONS_ID);
                 test.put(Constant.QUESTION_ID, session.getData(Constant.QUESTIONS_ID));
                 test.put(Constant.ANSWERS, ans);
-                String explanation = "";
                 if (ans.equals("A")) {
                     explanation = session.getData(Constant.A_VALUE);
                 } else if (ans.equals("B")) {
@@ -582,6 +600,8 @@ public class QuestionsActivity extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            databaseHelper.AddAttachQuestion(qid, "", ans, explanation);
             jsonArrayList.add(test);
 
             if (i > setBackground) {
@@ -686,7 +706,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         // TODO: Handle error
                         String body = "";
                         //get status code here
-                        String statusCode = String.valueOf(error.networkResponse.statusCode);
+                        //String statusCode = String.valueOf(error.networkResponse.statusCode);
                         //get response body and parse with appropriate encoding
                         if (error.networkResponse.data != null) {
                             try {
@@ -723,9 +743,14 @@ public class QuestionsActivity extends AppCompatActivity {
                 setUnCheck();
                 binding.layoutThisQuestion.setVisibility(View.VISIBLE);
                 binding.layoutTotalMarks.setVisibility(View.VISIBLE);
+                binding.tvAnswered.setVisibility(View.GONE);
                 binding.tvDateStatus.setText(R.string.dead_line);
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.QUESTIONS);
+                session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
+                answeredAttaches = databaseHelper.getAnsweredQuestion(session.getData(Constant.QUESTIONS_ID));
+                System.out.println(answeredAttaches);
+
                 String totalMark = jsonObject.getString(Constant.TOTAL_MARK);
                 binding.tvTotalMarknum.setText(totalMark);
                 String count = "";
@@ -741,7 +766,6 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.tvResult.setText("Questions" + ":");
                 String totQuestion = jsonObject.getString(Constant.TOTAL_QUESTIONS);
                 binding.tvMarkDetails.setText(questionCount + "/" + totQuestion);
-                session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 title = jsonArray.getJSONObject(i).getString(Constant.title);
                 binding.tvQuestion.setText(title);
                 binding.imageLayout.setVisibility(View.GONE);
@@ -751,6 +775,9 @@ public class QuestionsActivity extends AppCompatActivity {
                 if (attachment.length() >= 1) {
                     binding.ivOpenFiles.setVisibility(View.VISIBLE);
                     binding.ivFileSuccess.setVisibility(View.GONE);
+                    if (answeredAttaches.size() > 0)
+                        if (!(answeredAttaches.get(0).getAttach_link().isEmpty()))
+                            binding.tvAnswered.setVisibility(View.VISIBLE);
                     attachment = jsonArray.getJSONObject(i).getJSONArray(Constant.ATTACHMENTS);
                     isAttached = true;
                     String picUrl = Constant.SERVER + attachment.get(0);
@@ -765,7 +792,7 @@ public class QuestionsActivity extends AppCompatActivity {
                             binding.imageLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                   showImagePopup(url);
+                                    showImagePopup(url);
 
                                 }
                             });
@@ -850,7 +877,7 @@ public class QuestionsActivity extends AppCompatActivity {
                                 binding.answerImageLayout.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-                                       showImagePopup(url);
+                                        showImagePopup(url);
                                     }
                                 });
                             } else {
@@ -1150,6 +1177,19 @@ public class QuestionsActivity extends AppCompatActivity {
                     session.setData(Constant.D_VALUE, value);
                 }
             }
+            if (answeredAttaches.size() > 0)
+                if (!(answeredAttaches.get(0).getAnswer().isEmpty())) {
+                    String ans = answeredAttaches.get(0).getAnswer();
+                    if (ans.equals("A")) {
+                        binding.cbFirstOpt.setChecked(true);
+                    } else if (ans.equals("B")) {
+                        binding.cbSecondOpt.setChecked(true);
+                    } else if (ans.equals("C")) {
+                        binding.cbThirdOpt.setChecked(true);
+                    } else if (ans.equals("B")) {
+                        binding.cbFourthOpt.setChecked(true);
+                    }
+                }
         }
 
     }
@@ -1358,7 +1398,8 @@ public class QuestionsActivity extends AppCompatActivity {
         String path = MediaStore.Images.Media.insertImage(context.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
-    public void showImagePopup(String url){
+
+    public void showImagePopup(String url) {
 
 
         Dialog dialog = new Dialog(activity);
