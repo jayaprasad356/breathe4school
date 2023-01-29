@@ -157,6 +157,9 @@ public class Constant {
     public static final String COMPLETED = "completed";
     public static final String title = "title";
 
+    public static final String F_REVIEW = "freview";
+    public static final String F_PENDING = "fpending";
+    public static final String F_COMPLETED = "fcompleted";
 
     public static final String A = "A";
     public static final String B = "B";

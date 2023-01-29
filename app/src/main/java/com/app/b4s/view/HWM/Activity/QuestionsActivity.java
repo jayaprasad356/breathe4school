@@ -136,6 +136,8 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
         positionPicker = position -> {
             setQuestions(position);
+            setBackground=position;
+            setSubmitText(i, setBackground);
             questionsCountAdapter = new QuestionsCountAdapter(i, position, activity, positionPicker);
             rvQuestions.setAdapter(questionsCountAdapter);
             questionsCountAdapter.notifyDataSetChanged();
@@ -623,6 +625,8 @@ public class QuestionsActivity extends AppCompatActivity {
         int temp = setBackground + 1;
         if (temp == totalCount) {
             binding.btnNext.setText("Submit");
+        }else {
+            binding.btnNext.setText("Next");
         }
     }
 
@@ -833,7 +837,6 @@ public class QuestionsActivity extends AppCompatActivity {
                     options = jsonArray.getJSONObject(i).getJSONArray(Constant.OPTIONS);
                     isAttached = false;
                 }
-                System.out.println(options);
                 setOptionsForPending();
                 this.i = jsonObject.getInt(Constant.TOTAL_QUESTIONS);
 

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
@@ -42,6 +43,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -59,6 +61,13 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
     Session session;
     FragmentHomeWorkManagementBinding binding;
 
+    TextView tvToday, tvYesterday, tvThisWeek, tvLastWeek, tvThisMonth, tvLastMonth;
+
+    CheckBox cbMaths, cbEnglish, cbScience, cbHindi;
+
+    String subject = "English";
+    String subjectKey = "";
+    String time = "";
 
     public HomeWorkManagementFragment() {
         // Required empty public constructor
@@ -90,7 +99,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
         pending = true;
         review = false;
         completed = false;
-        filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
+        filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity(),"");
         binding.tvToday.setVisibility(View.VISIBLE);
         binding.tvPending.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +117,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 binding.tvOnReview.setTypeface(null);
                 binding.tvCompleted.setTypeface(null);
                 binding.tvPending.setTypeface(null, Typeface.BOLD);
-                filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity());
+                filterHomeWorkController.getFilterHomeWork(Constant.PENDING, getActivity(),"");
             }
         });
         binding.tvOnReview.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +133,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 binding.viewCompleted.setBackgroundColor(0);
                 binding.viewOnReview.setBackgroundColor(getActivity().getColor(R.color.primary));
                 binding.viewPending.setBackgroundColor(0);
-                filterHomeWorkController.getFilterHomeWork(Constant.REVIEW, getActivity());
+                filterHomeWorkController.getFilterHomeWork(Constant.REVIEW, getActivity(),"");
                 binding.tvOnReview.setTypeface(null, Typeface.BOLD);
                 binding.tvCompleted.setTypeface(null);
                 binding.tvPending.setTypeface(null);
@@ -146,7 +155,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 binding.tvOnReview.setTypeface(null);
                 binding.tvCompleted.setTypeface(null, Typeface.BOLD);
                 binding.tvPending.setTypeface(null);
-                filterHomeWorkController.getFilterHomeWork(Constant.COMPLETED, getActivity());
+                filterHomeWorkController.getFilterHomeWork(Constant.COMPLETED, getActivity(),"");
             }
         });
 
@@ -195,19 +204,138 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
 
 
                 TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
+
                 RelativeLayout apply = customView.findViewById(R.id.apply);
+                RelativeLayout today = customView.findViewById(R.id.rlToday);
+                RelativeLayout yesterday = customView.findViewById(R.id.rlYesterday);
+                RelativeLayout thisWeek = customView.findViewById(R.id.rl_thisWeek);
+                RelativeLayout lastWeek = customView.findViewById(R.id.rlLastWeek);
+                RelativeLayout thisMonth = customView.findViewById(R.id.rlThisMonth);
+                RelativeLayout lastMonth = customView.findViewById(R.id.rlLastMonth);
+
+                tvToday = customView.findViewById(R.id.tvToday);
+                tvYesterday = customView.findViewById(R.id.tvYesterday);
+                tvThisWeek = customView.findViewById(R.id.tvThisWeek);
+                tvLastWeek = customView.findViewById(R.id.tvLastWeek);
+                tvThisMonth = customView.findViewById(R.id.tvThisMonth);
+                tvLastMonth = customView.findViewById(R.id.tvLastMonth);
+
+                cbMaths = customView.findViewById(R.id.cbMaths);
+                cbEnglish = customView.findViewById(R.id.cbEnglish);
+                cbScience = customView.findViewById(R.id.cbScience);
+                cbHindi = customView.findViewById(R.id.cbHindi);
+
+                cbHindi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setUncheck();
+                        subject = "Hindi";
+                        cbHindi.setChecked(true);
+                    }
+                });
+                cbScience.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setUncheck();
+                        subject = "Science";
+                        cbScience.setChecked(true);
+                    }
+                });
+                cbEnglish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setUncheck();
+                        subject = "English";
+                        cbEnglish.setChecked(true);
+                    }
+                });
+                cbMaths.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setUncheck();
+                        subject = "Maths";
+                        cbMaths.setChecked(true);
+                    }
+                });
+
+
+                today.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "today";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        today.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvToday.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
+                yesterday.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "yesterday";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        yesterday.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvYesterday.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
+                thisWeek.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "thisweek";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        thisWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvThisWeek.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
+                lastWeek.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "lastweek";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        lastWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvLastWeek.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
+                thisMonth.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "thisMonth";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        thisMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvThisMonth.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
+                lastMonth.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        time = "lastMonth";
+                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+                        lastMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+                        tvLastMonth.setTextColor(getActivity().getColor(R.color.white));
+                    }
+                });
 
 
                 apply.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
+                        List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
+                        for (int i = 0; i < subjects.size(); i++) {
+                            if (subject.equals(subjects.get(i)))
+                                subjectKey = subjectIds.get(i);
+                        }
+                        String time_link = "?time=" + time;
+                        String subjectId = "&subjectId=" + subjectKey;
+                        String link = time_link + subjectId;
+                        filterHomeWorkController.getFilterHomeWork(Constant.F_PENDING, getActivity(),link);
                         Toast.makeText(getActivity(), "Hi", Toast.LENGTH_SHORT).show();
+                        popupWindow.dismiss();
                     }
                 });
 
                 //instantiate popup window
                 popupWindow = new PopupWindow(customView, 600, 400, true);
-               // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setTouchInterceptor(new View.OnTouchListener() {
@@ -243,6 +371,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
 
             }
 
+
         });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
@@ -254,6 +383,31 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
         return binding.getRoot();
     }
 
+    private void setUncheck() {
+        cbHindi.setChecked(false);
+        cbScience.setChecked(false);
+        cbEnglish.setChecked(false);
+        cbMaths.setChecked(false);
+
+    }
+
+    private void removeBackgrounds(RelativeLayout today, RelativeLayout yesterday, RelativeLayout thisMonth, RelativeLayout lastMonth, RelativeLayout thisWeek, RelativeLayout lastWeek) {
+        today.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+        yesterday.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+        thisWeek.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+        lastWeek.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+        thisMonth.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+        lastMonth.setBackground(getActivity().getDrawable(R.drawable.corner_stroke_primary));
+
+        tvToday.setTextColor(getActivity().getColor(R.color.black));
+        tvYesterday.setTextColor(getActivity().getColor(R.color.black));
+        tvLastWeek.setTextColor(getActivity().getColor(R.color.black));
+        tvLastMonth.setTextColor(getActivity().getColor(R.color.black));
+        tvThisMonth.setTextColor(getActivity().getColor(R.color.black));
+        tvThisWeek.setTextColor(getActivity().getColor(R.color.black));
+
+    }
+
     private void homework() {
 
         ArrayList<HomeWorkSubject> homeWorkSubjects = new ArrayList<>();
@@ -261,7 +415,6 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
         Gson g = new Gson();
         // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
         url = Constant.HomeWork_Url + Constant.STUDENT_SUMMARY + "get/" + Constant.STUDENTID + session.getData(Constant.STUDENT_ID);
-
 
 
         Map<String, String> params = new HashMap<>();

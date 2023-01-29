@@ -23,11 +23,14 @@ public class FilterController implements IfilterController {
     }
 
     @Override
-    public void getFilterHomeWork(String type, FragmentActivity activity) {
+    public void getFilterHomeWork(String type, FragmentActivity activity, String link) {
         session = new Session(activity);
         String url;
-       // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.FILTER_BY_STUDENT_ID +session.getData(Constant.STUDENT_ID)+"/"+type;
+        // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
+        if (type.equals(Constant.F_PENDING)) {
+            url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID) +link;
+        } else
+            url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID) + "/" + type;
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {
@@ -50,7 +53,7 @@ public class FilterController implements IfilterController {
         session = new Session(activity);
         String url;
         // url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID)+"/"+"completed";
-        url = Constant.FILTER_BY_STUDENT_ID +session.getData(Constant.STUDENT_ID)+"/"+type;
+        url = Constant.FILTER_BY_STUDENT_ID + session.getData(Constant.STUDENT_ID) + "/" + type;
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
             if (result) {
