@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
@@ -182,7 +183,61 @@ public class QuestionsActivity extends AppCompatActivity {
             showPdf(string);
         });
 
+
+
+        binding.cbFirstOpt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.cbFirstOpt.setTextColor(ContextCompat.getColor(activity, R.color.black));
+                    binding.tvCb1.setVisibility(View.VISIBLE);
+                } else {
+                    binding.cbFirstOpt.setTextColor(ContextCompat.getColor(activity, R.color.text_gray));
+                    binding.tvCb1.setVisibility(View.GONE);
+
+                }
+            }
+        });
+        binding.cbSecondOpt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.cbSecondOpt.setTextColor(ContextCompat.getColor(activity, R.color.black));
+                    binding.tvCb2.setVisibility(View.VISIBLE);
+                } else {
+                    binding.cbSecondOpt.setTextColor(ContextCompat.getColor(activity, R.color.text_gray));
+                    binding.tvCb2.setVisibility(View.GONE);
+                }
+            }
+        });
+        binding.cbThirdOpt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.cbThirdOpt.setTextColor(ContextCompat.getColor(activity, R.color.black));
+                    binding.tvCb3.setVisibility(View.VISIBLE);
+                } else {
+                    binding.cbThirdOpt.setTextColor(ContextCompat.getColor(activity, R.color.text_gray));
+                    binding.tvCb3.setVisibility(View.GONE);
+                }
+            }
+        });
+        binding.cbFourthOpt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    binding.cbThirdOpt.setTextColor(ContextCompat.getColor(activity, R.color.black));
+                    binding.tvCb4.setVisibility(View.VISIBLE);
+                } else {
+                    binding.cbThirdOpt.setTextColor(ContextCompat.getColor(activity, R.color.text_gray));
+                    binding.tvCb4.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
         binding.cbFirstOpt.setOnClickListener(view -> {
+
             if (type.equals(Constant.PENDING)) {
                 A = true;
                 B = false;

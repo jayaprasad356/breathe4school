@@ -334,7 +334,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 });
 
                 //instantiate popup window
-                popupWindow = new PopupWindow(customView, 600, 400, true);
+                popupWindow = new PopupWindow(customView, 400, 270, true);
                 // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
                 popupWindow.setOutsideTouchable(true);
@@ -354,7 +354,7 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
 
 
                 //display the popup window
-                popupWindow.showAsDropDown(tvFilter, -434, -68);
+                popupWindow.showAsDropDown(tvFilter, -290, -48);
 
 
                 //close the popup window on button click

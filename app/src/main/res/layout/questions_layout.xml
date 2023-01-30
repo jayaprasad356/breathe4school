@@ -5,9 +5,9 @@
 
     <TextView
         android:id="@+id/tvQuestionNo"
-        android:layout_width="@dimen/_25sdp"
+        android:layout_width="@dimen/_22sdp"
         android:gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_20sdp"
         android:background="@drawable/questions_border_tv"
         android:text="Q1"
         android:padding="@dimen/_1sdp"
