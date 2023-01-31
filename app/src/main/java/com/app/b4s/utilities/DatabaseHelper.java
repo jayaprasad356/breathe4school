@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+import com.app.b4s.model.Answered;
 import com.app.b4s.model.Attach;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_FESTIVAL_NAME = "tblfestival";
     public static final String TABLE_USER_NAME = "tbluser";
     public static final String TABLE_ATTACH_NAME = "tblattachedQuestion";
+    public static final String ANSWER_TABLE = "answer_table";
 
 
     public static final String KEY_ID = "pid";
@@ -41,9 +43,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     final String ANSWER = "answer";
     final String EXPLANATION = "explanation";
 
+    final String IS_ANSWERED = "is_answered";
+
     final String FestivalTableInfo = TABLE_FESTIVAL_NAME + "(" + FID + " TEXT ," + DATE + " REAL ," + FESTIVAL + " TEXT)";
     final String UserTableInfo = TABLE_USER_NAME + "(" + UID + " TEXT ," + NAME + " TEXT ," + MOBILE + " TEXT ," + AGE + " TEXT )";
     final String AttachTableQuestionInfo = TABLE_ATTACH_NAME + "(" + QID + " TEXT ," + ATTACHMENT_LINK + " TEXT ," + ANSWER + " TEXT ," + EXPLANATION + " TEXT )";
+    final String answerTableInfo = ANSWER_TABLE + "(" + QID + " TEXT ," + IS_ANSWERED + " TEXT )";
 
     public DatabaseHelper(Activity activity) {
         super(activity, DATABASE_NAME, null, DATABASE_VERSION);
@@ -55,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + FestivalTableInfo);
         db.execSQL("CREATE TABLE " + UserTableInfo);
         db.execSQL("CREATE TABLE " + AttachTableQuestionInfo);
+        db.execSQL("CREATE TABLE " + answerTableInfo);
 
     }
 
@@ -64,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         replaceDataToNewTable(db, TABLE_FESTIVAL_NAME, FestivalTableInfo);
         replaceDataToNewTable(db, TABLE_USER_NAME, UserTableInfo);
         replaceDataToNewTable(db, TABLE_ATTACH_NAME, AttachTableQuestionInfo);
+        replaceDataToNewTable(db, ANSWER_TABLE, answerTableInfo);
 
         onCreate(db);
     }
@@ -151,6 +158,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public void addToAnswerTable(String qid, String isAnswered) {
+        try {
+            if (!checkAnswerTableExist(qid).equalsIgnoreCase("0")) {
+                updateAnswerTable(qid, isAnswered);
+            } else {
+                SQLiteDatabase db = this.getWritableDatabase();
+                ContentValues values = new ContentValues();
+                values.put(QID, qid);
+                values.put(IS_ANSWERED, isAnswered);
+                db.insert(ANSWER_TABLE, null, values);
+                db.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void AddAttachQuestion(String qid, String attachmentLink, String answer, String explanation) {
         try {
             if (!CheckAttachQuestionExist(qid).equalsIgnoreCase("0")) {
@@ -203,7 +228,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_FESTIVAL_NAME, values, FID + " = ?", new String[]{uid});
         db.close();
     }
+    public void updateAnswerTable(String qid, String isAnswered) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(QID, qid);
+        values.put(IS_ANSWERED, isAnswered);
 
+
+        db.update(ANSWER_TABLE, values, QID + " = ?", new String[]{qid});
+        db.close();
+    }
 
     public ArrayList<Attach> getAnsweredQuestion(String id) {
         final ArrayList<Attach> attaches = new ArrayList<>();
@@ -223,6 +257,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return attaches;
     }
 
+    public ArrayList<Answered> getAnsweredTables() {
+        final ArrayList<Answered> answereds = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //specific id
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + ANSWER_TABLE + " WHERE " + QID + " = ?", new String[]{qid});
+        //all values
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ANSWER_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Answered answered = new Answered(cursor.getString(cursor.getColumnIndexOrThrow(QID)), cursor.getString(cursor.getColumnIndexOrThrow(IS_ANSWERED)));
+                //@SuppressLint("Range") String count = cursor.getString(cursor.getColumnIndex(QTY));
+                answereds.add(answered);
+            } while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+        return answereds;
+    }
+    public ArrayList<Answered> getSpecificAnsweredTables(String qid) {
+        final ArrayList<Answered> answereds = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        //specific id
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ANSWER_TABLE + " WHERE " + QID + " = ?", new String[]{qid});
+        //all values
+        //Cursor cursor = db.rawQuery("SELECT * FROM " + ANSWER_TABLE, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Answered answered = new Answered(cursor.getString(cursor.getColumnIndexOrThrow(QID)), cursor.getString(cursor.getColumnIndexOrThrow(IS_ANSWERED)));
+                //@SuppressLint("Range") String count = cursor.getString(cursor.getColumnIndex(QTY));
+                answereds.add(answered);
+            } while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+        return answereds;
+    }
     public ArrayList<Attach> getmodelAttchList() {
         final ArrayList<Attach> attaches = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
@@ -268,6 +342,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             if (count.equals("0")) {
                 db.execSQL("DELETE FROM " + TABLE_USER_NAME + " WHERE " + UID + " = ?", new String[]{uid});
 
+            }
+        }
+        cursor.close();
+        db.close();
+        return count;
+    }
+
+
+    @SuppressLint("Range")
+    public String checkAnswerTableExist(String qid) {
+        String count = "0";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + ANSWER_TABLE + " WHERE " + QID + " = ?", new String[]{qid});
+        if (cursor.moveToFirst()) {
+            count = cursor.getString(cursor.getColumnIndex(QID));
+            if (count.equals("0")) {
+                db.execSQL("DELETE FROM " + ANSWER_TABLE + " WHERE " + QID + " = ?", new String[]{qid});
             }
         }
         cursor.close();

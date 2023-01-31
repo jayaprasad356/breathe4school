@@ -1,17 +1,23 @@
 
 package com.app.b4s.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.b4s.R;
+import com.app.b4s.model.Answered;
+import com.app.b4s.utilities.DatabaseHelper;
 import com.app.b4s.view.HWM.Activity.PositionPicker;
+
+import java.util.ArrayList;
 
 public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAdapter.ViewHolder> {
     Activity activity;
@@ -19,12 +25,20 @@ public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAd
     int setBackground;
     boolean answred;
     PositionPicker positionPicker;
+    ArrayList<Answered> answereds;
+    ArrayList<Answered> specificanswereds;
 
-    public QuestionsCountAdapter(int count, int setBackground, Activity activity, PositionPicker positionPicker) {
+    ArrayList<String> allQuestionIds;
+    DatabaseHelper databaseHelper;
+
+    public QuestionsCountAdapter(ArrayList<String> allQuestionIds, ArrayList<Answered> answereds,
+                                 int count, int setBackground, Activity activity, PositionPicker positionPicker) {
+        this.answereds = answereds;
         this.activity = activity;
         this.count = count;
         this.setBackground = setBackground;
         this.positionPicker = positionPicker;
+        this.allQuestionIds = allQuestionIds;
     }
 
 
@@ -37,10 +51,22 @@ public class QuestionsCountAdapter extends RecyclerView.Adapter<QuestionsCountAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         int quesNumber = 1 + position;
+        databaseHelper=new DatabaseHelper(activity);
         String text = "Q" + quesNumber;
         holder.question.setText(text);
+
+        for (int l = 0; l < answereds.size(); l++) {
+            if (allQuestionIds.get(position).equals(answereds.get(l).getQid())) {
+                specificanswereds = new ArrayList<>();
+                specificanswereds = databaseHelper.getSpecificAnsweredTables(allQuestionIds.get(position));
+                if (specificanswereds.get(0).getIsAnswered().equals("1")){
+                    holder.question.setBackground(activity.getDrawable(R.drawable.transparent_answred_bg));
+                    holder.question.setTextColor(activity.getColor(R.color.primary));
+                }
+            }
+        }
         if (position == setBackground) {
             holder.question.setBackground(activity.getDrawable(R.drawable.question_tv_checked));
             holder.question.setTextColor(activity.getColor(R.color.primary));

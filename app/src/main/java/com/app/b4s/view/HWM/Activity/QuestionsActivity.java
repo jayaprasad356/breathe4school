@@ -56,6 +56,7 @@ import com.app.b4s.VolleyMultipartRequest;
 import com.app.b4s.VolleySingleton;
 import com.app.b4s.adapter.QuestionsCountAdapter;
 import com.app.b4s.databinding.ActivityQuestionsBinding;
+import com.app.b4s.model.Answered;
 import com.app.b4s.model.Attach;
 import com.app.b4s.preferences.Session;
 import com.app.b4s.utilities.ApiConfig;
@@ -114,7 +115,9 @@ public class QuestionsActivity extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 1;
 
     ArrayList<Attach> answeredAttaches;
-
+    ArrayList<Answered> answereds;
+    String isAnswred = "0";
+    ArrayList<String> allQuestionIds;
     JSONObject test;
     MediaController mediaController;
     private String type, date, titleSubject, descriptin, totalMark, optainedMark, subject, description;
@@ -137,9 +140,10 @@ public class QuestionsActivity extends AppCompatActivity {
         binding.ibBackBtn.setOnClickListener(view -> onBackPressed());
         positionPicker = position -> {
             setQuestions(position);
-            setBackground=position;
+            setBackground = position;
             setSubmitText(i, setBackground);
-            questionsCountAdapter = new QuestionsCountAdapter(i, position, activity, positionPicker);
+            answereds = databaseHelper.getAnsweredTables();
+            questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, position, activity, positionPicker);
             rvQuestions.setAdapter(questionsCountAdapter);
             questionsCountAdapter.notifyDataSetChanged();
         };
@@ -182,7 +186,6 @@ public class QuestionsActivity extends AppCompatActivity {
             String string = session.getData(Constant.ANSWER_PDF_LINK);
             showPdf(string);
         });
-
 
 
         binding.cbFirstOpt.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -303,21 +306,25 @@ public class QuestionsActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvQuestions.setLayoutManager(linearLayoutManager);
         setBackground = 0;
-        questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, this, positionPicker);
+
+        answereds = databaseHelper.getAnsweredTables();
+
+
+        questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, setBackground, this, positionPicker);
         rvQuestions.setAdapter(questionsCountAdapter);
         binding.btnNext.setOnClickListener(view -> {
             binding.videoView.stopPlayback();
             binding.LLOpenCamera.setVisibility(View.VISIBLE);
             binding.ivCameraSuccess.setVisibility(View.GONE);
-            if (mediaController != null)
-                mediaController.hide();
+            if (mediaController != null) mediaController.hide();
             if (type.equals(Constant.PENDING)) {
                 pendingFlow();
             } else if (type.equals(Constant.REVIEW)) {
                 setBackground = setBackground + 1;
                 if (i > setBackground) {
                     setQuestions(setBackground);
-                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                    answereds = databaseHelper.getAnsweredTables();
+                    questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, setBackground, activity, positionPicker);
                     rvQuestions.setAdapter(questionsCountAdapter);
                     questionsCountAdapter.notifyDataSetChanged();
                 } else {
@@ -327,7 +334,9 @@ public class QuestionsActivity extends AppCompatActivity {
                 setBackground = setBackground + 1;
                 if (i > setBackground) {
                     setQuestions(setBackground);
-                    questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                    answereds = databaseHelper.getAnsweredTables();
+
+                    questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, setBackground, activity, positionPicker);
                     rvQuestions.setAdapter(questionsCountAdapter);
                     questionsCountAdapter.notifyDataSetChanged();
                 }
@@ -341,25 +350,15 @@ public class QuestionsActivity extends AppCompatActivity {
     private void showPdf(String string) {
         String link = string.substring(1);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW);
-        browserIntent.setData(Uri.parse("http://143.244.132.170:3001" + link));
+        browserIntent.setData(Uri.parse(Constant.SERVER + link));
         startActivity(browserIntent);
     }
 
     private void doSelectionProcess() {
-        if (ActivityCompat.checkSelfPermission(
-                QuestionsActivity.this,
-                Manifest.permission
-                        .READ_EXTERNAL_STORAGE)
-                != PackageManager
-                .PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(QuestionsActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // When permission is not granted
             // Result permission
-            ActivityCompat.requestPermissions(
-                    QuestionsActivity.this,
-                    new String[]{
-                            Manifest.permission
-                                    .READ_EXTERNAL_STORAGE},
-                    1);
+            ActivityCompat.requestPermissions(QuestionsActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
         } else {
             // When permission is granted
             // Create method
@@ -417,8 +416,7 @@ public class QuestionsActivity extends AppCompatActivity {
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {
 
             // Return the remote address
-            if (isGooglePhotosUri(uri))
-                return uri.getLastPathSegment();
+            if (isGooglePhotosUri(uri)) return uri.getLastPathSegment();
 
             return getDataColumn(uri, null, null);
         }
@@ -453,8 +451,7 @@ public class QuestionsActivity extends AppCompatActivity {
             else if (isDownloadsDocument(uri)) {
                 //  Log.e(tag, "+++ Downloads External Document URI");
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
                 return getDataColumn(contentUri, null, null);
             }
@@ -479,9 +476,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[]{
-                        split[1]
-                };
+                final String[] selectionArgs = new String[]{split[1]};
 
                 return getDataColumn(contentUri, selection, selectionArgs);
             }
@@ -489,8 +484,7 @@ public class QuestionsActivity extends AppCompatActivity {
             // Log.e(tag, "+++ No DOCUMENT URI :: CONTENT ");
 
             // Return the remote address
-            if (isGooglePhotosUri(uri))
-                return uri.getLastPathSegment();
+            if (isGooglePhotosUri(uri)) return uri.getLastPathSegment();
 
             return getDataColumn(uri, null, null);
         }
@@ -511,25 +505,20 @@ public class QuestionsActivity extends AppCompatActivity {
      * @param selectionArgs (Optional) Selection arguments used in the query.
      * @return The value of the _data column, which is typically a file path.
      */
-    public String getDataColumn(Uri uri, String selection,
-                                String[] selectionArgs) {
+    public String getDataColumn(Uri uri, String selection, String[] selectionArgs) {
 
         Cursor cursor = null;
         final String column = "_data";
-        final String[] projection = {
-                column
-        };
+        final String[] projection = {column};
 
         try {
-            cursor = getContentResolver().query(uri, projection, selection, selectionArgs,
-                    null);
+            cursor = getContentResolver().query(uri, projection, selection, selectionArgs, null);
             if (cursor != null && cursor.moveToFirst()) {
                 final int index = cursor.getColumnIndexOrThrow(column);
                 return cursor.getString(index);
             }
         } finally {
-            if (cursor != null)
-                cursor.close();
+            if (cursor != null) cursor.close();
         }
         return null;
     }
@@ -570,8 +559,7 @@ public class QuestionsActivity extends AppCompatActivity {
     public String getPDFPath(Uri uri) {
 
         final String id = DocumentsContract.getDocumentId(uri);
-        final Uri contentUri = ContentUris.withAppendedId(
-                Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+        final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
         String[] projection = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
@@ -604,13 +592,19 @@ public class QuestionsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             databaseHelper.AddAttachQuestion(qid, attach_Link, "", "");
+            if (!(attach_Link.isEmpty()))
+                isAnswred = "1";
+            databaseHelper.addToAnswerTable(qid, isAnswred);
+            isAnswred = "0";
             jsonArrayList.add(test);
             session.setData(Constant.PDF_UPLOAD_LINK, "");
 
             if (i > setBackground) {
                 setSubmitText(i, setBackground);
                 setQuestions(setBackground);
-                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                answereds = databaseHelper.getAnsweredTables();
+
+                questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, setBackground, activity, positionPicker);
                 rvQuestions.setAdapter(questionsCountAdapter);
                 questionsCountAdapter.notifyDataSetChanged();
             } else {
@@ -659,13 +653,18 @@ public class QuestionsActivity extends AppCompatActivity {
             }
 
             databaseHelper.AddAttachQuestion(qid, "", ans, explanation);
+            if (!(ans.isEmpty())) {
+                isAnswred = "1";
+            }
+            databaseHelper.addToAnswerTable(qid, isAnswred);
+            isAnswred = "0";
             jsonArrayList.add(test);
 
             if (i > setBackground) {
                 setSubmitText(i, setBackground);
                 setQuestions(setBackground);
-
-                questionsCountAdapter = new QuestionsCountAdapter(i, setBackground, activity, positionPicker);
+                answereds = databaseHelper.getAnsweredTables();
+                questionsCountAdapter = new QuestionsCountAdapter(allQuestionIds, answereds, i, setBackground, activity, positionPicker);
                 rvQuestions.setAdapter(questionsCountAdapter);
                 questionsCountAdapter.notifyDataSetChanged();
             } else {
@@ -680,7 +679,7 @@ public class QuestionsActivity extends AppCompatActivity {
         int temp = setBackground + 1;
         if (temp == totalCount) {
             binding.btnNext.setText("Submit");
-        }else {
+        } else {
             binding.btnNext.setText("Next");
         }
     }
@@ -722,74 +721,72 @@ public class QuestionsActivity extends AppCompatActivity {
 
         //jsonObject2 is the payload to server here you can use JsonObjectRequest
 
-        String url = "http://143.244.132.170:3001/api/v1/homework/" + session.getData(Constant.HOMEWORD_ID) + "/studentResponse/create";
+        String url = Constant.SERVER+"/api/v1/homework/" + session.getData(Constant.HOMEWORD_ID) + "/studentResponse/create";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url, requestBody, new com.android.volley.Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, requestBody, new com.android.volley.Response.Listener<JSONObject>() {
 
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("STUDENT_RESPONSE", response.toString());
+                //   Toast.makeText(QuestionsActivity.this, "" + response, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                final View customLayout = getLayoutInflater().inflate(R.layout.custom_layout_activity, null);
+                builder.setView(customLayout);
+
+                Button btnOk = customLayout.findViewById(R.id.btnOk);
+                btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("STUDENT_RESPONSE", response.toString());
-                        //   Toast.makeText(QuestionsActivity.this, "" + response, Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                        final View customLayout = getLayoutInflater().inflate(R.layout.custom_layout_activity, null);
-                        builder.setView(customLayout);
+                    public void onClick(View v) {
 
-                        Button btnOk = customLayout.findViewById(R.id.btnOk);
-                        btnOk.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-
-                                Intent intent = new Intent(activity, HomeWorkManagementActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                        AlertDialog dialog
-                                = builder.create();
-                        dialog.show();
+                        Intent intent = new Intent(activity, HomeWorkManagementActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
 
 
+                try {
+                    //TODO: Handle your response here
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.print(response);
+
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO: Handle error
+                String body = "";
+                //get status code here
+                //String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                if (error.networkResponse.data != null) {
+                    try {
+                        body = new String(error.networkResponse.data, "UTF-8");
+
+                        String message = null;
                         try {
-                            //TODO: Handle your response here
-                        } catch (Exception e) {
+                            JSONObject response = new JSONObject(body);
+                            message = response.getString(Constant.MESSAGE);
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        System.out.print(response);
+                        System.out.println(message);
 
+                        Toast.makeText(QuestionsActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
-                }, new com.android.volley.Response.ErrorListener() {
+                }
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
-                        String body = "";
-                        //get status code here
-                        //String statusCode = String.valueOf(error.networkResponse.statusCode);
-                        //get response body and parse with appropriate encoding
-                        if (error.networkResponse.data != null) {
-                            try {
-                                body = new String(error.networkResponse.data, "UTF-8");
-
-                                String message = null;
-                                try {
-                                    JSONObject response = new JSONObject(body);
-                                    message = response.getString(Constant.MESSAGE);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                System.out.println(message);
-
-                                Toast.makeText(QuestionsActivity.this, message, Toast.LENGTH_SHORT).show();
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                    }
+            }
 
 
-                });
+        });
 
         ApiConfig.getInstance().addToRequestQueue(jsonObjectRequest);
     }
@@ -806,9 +803,16 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.tvDateStatus.setText(R.string.dead_line);
                 jsonObject = new JSONObject(session.getData(Constant.QUESTION_DATA));
                 jsonArray = jsonObject.getJSONArray(Constant.QUESTIONS);
+                allQuestionIds = new ArrayList<>();
+                for (int l = 0; l < jsonArray.length(); l++) {
+                    JSONObject temp = jsonArray.getJSONObject(l);
+                    allQuestionIds.add(temp.getString("id"));
+                }
                 session.setData(Constant.QUESTIONS_ID, jsonArray.getJSONObject(i).getString(Constant.ID));
                 answeredAttaches = databaseHelper.getAnsweredQuestion(session.getData(Constant.QUESTIONS_ID));
                 System.out.println(answeredAttaches);
+//                answereds = databaseHelper.getAnsweredTables();
+//                System.out.println(answereds);
 
                 String totalMark = jsonObject.getString(Constant.TOTAL_MARK);
                 binding.tvTotalMarknum.setText(totalMark);
@@ -845,8 +849,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
                         if (url.contains(".png") || url.contains(".jpeg")) {
                             binding.imageLayout.setVisibility(View.VISIBLE);
-                            Glide.with(this)
-                                    .load(url) // image url
+                            Glide.with(this).load(url) // image url
                                     .into(binding.imageView);
                             binding.imageLayout.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -907,6 +910,11 @@ public class QuestionsActivity extends AppCompatActivity {
                 jsonArray = jsonObject.getJSONArray(Constant.ANSWERS);
                 questions = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION);
                 title = questions.getString(Constant.title);
+                allQuestionIds = new ArrayList<>();
+                for (int l = 0; l < jsonArray.length(); l++) {
+                    JSONObject temp = jsonArray.getJSONObject(l);
+                    allQuestionIds.add(temp.getString("id"));
+                }
                 binding.imageLayout.setVisibility(View.GONE);
                 binding.answerImageLayout.setVisibility(View.GONE);
                 binding.vidoLayout.setVisibility(View.GONE);
@@ -929,8 +937,7 @@ public class QuestionsActivity extends AppCompatActivity {
                         if (!(url.contains(".pdf"))) {
                             if (url.contains(".png") || url.contains(".jpeg") || url.contains("image")) {
                                 binding.answerImageLayout.setVisibility(View.VISIBLE);
-                                Glide.with(this)
-                                        .load(url) // image url
+                                Glide.with(this).load(url) // image url
                                         .into(binding.answerImageView);
                                 binding.answerImageLayout.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -982,8 +989,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
                             if (url.contains(".png") || url.contains(".jpeg")) {
                                 binding.imageLayout.setVisibility(View.VISIBLE);
-                                Glide.with(this)
-                                        .load(url) // image url
+                                Glide.with(this).load(url) // image url
                                         .into(binding.imageView);
                             } else {
                                 binding.vidoLayout.setVisibility(View.VISIBLE);
@@ -1013,8 +1019,7 @@ public class QuestionsActivity extends AppCompatActivity {
                     }
                 }
                 binding.tvOnReview.setVisibility(View.VISIBLE);
-                if (answer != null)
-                    setOptionsForReview(answer);
+                if (answer != null) setOptionsForReview(answer);
                 this.i = jsonArray.length();
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -1027,6 +1032,11 @@ public class QuestionsActivity extends AppCompatActivity {
                 jsonArray = jsonObject.getJSONArray(Constant.RESULTS);
                 homeWorkObject = jsonObject.getJSONObject(Constant.HOMEWORK);
                 questionsResponse = jsonArray.getJSONObject(i).getJSONObject(Constant.QUESTION_RESPONSE);
+                allQuestionIds = new ArrayList<>();
+                for (int l = 0; l < questionsResponse.length(); l++) {
+                    JSONObject temp = questionsResponse.getJSONObject(Constant.QUESTION);
+                    allQuestionIds.add(temp.getString("id"));
+                }
                 if (questionsResponse.has(Constant.ANSWER))
                     answer = questionsResponse.getJSONObject(Constant.ANSWER);
                 questions = questionsResponse.getJSONObject(Constant.QUESTION);
@@ -1093,24 +1103,11 @@ public class QuestionsActivity extends AppCompatActivity {
         removeBackground();
         setDisable();
         int green = Color.parseColor("#45BF55");
-        ColorStateList GreencolorStateList = new ColorStateList(
-                new int[][]{
-                        new int[]{android.R.attr.state_checked}
-                },
-                new int[]{
-                        green
-                }
-        );
+        ColorStateList GreencolorStateList = new ColorStateList(new int[][]{new int[]{android.R.attr.state_checked}}, new int[]{green});
         int red = Color.parseColor("#D40D12");
         ColorStateList RedcolorStateList = new ColorStateList(
 
-                new int[][]{
-                        new int[]{android.R.attr.state_checked}
-                },
-                new int[]{
-                        red
-                }
-        );
+                new int[][]{new int[]{android.R.attr.state_checked}}, new int[]{red});
         for (int j = 0; j < options.length(); j++) {
             JSONObject option = options.getJSONObject(j);
             String key = option.getString(Constant.KEY);
@@ -1235,19 +1232,18 @@ public class QuestionsActivity extends AppCompatActivity {
                     session.setData(Constant.D_VALUE, value);
                 }
             }
-            if (answeredAttaches.size() > 0)
-                if (!(answeredAttaches.get(0).getAnswer().isEmpty())) {
-                    String ans = answeredAttaches.get(0).getAnswer();
-                    if (ans.equals("A")) {
-                        binding.cbFirstOpt.setChecked(true);
-                    } else if (ans.equals("B")) {
-                        binding.cbSecondOpt.setChecked(true);
-                    } else if (ans.equals("C")) {
-                        binding.cbThirdOpt.setChecked(true);
-                    } else if (ans.equals("B")) {
-                        binding.cbFourthOpt.setChecked(true);
-                    }
+            if (answeredAttaches.size() > 0) if (!(answeredAttaches.get(0).getAnswer().isEmpty())) {
+                String ans = answeredAttaches.get(0).getAnswer();
+                if (ans.equals("A")) {
+                    binding.cbFirstOpt.setChecked(true);
+                } else if (ans.equals("B")) {
+                    binding.cbSecondOpt.setChecked(true);
+                } else if (ans.equals("C")) {
+                    binding.cbThirdOpt.setChecked(true);
+                } else if (ans.equals("B")) {
+                    binding.cbFourthOpt.setChecked(true);
                 }
+            }
         }
 
     }
@@ -1441,8 +1437,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 binding.ivOpenFiles.setVisibility(View.GONE);
                 binding.ivFileSuccess.setVisibility(View.VISIBLE);
                 progressDisplay.showProgress();
-                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                 saveProfileAccount(sUri);
 
             }
@@ -1469,8 +1464,7 @@ public class QuestionsActivity extends AppCompatActivity {
         dialog.getWindow().setDimAmount(0);
         ImageView dialogImageView = dialog.findViewById(R.id.image_view);
         dialog.show();
-        Glide.with(this)
-                .load(url) // image url
+        Glide.with(this).load(url) // image url
                 .into(dialogImageView);
 
 

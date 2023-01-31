@@ -66,7 +66,7 @@ public class StudyPlanerController implements IStudyPlanerController {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        String url = "http://143.244.132.170:3001/api/v1/studyPlanner/create";
+        String url = Constant.SERVER+"/api/v1/studyPlanner/create";
 
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest

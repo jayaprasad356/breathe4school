@@ -6,6 +6,7 @@
     <color name="teal_200">#f8870f</color>
     <color name="teal_700">#f8870f</color>
     <color name="primary">#f8870f</color>
+    <color name="transparent_primary">#FDF3E5</color>
     <color name="secondary">#FDF3E5</color>
     <color name="blue">#3D348B</color>
     <color name="black">#FF000000</color>

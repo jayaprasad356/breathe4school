@@ -62,7 +62,7 @@ public class Constant {
     public static final String ID = "id";
     public static final String MALE = "M";
 
-    public static final String SERVER =  "http://143.244.132.170:3001";
+    public static final String SERVER =  "http://64.227.182.105:3001";
 
     public static final String DOB = "date_of_birth";
     public static final String FATHER_NAME = "emergency_contact_name";

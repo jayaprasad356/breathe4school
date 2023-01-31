@@ -577,20 +577,20 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
         Map<String, String> params = new HashMap<>();
         if (itemposition == 2) {
             type = Constant.STUDY_PLANER;
-            url = "http://143.244.132.170:3001/api/v1/studyPlanner/getDailyStudyPlanner/academicYearId/" +
+            url = Constant.SERVER+"/api/v1/studyPlanner/getDailyStudyPlanner/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/studentId/" + session.getData(Constant.STUDENT_ID);
         } else if (itemposition == 1) {
             type = Constant.LIVE_SESSION;
-            url = "http://143.244.132.170:3001/api/v1/timetable/getTimetableByDate/academicYearId/" +
+            url = Constant.SERVER+"/api/v1/timetable/getTimetableByDate/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
                     session.getData(Constant.TIME_TABLE_SESSION_ID) + "/date/" + date;
         } else if (itemposition == 0) {
             type = Constant.ALL;
-            url = "http://143.244.132.170:3001/api/v1/timetable/getDailyTimetableAndStudyPlanner/academicYearId/" +
+            url = Constant.SERVER+"/api/v1/timetable/getDailyTimetableAndStudyPlanner/academicYearId/" +
                     session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                     "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                     session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
@@ -848,7 +848,7 @@ public class CalendarFragment extends Fragment implements CalendarResponse, Resp
     }
 
     private void loadWeeklyTimeTables() {
-        String url = "http://143.244.132.170:3001/api/v1/timetable/get/academicYearId/" +
+        String url = Constant.SERVER+"/api/v1/timetable/get/academicYearId/" +
                 session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                 "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                 session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +

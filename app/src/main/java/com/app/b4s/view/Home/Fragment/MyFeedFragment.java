@@ -102,13 +102,13 @@ public class MyFeedFragment extends Fragment implements ResponseListener {
     }
 
     private void loadUpcommingClasses() {
-        String url = "http://143.244.132.170:3001/api/v1/timetable/getUpcomingClasses/academicYearId/" +
+        String url = Constant.SERVER+"/api/v1/timetable/getUpcomingClasses/academicYearId/" +
                 session.getData(Constant.ACADEMIC_YEAR_ID) + "/schoolId/" + session.getData(Constant.SCHOOL_ID) +
                 "/standardId/" + session.getData(Constant.STANDARD_ID) + "/sectionId/" +
                 session.getData(Constant.SECTION_ID) + "/timetableSessionId/" +
                 session.getData(Constant.TIME_TABLE_SESSION_ID);
 
-        //String url1 = "http://143.244.132.170:3001/api/v1/timetable/getUpcomingClasses/academicYearId/62a843c2c657c9f8ab54e629/schoolId/629e48822d8dc59764b3b057/standardId/62adb3030a7ac055c1ec6fd1/sectionId/629e48be2d8dc59764b3b059/timetableSessionId/62a855ac1e42b892d5951606";
+        //String url1 = Constant.SERVER+"/api/v1/timetable/getUpcomingClasses/academicYearId/62a843c2c657c9f8ab54e629/schoolId/629e48822d8dc59764b3b057/standardId/62adb3030a7ac055c1ec6fd1/sectionId/629e48be2d8dc59764b3b059/timetableSessionId/62a855ac1e42b892d5951606";
         Map<String, String> params = new HashMap<>();
         ApiConfig.RequestToVolley((result, response) -> {
 
