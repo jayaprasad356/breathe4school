@@ -213,6 +213,7 @@
     <string name="clear">Clear</string>
     <string name="apply">Apply</string>
     <string name="list_of_holidays">List of holidays</string>
+    <string name="pending">Pending</string>
 
 
 </resources>

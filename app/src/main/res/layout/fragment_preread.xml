@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/_10sdp"
+            android:paddingHorizontal="@dimen/_6sdp"
             android:paddingVertical="@dimen/_5sdp">
 
 
@@ -27,32 +27,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/home_work_management"
-                    android:textSize="@dimen/_14sdp"
+                    android:textSize="@dimen/_8sdp"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="@dimen/_10sdp" />
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp" />
 
 
                 <LinearLayout
                     android:id="@+id/llProfileItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
                     android:gravity="right"
+                    android:layout_marginBottom="@dimen/_6sdp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/_12sdp"
-                        android:layout_height="@dimen/_12sdp"
+                        android:layout_width="@dimen/_14sdp"
+                        android:layout_height="@dimen/_14sdp"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_6sdp"
                         android:background="@drawable/ic_notification" />
 
                     <ImageView
                         android:id="@+id/ivProfile"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
+                        android:layout_width="@dimen/_14sdp"
+                        android:layout_height="@dimen/_14sdp"
                         android:background="@drawable/img_profile" />
 
                 </LinearLayout>
@@ -65,9 +66,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/subject_wise_home_work"
-                android:textSize="@dimen/_10sdp"
+                android:textSize="@dimen/_6sdp"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textColor="@color/black"
-                android:layout_marginBottom="@dimen/_10sdp" />
+                android:layout_marginBottom="@dimen/_6sdp" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -86,8 +88,9 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:layout_marginRight="@dimen/_30sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     android:layout_height="wrap_content">
-
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -98,7 +101,6 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="@dimen/_10sdp"
                             android:orientation="vertical">
 
                             <TextView
@@ -109,7 +111,7 @@
                                 android:textStyle="bold"
                                 android:paddingHorizontal="@dimen/_3sdp"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_6sdp"
                                 android:text="Pending" />
 
                             <View
@@ -123,6 +125,7 @@
 
 
                         <LinearLayout
+                            android:layout_marginLeft="@dimen/_10sdp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -135,7 +138,7 @@
                                 android:paddingHorizontal="@dimen/_3sdp"
 
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/_8sdp"
+                                android:textSize="@dimen/_6sdp"
                                 android:text="Completed" />
 
                             <View
@@ -146,6 +149,7 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
 
 
                     <LinearLayout
@@ -162,23 +166,26 @@
                             android:background="@drawable/corner_stroke"
                             android:drawableStart="@drawable/ic_filter"
                             android:drawablePadding="@dimen/_5sdp"
-                            android:paddingHorizontal="@dimen/_10sdp"
-                            android:paddingVertical="@dimen/_5sdp"
+                            android:paddingHorizontal="@dimen/_6sdp"
+                            android:fontFamily="@font/open_sans"
+                            android:paddingVertical="@dimen/_4sdp"
                             android:text="Filter"
                             android:textColor="#668598"
-                            android:textSize="@dimen/_12sdp" />
+                            android:textSize="@dimen/_6sdp" />
 
 
                         <TextView
                             android:id="@+id/tvSortby"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="29dp"
+                            android:gravity="center"
                             android:layout_marginLeft="@dimen/_20sdp"
                             android:drawableEnd="@drawable/ic_arrow_down"
                             android:drawablePadding="@dimen/_5sdp"
+                            android:fontFamily="@font/open_sans"
                             android:text="Sort by"
                             android:textColor="@color/dark_blue"
-                            android:textSize="@dimen/_12sdp"
+                            android:textSize="@dimen/_6sdp"
 
                             />
 
@@ -189,17 +196,20 @@
                 </RelativeLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:id="@+id/rvpending"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
+
                     android:visibility="gone"
                     android:id="@+id/rvReview"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:id="@+id/rvCompleted"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

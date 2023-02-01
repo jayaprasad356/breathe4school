@@ -51,8 +51,8 @@ public class HomeWorkManagementActivity extends AppCompatActivity {
         bn_DCM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, DcmActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(activity, DcmActivity.class);
+//                startActivity(intent);
             }
         });
 

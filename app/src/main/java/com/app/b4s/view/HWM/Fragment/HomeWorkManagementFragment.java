@@ -193,186 +193,186 @@ public class HomeWorkManagementFragment extends Fragment implements FilterListen
                 popupMenu.show();
             }
         });
-        tvFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvFilter.setVisibility(View.VISIBLE);
-
-
-                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                View customView = layoutInflater.inflate(R.layout.filter_popup, null);
-
-
-                TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
-
-                RelativeLayout apply = customView.findViewById(R.id.apply);
-                RelativeLayout today = customView.findViewById(R.id.rlToday);
-                RelativeLayout yesterday = customView.findViewById(R.id.rlYesterday);
-                RelativeLayout thisWeek = customView.findViewById(R.id.rl_thisWeek);
-                RelativeLayout lastWeek = customView.findViewById(R.id.rlLastWeek);
-                RelativeLayout thisMonth = customView.findViewById(R.id.rlThisMonth);
-                RelativeLayout lastMonth = customView.findViewById(R.id.rlLastMonth);
-
-                tvToday = customView.findViewById(R.id.tvToday);
-                tvYesterday = customView.findViewById(R.id.tvYesterday);
-                tvThisWeek = customView.findViewById(R.id.tvThisWeek);
-                tvLastWeek = customView.findViewById(R.id.tvLastWeek);
-                tvThisMonth = customView.findViewById(R.id.tvThisMonth);
-                tvLastMonth = customView.findViewById(R.id.tvLastMonth);
-
-                cbMaths = customView.findViewById(R.id.cbMaths);
-                cbEnglish = customView.findViewById(R.id.cbEnglish);
-                cbScience = customView.findViewById(R.id.cbScience);
-                cbHindi = customView.findViewById(R.id.cbHindi);
-
-                cbHindi.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setUncheck();
-                        subject = "Hindi";
-                        cbHindi.setChecked(true);
-                    }
-                });
-                cbScience.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setUncheck();
-                        subject = "Science";
-                        cbScience.setChecked(true);
-                    }
-                });
-                cbEnglish.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setUncheck();
-                        subject = "English";
-                        cbEnglish.setChecked(true);
-                    }
-                });
-                cbMaths.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setUncheck();
-                        subject = "Maths";
-                        cbMaths.setChecked(true);
-                    }
-                });
-
-
-                today.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "today";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        today.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvToday.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-                yesterday.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "yesterday";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        yesterday.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvYesterday.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-                thisWeek.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "thisweek";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        thisWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvThisWeek.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-                lastWeek.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "lastweek";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        lastWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvLastWeek.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-                thisMonth.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "thisMonth";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        thisMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvThisMonth.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-                lastMonth.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        time = "lastMonth";
-                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
-                        lastMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
-                        tvLastMonth.setTextColor(getActivity().getColor(R.color.white));
-                    }
-                });
-
-
-                apply.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
-                        List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
-                        for (int i = 0; i < subjects.size(); i++) {
-                            if (subject.equals(subjects.get(i)))
-                                subjectKey = subjectIds.get(i);
-                        }
-                        String time_link = "?time=" + time;
-                        String subjectId = "&subjectId=" + subjectKey;
-                        String link = time_link + subjectId;
-                        filterHomeWorkController.getFilterHomeWork(Constant.F_PENDING, getActivity(),link);
-                        Toast.makeText(getActivity(), "Hi", Toast.LENGTH_SHORT).show();
-                        popupWindow.dismiss();
-                    }
-                });
-
-                //instantiate popup window
-                popupWindow = new PopupWindow(customView, 400, 270, true);
-                // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-
-                popupWindow.setOutsideTouchable(true);
-                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-                    public boolean onTouch(View v, MotionEvent event) {
-                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
-                            popupWindow.dismiss();
-                            tvFilter.setVisibility(View.VISIBLE);
-                            return true;
-                        }
-
-
-                        return false;
-                    }
-                });
-
-
-                //display the popup window
-                popupWindow.showAsDropDown(tvFilter, -290, -48);
-
-
-                //close the popup window on button click
-
-
-                tvFilterclose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        popupWindow.dismiss();
-                        tvFilter.setVisibility(View.VISIBLE);
-                    }
-                });
-
-
-            }
-
-
-        });
+//        tvFilter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                tvFilter.setVisibility(View.VISIBLE);
+//
+//
+//                LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                View customView = layoutInflater.inflate(R.layout.filter_popup, null);
+//
+//
+//                TextView tvFilterclose = customView.findViewById(R.id.tvFilterclose);
+//
+//                RelativeLayout apply = customView.findViewById(R.id.apply);
+//                RelativeLayout today = customView.findViewById(R.id.rlToday);
+//                RelativeLayout yesterday = customView.findViewById(R.id.rlYesterday);
+//                RelativeLayout thisWeek = customView.findViewById(R.id.rl_thisWeek);
+//                RelativeLayout lastWeek = customView.findViewById(R.id.rlLastWeek);
+//                RelativeLayout thisMonth = customView.findViewById(R.id.rlThisMonth);
+//                RelativeLayout lastMonth = customView.findViewById(R.id.rlLastMonth);
+//
+//                tvToday = customView.findViewById(R.id.tvToday);
+//                tvYesterday = customView.findViewById(R.id.tvYesterday);
+//                tvThisWeek = customView.findViewById(R.id.tvThisWeek);
+//                tvLastWeek = customView.findViewById(R.id.tvLastWeek);
+//                tvThisMonth = customView.findViewById(R.id.tvThisMonth);
+//                tvLastMonth = customView.findViewById(R.id.tvLastMonth);
+//
+//                cbMaths = customView.findViewById(R.id.cbMaths);
+//                cbEnglish = customView.findViewById(R.id.cbEnglish);
+//                cbScience = customView.findViewById(R.id.cbScience);
+//                cbHindi = customView.findViewById(R.id.cbHindi);
+//
+//                cbHindi.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        setUncheck();
+//                        subject = "Hindi";
+//                        cbHindi.setChecked(true);
+//                    }
+//                });
+//                cbScience.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        setUncheck();
+//                        subject = "Science";
+//                        cbScience.setChecked(true);
+//                    }
+//                });
+//                cbEnglish.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        setUncheck();
+//                        subject = "English";
+//                        cbEnglish.setChecked(true);
+//                    }
+//                });
+//                cbMaths.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        setUncheck();
+//                        subject = "Maths";
+//                        cbMaths.setChecked(true);
+//                    }
+//                });
+//
+//
+//                today.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "today";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        today.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvToday.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//                yesterday.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "yesterday";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        yesterday.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvYesterday.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//                thisWeek.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "thisweek";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        thisWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvThisWeek.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//                lastWeek.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "lastweek";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        lastWeek.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvLastWeek.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//                thisMonth.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "thisMonth";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        thisMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvThisMonth.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//                lastMonth.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        time = "lastMonth";
+//                        removeBackgrounds(today, yesterday, thisMonth, lastMonth, thisWeek, lastWeek);
+//                        lastMonth.setBackground(getActivity().getDrawable(R.drawable.cornor_with_bg));
+//                        tvLastMonth.setTextColor(getActivity().getColor(R.color.white));
+//                    }
+//                });
+//
+//
+//                apply.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        List<String> subjectIds = session.getArrayList(Constant.SUBJECTS_ID_KEY);
+//                        List<String> subjects = session.getArrayList(Constant.SUBJECTS_KEY);
+//                        for (int i = 0; i < subjects.size(); i++) {
+//                            if (subject.equals(subjects.get(i)))
+//                                subjectKey = subjectIds.get(i);
+//                        }
+//                        String time_link = "?time=" + time;
+//                        String subjectId = "&subjectId=" + subjectKey;
+//                        String link = time_link + subjectId;
+//                        filterHomeWorkController.getFilterHomeWork(Constant.F_PENDING, getActivity(),link);
+//                        Toast.makeText(getActivity(), "Hi", Toast.LENGTH_SHORT).show();
+//                        popupWindow.dismiss();
+//                    }
+//                });
+//
+//                //instantiate popup window
+//                popupWindow = new PopupWindow(customView, 400, 270, true);
+//                // popupWindow = new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//                popupWindow.setOutsideTouchable(true);
+//                popupWindow.setTouchInterceptor(new View.OnTouchListener() {
+//
+//                    public boolean onTouch(View v, MotionEvent event) {
+//                        if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+//                            popupWindow.dismiss();
+//                            tvFilter.setVisibility(View.VISIBLE);
+//                            return true;
+//                        }
+//
+//
+//                        return false;
+//                    }
+//                });
+//
+//
+//                //display the popup window
+//                popupWindow.showAsDropDown(tvFilter, -290, -48);
+//
+//
+//                //close the popup window on button click
+//
+//
+//                tvFilterclose.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        popupWindow.dismiss();
+//                        tvFilter.setVisibility(View.VISIBLE);
+//                    }
+//                });
+//
+//
+//            }
+//
+//
+//        });
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
